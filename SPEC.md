@@ -67,7 +67,7 @@
 5.16.2 Architecture Detection Pause Triggers
 5.16.3 Placement and Layering Pause Triggers
 5.16.4 Reuse vs Update vs New Pause Triggers
-5.16.5 Implementation Discipline Pause Triggers
+5.16.5 Execution and Validation Pause Triggers
 5.16.6 Optional Pause Modes
 5.17 When Not to Ask
 5.18 Rule of Deterministic Default
@@ -162,9 +162,9 @@
 13.1.1 Architecture Detection
 13.1.2 Placement and Layering
 13.1.3 Reuse vs Update vs New
-13.1.4 Implementation Discipline
 13.2 Shared Policy Configuration Layer
-13.3 Optional Extension Skills
+13.3 Non-skill Execution Guidance
+13.4 Optional Extension Skills
 
 ## Non-negotiables
 
@@ -184,6 +184,17 @@ No implicit specification changes may be inferred from example code or migration
 2. Keep data access predictable and centralized.
 3. Keep domain ownership in features, not in globals.
 4. Prevent "shared/common/utils soup".
+
+## Product Scope (v1)
+
+This repository's production scope is fixed to three execution skills:
+
+1. `react_architecture_detection`
+2. `react_placement_and_layering`
+3. `react_reuse_update_new`
+
+`agent_policy_v1` is the shared policy baseline for these three skills and is
+not counted as a production execution skill.
 
 ## Top-level Structure
 
@@ -765,7 +776,7 @@ Ask only when intent is unclear and structural cost is meaningful, for example:
 
 If abstraction cost is clearly high, default to a feature-local section/module instead of forcing generalization.
 
-#### Implementation Discipline Pause Triggers
+#### Execution and Validation Pause Triggers
 
 Implementation should almost never pause. Pause only when:
 
@@ -1786,7 +1797,7 @@ Rules:
 
 ## Skill Model
 
-Use `4` execution skills plus `1` shared policy configuration layer.
+Use `3` execution skills plus `1` shared policy configuration layer.
 
 ### Execution Skills
 
@@ -1802,14 +1813,19 @@ Use `4` execution skills plus `1` shared policy configuration layer.
 
 - Primary output: refined implementation plan with per-artifact reuse decisions.
 
-#### Implementation Discipline
-
-- Primary output: concrete code changes and boundary audit compliance.
-
 ### Shared Policy Configuration Layer
 
 - One shared config provides constraints/defaults to all execution skills (for example pause thresholds, technology defaults, naming conventions, scope governor, and logging/env/codegen/storybook policies).
 - Policy/config updates should not be modeled as new execution skills.
+
+### Non-skill Execution Guidance
+
+- Implementation discipline is mandatory but is handled by shared policy, DoD
+  checks, and task execution workflows, not by a separate production skill.
+- The production skill set remains fixed at:
+  - `react_architecture_detection`
+  - `react_placement_and_layering`
+  - `react_reuse_update_new`
 
 ### Optional Extension Skills
 

@@ -42,12 +42,20 @@ Changes MUST be small, deterministic, and focused on the current feature scope.
 New dependencies or new top-level directories MUST NOT be added unless
 explicitly requested and justified.
 
+### VI. Three-Skill Product Scope
+The product scope is fixed to exactly three production execution skills:
+`react_architecture_detection`, `react_placement_and_layering`, and
+`react_reuse_update_new`. `agent_policy_v1` is a shared policy baseline and is
+not counted as a production execution skill.
+
 ## Repository Constraints
 
 - Skills MUST include a skill definition file, rules directory, examples
   directory, and generated agent summary location.
 - Generated outputs MUST be deterministic and normalized for stable diffs.
 - Schema validation is REQUIRED when a schema is provided for a skill.
+- New production skills beyond the three-skill scope MUST NOT be added without a
+  constitution amendment and version bump.
 
 ## Development Workflow
 
@@ -64,4 +72,4 @@ explicitly requested and justified.
 - All PRs MUST include a compliance check against these principles.
 - Use `PROJECT_STRUCTURE.md`, `SPEC.md`, and `ESLINT.md` as runtime guidance.
 
-**Version**: 0.1.0 | **Ratified**: TODO(RATIFICATION_DATE): original adoption date not found in repo context | **Last Amended**: 2026-02-23
+**Version**: 0.2.0 | **Ratified**: TODO(RATIFICATION_DATE): original adoption date not found in repo context | **Last Amended**: 2026-02-23
