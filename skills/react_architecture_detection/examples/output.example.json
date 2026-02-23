@@ -1,0 +1,10 @@
+{
+  "skill": "react_architecture_detection",
+  "version": "1.0.0",
+  "notes": [],
+  "output": {
+    "classification": "target-architecture",
+    "gravity": "features-ui-api",
+    "key_paths": ["src/features", "src/ui", "src/api"]
+  }
+}

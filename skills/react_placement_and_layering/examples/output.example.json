@@ -1,0 +1,10 @@
+{
+  "skill": "react_placement_and_layering",
+  "version": "1.0.0",
+  "notes": ["Placement follows existing feature boundaries"],
+  "output": {
+    "file_touches": ["src/features/example/ExampleSection.tsx"],
+    "layer": "features",
+    "decision": "new"
+  }
+}

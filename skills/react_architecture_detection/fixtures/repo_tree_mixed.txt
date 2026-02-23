@@ -1,0 +1,5 @@
+src/
+  features/
+  ui/
+  api/
+  pages/

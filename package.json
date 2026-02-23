@@ -1,0 +1,19 @@
+{
+  "name": "react-discipline-skills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "npm run build:agents",
+    "build:agents": "node tools/build/compile_agents.mjs",
+    "check": "npm run check:agents && npm run check:frontmatter && npm run check:examples",
+    "check:agents": "node tools/build/compile_agents.mjs --check",
+    "check:frontmatter": "node tools/build/validate_frontmatter.mjs",
+    "check:examples": "node tools/build/validate_examples.mjs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.1",
+    "husky": "^9.0.11"
+  }
+}
