@@ -55,6 +55,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must focus on detecting repository structure and gravity.
 - The skill must not make placement decisions beyond reporting signals.
 - The skill must not modify repository structure.
+- The skill must be detection-only and must not perform feature implementation,
+  file moves, or refactors.
 - The skill must inherit and enforce shared baseline constraints from
   `agent-policy-v1`.
 
@@ -62,6 +64,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 
 - Recommending migrations without explicit instruction.
 - Editing files as part of detection.
+- Implementing runtime/business logic changes in repository source files.
 - Defining local mandatory rules that conflict with `agent-policy-v1`.
 
 ### Notes
@@ -85,18 +88,106 @@ Defines how to scan repositories for architecture signals.
 
 ### Requirement
 
-- Scan routing, UI, data access, and domain boundaries.
-- Record the primary structure and gravity signals.
+- Scan routing signals and route-entry points first.
+- Scan UI-home signals next.
+- Scan domain-organization signals next.
+- Scan data-access-home signals next.
+- Scan state-home signals next.
+- Produce one gravity map after all concern scans complete.
+- Select exactly one migration strategy after concern scans complete.
+- Determine a clear home for each concern using explicit gravity heuristics.
+- Compute alignment blockers and one recommended next migration step.
 - Use deterministic defaults when multiple signals conflict.
+- Trigger clarification pause when decision-safety confidence is below `0.7`
+  and the impact is structural.
+
+### Detection sequence
+
+1. **Routing scan**
+   - Detect active routing style and route entry files/folders.
+2. **UI scan**
+   - Detect active UI home and shared-component structure.
+3. **Domain scan**
+   - Detect domain organization (`features`, `modules`, `routes`, `flat`, or `mixed`).
+4. **Data-access scan**
+   - Detect canonical backend-access home and access pattern.
+5. **State scan**
+   - Detect server-state/client-state ownership and home.
+6. **Gravity synthesis**
+   - Assign one authoritative home per concern for downstream reuse.
+7. **Clear-home scoring**
+   - Treat a concern home as clear when at least one is true:
+     - About 70% or more related files are already there.
+     - Most concern imports resolve there.
+     - Recent active edits for that concern consistently use that location.
+8. **Strategy selection**
+   - Choose exactly one strategy:
+     - `follow-existing`
+     - `introduce-boundaries`
+     - `migrate-as-you-touch`
+   - Provide rationale for why the selected strategy best fits observed
+     repository gravity and task scope.
+9. **Alignment synthesis**
+   - Compute `alignment_score` (`0-100`) plus:
+     - `alignment.blockers` (top issues reducing alignment)
+     - `alignment.next_migration_step` (one concrete step)
+10. **Bootstrap trigger handling**
+   - Classify repository as bootstrap-triggered when:
+     - Overall shape is `flat/ad-hoc`.
+     - No clear homes exist for routing/UI/API/domain (all below `0.7` confidence).
+   - In bootstrap-triggered cases, output notes must constrain bootstrap
+     recommendations to the canonical set:
+     - `pages/`
+     - `features/`
+     - `ui/primitives/`
+     - `ui/composites/`
+     - `api/client/`
+     - `api/dto/`
+     - `api/endpoints/`
+     - `core/`
+     - `lib/`
+     - `hooks/`
+     - `config/`
+     - `store/` only when global client-state is truly required.
+11. **Ambiguity and pause handling**
+   - If any structural concern gravity confidence is `< 0.7`, set concern
+     `home` to `unknown` and concern `status` to `ambiguous`.
+   - Compute decision-safety confidence separately from concern gravity
+     confidence.
+   - Pause only when both are true:
+     - `decision_safety_confidence < 0.7`
+     - impact is structural
+   - For low-confidence non-structural decisions, apply deterministic defaults.
+   - Emit a `pause_decision` payload with:
+     - `pause_required: true`
+     - `trigger`
+     - `options` (2-3 bounded choices)
+     - `recommended_option`
+   - When structural ambiguity pause is not required, still emit
+     `pause_decision` with `pause_required: false`.
 
 ### Forbidden
 
 - Ignoring clear existing conventions.
 - Introducing new conventions during detection.
+- Returning a partial concern scan without explicit uncertainty notes.
+- Returning multiple strategies for the same task.
+- Recommending strategies that create competing homes for one concern.
+- Leaving low-confidence structural concerns unresolved without a pause
+  decision.
+- Emitting bootstrap recommendations outside the canonical bootstrap set.
 
 ### Notes
 
 - If no clear signal exists, classify as flat/ad-hoc and state assumptions.
+- Concern evidence should reference concrete files or folders.
+- Strategy selection must preserve one-home-per-concern output discipline.
+- Decision-safety confidence threshold for structural pause behavior is fixed at
+  `0.7`.
+- Decision-safety confidence is separate from concern gravity confidence used
+  for placement decisions.
+- `api.home` must be emitted as the canonical endpoint layer for downstream
+  boundary checks in the task.
 
 ---
 
@@ -115,15 +206,62 @@ Defines the expected output structure for architecture detection.
 
 ### Requirement
 
-- Output must include repository classification and gravity summary.
-- Output must list key detected paths and conventions.
-- Output must include any assumptions or uncertainties in notes.
+- Output must be a single machine-readable JSON object.
+- Output must include required architecture contract fields:
+  - `routing.type`
+  - `ui.home`
+  - `api.home`
+  - `domain.organization`
+  - `gravity_map`
+  - `alignment_score`
+  - `strategy`
+  - `notes[]`
+- Output must include one `gravity_map` for downstream reuse.
+- Output must include one `strategy` and supporting rationale.
+- Output must include one `alignment_score` from `0` to `100`.
+- Output must include alignment blockers and one recommended migration step.
+- Output must include any assumptions or uncertainties in `notes`.
+- Output must include `state` classification (use `unknown` values when
+  detection is inconclusive).
+- Output must include `pause_decision` for every run:
+  - `pause_required: false` when no structural ambiguity pause is needed.
+  - `pause_required: true` plus bounded options when structural low-confidence
+    ambiguity is present.
+
+### Required fields
+
+- Root fields:
+  - `schema_version`
+  - `routing`
+  - `ui`
+  - `api`
+  - `domain`
+  - `gravity_map`
+  - `alignment_score`
+  - `alignment`
+  - `strategy`
+  - `strategy_rationale`
+  - `notes`
+  - `state`
+  - `pause_decision`
 
 ### Forbidden
 
-- Omitting core classification fields.
+- Omitting any required contract field.
 - Returning unstructured prose instead of structured output.
+- Producing multiple gravity maps for one task.
+- Returning more than one strategy for one task.
+- Returning a strategy without rationale.
+- Omitting alignment blockers or recommended next migration step.
+- Omitting `pause_decision` from output.
+- Omitting `api.home` from output.
+- Emitting raw code snippets in standard output fields.
 
 ### Notes
 
 - Keep notes concise and limited to high-impact uncertainties.
+- Gravity map values should reflect one authoritative home per concern.
+- Strategy output should preserve the no-parallel-homes constraint.
+- `schema_version` is mandatory for every output payload revision.
+- `api.home` is the canonical endpoint layer consumed by downstream boundary checks.
+- `alignment.blockers` can be empty only when no active blockers are detected.

@@ -22,6 +22,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must focus on detecting repository structure and gravity.
 - The skill must not make placement decisions beyond reporting signals.
 - The skill must not modify repository structure.
+- The skill must be detection-only and must not perform feature implementation,
+  file moves, or refactors.
 - The skill must inherit and enforce shared baseline constraints from
   `agent-policy-v1`.
 
@@ -29,6 +31,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 
 - Recommending migrations without explicit instruction.
 - Editing files as part of detection.
+- Implementing runtime/business logic changes in repository source files.
 - Defining local mandatory rules that conflict with `agent-policy-v1`.
 
 ### Notes
