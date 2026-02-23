@@ -49,17 +49,38 @@ Return a **single JSON object** matching this shape:
 
 ```json
 {
+  "schema_version": "1.0.0",
   "skill": "react_placement_and_layering",
   "version": "1.0.0",
-  "notes": [],
-  "output": {}
+  "result_type": "plan|validation_error",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "input-validation|planning|finalized",
+    "errors": [],
+    "warnings": []
+  },
+  "notes": []
 }
 ```
 
 Constraints:
 
 - Output must be JSON only.
+- Output must follow strict versioned contract fields.
+- Required-input validation happens before plan generation.
+- Missing or invalid required inputs return `result_type=validation_error` with
+  no plan artifacts.
+- Successful outputs return `result_type=plan` and include planning fields
+  defined in `rules/20_output.md`.
+- Plan outputs include canonical endpoint layer, per-layer justifications, and
+  a short decision explanation tied to detected architecture signals.
+- Plan outputs include an authoritative-home map for active concerns.
+- Repository-evidence overrides for structural conflicts require explicit
+  pause-resolved metadata.
+- If move/rename operations are present, they are limited to small scope and
+  require explicit move metadata.
 - `notes[]` max 5 items.
+- No raw source snippets or secret-like values in output fields.
 - No extra prose outside JSON.
 
 ## Quick reference rules

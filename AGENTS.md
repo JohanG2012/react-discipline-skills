@@ -10,6 +10,9 @@ Auto-generated from all feature plans. Last updated: 2026-02-23
 - JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint (001-skill-react-architecture-detection)
 - Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (001-skill-react-architecture-detection)
 - Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (001-skill-react-architecture-detection)
+- JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing validation/build scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint (003-skill-react-placement-layering)
+- Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (003-skill-react-placement-layering)
+- Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (003-skill-react-placement-layering)
 
 - (001-init-codex-skills)
 
@@ -29,9 +32,9 @@ tests/
 : Follow standard conventions
 
 ## Recent Changes
+- 003-skill-react-placement-layering: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing validation/build scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint
+- 003-skill-react-placement-layering: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing validation/build scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint
 - 001-skill-react-architecture-detection: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint
-- 001-skill-react-architecture-detection: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint
-- 001-agent-policy-v1: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown for policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`tools/build/compile_agents.mjs`, `tools/build/validate_frontmatter.mjs`, `tools/build/validate_examples.mjs`), Husky/Commitlint
 
 
 <!-- MANUAL ADDITIONS START -->

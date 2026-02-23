@@ -57,16 +57,23 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must justify placement with boundary rules.
 - The skill must inherit and enforce shared baseline constraints from
   `agent-policy-v1`.
+- The skill must validate required inputs before planning.
+- The skill must return strict machine-consumable JSON output only.
+- The skill must keep output structural and exclude raw source snippets and
+  secret-like values.
 
 ### Forbidden
 
 - Creating new layers without explicit approval.
 - Ignoring existing architectural conventions.
 - Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Producing best-effort plans from missing or invalid required inputs.
+- Returning unstructured prose output outside the output contract.
 
 ### Notes
 
-- If placement is ambiguous, list options and preferred choice.
+- If placement is ambiguous, list options and preferred choice in contract
+  fields only.
 
 ---
 
@@ -85,18 +92,84 @@ Defines the placement workflow for new or updated files.
 
 ### Requirement
 
-- Map requested changes to a single owning layer.
+- Validate required inputs before planning:
+  - implementation request
+  - target architecture rules
+  - architecture-detection result
+- Translate the request into explicit planning requirements before choosing
+  files.
+- Select one primary feature owner for the run.
+- Select one strategy for the run (`follow-existing`,
+  `introduce-boundaries`, or `migrate-as-you-touch`).
+- Enforce import guardrails before finalizing:
+  - `ui/**` must not import from `features/**`, `api/**`, `store/**`, or
+    `pages/**`
+  - `api/**` must not import React, `ui/**`, `features/**`, `pages/**`, or
+    `store/**`
+  - `lib/**` must not import React
+  - `features/**` must not import from `pages/**`
+  - `pages/**` must not import from the canonical endpoint layer directly; use
+    feature hooks
+  - `hooks/**` must not import from `features/**`, `pages/**`, or `store/**`;
+    imports from `api/**` are allowed only when documented in exactly one
+    canonical policy location
+  - fetching/transport must remain in the canonical endpoint layer for the task
+  - when a path alias exists (for example `@/`), apply guardrails to alias and
+    raw `src/**` paths equally
+- Map requested changes to a single owning layer per artifact.
+- Perform required repository lookup before proposing new artifacts:
+  - existing route files
+  - existing feature sections
+  - existing UI composites/primitives
+  - existing endpoint/DTO files
+  - existing store slices
+  - naming/export conventions
 - Prefer reuse of existing folders over creating new ones.
+- Apply action decision ladder per artifact:
+  - `reuse` when a suitable artifact already exists as-is
+  - `update` when small extension of an existing artifact is enough
+  - `create` only when reuse/update is not suitable
+- Produce explicit artifact records with purpose, action, layer, and path.
+- For architecture/repository concern conflicts:
+  - use architecture detection as default source and do not recompute gravity
+  - if architecture confidence is below `0.7` and impact is structural, trigger
+    clean pause protocol and, after explicit resolution, select repository
+    evidence with `resolution_mode=pause_resolved`
+  - for all other conflict cases, keep architecture detection as the effective
+    source
+  - after explicit resolution, record each concern in
+    `source_of_truth_resolutions`
+- Keep a concise authoritative-home map for the run and use it consistently for
+  placement decisions (`authoritative_home_map`).
+- If no path alias is already configured, keep relative imports and do not
+  introduce alias configuration unless explicitly requested.
+- Include decision explanation metadata with detected architecture signals and
+  chosen direction.
 - Document why adjacent layers were not chosen.
+- If move/rename operations are explicitly enabled, include `old_path ->
+  new_path` and import-update targets before finalizing.
+- In move-enabled runs, keep moves small (default: three files or fewer) and
+  keep moves scoped to one concern in the run.
 
 ### Forbidden
 
 - Splitting a single responsibility across multiple layers.
 - Introducing inconsistent naming conventions.
+- Emitting placement artifacts without a selected strategy and owner.
+- Finalizing a plan when guardrail violations remain unresolved.
+- Creating new artifacts when a clearly suitable reusable artifact already
+  exists.
+- Recomputing gravity independently from architecture-detection output.
+- Applying repository-evidence override without explicit pause resolution when
+  structural impact is present.
+- Emitting move/rename plans without explicit import-update targets.
 
 ### Notes
 
 - Use deterministic defaults when choices are otherwise equivalent.
+- If non-structural ambiguity remains after lookup, choose the safest minimal
+  artifact and record the ambiguity in notes.
+- If structural ambiguity remains unresolved, pause and request confirmation.
 
 ---
 
@@ -115,14 +188,75 @@ Defines the expected output structure for placement decisions.
 
 ### Requirement
 
-- Output must list planned file touches with paths.
-- Output must include layer justification notes.
-- Output must mark reuse/update/new decisions.
+- Output must be one JSON object that follows a strict versioned contract.
+- Successful placement results must use `result_type=plan`.
+- Invalid or missing required inputs must use `result_type=validation_error`.
+- `result_type=plan` output must include:
+  - `schema_version`
+  - `skill`
+  - `version`
+  - `strategy_used`
+  - `feature_owner`
+  - `canonical_endpoint_layer`
+  - `authoritative_home_map`
+  - `artifacts`
+  - `layer_justifications`
+  - `decision_explanation`
+  - `import_guardrails`
+  - `source_of_truth_resolutions`
+  - `validation_status`
+  - `notes`
+- Each artifact must include:
+  - `purpose`
+  - `action` (`reuse | update | create`)
+  - `action_rationale`
+  - `layer`
+  - `path`
+  - `depends_on` (when relevant)
+- `source_of_truth_resolutions` entries must include:
+  - `concern`
+  - `default_source`
+  - `architecture_confidence`
+  - `override_threshold`
+  - `effective_source`
+  - `resolution_mode` (`inherited | pause_resolved`)
+  - `resolution_reason`
+- `layer_justifications` must provide at least one concise rationale per touched
+  layer.
+- `decision_explanation` must summarize detected architecture signals and the
+  chosen direction.
+- `authoritative_home_map` must provide a concise map of current authoritative
+  homes for relevant concerns (for example `ui`, `api`, `domain`, `routing`).
+- If move/rename operations are present, output must include
+  `move_operations[]` with `old_path`, `new_path`, and `import_update_targets`,
+  plus `move_concern`.
+- `move_operations[]` must contain three items or fewer.
+- `notes` must remain concise with maximum 5 items.
+- `notes` and artifact rationales must be structural (planning metadata only).
+- `result_type=validation_error` output must include:
+  - `schema_version`
+  - `skill`
+  - `version`
+  - `result_type`
+  - `validation_status` (`is_valid=false`, `stage=input-validation`, and at
+    least one error)
+  - `notes`
+- `result_type=validation_error` must not include plan fields (`strategy_used`,
+  `feature_owner`, `canonical_endpoint_layer`, `authoritative_home_map`,
+  `artifacts`,
+  `layer_justifications`, `decision_explanation`, `import_guardrails`,
+  `source_of_truth_resolutions`, `move_operations`, `move_concern`).
 
 ### Forbidden
 
 - Vague placement guidance without concrete paths.
 - Omitting justification for layer selection.
+- Returning free-form prose outside JSON output.
+- Returning plan output that omits mandatory contract fields.
+- Returning validation-error output without explicit input-validation errors.
+- Returning output fields with raw source snippets or secret-like values.
+- Using `effective_source=repository_evidence` for structural conflicts without
+  `resolution_mode=pause_resolved`.
 
 ### Notes
 
