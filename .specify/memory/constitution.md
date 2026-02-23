@@ -1,16 +1,15 @@
 <!--
 Sync Impact Report
-- Version change: none → 0.1.0
-- Modified principles: N/A (new constitution)
-- Added sections: None (template filled)
+- Version change: 0.2.0 → 0.3.0
+- Modified principles: VI. Four-Skill Product Scope
+- Added sections: None
 - Removed sections: None
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md (no changes required)
   - ✅ .specify/templates/spec-template.md (no changes required)
   - ✅ .specify/templates/tasks-template.md (no changes required)
   - ✅ .specify/templates/commands/*.md (not present)
-- Follow-up TODOs:
-  - TODO(RATIFICATION_DATE): original adoption date not found in repo context
+- Follow-up TODOs: None
 -->
 # React Discipline Skills Constitution
 
@@ -73,4 +72,4 @@ production execution skill.
 - All PRs MUST include a compliance check against these principles.
 - Use `PROJECT_STRUCTURE.md`, `SPEC.md`, and `ESLINT.md` as runtime guidance.
 
-**Version**: 0.3.0 | **Ratified**: TODO(RATIFICATION_DATE): original adoption date not found in repo context | **Last Amended**: 2026-02-23
+**Version**: 0.3.0 | **Ratified**: 2026-02-23 | **Last Amended**: 2026-02-23

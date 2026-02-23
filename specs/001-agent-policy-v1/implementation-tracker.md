@@ -61,6 +61,7 @@ Track execution evidence for tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tas
 - Post-completion action: after a second full `SPEC.md` coverage review, added additional numbered shared-rule modules (`80_planning_reuse_workflow.md`, `90_migration_placement.md`, `100_fallback_defaults.md`, `110_implementation_defaults.md`, `120_layer_contracts.md`, `130_access_write_control.md`, `140_file_size_guidance.md`) and refreshed shared-rule coverage checks in contract/quickstart artifacts.
 - Post-completion action: final precautionary `SPEC.md` pass added shared rules for architecture-detection output/bootstrap contract and enforcement heuristics (`150_architecture_detection_contract.md`, `160_enforcement_heuristics.md`) and synchronized SKILL quick-reference plus contract/quickstart coverage criteria.
 - Post-completion action: explicit skill-model guardrails were added so production execution scope remains fixed to the four downstream skills and shared policy/config updates are not treated as new execution skills.
+- Post-completion action: moved Commitlint execution from Husky `pre-commit` to Husky `commit-msg` (`.husky/commit-msg`) and removed `.husky/pre-commit` so only the current commit message is linted.
 
 ## Validation Evidence
 

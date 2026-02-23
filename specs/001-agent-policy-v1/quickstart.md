@@ -77,4 +77,4 @@ npm run check
 
 - All checks in this quickstart are satisfied.
 - No unresolved ambiguity remains for shared baseline governance decisions.
-- Feature is ready for `/speckit.tasks`.
+- Feature implementation and governance alignment are complete and ready for final review/merge.

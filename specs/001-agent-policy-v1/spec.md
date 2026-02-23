@@ -2,8 +2,8 @@
 
 **Feature Branch**: `001-agent-policy-v1`  
 **Created**: 2026-02-23  
-**Status**: Draft  
-**Input**: User description: "this is spec 001-agent-policy-v1. Its the first out of 5 specs. During those 5 specs we will build 4 codex agent skills and shared policies/rules for those 4 agents. This is the spec where we focus on the shared rules/policies. Im saying this because you will have to read the file SPEC.md this is the master spec that covers everyhing for this spec and the other 4 (that are not relevant right now). You also need to read the file PROJECT_STRUCTURE.md which explains the structure of the project. the master spec is the source of truth but if it leaves open questions than answers for those might be found in POLICY.md"
+**Status**: Completed  
+**Input**: User description: "this is spec 001-agent-policy-v1. Its the first out of 5 specs. During those 5 specs we will build 4 codex agent skills and shared policies/rules for those 4 agents. This is the spec where we focus on the shared rules/policies. Im saying this because you will have to read the file SPEC.md this is the master spec that covers everyhing for the initial phase of the project including the other 4 specs (that are not relevant right now). You also need to read the file PROJECT_STRUCTURE.md which explains the structure of the project. the master spec is the source of truth but if it leaves open questions than answers for those might be found in POLICY.md"
 
 ## Clarifications
 
