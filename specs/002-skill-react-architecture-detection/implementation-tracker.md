@@ -2,7 +2,7 @@
 
 ## Scope
 
-Feature directory: `<REPO_ROOT>/specs/001-skill-react-architecture-detection/`
+Feature directory: `<REPO_ROOT>/specs/002-skill-react-architecture-detection/`
 
 This tracker captures per-phase completion evidence for tasks in `tasks.md` and
 independent-test outcomes per user story.
@@ -51,7 +51,7 @@ independent-test outcomes per user story.
   - Updated example payload strategy fields in
     `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`.
   - Updated downstream strategy consumption expectations in
-    `<REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
+    `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
   - Re-ran `node tools/build/validate_examples.mjs` successfully.
 
 ### US3 - Handle Ambiguity With Confidence Rules

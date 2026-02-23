@@ -1,7 +1,7 @@
 # Tasks: React Architecture Detection Skill
 
-**Input**: Design documents from `<REPO_ROOT>/specs/001-skill-react-architecture-detection/`  
-**Prerequisites**: `<REPO_ROOT>/specs/001-skill-react-architecture-detection/plan.md`, `<REPO_ROOT>/specs/001-skill-react-architecture-detection/spec.md`, `<REPO_ROOT>/specs/001-skill-react-architecture-detection/research.md`, `<REPO_ROOT>/specs/001-skill-react-architecture-detection/data-model.md`, `<REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`, `<REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
+**Input**: Design documents from `<REPO_ROOT>/specs/002-skill-react-architecture-detection/`  
+**Prerequisites**: `<REPO_ROOT>/specs/002-skill-react-architecture-detection/plan.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/research.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/data-model.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
 
 **Tests**: No explicit TDD or new automated test suite was requested in the feature spec. Validation tasks use existing repository checks and per-story independent test criteria.
 
@@ -11,8 +11,8 @@
 
 **Purpose**: Create execution scaffolding and align implementation references.
 
-- [X] T001 Create implementation tracker with phase and story checkpoints in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
-- [X] T002 Align execution checklist and validation steps with planned contract changes in <REPO_ROOT>/specs/001-skill-react-architecture-detection/quickstart.md
+- [X] T001 Create implementation tracker with phase and story checkpoints in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
+- [X] T002 Align execution checklist and validation steps with planned contract changes in <REPO_ROOT>/specs/002-skill-react-architecture-detection/quickstart.md
 
 ---
 
@@ -24,8 +24,8 @@
 
 - [X] T003 Update scope boundaries (detection-only, no refactor, no direct edits) in <REPO_ROOT>/skills/react_architecture_detection/rules/00_overview.md
 - [X] T004 [P] Update skill-level output contract summary and baseline inheritance notes in <REPO_ROOT>/skills/react_architecture_detection/SKILL.md
-- [X] T005 [P] Confirm canonical contract rules and failure modes in <REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md
-- [X] T006 Record foundational completion evidence in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
+- [X] T005 [P] Confirm canonical contract rules and failure modes in <REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md
+- [X] T006 Record foundational completion evidence in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
 
 **Checkpoint**: Foundation complete; user story phases can begin.
 
@@ -44,7 +44,7 @@
 - [X] T009 [US1] Implement classification, concern-assessment, and gravity-map schema fields in <REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json
 - [X] T010 [US1] Update example payload with complete classification and gravity-map output in <REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json
 - [X] T011 [US1] Sync skill contract narrative with US1 output requirements in <REPO_ROOT>/skills/react_architecture_detection/SKILL.md
-- [X] T012 [US1] Record US1 independent validation evidence in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
+- [X] T012 [US1] Record US1 independent validation evidence in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
 
 **Checkpoint**: User Story 1 is independently functional and verifiable.
 
@@ -62,8 +62,8 @@
 - [X] T014 [P] [US2] Add strategy output constraints and rationale requirements in <REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md
 - [X] T015 [US2] Add single-strategy enum and alignment/notes constraints in <REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json
 - [X] T016 [US2] Update example payload with strategy and rationale-compatible fields in <REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json
-- [X] T017 [US2] Align downstream-consumption expectations with strategy behavior in <REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md
-- [X] T018 [US2] Record US2 independent validation evidence in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
+- [X] T017 [US2] Align downstream-consumption expectations with strategy behavior in <REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md
+- [X] T018 [US2] Record US2 independent validation evidence in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
 
 **Checkpoint**: User Story 2 is independently functional and verifiable.
 
@@ -82,7 +82,7 @@
 - [X] T021 [US3] Implement threshold-conditional concern rules and required `pause_decision` structure in <REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json
 - [X] T022 [US3] Update example payload to include `schema_version`, compliant confidence handling, and `pause_decision` shape in <REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json
 - [X] T023 [US3] Update output contract block to prohibit raw snippets in standard output in <REPO_ROOT>/skills/react_architecture_detection/SKILL.md
-- [X] T024 [US3] Record US3 independent validation evidence in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
+- [X] T024 [US3] Record US3 independent validation evidence in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
 
 **Checkpoint**: User Story 3 is independently functional and verifiable.
 
@@ -93,9 +93,9 @@
 **Purpose**: Regenerate derived artifacts, run validations, and finalize handoff evidence.
 
 - [X] T025 Regenerate <REPO_ROOT>/skills/react_architecture_detection/AGENTS.md via `npm run build:agents`
-- [X] T026 Run repository validation via `npm run check` and record results in <REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md
+- [X] T026 Run repository validation via `npm run check` and record results in <REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md
 - [X] T027 [P] Refresh agent context via `.specify/scripts/bash/update-agent-context.sh codex` and review <REPO_ROOT>/AGENTS.md
-- [X] T028 Finalize quickstart handoff checklist and validation notes in <REPO_ROOT>/specs/001-skill-react-architecture-detection/quickstart.md
+- [X] T028 Finalize quickstart handoff checklist and validation notes in <REPO_ROOT>/specs/002-skill-react-architecture-detection/quickstart.md
 
 ---
 

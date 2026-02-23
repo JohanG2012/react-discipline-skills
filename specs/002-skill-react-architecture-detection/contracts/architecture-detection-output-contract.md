@@ -16,7 +16,7 @@ Define the normative interface emitted by `react_architecture_detection` and con
 ## Normative Schema
 
 - Source of contract truth for this feature phase:
-  - `<REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
 
 ## Required Payload Shape
 

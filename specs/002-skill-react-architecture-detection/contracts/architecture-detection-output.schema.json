@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://react-discipline-skills/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json",
+  "$id": "https://react-discipline-skills/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json",
   "title": "React Architecture Detection Output Contract",
   "type": "object",
   "required": [

@@ -1,7 +1,7 @@
 # Implementation Plan: React Architecture Detection Skill
 
-**Branch**: `001-skill-react-architecture-detection` | **Date**: 2026-02-23 | **Spec**: `<REPO_ROOT>/specs/001-skill-react-architecture-detection/spec.md`
-**Input**: Feature specification from `<REPO_ROOT>/specs/001-skill-react-architecture-detection/spec.md`
+**Branch**: `002-skill-react-architecture-detection` | **Date**: 2026-02-23 | **Spec**: `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`
+**Input**: Feature specification from `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`
 
 ## Summary
 
@@ -17,7 +17,7 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 **Project Type**: Documentation-and-tooling repository for Codex/agent skills  
 **Performance Goals**: Explicit runtime/scale thresholds are deferred for this phase; focus is deterministic contract correctness, confidence-gated ambiguity handling, and downstream compatibility  
 **Constraints**: No new top-level directories or dependencies; four-skill production scope fixed; architecture output must include mandatory `schema_version`; confidence below `0.7` on structural concerns requires pause; default output is structural metadata only (no raw code snippets)  
-**Scale/Scope**: One skill-focused feature scope for `react_architecture_detection` design and contract updates in `<REPO_ROOT>/specs/001-skill-react-architecture-detection/`
+**Scale/Scope**: One skill-focused feature scope for `react_architecture_detection` design and contract updates in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/`
 
 ## Constitution Check
 
@@ -26,7 +26,7 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 ### Pre-Phase 0 Gate Review
 
 - **I. Structure Is a Contract**: PASS
-  - Planned artifacts are confined to `<REPO_ROOT>/specs/001-skill-react-architecture-detection/` and existing skill directories.
+  - Planned artifacts are confined to `<REPO_ROOT>/specs/002-skill-react-architecture-detection/` and existing skill directories.
 - **II. Rules Are the Source of Truth**: PASS
   - Plan updates source artifacts (`SKILL.md`, `rules/`, schemas, examples) and does not rely on manual edits to generated outputs.
 - **III. Validation Is Required**: PASS
@@ -52,7 +52,7 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 ### Documentation (this feature)
 
 ```text
-<REPO_ROOT>/specs/001-skill-react-architecture-detection/
+<REPO_ROOT>/specs/002-skill-react-architecture-detection/
 ├── plan.md
 ├── research.md
 ├── data-model.md
@@ -82,12 +82,12 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 │   └── build/
 ├── specs/
 │   ├── 001-agent-policy-v1/
-│   └── 001-skill-react-architecture-detection/
+│   └── 002-skill-react-architecture-detection/
 ├── eslint/
 └── .specify/
 ```
 
-**Structure Decision**: Use the existing single-repository skills architecture. This feature adds planning/design artifacts under `<REPO_ROOT>/specs/001-skill-react-architecture-detection/` and reuses existing skill/tooling homes for implementation follow-up.
+**Structure Decision**: Use the existing single-repository skills architecture. This feature adds planning/design artifacts under `<REPO_ROOT>/specs/002-skill-react-architecture-detection/` and reuses existing skill/tooling homes for implementation follow-up.
 
 ## Complexity Tracking
 

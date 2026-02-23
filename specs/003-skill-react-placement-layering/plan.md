@@ -82,7 +82,7 @@ Define and harden the `react_placement_and_layering` skill design with a strict 
 │   └── build/
 ├── specs/
 │   ├── 001-agent-policy-v1/
-│   ├── 001-skill-react-architecture-detection/
+│   ├── 002-skill-react-architecture-detection/
 │   └── 003-skill-react-placement-layering/
 ├── eslint/
 └── .specify/

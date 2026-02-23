@@ -3,22 +3,22 @@
 ## Goal
 
 Implement and validate the architecture-detection contract updates defined in
-`<REPO_ROOT>/specs/001-skill-react-architecture-detection/spec.md`
+`<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`
 with deterministic, machine-consumable output behavior.
 
 ## Prerequisites
 
-- Working branch: `001-skill-react-architecture-detection`
+- Working branch: `002-skill-react-architecture-detection`
 - Repository root: `<REPO_ROOT>`
 - Node.js 20 LTS and npm installed
 
 ## Steps
 
 1. Review planning artifacts
-   - Read `<REPO_ROOT>/specs/001-skill-react-architecture-detection/plan.md`.
-   - Read `<REPO_ROOT>/specs/001-skill-react-architecture-detection/research.md`.
-   - Read `<REPO_ROOT>/specs/001-skill-react-architecture-detection/data-model.md`.
-   - Read `<REPO_ROOT>/specs/001-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
+   - Read `<REPO_ROOT>/specs/002-skill-react-architecture-detection/plan.md`.
+   - Read `<REPO_ROOT>/specs/002-skill-react-architecture-detection/research.md`.
+   - Read `<REPO_ROOT>/specs/002-skill-react-architecture-detection/data-model.md`.
+   - Read `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
 
 2. Apply skill contract changes
    - Update `<REPO_ROOT>/skills/react_architecture_detection/SKILL.md` output contract guidance.
@@ -47,9 +47,9 @@ npm run check
 ```
 
 5. Verify design-contract alignment
-   - Confirm implementation aligns with all requirements in `<REPO_ROOT>/specs/001-skill-react-architecture-detection/spec.md` (`FR-012`, `FR-013`, `FR-016`, `FR-017` and related success criteria).
+   - Confirm implementation aligns with all requirements in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md` (`FR-012`, `FR-013`, `FR-016`, `FR-017` and related success criteria).
    - Confirm no new dependencies or top-level folders were introduced.
-   - Record implementation and validation evidence in `<REPO_ROOT>/specs/001-skill-react-architecture-detection/implementation-tracker.md`.
+   - Record implementation and validation evidence in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md`.
 
 ## Execution Checklist
 
