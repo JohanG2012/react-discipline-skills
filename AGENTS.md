@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2026-02-23
 ## Active Technologies
 - JavaScript (Node.js 20 LTS, ES modules) + Node.js runtime, npm scripts, ESLint (for recommended configs) (001-init-codex-skills)
 - Filesystem (repository content) (001-init-codex-skills)
+- JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown for policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`tools/build/compile_agents.mjs`, `tools/build/validate_frontmatter.mjs`, `tools/build/validate_examples.mjs`), Husky/Commitlint (001-agent-policy-v1)
+- Filesystem-based repository artifacts (Markdown specs, policy docs, generated agent docs) (001-agent-policy-v1)
 
 - (001-init-codex-skills)
 
@@ -24,19 +26,21 @@ tests/
 : Follow standard conventions
 
 ## Recent Changes
+- 001-agent-policy-v1: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown for policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`tools/build/compile_agents.mjs`, `tools/build/validate_frontmatter.mjs`, `tools/build/validate_examples.mjs`), Husky/Commitlint
+- 001-agent-policy-v1: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown for policy/spec artifacts + Node.js runtime, npm scripts, existing build/validation scripts (`tools/build/compile_agents.mjs`, `tools/build/validate_frontmatter.mjs`, `tools/build/validate_examples.mjs`), Husky/Commitlint
 - 001-init-codex-skills: Added JavaScript (Node.js 20 LTS, ES modules) + Node.js runtime, npm scripts, ESLint (for recommended configs)
 
-- 001-init-codex-skills: Added
 
 <!-- MANUAL ADDITIONS START -->
 ## Project Intent (Manual)
 
-- Build exactly **3 production skills** for Codex/agent clients:
+- Build exactly **4 production skills** for Codex/agent clients:
   - `react_architecture_detection`
   - `react_placement_and_layering`
   - `react_reuse_update_new`
-- `agent_policy_v1` is shared policy/configuration baseline for the 3 skills
-  and is not counted as one of the 3 production skills.
+  - `react_implementation_discipline`
+- `agent-policy-v1` is shared policy/configuration baseline for the 4 skills
+  and is not counted as one of the 4 production skills.
 - Unless a future spec explicitly expands scope, do not add new production
-  skills beyond these 3.
+  skills beyond these 4.
 <!-- MANUAL ADDITIONS END -->

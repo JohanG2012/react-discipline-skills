@@ -13,6 +13,15 @@ Non-goals:
 - This policy does not implement code.
 - This policy does not mandate tooling changes (ESLint rules may be added separately as a dedicated task).
 
+Repository execution-skill scope for this initiative:
+- `react_architecture_detection`
+- `react_placement_and_layering`
+- `react_reuse_update_new`
+- `react_implementation_discipline`
+
+`agent-policy-v1` is the shared baseline policy for all four skills and is not
+counted as a production execution skill.
+
 ---
 
 ## 1. Target Top-Level Architecture
@@ -397,6 +406,8 @@ A file is likely in the wrong place if:
 
 - Any change to this policy increments version (v1 → v2).
 - Policy changes are explicit and should not be auto-edited by agents unless requested.
+- Shared-policy exceptions require repo maintainer approval and explicit rationale.
+- Shared-policy exceptions must not include expiry metadata; they remain active
+  until explicitly revoked or superseded by a newer policy version.
 
 ---
-

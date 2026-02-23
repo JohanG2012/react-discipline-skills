@@ -6,15 +6,16 @@ scripts to generate agent-readable rule bundles.
 
 ## Project Direction
 
-This project is intentionally scoped to **3 production skills** for agents such
+This project is intentionally scoped to **4 production skills** for agents such
 as Codex:
 
 1. `react_architecture_detection`
 2. `react_placement_and_layering`
 3. `react_reuse_update_new`
+4. `react_implementation_discipline`
 
-`agent_policy_v1` is a shared policy baseline used by all skills, but it is not
-counted as one of the 3 production skills.
+`agent-policy-v1` is a shared policy baseline used by all skills, but it is not
+counted as one of the 4 production skills.
 
 If other skill folders exist in the repo, treat them as non-goal/legacy unless
 explicitly promoted by a new spec.
@@ -39,6 +40,7 @@ Each skill should follow the same high-level shape used in those ecosystems:
 ## Structure
 
 - `skills/`: Skill definitions, rules, examples, and generated `AGENTS.md`
+- `skills/.shared/policy/`: Shared baseline policy bundle (`agent-policy-v1`)
 - `tools/build/`: Generation and validation scripts
 - `eslint/`: Recommended ESLint rule sets for supported versions
 - `.github/workflows/`: CI configuration

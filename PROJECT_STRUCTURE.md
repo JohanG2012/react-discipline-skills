@@ -12,8 +12,8 @@ repo/
     10.0.0/
     8.50.0/
   skills/
-    
-      agent_policy_v1/
+    .shared/
+      policy/
         SKILL.md
         rules/
           00_overview.md
@@ -24,65 +24,63 @@ repo/
           policy_usage.example.md
         schemas/                    # optional
           policy.schema.json
-
-      react_architecture_detection/
-        SKILL.md
-        rules/
-          00_overview.md
-          10_<topic>.md
-          20_<topic>.md
-        AGENTS.md                   # generated
-        examples/
-          output.example.json
-        fixtures/                   # optional
-          repo_tree_flat.txt
-          repo_tree_mixed.txt
-        schemas/
-          output.schema.json        # optional
-
-      react_placement_and_layering/
-        SKILL.md
-        rules/
-          00_overview.md
-          10_<topic>.md
-          20_<topic>.md
-        AGENTS.md                   # generated
-        examples/
-          output.example.json
-        schemas/
-          output.schema.json
-
-      react_reuse_update_new/
-        SKILL.md
-        rules/
-          00_overview.md
-          10_<topic>.md
-          20_<topic>.md
-        AGENTS.md                   # generated
-        examples/
-          output.example.json
-        schemas/
-          output.schema.json
-
-      react_implementation_discipline/
-        SKILL.md
-        rules/
-          00_overview.md
-          10_<topic>.md
-          20_<topic>.md
-        AGENTS.md                   # generated
-        examples/
-          diff.example.patch
-        schemas/
-          output.schema.json
-
-    .shared/
       templates/
+        00_OVERVIEW_TEMPLATE.md
         SKILL_TEMPLATE.md
         AGENTS_TEMPLATE.md
         RULE_TEMPLATE.md
       schemas/
         skill_base.schema.json      # optional shared schema
+    react_architecture_detection/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+      AGENTS.md                   # generated
+      examples/
+        output.example.json
+      fixtures/                   # optional
+        repo_tree_flat.txt
+        repo_tree_mixed.txt
+      schemas/
+        output.schema.json        # optional
+
+    react_placement_and_layering/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+      AGENTS.md                   # generated
+      examples/
+        output.example.json
+      schemas/
+        output.schema.json
+
+    react_reuse_update_new/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+      AGENTS.md                   # generated
+      examples/
+        output.example.json
+      schemas/
+        output.schema.json
+
+    react_implementation_discipline/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+      AGENTS.md                   # generated
+      examples/
+        diff.example.patch
+      schemas/
+        output.schema.json
 
   tools/
     build/
@@ -148,7 +146,8 @@ Notes:
 
 ### Responsibilities
 
-For each folder under `skills/*/`:
+For each production skill under `skills/*/` and the shared baseline at
+`skills/.shared/policy/`:
 
 1. If it has `rules/`:
 
@@ -175,7 +174,7 @@ For each folder under `skills/*/`:
 
 ### Responsibilities
 
-For each `skills/*/SKILL.md`:
+For each production `skills/*/SKILL.md` and `skills/.shared/policy/SKILL.md`:
 
 * parse frontmatter
 * require keys:

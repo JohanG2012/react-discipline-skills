@@ -162,8 +162,9 @@
 13.1.1 Architecture Detection
 13.1.2 Placement and Layering
 13.1.3 Reuse vs Update vs New
+13.1.4 Implementation Discipline
 13.2 Shared Policy Configuration Layer
-13.3 Non-skill Execution Guidance
+13.3 Execution Guidance
 13.4 Optional Extension Skills
 
 ## Non-negotiables
@@ -176,6 +177,7 @@
 
 This specification is the authoritative source of architectural truth. If repository code conflicts with this document, the document governs new work unless an explicit migration strategy dictates otherwise.
 Changes to this specification require an explicit version increment (for example `v1` -> `v2`) and must not be introduced implicitly through feature work.
+Any shared-policy exception must be approved by a repo maintainer, include explicit rationale, and must not include expiry metadata.
 No implicit specification changes may be inferred from example code or migration behavior.
 
 ## Goals
@@ -187,13 +189,14 @@ No implicit specification changes may be inferred from example code or migration
 
 ## Product Scope (v1)
 
-This repository's production scope is fixed to three execution skills:
+This repository's production scope is fixed to four execution skills:
 
 1. `react_architecture_detection`
 2. `react_placement_and_layering`
 3. `react_reuse_update_new`
+4. `react_implementation_discipline`
 
-`agent_policy_v1` is the shared policy baseline for these three skills and is
+`agent-policy-v1` is the shared policy baseline for these four skills and is
 not counted as a production execution skill.
 
 ## Top-level Structure
@@ -1797,7 +1800,7 @@ Rules:
 
 ## Skill Model
 
-Use `3` execution skills plus `1` shared policy configuration layer.
+Use `4` execution skills plus `1` shared policy configuration layer.
 
 ### Execution Skills
 
@@ -1813,19 +1816,24 @@ Use `3` execution skills plus `1` shared policy configuration layer.
 
 - Primary output: refined implementation plan with per-artifact reuse decisions.
 
+#### Implementation Discipline
+
+- Primary output: disciplined implementation updates with boundary and quality-gate compliance.
+
 ### Shared Policy Configuration Layer
 
 - One shared config provides constraints/defaults to all execution skills (for example pause thresholds, technology defaults, naming conventions, scope governor, and logging/env/codegen/storybook policies).
 - Policy/config updates should not be modeled as new execution skills.
 
-### Non-skill Execution Guidance
+### Execution Guidance
 
-- Implementation discipline is mandatory but is handled by shared policy, DoD
-  checks, and task execution workflows, not by a separate production skill.
+- Implementation discipline remains mandatory and is represented by an explicit execution skill.
+- Shared policy, DoD checks, and task execution workflows continue to constrain all execution skills.
 - The production skill set remains fixed at:
   - `react_architecture_detection`
   - `react_placement_and_layering`
   - `react_reuse_update_new`
+  - `react_implementation_discipline`
 
 ### Optional Extension Skills
 
