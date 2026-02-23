@@ -37,7 +37,7 @@ Do not use this skill when:
 The skill expects:
 - **Task request:** <what the user asked for>
 - **Repository context:** <tree/read/search OR context bundle>
-- **Policy:** `agent_policy_v1` (must be available)
+- **Policy:** `agent-policy-v1` (must be available)
 
 ## How to use
 Follow this workflow in order:

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["skill", "version", "notes", "output"],
+  "additionalProperties": false,
+  "properties": {
+    "skill": {"type": "string", "const": "agent-policy-v1"},
+    "version": {"type": "string"},
+    "notes": {"type": "array", "maxItems": 5, "items": {"type": "string"}},
+    "output": {
+      "type": "object",
+      "required": ["compliance", "violations"],
+      "additionalProperties": false,
+      "properties": {
+        "compliance": {"type": "string", "enum": ["pass", "fail", "warning"]},
+        "violations": {"type": "array", "items": {"type": "string"}},
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "exception_id",
+              "requesting_skill_id",
+              "conflicting_rule_ref",
+              "rationale",
+              "approved_by_role",
+              "status"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "exception_id": {"type": "string"},
+              "requesting_skill_id": {"type": "string"},
+              "conflicting_rule_ref": {"type": "string"},
+              "rationale": {"type": "string"},
+              "approved_by_role": {"type": "string", "const": "repo_maintainer"},
+              "status": {
+                "type": "string",
+                "enum": ["proposed", "approved", "rejected", "active", "revoked", "superseded"]
+              },
+              "decision_note": {"type": "string"},
+              "superseded_by_version": {"type": "string"}
+            }
+          }
+        },
+        "policy_version_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["version", "change_summary", "change_reason", "effective_date"],
+            "additionalProperties": false,
+            "properties": {
+              "version": {"type": "string"},
+              "change_summary": {"type": "string"},
+              "change_reason": {"type": "string"},
+              "effective_date": {"type": "string", "format": "date"},
+              "supersedes_version": {"type": "string"}
+            }
+          }
+        },
+        "pre_approved_collisions": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

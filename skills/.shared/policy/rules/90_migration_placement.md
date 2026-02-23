@@ -1,0 +1,36 @@
+# Migration and Placement Strategy
+
+## Summary
+Defines migration-aware placement rules and strategy selection constraints.
+
+---
+
+## Rule: Migration and Placement Strategy
+**Rule ID:** apv-migration-placement  
+**Priority:** MUST  
+**Applies to:** agent-policy-v1  
+**Rationale:** Prevents mixed-architecture drift and keeps placement decisions
+deterministic in legacy or evolving repositories.
+
+### Requirement
+
+- Do not introduce parallel architectures for the same concern.
+- Choose a strategy per change:
+  - Follow existing.
+  - Introduce target structure at boundaries.
+  - Migrate as you touch (explicit migration scope only).
+- Default balanced behavior:
+  - No moves/renames unless explicitly enabled.
+  - Introduce new homes only when isolated and non-competing.
+  - Keep feature behavior and structural migration separate unless explicitly
+    requested.
+- Gravity decisions from Architecture Detection are inherited by downstream
+  skills and must not be recomputed unless pause/escalation resolves a conflict.
+- If move mode is explicitly enabled, keep moves small and complete import
+  updates in the same change.
+
+### Forbidden
+
+- Two active homes for the same concern in one scope.
+- Mixing broad structural migration with unrelated behavior changes.
+- Recomputing gravity independently in downstream skills without escalation.

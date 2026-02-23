@@ -1,5 +1,5 @@
 ---
-name: agent_policy_v1
+name: agent-policy-v1
 description: Baseline policy constraints for all skills
 version: 1.0.0
 license: MIT
@@ -15,14 +15,16 @@ metadata:
 # Agent Policy v1
 
 ## Purpose
-Defines the baseline policy constraints that all other skills must follow.
-It provides scope limits, guardrails, and governance expectations.
+Defines the authoritative shared baseline policy for all four production
+execution skills. It provides scope limits, document-precedence rules,
+guardrails, and governance expectations.
 
 ## When to apply
 Use this skill when:
 - A task requires baseline policy constraints
 - Another skill references policy compliance
 - Governance and scope rules must be enforced
+- Cross-skill policy consistency must be validated
 
 Do not use this skill when:
 - The task explicitly overrides policy with approved exceptions
@@ -33,19 +35,22 @@ The skill expects:
 - **Task request:** The user request requiring policy enforcement
 - **Repository context:** Repository structure and relevant policy documents
 - **Policy:** This policy itself is the baseline
+- **Document precedence:** `SPEC.md` is authoritative; `POLICY.md` may resolve
+  non-conflicting gaps
 
 ## How to use
 Follow this workflow in order:
 1. Read the policy rules in `AGENTS.md`.
-2. Identify any scope or governance constraints relevant to the task.
-3. Apply constraints and pause if violations are required.
+2. Verify baseline applicability across all four production execution skills.
+3. Identify scope, precedence, and governance constraints relevant to the task.
+4. Apply constraints and pause if violations are required.
 
 ## Output contract
 Return a **single JSON object** matching this shape:
 
 ```json
 {
-  "skill": "agent_policy_v1",
+  "skill": "agent-policy-v1",
   "version": "1.0.0",
   "notes": [],
   "output": {}
@@ -63,7 +68,23 @@ Constraints:
 The skill must follow these rule IDs (see `AGENTS.md` for details):
 
 - apv-overview-scope
+- apv-overview-nongoals
 - apv-constraints
+- apv-scope-governor
+- apv-architecture-boundaries
+- apv-ownership-naming
+- apv-decision-defaults
+- apv-output-discipline
+- apv-dod-baseline
+- apv-planning-reuse
+- apv-migration-placement
+- apv-fallback-defaults
+- apv-implementation-defaults
+- apv-layer-contracts
+- apv-access-write-control
+- apv-file-size-guidance
+- apv-architecture-detection-contract
+- apv-enforcement-heuristics
 - apv-governance
 
 ## Files

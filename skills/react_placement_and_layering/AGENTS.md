@@ -21,7 +21,7 @@ Generated on: 2026-02-23
 This document defines the authoritative rules for agents/LLMs using the `react_placement_and_layering` skill.
 
 Key constraints:
-- Follow `agent_policy_v1` unless explicitly overridden by an allowed migration strategy.
+- Follow `agent-policy-v1` unless explicitly overridden by an allowed migration strategy.
 - If a rule references a rule ID, the rule ID must be followed exactly.
 
 ## Rule index
@@ -38,7 +38,7 @@ Key constraints:
 This document defines the authoritative rules for the `react_placement_and_layering` skill.
 
 This skill operates under:
-- `agent_policy_v1` (mandatory baseline policy)
+- `agent-policy-v1` (mandatory baseline policy)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -55,11 +55,14 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must map work to the correct layer and folder.
 - The skill must use architecture detection outputs as inputs.
 - The skill must justify placement with boundary rules.
+- The skill must inherit and enforce shared baseline constraints from
+  `agent-policy-v1`.
 
 ### Forbidden
 
 - Creating new layers without explicit approval.
 - Ignoring existing architectural conventions.
+- Defining local mandatory rules that conflict with `agent-policy-v1`.
 
 ### Notes
 

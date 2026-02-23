@@ -18,7 +18,7 @@ Generated on: <YYYY-MM-DD>
 This document defines the authoritative rules for agents/LLMs using the `<skill_name>` skill.
 
 Key constraints:
-- Follow `agent_policy_v1` unless explicitly overridden by an allowed migration strategy.
+- Follow `agent-policy-v1` unless explicitly overridden by an allowed migration strategy.
 - If a rule references a rule ID, the rule ID must be followed exactly.
 
 ## Rule index

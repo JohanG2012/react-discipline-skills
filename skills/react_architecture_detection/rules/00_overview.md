@@ -5,7 +5,7 @@
 This document defines the authoritative rules for the `react_architecture_detection` skill.
 
 This skill operates under:
-- `agent_policy_v1` (mandatory baseline policy)
+- `agent-policy-v1` (mandatory baseline policy)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -22,11 +22,14 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must focus on detecting repository structure and gravity.
 - The skill must not make placement decisions beyond reporting signals.
 - The skill must not modify repository structure.
+- The skill must inherit and enforce shared baseline constraints from
+  `agent-policy-v1`.
 
 ### Forbidden
 
 - Recommending migrations without explicit instruction.
 - Editing files as part of detection.
+- Defining local mandatory rules that conflict with `agent-policy-v1`.
 
 ### Notes
 

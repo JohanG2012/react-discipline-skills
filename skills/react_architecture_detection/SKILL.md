@@ -32,13 +32,16 @@ Do not use this skill when:
 The skill expects:
 - **Task request:** The requested change or feature
 - **Repository context:** File tree and key entry points
-- **Policy:** `agent_policy_v1` (must be available)
+- **Policy:** `agent-policy-v1` (must be available)
+- **Baseline inheritance:** shared baseline rules are mandatory and may not be
+  locally overridden without approved exception record
 
 ## How to use
 Follow this workflow in order:
 1. Scan the repository for routing, UI, and data access signals.
 2. Classify the architecture shape and gravity.
-3. Output a structured summary with recommended placement.
+3. Validate output constraints against shared baseline policy.
+4. Output a structured summary with recommended placement.
 
 ## Output contract
 Return a **single JSON object** matching this shape:

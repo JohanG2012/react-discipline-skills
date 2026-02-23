@@ -33,13 +33,16 @@ Do not use this skill when:
 The skill expects:
 - **Task request:** The requested change or feature
 - **Repository context:** Architecture detection outputs and file tree
-- **Policy:** `agent_policy_v1` (must be available)
+- **Policy:** `agent-policy-v1` (must be available)
+- **Baseline inheritance:** shared baseline rules are mandatory and may not be
+  locally overridden without approved exception record
 
 ## How to use
 Follow this workflow in order:
 1. Confirm architecture detection results and gravity.
 2. Map the change to the correct layer.
-3. Produce a placement decision with justification.
+3. Validate placement output against shared baseline constraints.
+4. Produce a placement decision with justification.
 
 ## Output contract
 Return a **single JSON object** matching this shape:

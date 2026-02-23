@@ -21,7 +21,7 @@ Generated on: 2026-02-23
 This document defines the authoritative rules for agents/LLMs using the `react_implementation_discipline` skill.
 
 Key constraints:
-- Follow `agent_policy_v1` unless explicitly overridden by an allowed migration strategy.
+- Follow `agent-policy-v1` unless explicitly overridden by an allowed migration strategy.
 - If a rule references a rule ID, the rule ID must be followed exactly.
 
 ## Rule index
@@ -38,7 +38,7 @@ Key constraints:
 This document defines the authoritative rules for the `react_implementation_discipline` skill.
 
 This skill operates under:
-- `agent_policy_v1` (mandatory baseline policy)
+- `agent-policy-v1` (mandatory baseline policy)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -55,11 +55,14 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must enforce boundary and quality gates.
 - The skill must follow the implementation plan and file touch list.
 - The skill must minimize churn and avoid unrelated refactors.
+- The skill must inherit and enforce shared baseline constraints from
+  `agent-policy-v1`.
 
 ### Forbidden
 
 - Skipping required validation steps.
 - Modifying architecture documents unless explicitly requested.
+- Defining local mandatory rules that conflict with `agent-policy-v1`.
 
 ### Notes
 
