@@ -6,9 +6,9 @@ Defines required output structure for planning and implementation guidance.
 ---
 
 ## Rule: Output and Planning Discipline
-**Rule ID:** apv-output-discipline  
+**Rule ID:** sr-output-discipline  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps downstream planning and implementation outputs consistent,
 compact, and reviewable.

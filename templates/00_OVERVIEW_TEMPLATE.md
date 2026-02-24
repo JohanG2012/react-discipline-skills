@@ -5,7 +5,7 @@
 This document defines the authoritative rules for the `<skill-name>` skill.
 
 This skill operates under:
-- `agent-policy-v1` (mandatory baseline policy baked in at build time)
+- `shared-rules` (mandatory baseline policy baked in at build time)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -23,8 +23,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must not perform responsibilities assigned to other skills.
 - The skill must not silently modify architecture decisions made by other skills.
 - The skill must inherit and enforce shared baseline constraints from
-  `agent-policy-v1`.
-- The skill must not reinterpret or override `agent-policy-v1`.
+  `shared-rules`.
+- The skill must not reinterpret or override `shared-rules`.
 - The skill must return output in the structure defined by its `SKILL.md` output
   contract.
 
@@ -34,7 +34,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 - Performing structural migrations unless migration mode is active.
 - Expanding scope beyond the Scope Governor without explicit override.
 - Introducing implicit changes to policy or folder structure.
-- Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Defining local mandatory rules that conflict with `shared-rules`.
 - Returning unstructured prose outside the skill output contract.
 
 ### Notes

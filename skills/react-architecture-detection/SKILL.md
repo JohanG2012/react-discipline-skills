@@ -1,6 +1,6 @@
 ---
 name: react-architecture-detection
-description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when placement, routing, endpoint-layer, or domain-boundary decisions must be evidence-based. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations.
+description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when downstream placement, routing, endpoint-layer, or domain-boundary decisions must be evidence-based. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations.
 version: 1.0.0
 license: MIT
 metadata:
@@ -14,12 +14,12 @@ metadata:
 
 ## Purpose
 Analyzes a repository to determine its current architectural shape and
-preferred file placement based on existing signals.
+observed concern homes and boundaries based on existing signals.
 
 ## When to apply
 Use this skill when:
 - You need to classify the current repository structure
-- You must decide the canonical home for features or APIs
+- You need to identify the current canonical home for features or APIs
 - You need to detect migration strategy signals
 
 Do not use this skill when:
@@ -105,7 +105,8 @@ Constraints:
 - `result_type=detection_result` must include architecture classification fields.
 - Missing/invalid required inputs must return `result_type=validation_error`.
 - Missing repository evidence must return `result_type=dependency_error` and
-  include `dependency_issue` plus `fallback_context_bundle_requirements[]`.
+  include `dependency_issue`, `fallback_context_bundle_requirements[]`, and
+  `notes[]` (max 5).
 - `notes[]` max 5 items.
 - Output must contain structural metadata only.
 - Raw code snippets are prohibited in standard output.
@@ -124,8 +125,6 @@ Constraints:
   `pause_decision.impact`.
 - For `result_type=detection_result`, `api.home` is the canonical endpoint
   layer for downstream boundary checks in the task.
-- For `result_type=detection_result`, if any structural concern confidence is
-  below `0.7`, output must set `pause_decision.pause_required` to `true`.
 - No extra prose outside JSON.
 
 ## Quick reference rules

@@ -5,7 +5,7 @@
 This document defines the authoritative rules for the `react-placement-and-layering` skill.
 
 This skill operates under:
-- `agent-policy-v1` (mandatory baseline policy)
+- `shared-rules` (mandatory baseline policy)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -23,7 +23,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must use architecture detection outputs as inputs.
 - The skill must justify placement with boundary rules.
 - The skill must inherit and enforce shared baseline constraints from
-  `agent-policy-v1`.
+  `shared-rules`.
 - The skill must validate required inputs before planning.
 - The skill must return strict machine-consumable JSON output only.
 - The skill must keep output structural and exclude raw source snippets and
@@ -33,7 +33,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 
 - Creating new layers without explicit approval.
 - Ignoring existing architectural conventions.
-- Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Defining local mandatory rules that conflict with `shared-rules`.
 - Producing best-effort plans from missing or invalid required inputs.
 - Returning unstructured prose output outside the output contract.
 

@@ -42,29 +42,52 @@ function usage() {
     "Usage:",
     "  node scripts/validators/validate_handoffs.mjs",
     "  node scripts/validators/validate_handoffs.mjs --set <success|validation_error|dependency_error>",
+    "  node scripts/validators/validate_handoffs.mjs --set <set-name> --verbose",
     "",
     "Default mode validates all fixture sets against expected outcomes.",
     "--set mode runs strict validation for a single fixture set.",
+    "In strict mode, intentionally invalid sets (validation_error/dependency_error)",
+    "still exit non-zero; this is expected for those fixtures.",
+    "--verbose prints all validation/assertion errors instead of truncating output.",
   ].join("\n");
 }
 
 function parseArgs(argv) {
   let setName = null;
+  let verbose = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--help" || arg === "-h") {
-      return { help: true, setName: null };
+      return {
+        help: true,
+        setName: null,
+        verbose: false,
+      };
     }
     if (arg === "--set") {
       setName = argv[i + 1] ?? null;
       i += 1;
       continue;
     }
+    if (arg === "--verbose") {
+      verbose = true;
+      continue;
+    }
+    if (arg in fixtureExpectations) {
+      throw new Error(
+        `Unknown argument: ${arg}. Did you mean "--set ${arg}"? ` +
+        `If running via npm, use "npm run check:handoffs -- --set ${arg}".`,
+      );
+    }
     throw new Error(`Unknown argument: ${arg}`);
   }
 
-  return { help: false, setName };
+  return {
+    help: false,
+    setName,
+    verbose,
+  };
 }
 
 function rel(filePath) {
@@ -114,20 +137,32 @@ async function loadSchema(schemaPath, label) {
   };
 }
 
-function formatSchemaFailure({ fixturePath, schemaPath, errors }) {
+function formatSchemaFailure({
+  fixturePath,
+  schemaPath,
+  errors,
+  maxErrorsToShow = 3,
+}) {
   const lines = [
     `[${rel(fixturePath)}] failed schema validation against ${rel(schemaPath)}`,
   ];
-  for (const err of errors.slice(0, 3)) {
+  for (const err of errors.slice(0, maxErrorsToShow)) {
     lines.push(`  - ${err}`);
   }
-  if (errors.length > 3) {
-    lines.push(`  - ... ${errors.length - 3} more`);
+  if (errors.length > maxErrorsToShow) {
+    lines.push(
+      `  - ... ${errors.length - maxErrorsToShow} more (rerun with --verbose to show all)`,
+    );
   }
   return lines;
 }
 
-function validatePayloadWithSchema({ payload, fixturePath, schemaDef }) {
+function validatePayloadWithSchema({
+  payload,
+  fixturePath,
+  schemaDef,
+  maxErrorsToShow,
+}) {
   const validationErrors = validateSchema(schemaDef.schema, payload, "$", schemaDef.schema);
   if (validationErrors.length === 0) {
     return [];
@@ -136,6 +171,7 @@ function validatePayloadWithSchema({ payload, fixturePath, schemaDef }) {
     fixturePath,
     schemaPath: schemaDef.schemaPath,
     errors: validationErrors,
+    maxErrorsToShow,
   });
 }
 
@@ -161,7 +197,12 @@ async function loadFixtureSet(setName) {
   return { payloads, paths };
 }
 
-function validateFixtureSetSchemas({ setPayloads, setPaths, schemas }) {
+function validateFixtureSetSchemas({
+  setPayloads,
+  setPaths,
+  schemas,
+  maxErrorsToShow,
+}) {
   const schemaErrors = [];
 
   const stageToSchema = [
@@ -176,6 +217,7 @@ function validateFixtureSetSchemas({ setPayloads, setPaths, schemas }) {
       payload: setPayloads[fixtureFile],
       fixturePath: setPaths[fixtureFile],
       schemaDef,
+      maxErrorsToShow,
     });
     if (errors.length) {
       schemaErrors.push(...errors);
@@ -189,6 +231,7 @@ function validateFixtureSetSchemas({ setPayloads, setPaths, schemas }) {
     payload: skill4Input.detection_result,
     fixturePath: setPaths["skill4_input.json"],
     schemaDef: schemas.skill1_output,
+    maxErrorsToShow,
   });
   if (nestedDetectionErrors.length) {
     schemaErrors.push(
@@ -202,6 +245,7 @@ function validateFixtureSetSchemas({ setPayloads, setPaths, schemas }) {
     payload: skill4Input.revised_plan,
     fixturePath: setPaths["skill4_input.json"],
     schemaDef: schemas.skill3_revised_plan,
+    maxErrorsToShow,
   });
   if (nestedRevisedPlanErrors.length) {
     schemaErrors.push(
@@ -259,14 +303,32 @@ function runPipelineAssertions(setPayloads) {
   return errors;
 }
 
-async function runSetStrict(setName, schemas) {
+async function runSetStrict(setName, schemas, options = {}) {
+  const maxErrorsToShow = options.verbose ? Number.POSITIVE_INFINITY : 3;
+  const expectation = fixtureExpectations[setName];
+  if (expectation) {
+    const intentionallyInvalidInStrictMode = (
+      expectation.schemaShouldPass === false
+      || expectation.pipelineShouldPass === false
+    );
+    if (intentionallyInvalidInStrictMode) {
+      process.stderr.write(
+        `[strict mode] Fixture set "${setName}" is intentionally non-green; non-zero exit is expected.\n`,
+      );
+    }
+  }
+
   const { payloads, paths } = await loadFixtureSet(setName);
   const schemaErrors = validateFixtureSetSchemas({
     setPayloads: payloads,
     setPaths: paths,
     schemas,
+    maxErrorsToShow,
   });
   if (schemaErrors.length) {
+    process.stderr.write(
+      `Fixture set ${setName} failed strict schema validation:\n`,
+    );
     for (const error of schemaErrors) {
       process.stderr.write(`${error}\n`);
     }
@@ -275,6 +337,9 @@ async function runSetStrict(setName, schemas) {
 
   const pipelineErrors = runPipelineAssertions(payloads);
   if (pipelineErrors.length) {
+    process.stderr.write(
+      `Fixture set ${setName} failed strict pipeline assertions:\n`,
+    );
     for (const error of pipelineErrors) {
       process.stderr.write(`${error}\n`);
     }
@@ -282,13 +347,15 @@ async function runSetStrict(setName, schemas) {
   }
 }
 
-async function runExpectationMode(schemas) {
+async function runExpectationMode(schemas, options = {}) {
+  const maxErrorsToShow = options.verbose ? Number.POSITIVE_INFINITY : 3;
   for (const [setName, expectation] of Object.entries(fixtureExpectations)) {
     const { payloads, paths } = await loadFixtureSet(setName);
     const schemaErrors = validateFixtureSetSchemas({
       setPayloads: payloads,
       setPaths: paths,
       schemas,
+      maxErrorsToShow,
     });
 
     if (expectation.schemaShouldPass && schemaErrors.length) {
@@ -370,11 +437,15 @@ async function run() {
   const schemas = await loadSchemas();
 
   if (args.setName) {
-    await runSetStrict(args.setName, schemas);
+    await runSetStrict(args.setName, schemas, {
+      verbose: args.verbose,
+    });
     return;
   }
 
-  await runExpectationMode(schemas);
+  await runExpectationMode(schemas, {
+    verbose: args.verbose,
+  });
 }
 
 run().catch((err) => {

@@ -49,7 +49,7 @@ function buildHeader({ skillName, skillTitle, generatedOn }) {
     `This document defines the authoritative rules for agents/LLMs using the \`${skillName}\` skill.`,
     "",
     "Key constraints:",
-    "- Follow `agent-policy-v1` unless explicitly overridden by an allowed migration strategy.",
+    "- Follow shared baseline rules baked into this document (`shared-rules`) unless explicitly overridden by an allowed migration strategy.",
     "- If a rule references a rule ID, the rule ID must be followed exactly.",
     "",
     "## Rule index",
@@ -61,9 +61,11 @@ function buildHeader({ skillName, skillTitle, generatedOn }) {
   ].join("\n");
 }
 
-function buildToc(headings) {
-  if (!headings.length) return "- (none)";
-  return headings.map((h) => `- [${h}](#${slugify(h)})`).join("\n");
+function buildToc(entries) {
+  if (!entries.length) return "- (none)";
+  return entries
+    .map((entry) => `- [${entry.label}](#${entry.slug})`)
+    .join("\n");
 }
 
 function buildRuleIndex(ruleIds) {
@@ -71,11 +73,42 @@ function buildRuleIndex(ruleIds) {
   return ruleIds.map((id) => `- ${id}`).join("\n");
 }
 
-function extractHeadings(content) {
-  return content
-    .split("\n")
-    .filter((line) => line.startsWith("## "))
-    .map((line) => line.replace(/^##\s+/, "").trim());
+function extractTocEntries(content) {
+  const lines = content.split("\n");
+  const slugCounts = new Map();
+  const entries = [];
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const headingMatch = lines[i].match(/^##\s+Rule:\s+(.+)\s*$/);
+    if (!headingMatch) {
+      continue;
+    }
+
+    const heading = `Rule: ${headingMatch[1].trim()}`;
+    let ruleId = null;
+    for (let j = i + 1; j < lines.length; j += 1) {
+      if (/^##\s+/.test(lines[j])) {
+        break;
+      }
+      const ruleIdMatch = lines[j].match(/^\*\*Rule ID:\*\*\s*(.+?)\s*$/);
+      if (ruleIdMatch) {
+        ruleId = ruleIdMatch[1].trim();
+        break;
+      }
+    }
+
+    const slugBase = slugify(heading);
+    const slugCount = slugCounts.get(slugBase) || 0;
+    slugCounts.set(slugBase, slugCount + 1);
+    const slug = slugCount === 0 ? slugBase : `${slugBase}-${slugCount}`;
+
+    entries.push({
+      label: ruleId ? `${heading} [${ruleId}]` : heading,
+      slug,
+    });
+  }
+
+  return entries;
 }
 
 function extractRuleIds(content) {
@@ -86,6 +119,60 @@ function extractRuleIds(content) {
     ids.push(match[1].trim());
   }
   return ids;
+}
+
+function findRuleBlocks(content) {
+  const lines = content.split("\n");
+  const starts = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    if (/^##\s+Rule:/.test(lines[i])) {
+      starts.push(i);
+    }
+  }
+
+  if (starts.length === 0) {
+    return {
+      preamble: content.trim(),
+      blocks: [],
+    };
+  }
+
+  const preamble = lines.slice(0, starts[0]).join("\n");
+  const blocks = [];
+  for (let i = 0; i < starts.length; i += 1) {
+    const start = starts[i];
+    const end = starts[i + 1] ?? lines.length;
+    const blockText = lines.slice(start, end).join("\n");
+    const title = lines[start].replace(/^##\s+Rule:\s*/, "").trim();
+    blocks.push({
+      title,
+      text: blockText,
+    });
+  }
+
+  return { preamble, blocks };
+}
+
+function extractFieldValue(blockText, fieldName) {
+  const regex = new RegExp(`^\\*\\*${fieldName}:\\*\\*\\s*(.+?)\\s*$`, "m");
+  const match = blockText.match(regex);
+  return match ? match[1].trim() : null;
+}
+
+function parseSkillList(rawValue) {
+  if (!rawValue) return [];
+
+  return rawValue
+    .split(",")
+    .map((value) => value.trim().replace(/^`/, "").replace(/`$/, ""))
+    .filter(Boolean);
+}
+
+function normalizeSectionText(text) {
+  return text
+    .trim()
+    .replace(/\n---\s*$/m, "")
+    .trim();
 }
 
 function ruleFileSort(a, b) {
@@ -114,11 +201,74 @@ async function loadRuleContents(rulesPath) {
   return ruleContents.join("\n\n---\n\n");
 }
 
-function materializeSharedRulesForSkill(sharedRules, skillName) {
-  return sharedRules.replaceAll(sharedTargetSkillToken, skillName);
+function materializeForSkill(text, skillName) {
+  return text.replaceAll(sharedTargetSkillToken, skillName);
 }
 
-async function buildSkillAgents(skillDir, sharedRules) {
+async function loadSharedRuleSources() {
+  const rulesExists = await pathExists(sharedRulesPath);
+  if (!rulesExists) return null;
+
+  const ruleFiles = (await listFiles(sharedRulesPath))
+    .filter((f) => f.endsWith(".md"))
+    .sort(ruleFileSort);
+
+  if (ruleFiles.length === 0) return null;
+
+  const sources = [];
+  for (const file of ruleFiles) {
+    const filePath = path.join(sharedRulesPath, file);
+    const content = await readFile(filePath);
+    const { preamble, blocks } = findRuleBlocks(content);
+    if (!blocks.length) {
+      continue;
+    }
+
+    const parsedBlocks = blocks.map((block) => ({
+      ...block,
+      appliesTo: parseSkillList(extractFieldValue(block.text, "Applies to")),
+    }));
+
+    sources.push({
+      file,
+      preamble: normalizeSectionText(preamble),
+      blocks: parsedBlocks,
+    });
+  }
+
+  return sources;
+}
+
+function resolveSharedRulesForSkill(sharedSources, skillName) {
+  const inlineSections = [];
+
+  for (const source of sharedSources) {
+    const inlineBlocks = [];
+    for (const block of source.blocks) {
+      if (block.appliesTo.includes(skillName)) {
+        inlineBlocks.push(materializeForSkill(
+          normalizeSectionText(block.text),
+          skillName,
+        ));
+      }
+    }
+
+    if (!inlineBlocks.length) {
+      continue;
+    }
+
+    const sectionParts = [];
+    if (source.preamble) {
+      sectionParts.push(materializeForSkill(source.preamble, skillName));
+    }
+    sectionParts.push(...inlineBlocks);
+    inlineSections.push(sectionParts.join("\n\n---\n\n"));
+  }
+
+  return inlineSections.join("\n\n---\n\n");
+}
+
+async function buildSkillAgents(skillDir, sharedSources) {
   const skillPath = path.join(skillsRoot, skillDir);
   const localRules = await loadRuleContents(path.join(skillPath, "rules"));
   if (!localRules) return null;
@@ -128,15 +278,15 @@ async function buildSkillAgents(skillDir, sharedRules) {
   const frontmatter = parseFrontmatter(skillContent) || {};
   const skillName = frontmatter.name || skillDir;
   const skillTitle = extractSkillTitle(skillContent, skillName);
-  const resolvedSharedRules = materializeSharedRulesForSkill(
-    sharedRules,
+  const resolvedSharedRules = resolveSharedRulesForSkill(
+    sharedSources,
     skillName,
   );
 
   const combinedRules = [resolvedSharedRules, localRules]
     .filter(Boolean)
     .join("\n\n---\n\n");
-  const headings = extractHeadings(combinedRules);
+  const tocEntries = extractTocEntries(combinedRules);
   const ruleIds = extractRuleIds(combinedRules);
 
   const header = buildHeader({
@@ -146,7 +296,7 @@ async function buildSkillAgents(skillDir, sharedRules) {
   });
 
   const output = header
-    .replace("<!-- GENERATED_TOC -->", buildToc(headings))
+    .replace("<!-- GENERATED_TOC -->", buildToc(tocEntries))
     .replace("<!-- OPTIONAL: GENERATED_RULE_INDEX -->", buildRuleIndex(ruleIds))
     .replace("<!-- GENERATED_RULES -->", combinedRules || "(no rules found)");
 
@@ -160,8 +310,8 @@ async function listSkillTargets() {
 }
 
 async function run() {
-  const sharedRules = await loadRuleContents(sharedRulesPath);
-  if (!sharedRules) {
+  const sharedSources = await loadSharedRuleSources();
+  if (!sharedSources) {
     process.stderr.write(
       `Missing shared baseline rules at ${sharedRulesPath}\n`,
     );
@@ -172,7 +322,7 @@ async function run() {
   let hasDiff = false;
 
   for (const skillDir of skillDirs) {
-    const content = await buildSkillAgents(skillDir, sharedRules);
+    const content = await buildSkillAgents(skillDir, sharedSources);
     if (!content) continue;
     const agentsPath = path.join(skillsRoot, skillDir, "AGENTS.md");
     if (checkOnly) {

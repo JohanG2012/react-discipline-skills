@@ -91,27 +91,26 @@ Defines how to scan repositories for architecture signals.
        alternative home for that concern unless explicit migration mode is enabled.
 11. **Ambiguity and pause handling**
    - If any structural concern gravity confidence is `< 0.7`, set concern
-     `home` to `unknown` and concern `status` to `ambiguous`.
+     `home` to `unknown`, concern `status` to `ambiguous`, and add concise
+     uncertainty notes.
    - Compute decision-safety confidence separately from concern gravity
      confidence.
    - Determine pause by mode when impact is structural:
      - `strict`: pause on structural ambiguity.
      - `balanced`: pause when `decision_safety_confidence < 0.7`.
      - `autonomous`: pause when `decision_safety_confidence < 0.5`.
-   - If any structural concern gravity confidence is `< 0.7`, treat this as a
-     structural low-confidence case and require `pause_required: true`.
+   - Do not force pause solely from concern-gravity ambiguity; pause is governed
+     by structural impact plus decision-safety confidence thresholds.
    - For low-confidence non-structural decisions, apply deterministic defaults.
-   - Emit a `pause_decision` payload with:
-     - `pause_required: true`
+   - Emit `pause_decision` for every run with:
+     - `pause_required`
      - `pause_mode`
      - `decision_safety_confidence`
      - `impact`
+   - When `pause_required: true`, also include:
      - `trigger`
      - `options` (2-3 bounded choices)
      - `recommended_option`
-   - When structural ambiguity pause is not required, still emit
-     `pause_decision` with `pause_required: false`, `pause_mode`,
-     `decision_safety_confidence`, and `impact`.
 
 ### Forbidden
 
@@ -133,7 +132,8 @@ Defines how to scan repositories for architecture signals.
 - Concern evidence should reference concrete files or folders.
 - Strategy selection must preserve one-home-per-concern output discipline.
 - Decision-safety confidence threshold for structural pause behavior is fixed at
-  `0.7`.
+  `0.7` only for `balanced` mode (`strict`/`autonomous` follow their own
+  thresholds).
 - Decision-safety confidence is separate from concern gravity confidence used
   for placement decisions.
 - `api.home` must be emitted as the canonical endpoint layer for downstream

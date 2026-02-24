@@ -10,100 +10,68 @@ Generated on: 2026-02-24
 # React Implementation Discipline — Agent Rules
 
 ## Table of contents
-- [Summary](#summary)
-- [Rule: Skill Scope Definition](#rule-skill-scope-definition)
-- [Rule: Baseline Non-goals](#rule-baseline-non-goals)
-- [Summary](#summary)
-- [Rule: Minimal Scope Enforcement](#rule-minimal-scope-enforcement)
-- [Rule: Scope Governor Hard Defaults](#rule-scope-governor-hard-defaults)
-- [Summary](#summary)
-- [Rule: Governance Compliance](#rule-governance-compliance)
-- [Summary](#summary)
-- [Rule: Architecture and Dependency Boundaries](#rule-architecture-and-dependency-boundaries)
-- [Summary](#summary)
-- [Rule: Ownership and Naming Contract](#rule-ownership-and-naming-contract)
-- [Summary](#summary)
-- [Rule: Deterministic Defaults and Pause Protocol](#rule-deterministic-defaults-and-pause-protocol)
-- [Summary](#summary)
-- [Rule: Output and Planning Discipline](#rule-output-and-planning-discipline)
-- [Summary](#summary)
-- [Rule: Completion and Quality Baseline](#rule-completion-and-quality-baseline)
-- [Summary](#summary)
-- [Rule: Planning and Reuse Workflow](#rule-planning-and-reuse-workflow)
-- [Summary](#summary)
-- [Rule: Migration and Placement Strategy](#rule-migration-and-placement-strategy)
-- [Summary](#summary)
-- [Rule: Fallback Technology Defaults](#rule-fallback-technology-defaults)
-- [Summary](#summary)
-- [Rule: Implementation Defaults](#rule-implementation-defaults)
-- [Summary](#summary)
-- [Rule: Layer Contracts and Error Ownership](#rule-layer-contracts-and-error-ownership)
-- [Summary](#summary)
-- [Rule: Access and Write Control](#rule-access-and-write-control)
-- [Summary](#summary)
-- [Rule: File Size and Responsibility Guidance](#rule-file-size-and-responsibility-guidance)
-- [Summary](#summary)
-- [Rule: Architecture Detection Output and Bootstrap Contract](#rule-architecture-detection-output-and-bootstrap-contract)
-- [Summary](#summary)
-- [Rule: Enforcement Heuristics](#rule-enforcement-heuristics)
-- [Summary](#summary)
-- [Rule: Skill Scope Definition](#rule-skill-scope-definition)
-- [Summary](#summary)
-- [Rule: Plan-Driven Implementation](#rule-plan-driven-implementation)
-- [Summary](#summary)
-- [Rule: Structured Implementation Output](#rule-structured-implementation-output)
-- [Summary](#summary)
-- [Rule: Validation Gate Sequence](#rule-validation-gate-sequence)
-- [Summary](#summary)
-- [Rule: Scope and Churn Caps](#rule-scope-and-churn-caps)
-- [Summary](#summary)
-- [Rule: Context Access and Write Discipline](#rule-context-access-and-write-discipline)
-- [Summary](#summary)
-- [Rule: Output Mode Selection](#rule-output-mode-selection)
-- [Summary](#summary)
-- [Rule: UI Genericity and Anti-Leakage](#rule-ui-genericity-and-anti-leakage)
-- [Summary](#summary)
-- [Rule: Bottom-Up Flow and Minimal Export Wiring](#rule-bottom-up-flow-and-minimal-export-wiring)
-- [Summary](#summary)
-- [Rule: Quick Validation Checklist](#rule-quick-validation-checklist)
-- [Summary](#summary)
-- [Rule: Ambiguity Resolution Strategy](#rule-ambiguity-resolution-strategy)
-- [Summary](#summary)
-- [Rule: Anti-Chaotic Change Guardrails](#rule-anti-chaotic-change-guardrails)
-- [Summary](#summary)
-- [Rule: Deterministic Defaults and Pause Protocol](#rule-deterministic-defaults-and-pause-protocol)
-- [Summary](#summary)
-- [Rule: Boundary, Runtime, and Query Correctness](#rule-boundary-runtime-and-query-correctness)
-- [Summary](#summary)
-- [Rule: Stop and Revise Conditions](#rule-stop-and-revise-conditions)
+- [Rule: Skill Scope Definition [sr-overview-scope]](#rule-skill-scope-definition)
+- [Rule: Baseline Non-goals [sr-overview-nongoals]](#rule-baseline-non-goals)
+- [Rule: Minimal Scope Enforcement [sr-constraints]](#rule-minimal-scope-enforcement)
+- [Rule: Scope Governor Hard Defaults [sr-scope-governor]](#rule-scope-governor-hard-defaults)
+- [Rule: Governance Compliance [sr-governance]](#rule-governance-compliance)
+- [Rule: Architecture and Dependency Boundaries [sr-architecture-boundaries]](#rule-architecture-and-dependency-boundaries)
+- [Rule: Ownership and Naming Contract [sr-ownership-naming]](#rule-ownership-and-naming-contract)
+- [Rule: Deterministic Defaults and Pause Protocol [sr-decision-defaults]](#rule-deterministic-defaults-and-pause-protocol)
+- [Rule: Output and Planning Discipline [sr-output-discipline]](#rule-output-and-planning-discipline)
+- [Rule: Completion and Quality Baseline [sr-dod-baseline]](#rule-completion-and-quality-baseline)
+- [Rule: Planning and Reuse Workflow [sr-planning-reuse]](#rule-planning-and-reuse-workflow)
+- [Rule: Migration and Placement Strategy [sr-migration-placement]](#rule-migration-and-placement-strategy)
+- [Rule: Fallback Technology Defaults [sr-fallback-defaults]](#rule-fallback-technology-defaults)
+- [Rule: Implementation Defaults [sr-implementation-defaults]](#rule-implementation-defaults)
+- [Rule: Layer Contracts and Error Ownership [sr-layer-contracts]](#rule-layer-contracts-and-error-ownership)
+- [Rule: Access and Write Control [sr-access-write-control]](#rule-access-and-write-control)
+- [Rule: File Size and Responsibility Guidance [sr-file-size-guidance]](#rule-file-size-and-responsibility-guidance)
+- [Rule: Architecture Detection Output and Bootstrap Contract [sr-architecture-detection-contract]](#rule-architecture-detection-output-and-bootstrap-contract)
+- [Rule: Enforcement Heuristics [sr-enforcement-heuristics]](#rule-enforcement-heuristics)
+- [Rule: Skill Scope Definition [rid-overview-scope]](#rule-skill-scope-definition-1)
+- [Rule: Plan-Driven Implementation [rid-process]](#rule-plan-driven-implementation)
+- [Rule: Structured Implementation Output [rid-output]](#rule-structured-implementation-output)
+- [Rule: Validation Gate Sequence [rid-validation-gates]](#rule-validation-gate-sequence)
+- [Rule: Scope and Churn Caps [rid-scope-governor]](#rule-scope-and-churn-caps)
+- [Rule: Context Access and Write Discipline [rid-access-control]](#rule-context-access-and-write-discipline)
+- [Rule: Output Mode Selection [rid-output-mode-selection]](#rule-output-mode-selection)
+- [Rule: UI Genericity and Anti-Leakage [rid-ui-genericity]](#rule-ui-genericity-and-anti-leakage)
+- [Rule: Bottom-Up Flow and Minimal Export Wiring [rid-data-flow-exports]](#rule-bottom-up-flow-and-minimal-export-wiring)
+- [Rule: Quick Validation Checklist [rid-quick-validation]](#rule-quick-validation-checklist)
+- [Rule: Ambiguity Resolution Strategy [rid-ambiguity-strategy]](#rule-ambiguity-resolution-strategy)
+- [Rule: Anti-Chaotic Change Guardrails [rid-chaotic-change-guardrails]](#rule-anti-chaotic-change-guardrails)
+- [Rule: Deterministic Defaults and Pause Protocol [rid-pause-defaults-protocol]](#rule-deterministic-defaults-and-pause-protocol-1)
+- [Rule: Boundary, Runtime, and Query Correctness [rid-boundary-runtime-query]](#rule-boundary-runtime-and-query-correctness)
+- [Rule: Stop and Revise Conditions [rid-stop-conditions]](#rule-stop-and-revise-conditions)
 
 ## Overview
 This document defines the authoritative rules for agents/LLMs using the `react-implementation-discipline` skill.
 
 Key constraints:
-- Follow `agent-policy-v1` unless explicitly overridden by an allowed migration strategy.
+- Follow shared baseline rules baked into this document (`shared-rules`) unless explicitly overridden by an allowed migration strategy.
 - If a rule references a rule ID, the rule ID must be followed exactly.
 
 ## Rule index
-- apv-overview-scope
-- apv-overview-nongoals
-- apv-constraints
-- apv-scope-governor
-- apv-governance
-- apv-architecture-boundaries
-- apv-ownership-naming
-- apv-decision-defaults
-- apv-output-discipline
-- apv-dod-baseline
-- apv-planning-reuse
-- apv-migration-placement
-- apv-fallback-defaults
-- apv-implementation-defaults
-- apv-layer-contracts
-- apv-access-write-control
-- apv-file-size-guidance
-- apv-architecture-detection-contract
-- apv-enforcement-heuristics
+- sr-overview-scope
+- sr-overview-nongoals
+- sr-constraints
+- sr-scope-governor
+- sr-governance
+- sr-architecture-boundaries
+- sr-ownership-naming
+- sr-decision-defaults
+- sr-output-discipline
+- sr-dod-baseline
+- sr-planning-reuse
+- sr-migration-placement
+- sr-fallback-defaults
+- sr-implementation-defaults
+- sr-layer-contracts
+- sr-access-write-control
+- sr-file-size-guidance
+- sr-architecture-detection-contract
+- sr-enforcement-heuristics
 - rid-overview-scope
 - rid-process
 - rid-output
@@ -126,21 +94,21 @@ Key constraints:
 
 ## Summary
 
-This document defines the authoritative rules for the `agent-policy-v1` skill.
+This document defines the authoritative rules for the `react-implementation-discipline` skill.
 
 This skill operates under:
-- `agent-policy-v1` (mandatory baseline policy)
+- `react-implementation-discipline` (with mandatory shared baseline policy baked in at build time)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
 ---
 
 ## Rule: Skill Scope Definition
-**Rule ID:** apv-overview-scope  
+**Rule ID:** sr-overview-scope  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
-**Rationale:** Ensures the policy skill stays focused on governance and scope.
+**Rationale:** Keeps shared baseline governance and scope constraints explicit.
 
 ### Requirement
 
@@ -153,8 +121,7 @@ All rules defined here are binding for agents and LLMs using this skill.
   - `react-reuse-update-new`
   - `react-implementation-discipline`
 - The production execution skill set for this initiative is fixed to those four
-  skills; `agent-policy-v1` is shared baseline policy and not a production
-  execution skill.
+  skills; the shared baseline policy is not a production execution skill.
 - Shared policy/config updates must not be modeled as new execution skills.
 - Document precedence must remain deterministic:
   - `specs/001-agent-policy-v1/master_spec.md` is authoritative.
@@ -177,9 +144,9 @@ All rules defined here are binding for agents and LLMs using this skill.
 ---
 
 ## Rule: Baseline Non-goals
-**Rule ID:** apv-overview-nongoals  
+**Rule ID:** sr-overview-nongoals  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents policy drift into implementation-specific prescriptions.
 
@@ -212,9 +179,9 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ---
 
 ## Rule: Minimal Scope Enforcement
-**Rule ID:** apv-constraints  
+**Rule ID:** sr-constraints  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents uncontrolled scope expansion and dependency creep.
 
@@ -244,9 +211,9 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ---
 
 ## Rule: Scope Governor Hard Defaults
-**Rule ID:** apv-scope-governor  
+**Rule ID:** sr-scope-governor  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Controls churn and keeps delivery bounded.
 
@@ -277,9 +244,9 @@ Sets expectations for compliance, documentation, and review.
 ---
 
 ## Rule: Governance Compliance
-**Rule ID:** apv-governance  
+**Rule ID:** sr-governance  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures policies are enforced consistently across changes.
 
@@ -322,9 +289,9 @@ must enforce.
 ---
 
 ## Rule: Architecture and Dependency Boundaries
-**Rule ID:** apv-architecture-boundaries  
+**Rule ID:** sr-architecture-boundaries  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures all downstream skills enforce one consistent
 architecture and import-boundary model.
@@ -379,9 +346,9 @@ specifications.
 ---
 
 ## Rule: Ownership and Naming Contract
-**Rule ID:** apv-ownership-naming  
+**Rule ID:** sr-ownership-naming  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps responsibility boundaries and naming deterministic across
 all downstream specs.
@@ -423,9 +390,9 @@ Defines deterministic default behavior and high-impact clarification triggers.
 ---
 
 ## Rule: Deterministic Defaults and Pause Protocol
-**Rule ID:** apv-decision-defaults  
+**Rule ID:** sr-decision-defaults  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Reduces unnecessary clarification loops while protecting
 high-impact structural decisions.
@@ -464,9 +431,9 @@ Defines required output structure for planning and implementation guidance.
 ---
 
 ## Rule: Output and Planning Discipline
-**Rule ID:** apv-output-discipline  
+**Rule ID:** sr-output-discipline  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps downstream planning and implementation outputs consistent,
 compact, and reviewable.
@@ -503,9 +470,9 @@ all downstream skills.
 ---
 
 ## Rule: Completion and Quality Baseline
-**Rule ID:** apv-dod-baseline  
+**Rule ID:** sr-dod-baseline  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures every downstream skill validates critical correctness and
 safety gates before completion.
@@ -551,9 +518,9 @@ all downstream skills.
 ---
 
 ## Rule: Planning and Reuse Workflow
-**Rule ID:** apv-planning-reuse  
+**Rule ID:** sr-planning-reuse  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents ad hoc implementation choices and improves consistency
 across downstream planning outputs.
@@ -600,9 +567,9 @@ Defines migration-aware placement rules and strategy selection constraints.
 ---
 
 ## Rule: Migration and Placement Strategy
-**Rule ID:** apv-migration-placement  
+**Rule ID:** sr-migration-placement  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents mixed-architecture drift and keeps placement decisions
 deterministic in legacy or evolving repositories.
@@ -641,9 +608,9 @@ missing or ambiguous.
 ---
 
 ## Rule: Fallback Technology Defaults
-**Rule ID:** apv-fallback-defaults  
+**Rule ID:** sr-fallback-defaults  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures deterministic cross-skill defaults while honoring
 existing repository gravity first.
@@ -683,9 +650,9 @@ Defines shared implementation posture defaults inherited by downstream skills.
 ---
 
 ## Rule: Implementation Defaults
-**Rule ID:** apv-implementation-defaults  
+**Rule ID:** sr-implementation-defaults  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Aligns downstream implementation behavior on quality, environment
 access, logging, and tooling posture.
@@ -728,9 +695,9 @@ Defines shared folder-layer contracts and cross-layer error handling ownership.
 ---
 
 ## Rule: Layer Contracts and Error Ownership
-**Rule ID:** apv-layer-contracts  
+**Rule ID:** sr-layer-contracts  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps ownership deterministic across pages, features, UI, API,
 store, core, hooks, lib, and config.
@@ -770,9 +737,9 @@ skills.
 ---
 
 ## Rule: Access and Write Control
-**Rule ID:** apv-access-write-control  
+**Rule ID:** sr-access-write-control  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps structural decisions grounded in repository signals and
 maintains controlled, reviewable changes.
@@ -809,9 +776,9 @@ Defines soft file-size and responsibility guidance to prevent oversized modules.
 ---
 
 ## Rule: File Size and Responsibility Guidance
-**Rule ID:** apv-file-size-guidance  
+**Rule ID:** sr-file-size-guidance  
 **Priority:** SHOULD  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Encourages maintainable module boundaries and limits
 responsibility drift.
@@ -841,9 +808,9 @@ architecture-detection outputs, including bootstrap behavior.
 ---
 
 ## Rule: Architecture Detection Output and Bootstrap Contract
-**Rule ID:** apv-architecture-detection-contract  
+**Rule ID:** sr-architecture-detection-contract  
 **Priority:** MUST  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures all downstream skills consume one consistent
 architecture-detection result and bootstrap behavior.
@@ -887,9 +854,9 @@ folder-fit decisions.
 ---
 
 ## Rule: Enforcement Heuristics
-**Rule ID:** apv-enforcement-heuristics  
+**Rule ID:** sr-enforcement-heuristics  
 **Priority:** SHOULD  
-**Applies to:** react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Provides consistent review heuristics across downstream skills
 without over-prescribing implementation details.
@@ -924,7 +891,7 @@ This document defines authoritative constraints for
 
 This skill operates under:
 
-- `agent-policy-v1` (mandatory baseline policy)
+- `shared-rules` (mandatory baseline policy)
 
 All rules here are binding for agents and LLMs using this skill.
 
@@ -942,7 +909,7 @@ with architecture and policy.
 - Enforce plan fidelity: implementation must follow the approved revised plan.
 - Enforce boundary and quality gates before output is finalized.
 - Enforce minimal churn: avoid unrelated refactors and speculative cleanup.
-- Inherit and enforce shared baseline constraints from `agent-policy-v1`.
+- Inherit and enforce shared baseline constraints from `shared-rules`.
 - Treat these by default as out of scope unless explicitly approved:
   - architecture migration
   - new dependencies
@@ -958,7 +925,7 @@ with architecture and policy.
 
 - Skipping required validation, boundary, or scope checks.
 - Modifying architecture/specification policy artifacts unless explicitly requested.
-- Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Defining local mandatory rules that conflict with `shared-rules`.
 - Returning unqualified implementation output when mandatory checks fail.
 
 ### Notes

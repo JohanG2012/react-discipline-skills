@@ -7,9 +7,9 @@ must enforce.
 ---
 
 ## Rule: Architecture and Dependency Boundaries
-**Rule ID:** apv-architecture-boundaries  
+**Rule ID:** sr-architecture-boundaries  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures all downstream skills enforce one consistent
 architecture and import-boundary model.

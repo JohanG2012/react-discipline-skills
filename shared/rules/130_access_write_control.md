@@ -7,9 +7,9 @@ skills.
 ---
 
 ## Rule: Access and Write Control
-**Rule ID:** apv-access-write-control  
+**Rule ID:** sr-access-write-control  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps structural decisions grounded in repository signals and
 maintains controlled, reviewable changes.

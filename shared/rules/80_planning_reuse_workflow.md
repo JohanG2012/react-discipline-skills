@@ -7,9 +7,9 @@ all downstream skills.
 ---
 
 ## Rule: Planning and Reuse Workflow
-**Rule ID:** apv-planning-reuse  
+**Rule ID:** sr-planning-reuse  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents ad hoc implementation choices and improves consistency
 across downstream planning outputs.

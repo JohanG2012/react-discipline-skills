@@ -8,7 +8,7 @@
 ## Rule: <Human Readable Rule Name>
 **Rule ID:** <prefix>-<slug>  
 **Priority:** MUST | SHOULD | MAY  
-**Applies to:** <skill-name OR __TARGET_SKILL__ for shared/rules>  
+**Applies to:** <comma-delimited skill list>  
 **Inherited from:** <shared-rules for shared/rules, otherwise omit>  
 **Rationale:** <1-2 sentences explaining why the rule exists.>
 

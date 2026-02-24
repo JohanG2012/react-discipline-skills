@@ -7,9 +7,9 @@ all downstream skills.
 ---
 
 ## Rule: Completion and Quality Baseline
-**Rule ID:** apv-dod-baseline  
+**Rule ID:** sr-dod-baseline  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures every downstream skill validates critical correctness and
 safety gates before completion.

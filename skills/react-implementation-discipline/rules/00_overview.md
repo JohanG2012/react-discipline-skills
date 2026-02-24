@@ -7,7 +7,7 @@ This document defines authoritative constraints for
 
 This skill operates under:
 
-- `agent-policy-v1` (mandatory baseline policy)
+- `shared-rules` (mandatory baseline policy)
 
 All rules here are binding for agents and LLMs using this skill.
 
@@ -25,7 +25,7 @@ with architecture and policy.
 - Enforce plan fidelity: implementation must follow the approved revised plan.
 - Enforce boundary and quality gates before output is finalized.
 - Enforce minimal churn: avoid unrelated refactors and speculative cleanup.
-- Inherit and enforce shared baseline constraints from `agent-policy-v1`.
+- Inherit and enforce shared baseline constraints from `shared-rules`.
 - Treat these by default as out of scope unless explicitly approved:
   - architecture migration
   - new dependencies
@@ -41,7 +41,7 @@ with architecture and policy.
 
 - Skipping required validation, boundary, or scope checks.
 - Modifying architecture/specification policy artifacts unless explicitly requested.
-- Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Defining local mandatory rules that conflict with `shared-rules`.
 - Returning unqualified implementation output when mandatory checks fail.
 
 ### Notes

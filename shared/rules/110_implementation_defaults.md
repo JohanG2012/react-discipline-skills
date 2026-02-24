@@ -6,9 +6,9 @@ Defines shared implementation posture defaults inherited by downstream skills.
 ---
 
 ## Rule: Implementation Defaults
-**Rule ID:** apv-implementation-defaults  
+**Rule ID:** sr-implementation-defaults  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Aligns downstream implementation behavior on quality, environment
 access, logging, and tooling posture.

@@ -7,9 +7,9 @@ missing or ambiguous.
 ---
 
 ## Rule: Fallback Technology Defaults
-**Rule ID:** apv-fallback-defaults  
+**Rule ID:** sr-fallback-defaults  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures deterministic cross-skill defaults while honoring
 existing repository gravity first.

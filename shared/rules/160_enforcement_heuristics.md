@@ -7,9 +7,9 @@ folder-fit decisions.
 ---
 
 ## Rule: Enforcement Heuristics
-**Rule ID:** apv-enforcement-heuristics  
+**Rule ID:** sr-enforcement-heuristics  
 **Priority:** SHOULD  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Provides consistent review heuristics across downstream skills
 without over-prescribing implementation details.

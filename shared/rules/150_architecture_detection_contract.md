@@ -7,9 +7,9 @@ architecture-detection outputs, including bootstrap behavior.
 ---
 
 ## Rule: Architecture Detection Output and Bootstrap Contract
-**Rule ID:** apv-architecture-detection-contract  
+**Rule ID:** sr-architecture-detection-contract  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures all downstream skills consume one consistent
 architecture-detection result and bootstrap behavior.

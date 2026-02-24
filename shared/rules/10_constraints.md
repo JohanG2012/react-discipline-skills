@@ -6,9 +6,9 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ---
 
 ## Rule: Minimal Scope Enforcement
-**Rule ID:** apv-constraints  
+**Rule ID:** sr-constraints  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents uncontrolled scope expansion and dependency creep.
 
@@ -38,9 +38,9 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ---
 
 ## Rule: Scope Governor Hard Defaults
-**Rule ID:** apv-scope-governor  
+**Rule ID:** sr-scope-governor  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Controls churn and keeps delivery bounded.
 

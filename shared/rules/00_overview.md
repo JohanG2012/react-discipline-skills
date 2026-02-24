@@ -2,21 +2,21 @@
 
 ## Summary
 
-This document defines the authoritative rules for the `agent-policy-v1` skill.
+This document defines the authoritative rules for the `__TARGET_SKILL__` skill.
 
 This skill operates under:
-- `agent-policy-v1` (mandatory baseline policy)
+- `__TARGET_SKILL__` (with mandatory shared baseline policy baked in at build time)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
 ---
 
 ## Rule: Skill Scope Definition
-**Rule ID:** apv-overview-scope  
+**Rule ID:** sr-overview-scope  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
-**Rationale:** Ensures the policy skill stays focused on governance and scope.
+**Rationale:** Keeps shared baseline governance and scope constraints explicit.
 
 ### Requirement
 
@@ -29,8 +29,7 @@ All rules defined here are binding for agents and LLMs using this skill.
   - `react-reuse-update-new`
   - `react-implementation-discipline`
 - The production execution skill set for this initiative is fixed to those four
-  skills; `agent-policy-v1` is shared baseline policy and not a production
-  execution skill.
+  skills; the shared baseline policy is not a production execution skill.
 - Shared policy/config updates must not be modeled as new execution skills.
 - Document precedence must remain deterministic:
   - `specs/001-agent-policy-v1/master_spec.md` is authoritative.
@@ -53,9 +52,9 @@ All rules defined here are binding for agents and LLMs using this skill.
 ---
 
 ## Rule: Baseline Non-goals
-**Rule ID:** apv-overview-nongoals  
+**Rule ID:** sr-overview-nongoals  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents policy drift into implementation-specific prescriptions.
 

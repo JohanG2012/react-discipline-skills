@@ -6,9 +6,9 @@ Defines migration-aware placement rules and strategy selection constraints.
 ---
 
 ## Rule: Migration and Placement Strategy
-**Rule ID:** apv-migration-placement  
+**Rule ID:** sr-migration-placement  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents mixed-architecture drift and keeps placement decisions
 deterministic in legacy or evolving repositories.

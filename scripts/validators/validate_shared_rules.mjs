@@ -1,15 +1,16 @@
 import path from "path";
 import {
+  listDirs,
   listFiles,
   pathExists,
   readFile,
 } from "../lib/utils.mjs";
 
 const repoRoot = process.cwd();
+const skillsRoot = path.join(repoRoot, "skills");
 const sharedRoot = path.join(repoRoot, "shared");
 const sharedSkillPath = path.join(sharedRoot, "SKILL.md");
 const sharedRulesPath = path.join(sharedRoot, "rules");
-const sharedAppliesToken = "__TARGET_SKILL__";
 const sharedInheritedFromValue = "shared-rules";
 
 function findRuleBlocks(content) {
@@ -41,6 +42,15 @@ function extractFieldValue(blockText, fieldName) {
   const regex = new RegExp(`^\\*\\*${fieldName}:\\*\\*\\s*(.+?)\\s*$`, "m");
   const match = blockText.match(regex);
   return match ? match[1].trim() : null;
+}
+
+function parseSkillList(rawValue) {
+  if (!rawValue) return [];
+
+  return rawValue
+    .split(",")
+    .map((value) => value.trim().replace(/^`/, "").replace(/`$/, ""))
+    .filter(Boolean);
 }
 
 function hasSection(blockText, sectionName) {
@@ -77,6 +87,10 @@ function extractQuickReferenceRuleIds(skillContent) {
 
 async function validateSharedRules() {
   const errors = [];
+  const productionSkills = (await listDirs(skillsRoot))
+    .filter((dir) => !dir.startsWith("."))
+    .sort();
+  const productionSkillSet = new Set(productionSkills);
 
   if (!await pathExists(sharedRulesPath)) {
     return [`Missing shared rules directory at ${sharedRulesPath}`];
@@ -110,6 +124,8 @@ async function validateSharedRules() {
       const ruleId = extractFieldValue(block.text, "Rule ID");
       const priority = extractFieldValue(block.text, "Priority");
       const appliesTo = extractFieldValue(block.text, "Applies to");
+      const inlineIn = extractFieldValue(block.text, "Inline in");
+      const referenceIn = extractFieldValue(block.text, "Reference in");
       const inheritedFrom = extractFieldValue(block.text, "Inherited from");
       const rationale = extractFieldValue(block.text, "Rationale");
       const hasRequirement = hasSection(block.text, "Requirement");
@@ -135,9 +151,33 @@ async function validateSharedRules() {
         errors.push(
           `${filePath}:${block.startLine}: missing "**Applies to:**" in rule block "${block.title}"`,
         );
-      } else if (appliesTo !== sharedAppliesToken) {
+      } else {
+        const appliesList = parseSkillList(appliesTo);
+
+        if (appliesList.length === 0) {
+          errors.push(
+            `${filePath}:${block.startLine}: "**Applies to:**" must include at least one skill`,
+          );
+        }
+
+        const unknownApplies = appliesList.filter(
+          (skill) => !productionSkillSet.has(skill),
+        );
+        if (unknownApplies.length) {
+          errors.push(
+            `${filePath}:${block.startLine}: "**Applies to:**" includes unknown skills: ${unknownApplies.join(", ")}`,
+          );
+        }
+      }
+
+      if (inlineIn) {
         errors.push(
-          `${filePath}:${block.startLine}: "**Applies to:**" must be "${sharedAppliesToken}" in shared rule sources`,
+          `${filePath}:${block.startLine}: "**Inline in:**" is deprecated; shared rules are inline-only`,
+        );
+      }
+      if (referenceIn) {
+        errors.push(
+          `${filePath}:${block.startLine}: "**Reference in:**" is deprecated; shared rules are inline-only`,
         );
       }
       if (!inheritedFrom) {

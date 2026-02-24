@@ -1,5 +1,5 @@
 ---
-name: agent-policy-v1
+name: shared-rules
 description: Build-time shared baseline policy constraints baked into all production skills
 version: 1.0.0
 license: MIT
@@ -11,7 +11,7 @@ metadata:
   tags: policy, governance, baseline
 ---
 
-# Agent Policy v1
+# Shared Rules
 
 ## Purpose
 Defines the authoritative shared baseline policy for all four production
@@ -49,7 +49,7 @@ Return a **single JSON object** matching this shape:
 
 ```json
 {
-  "skill": "agent-policy-v1",
+  "skill": "shared-rules",
   "version": "1.0.0",
   "notes": [],
   "output": {}
@@ -66,25 +66,25 @@ Constraints:
 
 The policy source must maintain these rule IDs (see `rules/` for details):
 
-- apv-overview-scope
-- apv-overview-nongoals
-- apv-constraints
-- apv-scope-governor
-- apv-architecture-boundaries
-- apv-ownership-naming
-- apv-decision-defaults
-- apv-output-discipline
-- apv-dod-baseline
-- apv-planning-reuse
-- apv-migration-placement
-- apv-fallback-defaults
-- apv-implementation-defaults
-- apv-layer-contracts
-- apv-access-write-control
-- apv-file-size-guidance
-- apv-architecture-detection-contract
-- apv-enforcement-heuristics
-- apv-governance
+- sr-overview-scope
+- sr-overview-nongoals
+- sr-constraints
+- sr-scope-governor
+- sr-architecture-boundaries
+- sr-ownership-naming
+- sr-decision-defaults
+- sr-output-discipline
+- sr-dod-baseline
+- sr-planning-reuse
+- sr-migration-placement
+- sr-fallback-defaults
+- sr-implementation-defaults
+- sr-layer-contracts
+- sr-access-write-control
+- sr-file-size-guidance
+- sr-architecture-detection-contract
+- sr-enforcement-heuristics
+- sr-governance
 
 ## Files
 

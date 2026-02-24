@@ -7,9 +7,9 @@ specifications.
 ---
 
 ## Rule: Ownership and Naming Contract
-**Rule ID:** apv-ownership-naming  
+**Rule ID:** sr-ownership-naming  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps responsibility boundaries and naming deterministic across
 all downstream specs.

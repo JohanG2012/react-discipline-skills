@@ -6,7 +6,7 @@ This document defines the authoritative rules for the `react-reuse-update-new`
 skill.
 
 This skill operates under:
-- `agent-policy-v1` (mandatory baseline policy)
+- `shared-rules` (mandatory baseline policy)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -29,7 +29,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must emit planning guidance only and must not directly implement,
   move, or refactor project code.
 - The skill must inherit and enforce shared baseline constraints from
-  `agent-policy-v1`.
+  `shared-rules`.
 
 ### Forbidden
 
@@ -37,7 +37,7 @@ All rules defined here are binding for agents and LLMs using this skill.
 - Forcing reuse through leaky domain flags in shared abstractions.
 - Returning partial decision payloads when required inputs are invalid or
   discovery evidence is unavailable.
-- Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Defining local mandatory rules that conflict with `shared-rules`.
 
 ### Notes
 

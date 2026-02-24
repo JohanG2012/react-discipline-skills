@@ -6,9 +6,9 @@ Sets expectations for compliance, documentation, and review.
 ---
 
 ## Rule: Governance Compliance
-**Rule ID:** apv-governance  
+**Rule ID:** sr-governance  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures policies are enforced consistently across changes.
 

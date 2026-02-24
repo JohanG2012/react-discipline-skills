@@ -6,9 +6,9 @@ Defines deterministic default behavior and high-impact clarification triggers.
 ---
 
 ## Rule: Deterministic Defaults and Pause Protocol
-**Rule ID:** apv-decision-defaults  
+**Rule ID:** sr-decision-defaults  
 **Priority:** MUST  
-**Applies to:** __TARGET_SKILL__  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Reduces unnecessary clarification loops while protecting
 high-impact structural decisions.
