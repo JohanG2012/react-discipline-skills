@@ -16,6 +16,18 @@ Generated on: 2026-02-24
 - [Rule: Layer Mapping](#rule-layer-mapping)
 - [Summary](#summary)
 - [Rule: Structured Placement Output](#rule-structured-placement-output)
+- [Summary](#summary)
+- [Rule: Strategy and One-Home Discipline](#rule-strategy-and-one-home-discipline)
+- [Summary](#summary)
+- [Rule: Default Bias and Clean Pause Protocol](#rule-default-bias-and-clean-pause-protocol)
+- [Summary](#summary)
+- [Rule: Discovery Coverage and Convention Alignment](#rule-discovery-coverage-and-convention-alignment)
+- [Summary](#summary)
+- [Rule: Constraint-Aware Placement Scope](#rule-constraint-aware-placement-scope)
+- [Summary](#summary)
+- [Rule: Repository Evidence Access](#rule-repository-evidence-access)
+- [Summary](#summary)
+- [Rule: Fixed Execution-Skill Scope](#rule-fixed-execution-skill-scope)
 
 ## Overview
 This document defines the authoritative rules for agents/LLMs using the `react_placement_and_layering` skill.
@@ -28,6 +40,12 @@ Key constraints:
 - rpl-overview-scope
 - rpl-process
 - rpl-output
+- rpl-migration-safety
+- rpl-default-bias
+- rpl-discovery-conventions
+- rpl-scope-governor
+- rpl-access-control
+- rpl-skill-model-alignment
 
 ---
 
@@ -139,6 +157,9 @@ Defines the placement workflow for new or updated files.
     source
   - after explicit resolution, record each concern in
     `source_of_truth_resolutions`
+- Preserve unresolved high-impact structural ambiguity from architecture
+  detection or placement analysis and block plan finalization until
+  clarification is resolved.
 - Keep a concise authoritative-home map for the run and use it consistently for
   placement decisions (`authoritative_home_map`).
 - If no path alias is already configured, keep relative imports and do not
@@ -162,6 +183,8 @@ Defines the placement workflow for new or updated files.
 - Recomputing gravity independently from architecture-detection output.
 - Applying repository-evidence override without explicit pause resolution when
   structural impact is present.
+- Finalizing `result_type=plan` while unresolved high-impact structural
+  ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.
 
 ### Notes
@@ -261,3 +284,295 @@ Defines the expected output structure for placement decisions.
 ### Notes
 
 - Keep notes concise and tied to the request.
+
+---
+
+# Migration Strategy and Placement Safety
+
+## Summary
+Defines migration-aware placement behavior and duplicate-home prevention.
+
+---
+
+## Rule: Strategy and One-Home Discipline
+**Rule ID:** rpl-migration-safety  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Prevents parallel architectures and unsafe structural churn.
+
+### Requirement
+
+- Choose exactly one strategy per run:
+  - `follow-existing`
+  - `introduce-boundaries`
+  - `migrate-as-you-touch`
+- Follow gravity for each concern by extending the active home unless an
+  explicit migration boundary is selected.
+- Avoid duplicate homes by keeping one authoritative home per concern in the
+  run (`authoritative_home_map`).
+- Introduce new target structure only when the new scope is isolated,
+  self-consistent, and does not create competing homes.
+- Classify placement work as either:
+  - feature task (default: updates/creates only, no moves), or
+  - migration task (moves allowed only in explicit migration scope).
+- Default move posture is no moves/renames; move operations require explicit
+  enablement and complete import-update targets.
+- In move-enabled runs, keep move scope bounded to one concern and three files
+  or fewer.
+- In bootstrap-triggered repositories (flat/ad-hoc with no clear homes), folder
+  creation is limited to canonical homes and only the minimal folders needed for
+  the task.
+- In bootstrap mode, create `store/` only when truly global client state is
+  required.
+
+### Forbidden
+
+- Treating two locations as simultaneously correct for the same concern.
+- Introducing broad relocation/migration during routine feature-scope planning.
+- Creating bootstrap folders outside canonical homes.
+- Mixing feature-behavior changes with structural migration by default.
+
+### Notes
+
+- Prefer stable import boundaries and incremental convergence over early broad
+  file moves.
+
+---
+
+# Deterministic Defaults and Pause Discipline
+
+## Summary
+Defines deterministic default actions and strict pause criteria for placement
+decisions.
+
+---
+
+## Rule: Default Bias and Clean Pause Protocol
+**Rule ID:** rpl-default-bias  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Keeps planning flow predictable while pausing only for
+high-impact ambiguity.
+
+### Requirement
+
+- Apply deterministic defaults unless structural risk requires a pause:
+  - ambiguous feature owner -> choose the most specific domain
+  - UI pattern unclear -> keep logic in the feature section
+  - reuse vs generalize unclear -> prefer section-level duplication
+  - multiple state options -> prefer local state first
+  - unsure store usage -> avoid introducing global store state
+  - unsure abstraction -> keep implementation concrete
+  - API placement unclear -> use the existing API home
+  - folder placement unclear -> follow gravity and nearest established home
+  - naming unclear -> match nearest-neighbor naming
+- Pause only when both are true:
+  - `confidence < 0.7`
+  - impact is structural
+- For low-confidence non-structural decisions, proceed with deterministic
+  defaults.
+- When pausing, use a clean protocol:
+  1. state the structural ambiguity
+  2. provide two or three bounded options
+  3. provide one recommended default
+  4. wait for confirmation
+- Default pause mode is `balanced`; respect explicit policy overrides for
+  `strict` or `autonomous` modes.
+
+### Forbidden
+
+- Pausing for minor naming choices, harmless small prop additions, or other
+  low-impact local decisions with safe defaults.
+- Asking vague or philosophical architecture questions during execution.
+- Continuing with conflicting structural assumptions after deciding a pause is
+  required.
+
+### Notes
+
+- Question quality must remain high-leverage, structural, and blocking.
+
+---
+
+# Discovery and Convention Fit
+
+## Summary
+Defines mandatory repository discovery and naming/export convention checks before
+final placement output.
+
+---
+
+## Rule: Discovery Coverage and Convention Alignment
+**Rule ID:** rpl-discovery-conventions  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Prevents duplicate artifacts and naming drift in placement plans.
+
+### Requirement
+
+- Discovery must check existing homes before proposing new artifacts:
+  - route files/entry points
+  - feature sections, hooks, and domain modules
+  - UI composites and primitives
+  - endpoint and DTO modules
+  - store slices and state ownership patterns
+  - naming/export conventions in the active area
+- Naming and export checks must enforce local consistency:
+  - pages: `*Page` unless framework or local conventions require otherwise
+  - feature sections: `*Section`
+  - hooks: `use*`
+  - DTOs: `*Dto` and DTO placement in `api/dto` or the gravity-equivalent home
+  - component files/exports in `PascalCase`
+  - hook files/exports in `useXxx` camelCase
+  - named exports by default; allow default exports only for framework-required
+    modules or established local-area conventions
+  - avoid introducing new barrels unless the local area already uses them
+- Keep names searchable by aligning file names and primary exports.
+- Use one role term per area (for example `Page` vs `Route` vs `Screen`) and do
+  not mix synonyms unpredictably in one area.
+- If tests exist in the target area, follow colocated naming compatibility
+  (`*.test.tsx` or `*.test.ts`) for touched artifacts.
+- Record concrete discovery evidence (paths) or explicit `not_found` outcomes
+  before selecting `create`.
+
+### Forbidden
+
+- Proposing new artifact homes before discovery checks complete.
+- Inventing a new naming/export style in an established area.
+- Treating naming ambiguity as justification for structural churn.
+
+### Notes
+
+- Convention fit is part of placement correctness, not optional polish.
+
+---
+
+# Constraint and Scope Governor Alignment
+
+## Summary
+Defines required scope and constraint handling for placement planning.
+
+---
+
+## Rule: Constraint-Aware Placement Scope
+**Rule ID:** rpl-scope-governor  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Keeps plans reviewable and prevents implicit scope expansion.
+
+### Requirement
+
+- Respect explicit task constraints when provided, including:
+  - `avoid_new_folders`
+  - `max_files_touched`
+  - move/rename enablement and limits
+- If explicit constraints are absent, apply shared-policy hard defaults:
+  - max files touched: `8`
+  - max new files: `4`
+  - max moved/renamed files: `0` unless migration mode is explicit
+  - max new dependencies: `0` unless explicitly requested
+  - max new top-level folders: `0` unless explicitly requested
+- If scope pressure exceeds caps, produce the smallest in-cap plan and record
+  concise follow-up scope in `notes`.
+- If `avoid_new_folders=true`, do not propose new folder homes unless explicit
+  override is provided.
+- If constraints block all safe placement outcomes, return
+  `result_type=validation_error` with blocking errors.
+
+### Forbidden
+
+- Silently exceeding explicit or default scope caps.
+- Proposing new dependencies as part of normal placement planning.
+- Enabling moves/renames in feature-task mode without explicit migration scope.
+
+### Notes
+
+- Keep scope expansion explicit and bounded; do not hide it in placement output.
+
+---
+
+# Access Control and Fallback Context
+
+## Summary
+Defines read/search access expectations and fallback context requirements for
+placement planning.
+
+---
+
+## Rule: Repository Evidence Access
+**Rule ID:** rpl-access-control  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Placement decisions require repository evidence to avoid
+speculative structure changes.
+
+### Requirement
+
+- Placement planning should run with repository read/search access.
+- Minimum capabilities expected:
+  - list tree shape under `src/`
+  - search architecture and data-access patterns
+  - read files on demand
+  - read key config/tooling files relevant to routing, API homes, and naming
+- If direct repository access is unavailable, require a fallback context bundle
+  before finalizing a plan:
+  - file tree (top-level and `src/` depth about 3-4)
+  - `package.json`
+  - router entry/setup files
+  - API client/home location currently in use
+  - representative primitive/composite/section/hook/endpoint examples
+- Without repository evidence or fallback bundle, return
+  `result_type=validation_error` and do not emit a plan.
+- This skill remains planning-only and does not perform implementation edits.
+
+### Forbidden
+
+- Finalizing structural placement without repository evidence.
+- Assuming gravity/convention outcomes when both direct access and fallback
+  context are missing.
+- Treating direct source edits as normal output for this skill.
+
+### Notes
+
+- When evidence is constrained, surface uncertainty in concise structural notes.
+
+---
+
+# Skill Model Alignment
+
+## Summary
+Defines alignment with the fixed execution-skill model and shared policy layer.
+
+---
+
+## Rule: Fixed Execution-Skill Scope
+**Rule ID:** rpl-skill-model-alignment  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Prevents skill-scope drift and preserves cross-skill ownership
+boundaries.
+
+### Requirement
+
+- Treat `react_placement_and_layering` as one of the fixed production execution
+  skills.
+- Keep primary output focused on placement plans and layer assignments.
+- Coordinate with upstream architecture detection outputs and downstream reuse
+  and implementation skills without absorbing their responsibilities.
+- Keep shared policy/config as a separate baseline layer; do not re-model
+  policy concerns as new execution-skill behavior.
+- Preserve four-skill production scope:
+  - `react_architecture_detection`
+  - `react_placement_and_layering`
+  - `react_reuse_update_new`
+  - `react_implementation_discipline`
+
+### Forbidden
+
+- Expanding this skill to perform full implementation, broad refactors, or
+  architecture detection recomputation.
+- Reframing shared policy-layer behavior as a new execution-skill concern.
+- Expanding production scope beyond the fixed four execution skills.
+
+### Notes
+
+- Cross-skill handoffs must remain explicit and machine-consumable.

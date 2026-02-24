@@ -90,6 +90,12 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 - rpl-overview-scope
 - rpl-process
 - rpl-output
+- rpl-migration-safety
+- rpl-default-bias
+- rpl-discovery-conventions
+- rpl-scope-governor
+- rpl-access-control
+- rpl-skill-model-alignment
 
 ## Files
 

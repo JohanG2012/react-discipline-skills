@@ -130,3 +130,20 @@ results, and validation command outcomes for tasks in
     - aligned `PlannedArtifact` model to include `action_rationale`.
   - Verified project setup ignore files and ESLint ignore coverage; no missing
     critical patterns required changes.
+- Master-spec parity review (2026-02-24):
+  - Reviewed `<REPO_ROOT>/SPEC.md`
+    against spec 003 placement rules and added missing rule coverage modules in
+    `skills/react_placement_and_layering/rules/`:
+    - `30_migration_safety.md`
+    - `40_default_bias.md`
+    - `50_discovery_conventions.md`
+    - `60_scope_governor.md`
+    - `70_access_control.md`
+    - `80_skill_model_alignment.md`
+  - Updated quick-reference rule IDs in
+    `<REPO_ROOT>/skills/react_placement_and_layering/SKILL.md`.
+  - Recompiled agent docs and re-ran `npm run check` successfully.
+  - Elevated FR-015 behavior to normative process rules in
+    `skills/react_placement_and_layering/rules/10_process.md`:
+    unresolved high-impact structural ambiguity now explicitly blocks
+    `result_type=plan` finalization until clarification is resolved.

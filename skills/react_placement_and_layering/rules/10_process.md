@@ -60,6 +60,9 @@ Defines the placement workflow for new or updated files.
     source
   - after explicit resolution, record each concern in
     `source_of_truth_resolutions`
+- Preserve unresolved high-impact structural ambiguity from architecture
+  detection or placement analysis and block plan finalization until
+  clarification is resolved.
 - Keep a concise authoritative-home map for the run and use it consistently for
   placement decisions (`authoritative_home_map`).
 - If no path alias is already configured, keep relative imports and do not
@@ -83,6 +86,8 @@ Defines the placement workflow for new or updated files.
 - Recomputing gravity independently from architecture-detection output.
 - Applying repository-evidence override without explicit pause resolution when
   structural impact is present.
+- Finalizing `result_type=plan` while unresolved high-impact structural
+  ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.
 
 ### Notes
