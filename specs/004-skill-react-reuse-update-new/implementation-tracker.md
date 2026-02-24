@@ -18,11 +18,25 @@ results, and validation command outcomes for tasks in
 - Phase 5 (US3): Complete
 - Phase 6 (Polish): Complete
 
+## Completion Status Breakdown
+
+- Artifact implementation status: Complete
+- Contract/schema/example alignment status: Complete
+- Operational success-criteria evidence status: Partial (sample-run metrics pending)
+
+### Success Criteria Evidence Status
+
+- Contract/output-structure criteria (`SC-001`, `SC-004`, `SC-006`, `SC-009` to
+  `SC-016`): covered by implemented rule/schema/contract/example artifacts and
+  validation checks.
+- Run-sample/rollout metrics (`SC-002`, `SC-003`, `SC-005`, `SC-007`,
+  `SC-008`): pending collection from tracked multi-run acceptance samples.
+
 ## Story Validation Evidence
 
 ### US1 - Make Deterministic Reuse Decisions
 
-- Status: Complete
+- Status: Complete (artifact implementation)
 - Independent test criterion:
   - One placement plan with multiple artifacts returns one explicit decision per
     artifact with concrete target and concise rationale.
@@ -49,7 +63,7 @@ results, and validation command outcomes for tasks in
 
 ### US2 - Prevent Leaky Generalization
 
-- Status: Complete
+- Status: Complete (artifact implementation)
 - Independent test criterion:
   - Mixed-domain request rejects domain-mode leakage in shared UI and favors
     domain-owned section ownership.
@@ -71,7 +85,7 @@ results, and validation command outcomes for tasks in
 
 ### US3 - Produce Downstream-Ready Decision Output
 
-- Status: Complete
+- Status: Complete (artifact implementation)
 - Independent test criterion:
   - Realistic planning input yields downstream-consumable output with no missing
     required decision fields.

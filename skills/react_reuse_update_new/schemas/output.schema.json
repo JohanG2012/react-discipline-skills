@@ -357,16 +357,15 @@
         },
         "ordered_criteria": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "authoritative_home",
-              "coupling_risk",
-              "divergence_risk",
-              "complexity_cost",
-              "lexical_path"
-            ]
-          }
+          "minItems": 5,
+          "maxItems": 5,
+          "const": [
+            "authoritative_home",
+            "coupling_risk",
+            "divergence_risk",
+            "complexity_cost",
+            "lexical_path"
+          ]
         },
         "selected_candidate_id": {
           "type": "string"

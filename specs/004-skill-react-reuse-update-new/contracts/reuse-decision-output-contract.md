@@ -34,6 +34,8 @@ Baseline governance references:
 
 - `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`
 - `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`
+- `<REPO_ROOT>/skills/.shared/policy/rules/30_architecture_boundaries.md` (dependency direction, canonical endpoint layer, alias-boundary parity, generic fetch-hook exception policy)
+- `<REPO_ROOT>/skills/.shared/policy/rules/130_access_write_control.md` (read/search assumptions and write-control policy for architecture/spec documents)
 
 ## Top-Level Contract
 
@@ -147,6 +149,9 @@ Required fields:
   `override_required=true`.
 - Scope expansion requests, when present, must remain bounded and include
   concrete file-touch estimates, plus a short follow-up scope list.
+- Import-boundary and write-control behavior is inherited from shared policy
+  baseline rules and remains normative even when not duplicated in this
+  contract body.
 
 ## Example Outcome Types
 

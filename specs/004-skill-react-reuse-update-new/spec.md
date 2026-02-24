@@ -136,16 +136,19 @@ As a downstream skill consumer, I need a revised plan and guardrails that can be
 
 - `specs/004-skill-react-reuse-update-new/master_spec.md` remains the authoritative source for project architecture rules and scope boundaries.
 - `specs/004-skill-react-reuse-update-new/master_spec.md` defines the detailed intent and guardrails for this skill.
+- Import/dependency direction, canonical endpoint-layer semantics, alias-path boundary enforcement, and documented generic fetch-hook exception handling are inherited from `skills/.shared/policy/rules/30_architecture_boundaries.md`.
 - Upstream skills provide valid architecture-detection and placement-planning outputs before this skill runs.
 - The four-skill production scope remains fixed for the initial phase.
 - Repository read/search capability is available for candidate discovery.
 - Shared baseline policy (`agent-policy-v1`) applies to this skill as a mandatory governance layer.
+- Access and write-control behavior (including architecture/spec-document edit restrictions) is inherited from `skills/.shared/policy/rules/130_access_write_control.md`.
 
 ### Dependencies
 
 - Reliable upstream outputs from architecture detection and placement planning.
 - Repository artifacts and naming conventions remain accessible for discovery and comparison.
 - Shared policy constraints remain active and unchanged during this feature phase.
+- Shared policy rule modules `skills/.shared/policy/rules/30_architecture_boundaries.md` and `skills/.shared/policy/rules/130_access_write_control.md` remain available and authoritative for inherited boundary/write constraints.
 - Project structure guidance in `specs/004-skill-react-reuse-update-new/master_spec.md` remains available for skill artifact organization.
 
 ## Success Criteria *(mandatory)*
