@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react_reuse_update_new",
+  "version": "1.0.0",
+  "result_type": "dependency_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "discovery",
+    "errors": [
+      "Repository discovery evidence unavailable."
+    ]
+  },
+  "dependency_issue": "repo_discovery_unavailable",
+  "fallback_context_bundle_requirements": [
+    "File tree (top-level plus src depth about 3-4).",
+    "package.json.",
+    "Router entry/config files.",
+    "API client location currently in use.",
+    "One or two examples each of primitive, composite, section, hook, and endpoint module."
+  ],
+  "notes": [
+    "Retry after repository indexing/search is available."
+  ]
+}

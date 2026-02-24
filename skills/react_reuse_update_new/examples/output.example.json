@@ -1,10 +1,168 @@
 {
+  "schema_version": "1.0.0",
   "skill": "react_reuse_update_new",
   "version": "1.0.0",
-  "notes": [],
-  "output": {
-    "decision": "reuse",
-    "reason": "Existing component matches requirements",
-    "artifacts": ["src/ui/primitives/Button.tsx"]
+  "result_type": "decision_plan",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "finalized",
+    "errors": []
+  },
+  "thresholds_applied": {
+    "max_new_props_for_update": 2,
+    "max_flags_allowed_composites": 0,
+    "max_generic_flags_allowed_primitives": 1,
+    "max_abstraction_risk_score": 6
+  },
+  "revised_plan": {
+    "source_plan_ref": "placement-plan://sample",
+    "context_decisions": {
+      "feature_owner_domain": "projects",
+      "route_page_involvement": "route",
+      "data_sources_summary": [
+        "src/api/endpoints/projects.ts",
+        "src/api/dto/project.dto.ts"
+      ],
+      "state_type": "server-state",
+      "ui_need_shape": "feature section with shared composite reuse"
+    },
+    "file_actions": [
+      {
+        "action": "Reuse",
+        "path": "src/ui/composites/FilterBar.tsx",
+        "needed_artifact_id": "na-filter-bar"
+      },
+      {
+        "action": "Update",
+        "path": "src/ui/composites/Toolbar.tsx",
+        "needed_artifact_id": "na-toolbar-actions"
+      },
+      {
+        "action": "Create",
+        "path": "src/features/projects/sections/ProjectInsightsSection.tsx",
+        "needed_artifact_id": "na-project-domain-section"
+      }
+    ],
+    "layer_justifications": [
+      {
+        "layer": "ui/composites",
+        "justification": "Shared layout affordances belong in composites because behavior is presentation-driven and reusable.",
+        "adjacent_layers_not_chosen": "Feature sections were not chosen because this behavior is not domain-specific."
+      },
+      {
+        "layer": "features/projects/sections",
+        "justification": "Domain behavior diverges enough to keep orchestration in a project-owned section.",
+        "adjacent_layers_not_chosen": "Shared composites were not chosen to avoid domain leakage through mode flags."
+      }
+    ],
+    "decisions": [
+      {
+        "needed_artifact_id": "na-filter-bar",
+        "decision": "reuse",
+        "decision_mark": "reuse as-is",
+        "discovery_status": "found",
+        "discovery_paths": [
+          "src/ui/composites/FilterBar.tsx"
+        ],
+        "target_path": "src/ui/composites/FilterBar.tsx",
+        "chosen_candidate_id": "cand-filter-bar",
+        "score_profile": {
+          "fit": 9,
+          "complexity_cost": 2,
+          "coupling_risk": 2,
+          "divergence_risk": 3,
+          "locality_benefit": 8
+        },
+        "reasons": [
+          "Existing composite matches required behavior without threshold violations."
+        ],
+        "override_required": false
+      },
+      {
+        "needed_artifact_id": "na-toolbar-actions",
+        "decision": "update",
+        "decision_mark": "updated",
+        "discovery_status": "found",
+        "discovery_paths": [
+          "src/ui/composites/Toolbar.tsx",
+          "src/ui/composites/ActionBar.tsx"
+        ],
+        "target_path": "src/ui/composites/Toolbar.tsx",
+        "chosen_candidate_id": "cand-toolbar",
+        "score_profile": {
+          "fit": 7,
+          "complexity_cost": 3,
+          "coupling_risk": 2,
+          "divergence_risk": 4,
+          "locality_benefit": 7
+        },
+        "tie_break": {
+          "applied": false,
+          "ordered_criteria": [
+            "authoritative_home",
+            "coupling_risk",
+            "divergence_risk",
+            "complexity_cost",
+            "lexical_path"
+          ]
+        },
+        "reasons": [
+          "Adding one generic action slot stays within update thresholds."
+        ],
+        "override_required": false
+      },
+      {
+        "needed_artifact_id": "na-project-domain-section",
+        "decision": "new",
+        "decision_mark": "new",
+        "discovery_status": "found",
+        "discovery_paths": [
+          "src/features/tasks/sections/TaskInsightsSection.tsx"
+        ],
+        "target_path": "src/features/projects/sections/ProjectInsightsSection.tsx",
+        "score_profile": {
+          "fit": 4,
+          "complexity_cost": 5,
+          "coupling_risk": 6,
+          "divergence_risk": 8,
+          "locality_benefit": 9
+        },
+        "reasons": [
+          "No existing section supports the domain behavior without leakage."
+        ],
+        "override_required": false
+      },
+      {
+        "needed_artifact_id": "na-shared-grid-mode-switch",
+        "decision": "decision_blocked",
+        "decision_mark": "decision_blocked",
+        "discovery_status": "found",
+        "discovery_paths": [
+          "src/ui/composites/GridShell.tsx"
+        ],
+        "reasons": [
+          "All candidate updates require domain-mode flags in a shared composite."
+        ],
+        "constraint_blockers": [
+          "Constraint avoid_new_artifacts=true conflicts with anti-leakage guardrails."
+        ],
+        "override_required": true
+      }
+    ],
+    "guardrails": [
+      "No domain flags in shared composites.",
+      "Prefer domain-owned sections when divergence risk is high.",
+      "Do not introduce new shared/common dumping-ground abstractions.",
+      "Do not bypass endpoint layers from hooks or UI.",
+      "Do not place reusable utilities inline in pages/sections when they belong in domain/lib.",
+      "Do not expand shared components with excessive mode/flag complexity.",
+      "Do not force multi-mode shared composites when section-level duplication is safer.",
+      "Do not include refactor-for-future churn without immediate value.",
+      "Do not mix migration and feature behavior churn in one package unless explicitly requested."
+    ],
+    "notes": [
+      "Decision package is deterministic and downstream-consumable.",
+      "Decisions demonstrate reuse, update, new, and blocked outcomes."
+    ]
   }
 }
