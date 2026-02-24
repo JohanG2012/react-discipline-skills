@@ -34,6 +34,12 @@ Defines the expected output structure for architecture detection.
   - `pause_required: false` when no structural ambiguity pause is needed.
   - `pause_required: true` plus bounded options when structural low-confidence
     ambiguity is present.
+- Output must include pause-evaluation metadata for every run:
+  - `pause_decision.pause_mode`
+  - `pause_decision.decision_safety_confidence`
+  - `pause_decision.impact`
+- Output should include `bootstrap` metadata when bootstrap trigger conditions
+  are detected (`flat/ad-hoc` and no clear routing/UI/API/domain homes).
 
 ### Required fields
 
@@ -61,6 +67,7 @@ Defines the expected output structure for architecture detection.
 - Returning a strategy without rationale.
 - Omitting alignment blockers or recommended next migration step.
 - Omitting `pause_decision` from output.
+- Omitting required pause-evaluation metadata from `pause_decision`.
 - Omitting `api.home` from output.
 - Emitting raw code snippets in standard output fields.
 
@@ -72,3 +79,5 @@ Defines the expected output structure for architecture detection.
 - `schema_version` is mandatory for every output payload revision.
 - `api.home` is the canonical endpoint layer consumed by downstream boundary checks.
 - `alignment.blockers` can be empty only when no active blockers are detected.
+- `pause_mode` defaults to `balanced` when not explicitly configured by the
+  user or task context.

@@ -28,6 +28,7 @@ with deterministic, machine-consumable output behavior.
      - mandatory `schema_version`
      - `confidence < 0.7 => home=unknown`
      - required `pause_decision` when ambiguity is structural/high-impact
+     - pause-mode thresholds (`strict | balanced | autonomous`, default `balanced`)
      - metadata-only output (no raw code snippets)
    - Update `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json` to match the new contract.
    - Update `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json` to a valid payload under the updated schema.
@@ -47,7 +48,7 @@ npm run check
 ```
 
 5. Verify design-contract alignment
-   - Confirm implementation aligns with all requirements in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md` (`FR-012`, `FR-013`, `FR-016`, `FR-017` and related success criteria).
+   - Confirm implementation aligns with all requirements in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md` (`FR-012`, `FR-013`, `FR-016`, `FR-017`, `FR-018`, `FR-019`, `FR-020` and related success criteria).
    - Confirm no new dependencies or top-level folders were introduced.
    - Record implementation and validation evidence in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/implementation-tracker.md`.
 
@@ -58,6 +59,9 @@ npm run check
 - [x] Output includes exactly one strategy (`follow-existing`, `introduce-boundaries`, or `migrate-as-you-touch`) with rationale.
 - [x] Low-confidence rule (`< 0.7`) forces `home=unknown` and `status=ambiguous`.
 - [x] Required `pause_decision` is present when ambiguity is low-confidence and structural.
+- [x] `pause_decision` includes `pause_mode`, `decision_safety_confidence`, and `impact`.
+- [x] Strategy output includes explicit strategy-selection basis metadata.
+- [x] Bootstrap behavior is constrained to canonical/minimal recommendations when triggered.
 - [x] Output contains structural metadata only and no raw code snippets.
 - [x] Example output validates against updated schema.
 - [x] Generated `<REPO_ROOT>/skills/react_architecture_detection/AGENTS.md` is up to date.

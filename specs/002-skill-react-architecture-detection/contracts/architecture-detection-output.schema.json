@@ -154,6 +154,74 @@
       "minItems": 1,
       "items": { "type": "string" }
     },
+    "strategy_basis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "stable-local-gravity",
+          "low-migration-churn",
+          "flat-or-messy-repo",
+          "isolated-boundary-introduction",
+          "explicit-migration-scope",
+          "touched-area-clarity"
+        ]
+      }
+    },
+    "bootstrap": {
+      "type": "object",
+      "required": ["triggered"],
+      "additionalProperties": false,
+      "properties": {
+        "triggered": { "type": "boolean" },
+        "canonical_set_enforced": { "type": "boolean" },
+        "minimal_bootstrap": { "type": "boolean" },
+        "exit_rule_enforced": { "type": "boolean" },
+        "recommended_folders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "pages/",
+              "features/",
+              "ui/primitives/",
+              "ui/composites/",
+              "api/client/",
+              "api/dto/",
+              "api/endpoints/",
+              "core/",
+              "lib/",
+              "hooks/",
+              "config/",
+              "store/"
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "triggered": { "const": true }
+            },
+            "required": ["triggered"]
+          },
+          "then": {
+            "required": [
+              "canonical_set_enforced",
+              "minimal_bootstrap",
+              "exit_rule_enforced"
+            ],
+            "properties": {
+              "canonical_set_enforced": { "const": true },
+              "minimal_bootstrap": { "const": true },
+              "exit_rule_enforced": { "const": true }
+            }
+          }
+        }
+      ]
+    },
     "notes": {
       "type": "array",
       "maxItems": 5,
@@ -161,10 +229,28 @@
     },
     "pause_decision": {
       "type": "object",
-      "required": ["pause_required"],
+      "required": [
+        "pause_required",
+        "pause_mode",
+        "decision_safety_confidence",
+        "impact"
+      ],
       "additionalProperties": false,
       "properties": {
         "pause_required": { "type": "boolean" },
+        "pause_mode": {
+          "type": "string",
+          "enum": ["strict", "balanced", "autonomous"]
+        },
+        "decision_safety_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "impact": {
+          "type": "string",
+          "enum": ["local", "structural"]
+        },
         "trigger": { "type": "string" },
         "options": {
           "type": "array",
@@ -184,6 +270,69 @@
           },
           "then": {
             "required": ["trigger", "options", "recommended_option"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "local" }
+            },
+            "required": ["impact"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": false }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "structural" },
+              "pause_mode": { "const": "strict" }
+            },
+            "required": ["impact", "pause_mode"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": true }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "structural" },
+              "pause_mode": { "const": "balanced" },
+              "decision_safety_confidence": {
+                "type": "number",
+                "exclusiveMaximum": 0.7
+              }
+            },
+            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": true }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "structural" },
+              "pause_mode": { "const": "autonomous" },
+              "decision_safety_confidence": {
+                "type": "number",
+                "exclusiveMaximum": 0.5
+              }
+            },
+            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": true }
+            }
           }
         }
       ]
@@ -218,7 +367,8 @@
             "type": "object",
             "required": ["pause_required"],
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": { "const": true },
+              "impact": { "const": "structural" }
             }
           }
         }
@@ -246,7 +396,8 @@
             "type": "object",
             "required": ["pause_required"],
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": { "const": true },
+              "impact": { "const": "structural" }
             }
           }
         }
@@ -274,7 +425,8 @@
             "type": "object",
             "required": ["pause_required"],
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": { "const": true },
+              "impact": { "const": "structural" }
             }
           }
         }
@@ -302,7 +454,8 @@
             "type": "object",
             "required": ["pause_required"],
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": { "const": true },
+              "impact": { "const": "structural" }
             }
           }
         }

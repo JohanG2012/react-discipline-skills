@@ -23,8 +23,10 @@ Defines how to scan repositories for architecture signals.
 - Determine a clear home for each concern using explicit gravity heuristics.
 - Compute alignment blockers and one recommended next migration step.
 - Use deterministic defaults when multiple signals conflict.
-- Trigger clarification pause when decision-safety confidence is below `0.7`
-  and the impact is structural.
+- Apply pause mode thresholds for structural ambiguity:
+  - `strict`: pause on structural ambiguity.
+  - `balanced` (default): pause when decision-safety confidence is below `0.7`.
+  - `autonomous`: pause when decision-safety confidence is below `0.5`.
 
 ### Detection sequence
 
@@ -50,6 +52,13 @@ Defines how to scan repositories for architecture signals.
      - `follow-existing`
      - `introduce-boundaries`
      - `migrate-as-you-touch`
+   - Use explicit selection criteria:
+     - `follow-existing` when local gravity is clear, migration churn would be
+       high, or scope is small/urgent.
+     - `introduce-boundaries` when the repository is flat/messy or partially
+       structured and target structure can be introduced in isolated boundaries.
+     - `migrate-as-you-touch` only when migration scope is explicit and
+       touched-area moves create immediate clarity.
    - Provide rationale for why the selected strategy best fits observed
      repository gravity and task scope.
 9. **Alignment synthesis**
@@ -74,22 +83,35 @@ Defines how to scan repositories for architecture signals.
      - `hooks/`
      - `config/`
      - `store/` only when global client-state is truly required.
+   - Apply minimal bootstrap discipline:
+     - Recommend only folders needed for current task scope.
+     - Do not recommend speculative, currently-unused bootstrap folders.
+   - Enforce bootstrap exit condition:
+     - Once a canonical concern home exists, do not recommend creating an
+       alternative home for that concern unless explicit migration mode is enabled.
 11. **Ambiguity and pause handling**
    - If any structural concern gravity confidence is `< 0.7`, set concern
      `home` to `unknown` and concern `status` to `ambiguous`.
    - Compute decision-safety confidence separately from concern gravity
      confidence.
-   - Pause only when both are true:
-     - `decision_safety_confidence < 0.7`
-     - impact is structural
+   - Determine pause by mode when impact is structural:
+     - `strict`: pause on structural ambiguity.
+     - `balanced`: pause when `decision_safety_confidence < 0.7`.
+     - `autonomous`: pause when `decision_safety_confidence < 0.5`.
+   - If any structural concern gravity confidence is `< 0.7`, treat this as a
+     structural low-confidence case and require `pause_required: true`.
    - For low-confidence non-structural decisions, apply deterministic defaults.
    - Emit a `pause_decision` payload with:
      - `pause_required: true`
+     - `pause_mode`
+     - `decision_safety_confidence`
+     - `impact`
      - `trigger`
      - `options` (2-3 bounded choices)
      - `recommended_option`
    - When structural ambiguity pause is not required, still emit
-     `pause_decision` with `pause_required: false`.
+     `pause_decision` with `pause_required: false`, `pause_mode`,
+     `decision_safety_confidence`, and `impact`.
 
 ### Forbidden
 
@@ -101,6 +123,9 @@ Defines how to scan repositories for architecture signals.
 - Leaving low-confidence structural concerns unresolved without a pause
   decision.
 - Emitting bootstrap recommendations outside the canonical bootstrap set.
+- Recommending speculative bootstrap folders unrelated to current task scope.
+- Recommending alternate concern homes after bootstrap exit unless explicit
+  migration mode is enabled.
 
 ### Notes
 

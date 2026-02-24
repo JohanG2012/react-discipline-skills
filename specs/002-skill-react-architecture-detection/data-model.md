@@ -60,10 +60,15 @@ gravity ownership, migration strategy, and pause behavior.
 - **Fields**:
   - `strategy` (enum, required): `follow-existing | introduce-boundaries | migrate-as-you-touch`.
   - `rationale` (array[string], required): concise reasons supporting strategy.
+  - `selection_basis` (array[string], required): one or more explicit criteria
+    used for strategy selection (for example `stable-local-gravity`,
+    `flat-or-messy-repo`, `explicit-migration-scope`).
   - `prevents_parallel_homes` (boolean, required): always `true`.
 - **Validation rules**:
   - Exactly one `strategy` value is allowed per run.
   - Rationale must describe why alternatives were not selected.
+  - `selection_basis` must align with strategy criteria from master behavior
+    (`follow-existing`, `introduce-boundaries`, `migrate-as-you-touch`).
 
 ### 5. AlignmentAssessment
 
@@ -81,12 +86,24 @@ gravity ownership, migration strategy, and pause behavior.
 - **Description**: Structured pause artifact for high-impact low-confidence ambiguity.
 - **Fields**:
   - `pause_required` (boolean, required)
+  - `pause_mode` (enum, required): `strict | balanced | autonomous`.
+  - `decision_safety_confidence` (number, required): confidence in
+    decision-safety logic (`0.0-1.0`) and explicitly separate from concern
+    gravity confidence.
+  - `impact` (enum, required): `local | structural`.
   - `trigger` (string, required when pause required): structural ambiguity cause.
   - `options` (array[string], required when pause required): 2-3 bounded options.
   - `recommended_option` (string, required when pause required)
   - `resolution` (string, optional): accepted option/answer.
 - **Validation rules**:
-  - If any structural concern has `confidence < 0.7`, `pause_required` must be `true`.
+  - Default `pause_mode` is `balanced` unless explicitly configured.
+  - In `strict` mode: structural ambiguity requires pause.
+  - In `balanced` mode: pause when `decision_safety_confidence < 0.7` and
+    `impact=structural`.
+  - In `autonomous` mode: pause when `decision_safety_confidence < 0.5` and
+    `impact=structural`.
+  - If any structural concern has `confidence < 0.7`, concern home must be
+    `unknown` and `pause_required` must be `true`.
   - If `pause_required=true`, `trigger`, `options`, and `recommended_option` are mandatory.
 
 ### 7. ArchitectureDetectionOutput
@@ -105,6 +122,8 @@ gravity ownership, migration strategy, and pause behavior.
   - `strategy` (enum, required): single strategy for the run.
   - `strategy_rationale` (array[string], required): at least one rationale entry.
   - `pause_decision` (object, required): pause metadata for this run.
+  - `bootstrap` (object, optional): bootstrap trigger metadata and constraints
+    when the repository is `flat/ad-hoc` with no clear homes.
   - `notes` (array[string], required): metadata notes, maximum 5 entries.
   - `skill` (string, optional): `react_architecture_detection`.
   - `version` (string, optional): skill version identifier.

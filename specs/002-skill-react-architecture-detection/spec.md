@@ -94,6 +94,12 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 - **FR-015**: The system MUST limit this skill to detection, mapping, and strategy guidance and MUST NOT implement features, move files, or perform refactors.
 - **FR-016**: The system MUST return structural metadata only by default and MUST NOT include raw code snippets in standard architecture-detection output.
 - **FR-017**: When any structural concern has gravity confidence below `0.7`, the system MUST set that concern home to `unknown` with ambiguous status and require `pause_decision.pause_required=true` before downstream planning continues.
+- **FR-018**: The system MUST support pause modes `strict`, `balanced`, and `autonomous`; `balanced` is the default when no mode is explicitly configured.
+- **FR-019**: The system MUST select strategy using explicit mode criteria:
+  - `follow-existing` for strong local gravity or small/urgent scope where migration churn is not justified.
+  - `introduce-boundaries` for flat/messy or partially structured repositories where isolated target-boundary introduction is safe.
+  - `migrate-as-you-touch` only in explicit migration scope where touched-area moves provide immediate clarity.
+- **FR-020**: For bootstrap-triggered repositories (`flat/ad-hoc` with no clear routing/UI/API/domain homes), the system MUST constrain recommendations to the canonical bootstrap set, MUST enforce minimal bootstrap (no speculative folders), and MUST enforce the bootstrap exit rule (no alternative concern home creation without explicit migration mode once a canonical home exists).
 
 ### Key Entities *(include if feature involves data)*
 
@@ -111,6 +117,7 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 - **Gravity Confidence**: Concern-level placement confidence used to determine whether a concern home is clear.
 - **Decision-safety Confidence**: Pause-decision confidence used to determine whether structural ambiguity requires clarification.
 - **Two-Architecture Anti-pattern**: Parallel treatment of multiple homes as simultaneously correct for the same concern.
+- **Pause Mode**: Configurable clarification strictness policy (`strict | balanced | autonomous`) used to determine structural pause thresholds.
 
 ### Assumptions
 
@@ -141,3 +148,5 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 - **SC-007**: In 100% of standard architecture-detection outputs, no raw code snippets are included.
 - **SC-008**: In 100% of cases where a concern has confidence below `0.7`, output marks that concern as `unknown` and includes a required pause decision before downstream planning.
 - **SC-009**: In 100% of architecture-detection runs, output includes a `pause_decision` record (`pause_required=false` when no structural pause is needed).
+- **SC-010**: In 100% of runs, `pause_decision` includes pause-mode metadata (`pause_mode`, `decision_safety_confidence`, `impact`) and follows configured mode thresholds.
+- **SC-011**: In 100% of bootstrap-triggered runs, recommendations stay within canonical bootstrap homes, avoid speculative folders, and preserve bootstrap exit constraints.

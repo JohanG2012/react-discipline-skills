@@ -78,8 +78,15 @@ Return a **single JSON object** matching this shape:
   "alignment": {"blockers": [], "next_migration_step": "Continue using current architecture homes for this task."},
   "strategy": "follow-existing",
   "strategy_rationale": ["Current concern homes are stable for this scope."],
+  "strategy_basis": ["stable-local-gravity", "low-migration-churn"],
+  "bootstrap": {"triggered": false},
   "notes": [],
-  "pause_decision": {"pause_required": false}
+  "pause_decision": {
+    "pause_required": false,
+    "pause_mode": "balanced",
+    "decision_safety_confidence": 0.91,
+    "impact": "local"
+  }
 }
 ```
 
@@ -94,6 +101,11 @@ Constraints:
   `notes[]`.
 - Output must include `strategy_rationale`, `alignment.blockers`,
   `alignment.next_migration_step`, and `pause_decision`.
+- Output should include `strategy_basis` using explicit strategy criteria
+  (for example `stable-local-gravity`, `flat-or-messy-repo`,
+  `explicit-migration-scope`).
+- Output must include `pause_decision.pause_mode`,
+  `pause_decision.decision_safety_confidence`, and `pause_decision.impact`.
 - `api.home` is the canonical endpoint layer for downstream boundary checks in
   the task.
 - If any structural concern confidence is below `0.7`, output must set

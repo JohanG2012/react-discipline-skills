@@ -82,6 +82,25 @@ independent-test outcomes per user story.
 - `npm run check`: Passed
 - `.specify/scripts/bash/update-agent-context.sh codex`: Passed (with known duplicate-prefix warning)
 
+## Post-audit Alignment Fixes (2026-02-24)
+
+- Added explicit strategy-selection criteria alignment (`follow-existing`,
+  `introduce-boundaries`, `migrate-as-you-touch`) in
+  `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+- Added bootstrap minimal/exit-condition constraints in
+  `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+- Added pause-mode metadata and thresholds (`strict | balanced | autonomous`)
+  across:
+  - `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`
+  - `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
+- Updated contract examples and narrative artifacts:
+  - `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/data-model.md`
+  - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/quickstart.md`
+
 ## Notes
 
 - Use this file to record command output summaries and sign-off checkpoints as

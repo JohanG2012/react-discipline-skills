@@ -50,9 +50,19 @@ Define the normative interface emitted by `react_architecture_detection` and con
   "strategy_rationale": [
     "Existing repository gravity is stable for this task scope."
   ],
+  "strategy_basis": [
+    "stable-local-gravity",
+    "low-migration-churn"
+  ],
+  "bootstrap": {
+    "triggered": false
+  },
   "notes": [],
   "pause_decision": {
-    "pause_required": false
+    "pause_required": false,
+    "pause_mode": "balanced",
+    "decision_safety_confidence": 0.91,
+    "impact": "local"
   }
 }
 ```
@@ -71,6 +81,9 @@ Define the normative interface emitted by `react_architecture_detection` and con
      - `alignment.next_migration_step`
      - `strategy`
      - `strategy_rationale`
+     - `pause_decision.pause_mode`
+     - `pause_decision.decision_safety_confidence`
+     - `pause_decision.impact`
      - `notes[]`
 
 2. **Canonical Endpoint Rule**
@@ -91,8 +104,24 @@ Define the normative interface emitted by `react_architecture_detection` and con
 6. **Single Strategy Rule**
    - Exactly one strategy is allowed: `follow-existing`, `introduce-boundaries`, or `migrate-as-you-touch`.
    - `strategy_rationale` must include at least one concrete reason.
+   - `strategy_basis` should include one or more explicit selection criteria.
 
-7. **Deterministic Notes Rule**
+7. **Pause Mode Rule**
+   - `pause_mode` supports `strict`, `balanced`, and `autonomous`.
+   - Default pause mode is `balanced` unless explicitly configured.
+   - Structural pause thresholds by mode:
+     - `strict`: pause on structural ambiguity.
+     - `balanced`: pause when `decision_safety_confidence < 0.7`.
+     - `autonomous`: pause when `decision_safety_confidence < 0.5`.
+
+8. **Bootstrap Rule**
+   - If bootstrap is triggered (`flat/ad-hoc` with no clear routing/UI/API/domain homes),
+     recommendations must be constrained to the canonical bootstrap set.
+   - Bootstrap recommendations must be minimal and task-scoped (no speculative folders).
+   - Once a canonical concern home exists, alternative-home recommendations are forbidden
+     unless explicit migration mode is enabled.
+
+9. **Deterministic Notes Rule**
    - `notes` must be an array with at most 5 items.
 
 ## Compatibility Expectations
@@ -111,4 +140,5 @@ Define the normative interface emitted by `react_architecture_detection` and con
 - Missing `api.home` -> reject payload as invalid.
 - `confidence < 0.7` with non-`unknown` home -> reject payload as invalid.
 - `pause_required=true` without options/recommendation -> reject payload as invalid.
+- Missing `pause_mode`, `decision_safety_confidence`, or `impact` -> reject payload as invalid.
 - Raw code snippets in output fields -> reject payload as policy violation.

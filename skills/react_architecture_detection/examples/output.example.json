@@ -52,14 +52,23 @@
   },
   "strategy": "follow-existing",
   "strategy_rationale": [
-    "Current repository gravity is already stable for UI and API homes.",
+    "Current repository gravity is stable enough outside the ambiguous API concern.",
     "Introducing competing homes would increase migration risk for this task scope."
   ],
+  "strategy_basis": [
+    "low-migration-churn"
+  ],
+  "bootstrap": {
+    "triggered": false
+  },
   "notes": [
     "Detected mixed route and API conventions; bootstrap mode not required."
   ],
   "pause_decision": {
     "pause_required": true,
+    "pause_mode": "balanced",
+    "decision_safety_confidence": 0.64,
+    "impact": "structural",
     "trigger": "Competing data-access homes with low confidence",
     "options": [
       "Treat src/services/api as canonical endpoint layer",
