@@ -86,6 +86,12 @@ for downstream planning and implementation workflows.
     "errors": [],
     "warnings": []
   },
+  "scope_expansion_needed": [
+    {
+      "why": "Shared table-shell extraction would improve long-term reuse.",
+      "would_touch": 2
+    }
+  ],
   "notes": [
     "Reused existing FilterBar composite."
   ]
@@ -140,6 +146,8 @@ for downstream planning and implementation workflows.
   `old_path`, `new_path`, and `import_update_targets`.
 - If move/rename operations are present, `move_concern` MUST be provided.
 - `move_operations` MUST contain three items or fewer.
+- If `scope_expansion_needed` is present, each item MUST include `why` and
+  integer `would_touch`.
 
 3. **Fail-Fast Validation Rule**
    - Missing/invalid required inputs MUST produce `result_type=validation_error`.
@@ -163,6 +171,14 @@ for downstream planning and implementation workflows.
    - `notes` maximum is 5 entries.
    - Notes should be concise and tied to placement decisions only.
 
+8. **Scope Expansion Escape Hatch Rule**
+   - If extra out-of-cap scope would materially improve completeness, plan
+     output may include `scope_expansion_needed`.
+   - `scope_expansion_needed` is plan-only and must stay structured
+     (`why`, `would_touch`).
+   - Presence of `scope_expansion_needed` does not replace the requirement to
+     return the smallest viable in-cap plan.
+
 ## Compatibility Expectations
 
 - Consumers must handle both contract shapes (`plan` and `validation_error`).
@@ -177,6 +193,8 @@ for downstream planning and implementation workflows.
 - Missing mandatory plan fields for `result_type=plan` -> reject payload as invalid.
 - Missing `validation_status` or `schema_version` -> reject payload as invalid.
 - `result_type=validation_error` with plan artifacts present -> reject payload as invalid.
+- `result_type=validation_error` with `scope_expansion_needed` present ->
+  reject payload as invalid.
 - Required inputs missing/invalid without `result_type=validation_error` -> reject payload as invalid.
 - Conflict resolution below `0.7` without `resolution_mode=pause_resolved` -> reject payload as invalid.
 - Move-enabled payload with more than 3 operations -> reject payload as invalid.

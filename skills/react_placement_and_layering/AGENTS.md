@@ -28,6 +28,8 @@ Generated on: 2026-02-24
 - [Rule: Repository Evidence Access](#rule-repository-evidence-access)
 - [Summary](#summary)
 - [Rule: Fixed Execution-Skill Scope](#rule-fixed-execution-skill-scope)
+- [Summary](#summary)
+- [Rule: Implementation Output Format Defaults](#rule-implementation-output-format-defaults)
 
 ## Overview
 This document defines the authoritative rules for agents/LLMs using the `react_placement_and_layering` skill.
@@ -46,6 +48,7 @@ Key constraints:
 - rpl-scope-governor
 - rpl-access-control
 - rpl-skill-model-alignment
+- rpl-implementation-handoff
 
 ---
 
@@ -116,6 +119,13 @@ Defines the placement workflow for new or updated files.
   - architecture-detection result
 - Translate the request into explicit planning requirements before choosing
   files.
+- Classify the request using one or more task categories before placement:
+  - new page/route
+  - new feature capability
+  - new UI element
+  - new API endpoint/backend integration
+  - refactor/reuse improvement
+  - bug fix
 - Select one primary feature owner for the run.
 - Select one strategy for the run (`follow-existing`,
   `introduce-boundaries`, or `migrate-as-you-touch`).
@@ -134,6 +144,22 @@ Defines the placement workflow for new or updated files.
   - fetching/transport must remain in the canonical endpoint layer for the task
   - when a path alias exists (for example `@/`), apply guardrails to alias and
     raw `src/**` paths equally
+- Enforce cross-layer error ownership in placement decisions:
+  - `api/endpoints/**` owns normalized typed transport errors (`ApiError`) with
+    `message` and optional `status`, `code`, `details`, and `cause`
+  - `features/*/hooks/**` expose consistent error result shape and do not emit
+    toasts/snackbars for query/page-load failures
+  - `pages/**` and `features/*/sections/**` own user-facing error behavior;
+    default query/page-load failures to inline retry UI
+  - mutation toast/snackbar feedback is allowed only when that app pattern
+    already exists; otherwise keep mutation feedback inline near the action
+- Enforce state persistence policy when store/global-state artifacts are planned:
+  - persist only user preferences and lightweight durable UI state
+  - prefer URL query parameters for shareable/bookmarkable state
+  - do not persist ephemeral UI state (for example modal open flags)
+  - do not persist server-state snapshots in global store unless explicitly
+    justified by performance-critical caching, offline-first requirements, or a
+    documented architectural decision
 - Map requested changes to a single owning layer per artifact.
 - Perform required repository lookup before proposing new artifacts:
   - existing route files
@@ -229,6 +255,8 @@ Defines the expected output structure for placement decisions.
   - `source_of_truth_resolutions`
   - `validation_status`
   - `notes`
+- `result_type=plan` may include `scope_expansion_needed` when out-of-cap
+  follow-up work would materially improve completeness.
 - Each artifact must include:
   - `purpose`
   - `action` (`reuse | update | create`)
@@ -256,6 +284,9 @@ Defines the expected output structure for placement decisions.
 - `move_operations[]` must contain three items or fewer.
 - `notes` must remain concise with maximum 5 items.
 - `notes` and artifact rationales must be structural (planning metadata only).
+- If `scope_expansion_needed` is present, each item must include:
+  - `why`
+  - `would_touch` (integer count of additional files)
 - `result_type=validation_error` output must include:
   - `schema_version`
   - `skill`
@@ -268,7 +299,8 @@ Defines the expected output structure for placement decisions.
   `feature_owner`, `canonical_endpoint_layer`, `authoritative_home_map`,
   `artifacts`,
   `layer_justifications`, `decision_explanation`, `import_guardrails`,
-  `source_of_truth_resolutions`, `move_operations`, `move_concern`).
+  `source_of_truth_resolutions`, `move_operations`, `move_concern`,
+  `scope_expansion_needed`).
 
 ### Forbidden
 
@@ -473,6 +505,12 @@ Defines required scope and constraint handling for placement planning.
   - max new top-level folders: `0` unless explicitly requested
 - If scope pressure exceeds caps, produce the smallest in-cap plan and record
   concise follow-up scope in `notes`.
+- If extra out-of-cap scope would materially improve completeness, include a
+  structured `scope_expansion_needed` array with items:
+  - `why` (short reason)
+  - `would_touch` (number of additional files)
+- When `scope_expansion_needed` is included, still return the in-cap placement
+  plan in the same output.
 - If `avoid_new_folders=true`, do not propose new folder homes unless explicit
   override is provided.
 - If constraints block all safe placement outcomes, return
@@ -523,6 +561,12 @@ speculative structure changes.
 - Without repository evidence or fallback bundle, return
   `result_type=validation_error` and do not emit a plan.
 - This skill remains planning-only and does not perform implementation edits.
+- Default write posture is controlled/review-oriented output; avoid silent churn
+  and unreviewed direct edits as routine behavior.
+- Do not auto-edit architecture/specification documents during routine tasks
+  (`ARCHITECTURE.md`, `specs/**/master_spec.md`, `spec/**`).
+- Treat architecture/specification document edits as dedicated documentation
+  scope and perform them only when explicitly requested.
 
 ### Forbidden
 
@@ -576,3 +620,52 @@ boundaries.
 ### Notes
 
 - Cross-skill handoffs must remain explicit and machine-consumable.
+
+---
+
+# Implementation Handoff Formatting
+
+## Summary
+Defines downstream implementation-output formatting defaults referenced by this
+planning skill.
+
+---
+
+## Rule: Implementation Output Format Defaults
+**Rule ID:** rpl-implementation-handoff  
+**Priority:** MUST  
+**Applies to:** react_placement_and_layering  
+**Rationale:** Keeps handoff output reviewable and consistent across placement
+and implementation stages.
+
+### Requirement
+
+- This skill remains planning-first and JSON-contract driven.
+- When a downstream implementation handoff is requested, use these formatting
+  defaults:
+  - updated files: provide changed snippets by default
+  - switch to unified diff when:
+    - edits span non-adjacent regions in one file
+    - changes touch imports, exports, and logic together
+    - snippet-only output is likely to be misapplied
+  - new files: provide full file content
+  - existing files: avoid full-file dumps unless explicitly requested, or the
+    file is small (about under 60 lines) and entirely changed
+  - if a newly proposed file would exceed about 250 lines, split
+    responsibilities instead of producing one oversized file
+- Keep implementation-handoff guidance scoped to the approved placement plan and
+  scope-governor limits.
+
+### Forbidden
+
+- Returning implementation output in free-form or low-context formats that
+  increase patch-application risk.
+- Combining structural migration and feature behavior changes in one handoff
+  unless migration scope is explicitly requested.
+- Expanding handoff scope beyond the selected placement plan without explicit
+  structured scope expansion.
+
+### Notes
+
+- These defaults govern implementation handoff shape; they do not replace the
+  mandatory placement JSON contract.

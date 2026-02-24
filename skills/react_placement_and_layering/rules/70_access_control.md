@@ -31,6 +31,12 @@ speculative structure changes.
 - Without repository evidence or fallback bundle, return
   `result_type=validation_error` and do not emit a plan.
 - This skill remains planning-only and does not perform implementation edits.
+- Default write posture is controlled/review-oriented output; avoid silent churn
+  and unreviewed direct edits as routine behavior.
+- Do not auto-edit architecture/specification documents during routine tasks
+  (`ARCHITECTURE.md`, `specs/**/master_spec.md`, `spec/**`).
+- Treat architecture/specification document edits as dedicated documentation
+  scope and perform them only when explicitly requested.
 
 ### Forbidden
 

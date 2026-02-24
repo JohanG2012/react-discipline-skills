@@ -19,6 +19,13 @@ Defines the placement workflow for new or updated files.
   - architecture-detection result
 - Translate the request into explicit planning requirements before choosing
   files.
+- Classify the request using one or more task categories before placement:
+  - new page/route
+  - new feature capability
+  - new UI element
+  - new API endpoint/backend integration
+  - refactor/reuse improvement
+  - bug fix
 - Select one primary feature owner for the run.
 - Select one strategy for the run (`follow-existing`,
   `introduce-boundaries`, or `migrate-as-you-touch`).
@@ -37,6 +44,22 @@ Defines the placement workflow for new or updated files.
   - fetching/transport must remain in the canonical endpoint layer for the task
   - when a path alias exists (for example `@/`), apply guardrails to alias and
     raw `src/**` paths equally
+- Enforce cross-layer error ownership in placement decisions:
+  - `api/endpoints/**` owns normalized typed transport errors (`ApiError`) with
+    `message` and optional `status`, `code`, `details`, and `cause`
+  - `features/*/hooks/**` expose consistent error result shape and do not emit
+    toasts/snackbars for query/page-load failures
+  - `pages/**` and `features/*/sections/**` own user-facing error behavior;
+    default query/page-load failures to inline retry UI
+  - mutation toast/snackbar feedback is allowed only when that app pattern
+    already exists; otherwise keep mutation feedback inline near the action
+- Enforce state persistence policy when store/global-state artifacts are planned:
+  - persist only user preferences and lightweight durable UI state
+  - prefer URL query parameters for shareable/bookmarkable state
+  - do not persist ephemeral UI state (for example modal open flags)
+  - do not persist server-state snapshots in global store unless explicitly
+    justified by performance-critical caching, offline-first requirements, or a
+    documented architectural decision
 - Map requested changes to a single owning layer per artifact.
 - Perform required repository lookup before proposing new artifacts:
   - existing route files

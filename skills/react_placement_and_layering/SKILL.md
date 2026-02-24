@@ -80,6 +80,9 @@ Constraints:
 - If move/rename operations are present, they are limited to small scope and
   require explicit move metadata.
 - `notes[]` max 5 items.
+- If extra out-of-cap work would materially improve completeness, include
+  `scope_expansion_needed[]` entries (`why`, `would_touch`) while still
+  returning the smallest in-cap plan.
 - No raw source snippets or secret-like values in output fields.
 - No extra prose outside JSON.
 
@@ -96,6 +99,7 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 - rpl-scope-governor
 - rpl-access-control
 - rpl-skill-model-alignment
+- rpl-implementation-handoff
 
 ## Files
 

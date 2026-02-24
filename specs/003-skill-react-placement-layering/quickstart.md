@@ -26,13 +26,20 @@ source-of-truth precedence with pause-resolved structural overrides.
    - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/00_overview.md` with explicit scope and sensitive-output prohibition.
    - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md` with:
      - required-input validation sequence
+     - request-classification categories before artifact planning
      - architecture-vs-repository precedence handling
      - confidence threshold behavior (`<0.7` structural conflicts require pause-resolved override)
+     - cross-layer error ownership expectations
+     - state-persistence policy for store/global-state placement
      - authoritative-home mapping and move-mode constraints
    - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md` with:
      - strict output field requirements for plan results
      - validation-error output shape
+     - optional structured scope-expansion escape hatch field
      - no raw source snippets or secret-like values
+   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/60_scope_governor.md` with structured scope-expansion behavior.
+   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/70_access_control.md` with explicit write-control policy for architecture/spec docs.
+   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/90_implementation_handoff.md` with implementation-output formatting defaults.
    - Update `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json` to align with the contract.
    - Update `<REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json` to match the updated schema.
 
@@ -56,6 +63,9 @@ npm run check
      - fail-fast validation behavior (`FR-020`, `FR-021`)
      - source-of-truth precedence and threshold (`FR-022`, `FR-023`, `FR-025`)
      - authoritative-home and move metadata contract fields (`FR-026`, `FR-027`)
+     - scope-expansion structured field behavior (`FR-032`)
+     - request classification, persistence policy, and cross-layer error guidance (`FR-029`, `FR-030`, `FR-031`)
+     - documentation write-control and implementation handoff format defaults (`FR-033`, `FR-034`)
      - sensitive-output exclusion (`FR-024`)
    - Confirm no new dependencies or top-level directories were added.
    - Record implementation evidence in `<REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md`.
@@ -74,6 +84,10 @@ npm run check
 - [x] Source-of-truth precedence uses architecture output by default; structural repository overrides below `0.7` require `pause_resolved` metadata.
 - [x] Plan output includes canonical endpoint layer and authoritative-home map.
 - [x] Move-enabled output (when used) is capped to three operations and includes `move_concern` and import-update targets.
+- [x] Scope-expansion follow-up output uses structured `scope_expansion_needed` entries (`why`, `would_touch`) only for plan results.
+- [x] Process rules include request-classification categories and store/error policy constraints.
+- [x] Access-control rules prohibit routine auto-editing of architecture/specification documents.
+- [x] Implementation handoff formatting defaults are codified for downstream stages.
 - [x] Output excludes raw source snippets and secret-like values.
 - [x] Updated example output validates against updated schema.
 - [x] Generated `<REPO_ROOT>/skills/react_placement_and_layering/AGENTS.md` is up to date.

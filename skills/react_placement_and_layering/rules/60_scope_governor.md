@@ -25,6 +25,12 @@ Defines required scope and constraint handling for placement planning.
   - max new top-level folders: `0` unless explicitly requested
 - If scope pressure exceeds caps, produce the smallest in-cap plan and record
   concise follow-up scope in `notes`.
+- If extra out-of-cap scope would materially improve completeness, include a
+  structured `scope_expansion_needed` array with items:
+  - `why` (short reason)
+  - `would_touch` (number of additional files)
+- When `scope_expansion_needed` is included, still return the in-cap placement
+  plan in the same output.
 - If `avoid_new_folders=true`, do not propose new folder homes unless explicit
   override is provided.
 - If constraints block all safe placement outcomes, return

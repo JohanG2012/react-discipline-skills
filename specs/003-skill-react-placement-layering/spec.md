@@ -110,6 +110,12 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 - **FR-026**: The system MUST include an authoritative-home map for active concerns in successful placement-plan output.
 - **FR-027**: If move/rename operations are present, the system MUST include move metadata (`old_path`, `new_path`, `import_update_targets`, and `move_concern`) and MUST cap move operations to three or fewer per run.
 - **FR-028**: If no path alias is already configured, the system MUST keep relative imports and MUST NOT introduce alias configuration unless explicitly requested.
+- **FR-029**: The system MUST classify each request into one or more planning categories before artifact planning (`new page/route`, `new feature capability`, `new UI element`, `new API endpoint/backend integration`, `refactor/reuse improvement`, `bug fix`).
+- **FR-030**: The system MUST enforce cross-layer error ownership in placement guidance: transport errors are normalized in `api/endpoints/**`, feature hooks expose consistent error shapes without query-load toasts/snackbars, and pages/sections own user-facing error behavior.
+- **FR-031**: The system MUST apply state-persistence policy when store/global-state artifacts are planned: persist only durable preferences/UI state, prefer URL query params for shareable state, avoid ephemeral persistence, and avoid server-state snapshots without explicit justification.
+- **FR-032**: When extra out-of-cap scope would materially improve completeness, the system MUST include structured `scope_expansion_needed` entries with `why` and `would_touch`, while still returning the smallest viable in-cap plan.
+- **FR-033**: The system MUST NOT auto-edit architecture/specification documents during routine implementation tasks and MUST treat such edits as explicit documentation scope.
+- **FR-034**: When producing downstream implementation handoff guidance, the system MUST follow implementation-output formatting defaults: changed snippets for updated files, unified diff for high-context edits, full content for new files, and no unnecessary full-file dumps.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -124,6 +130,7 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 - **Layer Justification**: Concise rationale for each touched layer.
 - **Decision Explanation**: Structured summary of detected architecture signals and chosen direction.
 - **Move Operation**: Explicit move/rename metadata with import-update targets in move-enabled scope.
+- **Scope Expansion Need**: Structured follow-up expansion item with `why` and `would_touch` when extra out-of-cap scope is identified.
 
 ### Terminology
 
@@ -164,3 +171,5 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 - **SC-009**: In 100% of runs with architecture/repository mismatch, source-of-truth precedence is applied consistently: architecture output by default, and repository evidence only with `pause_resolved` metadata for structural conflicts below `0.7`.
 - **SC-010**: In 100% of placement outputs, no raw source snippets or secret-like values are present.
 - **SC-011**: In 100% of move-enabled runs, move operations are three or fewer and include `move_concern` plus explicit import-update targets.
+- **SC-012**: In 100% of runs where cap pressure is identified and extra scope is beneficial, output includes structured `scope_expansion_needed` entries with `why` and `would_touch` while preserving an in-cap plan.
+- **SC-013**: In 100% of store-related placement decisions, persistence recommendations avoid ephemeral/server-state snapshot persistence unless explicit justification is provided.

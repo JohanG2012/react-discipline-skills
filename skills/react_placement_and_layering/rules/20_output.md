@@ -31,6 +31,8 @@ Defines the expected output structure for placement decisions.
   - `source_of_truth_resolutions`
   - `validation_status`
   - `notes`
+- `result_type=plan` may include `scope_expansion_needed` when out-of-cap
+  follow-up work would materially improve completeness.
 - Each artifact must include:
   - `purpose`
   - `action` (`reuse | update | create`)
@@ -58,6 +60,9 @@ Defines the expected output structure for placement decisions.
 - `move_operations[]` must contain three items or fewer.
 - `notes` must remain concise with maximum 5 items.
 - `notes` and artifact rationales must be structural (planning metadata only).
+- If `scope_expansion_needed` is present, each item must include:
+  - `why`
+  - `would_touch` (integer count of additional files)
 - `result_type=validation_error` output must include:
   - `schema_version`
   - `skill`
@@ -70,7 +75,8 @@ Defines the expected output structure for placement decisions.
   `feature_owner`, `canonical_endpoint_layer`, `authoritative_home_map`,
   `artifacts`,
   `layer_justifications`, `decision_explanation`, `import_guardrails`,
-  `source_of_truth_resolutions`, `move_operations`, `move_concern`).
+  `source_of_truth_resolutions`, `move_operations`, `move_concern`,
+  `scope_expansion_needed`).
 
 ### Forbidden
 

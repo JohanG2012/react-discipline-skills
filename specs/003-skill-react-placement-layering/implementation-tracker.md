@@ -147,3 +147,21 @@ results, and validation command outcomes for tasks in
     `skills/react_placement_and_layering/rules/10_process.md`:
     unresolved high-impact structural ambiguity now explicitly blocks
     `result_type=plan` finalization until clarification is resolved.
+- Master-spec parity closure pass (2026-02-24):
+  - Added explicit request-classification categories and missing master-policy
+    coverage in `skills/react_placement_and_layering/rules/10_process.md`:
+    cross-layer error ownership and state-persistence constraints for
+    store/global-state placement.
+  - Added scope-expansion structured escape-hatch behavior in
+    `skills/react_placement_and_layering/rules/20_output.md` and
+    `skills/react_placement_and_layering/rules/60_scope_governor.md`.
+  - Added write-control policy for architecture/specification documents in
+    `skills/react_placement_and_layering/rules/70_access_control.md`.
+  - Added implementation-output formatting defaults in
+    `skills/react_placement_and_layering/rules/90_implementation_handoff.md`.
+  - Synced schema and contract for optional `scope_expansion_needed` shape in:
+    - `skills/react_placement_and_layering/schemas/output.schema.json`
+    - `specs/003-skill-react-placement-layering/contracts/placement-plan-output.schema.json`
+    - `specs/003-skill-react-placement-layering/contracts/placement-plan-output-contract.md`
+  - Synced spec artifacts (`spec.md`, `data-model.md`, `quickstart.md`) with
+    new parity requirements and traceability updates.

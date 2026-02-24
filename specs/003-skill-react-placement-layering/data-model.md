@@ -109,6 +109,17 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
   - At least one concern home must be present in successful plans.
   - Homes must reflect detected gravity or explicitly pause-resolved overrides.
 
+### 5e. ScopeExpansionNeed
+
+- **Description**: Structured record for additional out-of-cap follow-up work
+  that would materially improve completeness.
+- **Fields**:
+  - `why` (string, required): concise reason extra scope is beneficial.
+  - `would_touch` (integer, required): additional file touches expected.
+- **Validation rules**:
+  - `would_touch` must be greater than `0`.
+  - Entries are plan-only and do not replace required in-cap output.
+
 ### 6. PlannedArtifact
 
 - **Description**: A single planned file touch in the output plan.
@@ -167,6 +178,7 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
   - `source_of_truth_resolutions` (array[SourceOfTruthResolution], required)
   - `move_operations` (array[MoveOperation], optional)
   - `move_concern` (string, optional): required when `move_operations` is present.
+  - `scope_expansion_needed` (array[ScopeExpansionNeed], optional)
   - `validation_status` (ValidationStatus, required)
   - `notes` (array[string], required, max 5)
 - **Validation rules**:
@@ -174,6 +186,8 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
   - `notes` and all text fields must remain structural and must not include raw source snippets or secret-like values.
   - If `move_operations` is present, strategy must be `migrate-as-you-touch`.
   - If `move_operations` is present, `move_concern` must be present.
+  - If `scope_expansion_needed` is present, it must include only structured
+    `why`/`would_touch` entries and still accompany an in-cap plan.
 
 ### 10. ValidationErrorOutput
 
@@ -196,6 +210,7 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 - `PlacementPlanningRequest (1) -> (many) SourceOfTruthResolution`
 - `PlacementPlanningRequest (1) -> (many) PlannedArtifact` (for successful runs)
 - `PlacementPlanningRequest (1) -> (many) GuardrailEvaluation`
+- `PlacementPlanningRequest (1) -> (0..many) ScopeExpansionNeed`
 - `PlacementPlanningRequest (1) -> (1) ValidationStatus`
 - `ValidationStatus (1) -> (1) PlacementPlanOutput | ValidationErrorOutput`
 
@@ -226,4 +241,8 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 - `FR-018`, `FR-019`: strict versioned contract fields and mandatory-field validation.
 - `FR-022`, `FR-023`: precedence and `0.7` confidence-threshold behavior.
 - `FR-024`: structural-only output and sensitive-content exclusion.
-- `SC-007`, `SC-008`, `SC-009`, `SC-010`: contract conformance, fail-fast validation, precedence consistency, and snippet/secret exclusion.
+- `FR-029`: request classification before artifact planning.
+- `FR-030`, `FR-031`: cross-layer error ownership and state-persistence policy constraints.
+- `FR-032`: structured scope expansion escape hatch (`ScopeExpansionNeed`).
+- `FR-033`, `FR-034`: documentation write-control and implementation handoff format alignment.
+- `SC-007`, `SC-008`, `SC-009`, `SC-010`, `SC-012`, `SC-013`: contract conformance, fail-fast validation, precedence consistency, sensitive-output exclusion, scope-expansion structure, and persistence-policy adherence.
