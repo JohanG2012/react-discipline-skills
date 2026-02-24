@@ -3,7 +3,7 @@
 **Feature Branch**: `003-skill-react-placement-layering`  
 **Created**: 2026-02-23  
 **Status**: Completed  
-**Input**: User description: "This is spec 003-skill-react-placement-and-layering. This is spec 3 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react architecture detection skill if the master spec leaves open questions you can also read 2_REACT_PLACEMENT_AND_LAYERING.md for project structure read PROJECT_STRUCTURE.md"
+**Input**: User description: "This is spec 003-skill-react-placement-and-layering. This is spec 3 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react placement and layering detection skill if the master spec leaves open questions you can also read 2_REACT_PLACEMENT_AND_LAYERING.md for project structure read PROJECT_STRUCTURE.md"
 
 ## Clarifications
 
@@ -137,7 +137,7 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 
 - The master specification (`SPEC.md`) remains the authoritative source for architecture rules and production-skill scope.
 - `2_REACT_PLACEMENT_AND_LAYERING.md` defines detailed behavior for this skill when additional precision is needed.
-- The phrase "react architecture detection skill" in the input is interpreted as a wording carryover; this feature scope is placement-and-layering based on the spec identifier and referenced detail document.
+- The input explicitly targets the placement-and-layering skill scope based on the spec identifier and referenced detail document.
 - Architecture detection runs before placement planning and provides required upstream context.
 - Shared baseline policy (`agent-policy-v1`) is active for all four production execution skills.
 - Structural source-of-truth overrides below `0.7` require explicit pause resolution metadata.
