@@ -3,7 +3,7 @@ import path from "path";
 import {
   collectUnsupportedSchemaKeywords,
   validateSchema,
-} from "../tools/build/schema_validator.mjs";
+} from "../lib/schema_validator.mjs";
 
 const repoRoot = process.cwd();
 const fixturesRoot = path.join(repoRoot, "scripts", "fixtures", "handoffs");
@@ -40,8 +40,8 @@ const schemaPaths = {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/validate_handoffs.mjs",
-    "  node scripts/validate_handoffs.mjs --set <success|validation_error|dependency_error>",
+    "  node scripts/validators/validate_handoffs.mjs",
+    "  node scripts/validators/validate_handoffs.mjs --set <success|validation_error|dependency_error>",
     "",
     "Default mode validates all fixture sets against expected outcomes.",
     "--set mode runs strict validation for a single fixture set.",

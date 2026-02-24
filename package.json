@@ -5,12 +5,13 @@
   "scripts": {
     "prepare": "husky install",
     "build": "npm run build:agents",
-    "build:agents": "node tools/build/compile_agents.mjs",
-    "check": "npm run check:agents && npm run check:frontmatter && npm run check:examples && npm run check:handoffs",
-    "check:agents": "node tools/build/compile_agents.mjs --check",
-    "check:frontmatter": "node tools/build/validate_frontmatter.mjs",
-    "check:examples": "node tools/build/validate_examples.mjs",
-    "check:handoffs": "node scripts/validate_handoffs.mjs"
+    "build:agents": "node scripts/generators/generate_agents.mjs",
+    "check": "npm run check:frontmatter && npm run check:shared && npm run check:agents && npm run check:examples && npm run check:handoffs",
+    "check:agents": "node scripts/generators/generate_agents.mjs --check",
+    "check:frontmatter": "node scripts/validators/validate_frontmatter.mjs",
+    "check:shared": "node scripts/validators/validate_shared_rules.mjs",
+    "check:examples": "node scripts/validators/validate_examples.mjs",
+    "check:handoffs": "node scripts/validators/validate_handoffs.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
