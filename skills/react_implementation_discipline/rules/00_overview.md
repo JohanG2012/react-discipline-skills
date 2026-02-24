@@ -2,12 +2,14 @@
 
 ## Summary
 
-This document defines the authoritative rules for the `react_implementation_discipline` skill.
+This document defines authoritative constraints for
+`react_implementation_discipline`.
 
 This skill operates under:
+
 - `agent-policy-v1` (mandatory baseline policy)
 
-All rules defined here are binding for agents and LLMs using this skill.
+All rules here are binding for agents and LLMs using this skill.
 
 ---
 
@@ -15,22 +17,34 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Rule ID:** rid-overview-scope  
 **Priority:** MUST  
 **Applies to:** react_implementation_discipline  
-**Rationale:** Ensures implementation discipline stays within boundaries.
+**Rationale:** Keep implementation output disciplined, reviewable, and aligned
+with architecture and policy.
 
 ### Requirement
 
-- The skill must enforce boundary and quality gates.
-- The skill must follow the implementation plan and file touch list.
-- The skill must minimize churn and avoid unrelated refactors.
-- The skill must inherit and enforce shared baseline constraints from
-  `agent-policy-v1`.
+- Enforce plan fidelity: implementation must follow the approved revised plan.
+- Enforce boundary and quality gates before output is finalized.
+- Enforce minimal churn: avoid unrelated refactors and speculative cleanup.
+- Inherit and enforce shared baseline constraints from `agent-policy-v1`.
+- Treat these by default as out of scope unless explicitly approved:
+  - architecture migration
+  - new dependencies
+  - unrelated cleanup/refactor work
+  - policy/spec document edits
+- Require deterministic output states:
+  - `accepted`
+  - `blocked`
+  - `dependency_error`
+  - `validation_error`
 
 ### Forbidden
 
-- Skipping required validation steps.
-- Modifying architecture documents unless explicitly requested.
+- Skipping required validation, boundary, or scope checks.
+- Modifying architecture/specification policy artifacts unless explicitly requested.
 - Defining local mandatory rules that conflict with `agent-policy-v1`.
+- Returning unqualified implementation output when mandatory checks fail.
 
 ### Notes
 
-- Pause if implementation would violate scope or policy.
+- If required repository context is unavailable, fail closed.
+- Always prefer bounded, reviewable changes over large structural drift.

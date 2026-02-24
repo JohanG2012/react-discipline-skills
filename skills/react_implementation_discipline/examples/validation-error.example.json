@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react_implementation_discipline",
+  "version": "1.0.0",
+  "result_type": "validation_error",
+  "validation_summary": {
+    "is_valid": false,
+    "stage": "input_validation",
+    "quality_check_status": "not_run",
+    "boundary_status": "not_run",
+    "scope_deviation_status": "none",
+    "final_state": "validation_error",
+    "errors": [
+      "Missing revised_plan input."
+    ],
+    "warnings": []
+  },
+  "notes": [
+    "Required upstream input validation failed."
+  ]
+}

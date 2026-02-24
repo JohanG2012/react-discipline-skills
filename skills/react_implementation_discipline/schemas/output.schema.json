@@ -1,17 +1,569 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://react-discipline-skills/skills/react_implementation_discipline/schemas/output.schema.json",
+  "title": "React Implementation Discipline Output",
   "type": "object",
-  "required": ["skill", "version", "notes", "output"],
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill",
+    "version",
+    "result_type",
+    "validation_summary"
+  ],
   "properties": {
-    "skill": {"type": "string"},
-    "version": {"type": "string"},
-    "notes": {"type": "array", "items": {"type": "string"}},
-    "output": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill": {
+      "type": "string",
+      "const": "react_implementation_discipline"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_type": {
+      "type": "string",
+      "enum": [
+        "implementation_package",
+        "validation_error",
+        "dependency_error"
+      ]
+    },
+    "validation_summary": {
+      "$ref": "#/$defs/validation_summary"
+    },
+    "output_package": {
+      "$ref": "#/$defs/output_package"
+    },
+    "dependency_issue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fallback_context_bundle_requirements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "$ref": "#/$defs/notes"
+    },
+    "scope_expansion_needed": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scope_expansion_item"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "implementation_package"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "output_package"
+        ],
+        "allOf": [
+          {
+            "properties": {
+              "validation_summary": {
+                "properties": {
+                  "is_valid": {
+                    "const": true
+                  },
+                  "final_state": {
+                    "enum": [
+                      "accepted",
+                      "blocked"
+                    ]
+                  }
+                },
+                "required": [
+                  "is_valid",
+                  "final_state"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "validation_error"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "notes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "output_package"
+              ]
+            },
+            {
+              "required": [
+                "dependency_issue"
+              ]
+            },
+            {
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
+            }
+          ]
+        },
+        "allOf": [
+          {
+            "properties": {
+              "validation_summary": {
+                "properties": {
+                  "is_valid": {
+                    "const": false
+                  },
+                  "final_state": {
+                    "const": "validation_error"
+                  }
+                },
+                "required": [
+                  "is_valid",
+                  "final_state"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "dependency_error"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependency_issue",
+          "fallback_context_bundle_requirements",
+          "notes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "output_package"
+              ]
+            }
+          ]
+        },
+        "allOf": [
+          {
+            "properties": {
+              "validation_summary": {
+                "properties": {
+                  "is_valid": {
+                    "const": false
+                  },
+                  "final_state": {
+                    "const": "dependency_error"
+                  }
+                },
+                "required": [
+                  "is_valid",
+                  "final_state"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "validation_summary": {
+            "properties": {
+              "final_state": {
+                "const": "blocked"
+              }
+            },
+            "required": [
+              "final_state"
+            ]
+          }
+        },
+        "required": [
+          "validation_summary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "output_package": {
+            "required": [
+              "required_fixes"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "scope_expansion_needed"
+        ]
+      },
+      "then": {
+        "required": [
+          "output_package"
+        ],
+        "properties": {
+          "output_package": {
+            "required": [
+              "recommended_follow_up_scope"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5
+    },
+    "scope_expansion_item": {
       "type": "object",
-      "required": ["files_changed", "checks"],
+      "additionalProperties": false,
+      "required": [
+        "why",
+        "would_touch"
+      ],
       "properties": {
-        "files_changed": {"type": "array", "items": {"type": "string"}},
-        "checks": {"type": "array", "items": {"type": "string"}}
+        "why": {
+          "type": "string",
+          "minLength": 1
+        },
+        "would_touch": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "validation_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_valid",
+        "stage",
+        "quality_check_status",
+        "boundary_status",
+        "scope_deviation_status",
+        "final_state",
+        "errors"
+      ],
+      "properties": {
+        "is_valid": {
+          "type": "boolean"
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "input_validation",
+            "context_validation",
+            "boundary_audit",
+            "quality_gates",
+            "finalized"
+          ]
+        },
+        "quality_check_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        },
+        "boundary_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        },
+        "scope_deviation_status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "present"
+          ]
+        },
+        "final_state": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "blocked",
+            "dependency_error",
+            "validation_error"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changed_files",
+        "quality_checks",
+        "boundary_audit",
+        "scope_deviations"
+      ],
+      "properties": {
+        "changed_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "updated_patches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/patch_update"
+          }
+        },
+        "new_files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/new_file"
+          }
+        },
+        "quality_checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/quality_check"
+          }
+        },
+        "boundary_audit": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/boundary_finding"
+          }
+        },
+        "scope_deviations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scope_deviation"
+          }
+        },
+        "required_fixes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "recommended_follow_up_scope": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "$ref": "#/$defs/notes"
+        }
+      }
+    },
+    "patch_update": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "patch"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "patch": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "new_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "content"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "quality_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check_id",
+        "status",
+        "summary"
+      ],
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_fix": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "boundary_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_path",
+        "status"
+      ],
+      "properties": {
+        "file_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "fail"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "issues"
+            ]
+          }
+        }
+      ]
+    },
+    "scope_deviation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description",
+        "action_taken"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "out_of_plan_touch",
+            "out_of_scope_request",
+            "scope_limit_exceeded",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_taken": {
+          "type": "string",
+          "enum": [
+            "excluded",
+            "accepted_exception",
+            "scope_expansion"
+          ]
+        }
       }
     }
   }

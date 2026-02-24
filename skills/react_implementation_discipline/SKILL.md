@@ -1,6 +1,6 @@
 ---
 name: react_implementation_discipline
-description: Enforces implementation discipline and boundary checks
+description: Enforces plan-fidelity implementation with boundary audits, quality gates, and deterministic output states
 version: 1.0.0
 license: MIT
 metadata:
@@ -10,71 +10,97 @@ metadata:
   tags:
     - react
     - discipline
-    - quality
+    - implementation
+    - governance
 ---
 
 # React Implementation Discipline
 
 ## Purpose
-Ensures implementation changes follow architecture rules, minimal scope, and
-quality gates such as loading/error handling and boundary constraints.
+
+Execute implementation work from an approved plan while enforcing architecture
+boundaries, minimal churn, quality gates, and deterministic output behavior.
 
 ## When to apply
+
 Use this skill when:
-- You are implementing changes after planning
-- You must ensure adherence to boundary and quality rules
-- You need to enforce minimal churn and disciplined updates
+
+- You are implementing changes after planning and reuse decisions are complete.
+- You need strict boundary checks and scope-governor enforcement.
+- You need structured output that can be reviewed or consumed by automation.
 
 Do not use this skill when:
-- The task is purely planning or specification work
-- No code or files are being modified
+
+- The task is only planning or specification.
+- No implementation output is being produced.
 
 ## Inputs
-The skill expects:
-- **Task request:** The requested change or feature
-- **Repository context:** Current codebase and relevant policies
-- **Policy:** `agent-policy-v1` (must be available)
-- **Baseline inheritance:** shared baseline rules are mandatory and may not be
-  locally overridden without approved exception record
 
-## How to use
-Follow this workflow in order:
-1. Confirm planned file touches and boundaries.
-2. Implement changes with minimal churn.
-3. Validate quality and governance gates against shared baseline policy.
-4. Report outcomes.
+Required:
+
+- `task_request`
+- `revised_plan`
+- `detection_result`
+- `reuse_decisions`
+- repository context for convention and boundary validation
+
+Shared baseline:
+
+- `agent-policy-v1` must be available and enforced.
+
+## Workflow
+
+1. Validate required inputs and context availability.
+2. Execute implementation only within approved plan scope.
+3. Run boundary, quality, and scope-deviation checks.
+4. Return one structured output result type.
 
 ## Output contract
-Return a **single JSON object** matching this shape:
 
-```json
-{
-  "skill": "react_implementation_discipline",
-  "version": "1.0.0",
-  "notes": [],
-  "output": {}
-}
-```
+Return a single JSON object only (no extra prose) with:
 
-Constraints:
+- `schema_version`
+- `skill`: `react_implementation_discipline`
+- `version`
+- `result_type`: `implementation_package | validation_error | dependency_error`
+- `validation_summary`
 
-- Output must be JSON only.
-- `notes[]` max 5 items.
-- No extra prose outside JSON.
+`implementation_package` includes `output_package` with changed files, patch/new
+file payloads, quality checks, boundary audit findings, and scope deviations.
+
+If final state is `blocked`, include `required_fixes`.
+
+`validation_error` and `dependency_error` outputs must not include
+`output_package`.
 
 ## Quick reference rules
 
-The skill must follow these rule IDs (see `AGENTS.md` for details):
-
-- rid-overview-scope
-- rid-process
-- rid-output
+- `rid-overview-scope`
+- `rid-process`
+- `rid-output`
+- `rid-validation-gates`
+- `rid-scope-governor`
+- `rid-access-control`
+- `rid-output-mode-selection`
+- `rid-ui-genericity`
+- `rid-data-flow-exports`
+- `rid-quick-validation`
+- `rid-ambiguity-strategy`
+- `rid-chaotic-change-guardrails`
+- `rid-pause-defaults-protocol`
+- `rid-boundary-runtime-query`
+- `rid-stop-conditions`
 
 ## Files
 
-- `AGENTS.md` contains the full rules for agents and LLMs (generated from `rules/`).
-- `rules/` contains the source-of-truth modular rules.
+- `AGENTS.md` contains generated, full guidance.
+- `rules/` contains source-of-truth modular rules.
+- `schemas/output.schema.json` defines machine-validated output contract.
 
 ## Examples
 
-- See `examples/` for sample outputs.
+- `examples/output.example.json`
+- `examples/blocked-output.example.json`
+- `examples/validation-error.example.json`
+- `examples/dependency-error.example.json`
+- `examples/diff.example.patch`
