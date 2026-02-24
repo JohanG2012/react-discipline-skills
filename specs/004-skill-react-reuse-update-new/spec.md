@@ -3,7 +3,7 @@
 **Feature Branch**: `004-skill-react-reuse-update-new`  
 **Created**: 2026-02-23  
 **Status**: Completed  
-**Input**: User description: "This is spec 004-skill-react-reuse-update-new. This is spec 4 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react reuse update new skill if the master spec leaves open questions you can also read 3_REACT_REUSE_VS_UPDATE_VS_NEW.md for project structure read PROJECT_STRUCTURE.md"
+**Input**: User description: "This is spec 004-skill-react-reuse-update-new. This is spec 4 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec specs/004-skill-react-reuse-update-new/master_spec.md read it. In this spec specifically we will be working on the react reuse update new skill if the master spec leaves open questions you can also read specs/004-skill-react-reuse-update-new/master_spec.md for additional structure details"
 
 ## Clarifications
 
@@ -134,8 +134,8 @@ As a downstream skill consumer, I need a revised plan and guardrails that can be
 
 ### Assumptions
 
-- `SPEC.md` remains the authoritative source for project architecture rules and scope boundaries.
-- `3_REACT_REUSE_VS_UPDATE_VS_NEW.md` defines the detailed intent and guardrails for this skill.
+- `specs/004-skill-react-reuse-update-new/master_spec.md` remains the authoritative source for project architecture rules and scope boundaries.
+- `specs/004-skill-react-reuse-update-new/master_spec.md` defines the detailed intent and guardrails for this skill.
 - Upstream skills provide valid architecture-detection and placement-planning outputs before this skill runs.
 - The four-skill production scope remains fixed for the initial phase.
 - Repository read/search capability is available for candidate discovery.
@@ -146,7 +146,7 @@ As a downstream skill consumer, I need a revised plan and guardrails that can be
 - Reliable upstream outputs from architecture detection and placement planning.
 - Repository artifacts and naming conventions remain accessible for discovery and comparison.
 - Shared policy constraints remain active and unchanged during this feature phase.
-- Project structure guidance in `PROJECT_STRUCTURE.md` remains available for skill artifact organization.
+- Project structure guidance in `specs/004-skill-react-reuse-update-new/master_spec.md` remains available for skill artifact organization.
 
 ## Success Criteria *(mandatory)*
 

@@ -3,6 +3,7 @@ name: agent-policy-v1
 description: Baseline policy constraints for all skills
 version: 1.0.0
 license: MIT
+pre_approved_collisions: []
 metadata:
   category: agent-skill
   language: en
@@ -35,8 +36,8 @@ The skill expects:
 - **Task request:** The user request requiring policy enforcement
 - **Repository context:** Repository structure and relevant policy documents
 - **Policy:** This policy itself is the baseline
-- **Document precedence:** `SPEC.md` is authoritative; `POLICY.md` may resolve
-  non-conflicting gaps
+- **Document precedence:** `specs/001-agent-policy-v1/master_spec.md` is
+  authoritative; supporting policy docs may resolve non-conflicting gaps
 
 ## How to use
 Follow this workflow in order:

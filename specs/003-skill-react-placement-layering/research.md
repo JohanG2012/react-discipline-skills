@@ -3,8 +3,8 @@
 ## Context
 
 Research consolidated from `<REPO_ROOT>/specs/003-skill-react-placement-layering/spec.md`,
-`<REPO_ROOT>/SPEC.md`,
-`<REPO_ROOT>/2_REACT_PLACEMENT_AND_LAYERING.md`,
+`<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`,
+`<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`,
 and current skill artifacts to finalize contract and planning decisions before implementation.
 
 ## Research Task Queue Executed

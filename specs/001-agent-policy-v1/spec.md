@@ -3,7 +3,7 @@
 **Feature Branch**: `001-agent-policy-v1`  
 **Created**: 2026-02-23  
 **Status**: Completed  
-**Input**: User description: "this is spec 001-agent-policy-v1. Its the first out of 5 specs. During those 5 specs we will build 4 codex agent skills and shared policies/rules for those 4 agents. This is the spec where we focus on the shared rules/policies. Im saying this because you will have to read the file SPEC.md this is the master spec that covers everyhing for the initial phase of the project including the other 4 specs (that are not relevant right now). You also need to read the file PROJECT_STRUCTURE.md which explains the structure of the project. the master spec is the source of truth but if it leaves open questions than answers for those might be found in POLICY.md"
+**Input**: User description: "this is spec 001-agent-policy-v1. Its the first out of 5 specs. During those 5 specs we will build 4 codex agent skills and shared policies/rules for those 4 agents. This is the spec where we focus on the shared rules/policies. Im saying this because you will have to read the file specs/001-agent-policy-v1/master_spec.md this is the master spec that covers everyhing for the initial phase of the project including the other 4 specs (that are not relevant right now). Project structure guidance is included in specs/001-agent-policy-v1/master_spec.md. the master spec is the source of truth but if it leaves open questions than answers for those might be found in specs/001-agent-policy-v1/master_spec.md"
 
 ## Clarifications
 
@@ -15,7 +15,7 @@
 - Q: Where must the pre-approved collision field live? → A: It must exist only in the shared baseline header as the single source of truth.
 - Q: Do shared-policy exceptions expire? → A: No; approved exceptions have no expiry and remain active until explicitly revoked or superseded by a newer shared policy version.
 - Q: How should shared baseline rule coverage be organized in policy files? → A: Shared rule coverage must be explicit and modularized in numbered rule files, with rule IDs mapped in `skills/.shared/policy/SKILL.md` and mirrored by compliance checks in contract and quickstart artifacts.
-- Q: Which additional shared-rule areas from `SPEC.md` must be explicitly represented in baseline modules? → A: Planning/reuse workflow, migration strategy, fallback defaults, implementation defaults, layer contracts, access/write control, and file-size guidance must be included as explicit numbered shared-rule modules.
+- Q: Which additional shared-rule areas from `specs/001-agent-policy-v1/master_spec.md` must be explicitly represented in baseline modules? → A: Planning/reuse workflow, migration strategy, fallback defaults, implementation defaults, layer contracts, access/write control, and file-size guidance must be included as explicit numbered shared-rule modules.
 - Q: After final precaution review, which remaining shared rules still required explicit modules? → A: Architecture-detection output/bootstrap contract and enforcement heuristics were added as dedicated numbered modules and included in shared baseline coverage checks.
 
 ## User Scenarios & Testing *(mandatory)*

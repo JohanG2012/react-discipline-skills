@@ -16,9 +16,9 @@ Track execution evidence for tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tas
 - T003: Updated constitution production-scope principle to four execution skills.
 - T004: Updated README production-scope statement and skill list.
 - T005: Updated AGENTS manual project intent scope to four production skills.
-- T006: Updated SPEC product scope and skill model to include `react_implementation_discipline`.
-- T007: Updated POLICY scope wording to align four-skill production coverage.
-- T008: Completed cross-document scope-alignment audit across constitution, README, AGENTS, SPEC, and POLICY.
+- T006: Updated `specs/001-agent-policy-v1/master_spec.md` product scope and skill model to include `react_implementation_discipline`.
+- T007: Updated `specs/001-agent-policy-v1/master_spec.md` scope wording to align four-skill production coverage.
+- T008: Completed cross-document scope-alignment audit across constitution, README, AGENTS, and `specs/**/master_spec.md` documents.
 
 ### User Story 1 (P1)
 
@@ -45,8 +45,8 @@ Track execution evidence for tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tas
 - T027: Extended policy schema for exception records and policy version records in `skills/.shared/policy/schemas/policy.schema.json`.
 - T028: Updated policy usage example with compliant exception/version payload in `skills/.shared/policy/examples/policy_usage.example.md`.
 - T029: Added maintainer-approval and no-expiry validation checks in governance contract.
-- T030: Updated `SPEC.md` with maintainer-only/no-expiry shared-policy exception language.
-- T031: Updated `POLICY.md` evolution section with exception governance language.
+- T030: Updated `specs/001-agent-policy-v1/master_spec.md` with maintainer-only/no-expiry shared-policy exception language.
+- T031: Updated `specs/001-agent-policy-v1/master_spec.md` evolution/governance language with exception policy requirements.
 - T032: Verified US3 independently by tracing a conflicting-rule scenario through contract checks and policy/rules updates.
 
 ### Polish
@@ -57,9 +57,9 @@ Track execution evidence for tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tas
 - T036: Completed terminology/cross-reference consistency pass in `spec.md`.
 - Post-completion action: moved template files from repository root into `skills/.shared/templates/`, including adding `00_OVERVIEW_TEMPLATE.md` there and removing root template duplicates.
 - Post-completion action: moved shared policy bundle into `skills/.shared/policy/` from its prior top-level location, renamed baseline identifier in headers/content to `agent-policy-v1`, and aligned feature references to `001-agent-policy-v1`.
-- Post-completion action: expanded shared baseline rule coverage from `SPEC.md` into numbered rule modules (`30_architecture_boundaries.md`, `40_ownership_naming.md`, `50_decision_defaults.md`, `60_output_discipline.md`, `70_quality_baseline.md`) and synced spec contract/quickstart checks.
-- Post-completion action: after a second full `SPEC.md` coverage review, added additional numbered shared-rule modules (`80_planning_reuse_workflow.md`, `90_migration_placement.md`, `100_fallback_defaults.md`, `110_implementation_defaults.md`, `120_layer_contracts.md`, `130_access_write_control.md`, `140_file_size_guidance.md`) and refreshed shared-rule coverage checks in contract/quickstart artifacts.
-- Post-completion action: final precautionary `SPEC.md` pass added shared rules for architecture-detection output/bootstrap contract and enforcement heuristics (`150_architecture_detection_contract.md`, `160_enforcement_heuristics.md`) and synchronized SKILL quick-reference plus contract/quickstart coverage criteria.
+- Post-completion action: expanded shared baseline rule coverage from `specs/001-agent-policy-v1/master_spec.md` into numbered rule modules (`30_architecture_boundaries.md`, `40_ownership_naming.md`, `50_decision_defaults.md`, `60_output_discipline.md`, `70_quality_baseline.md`) and synced spec contract/quickstart checks.
+- Post-completion action: after a second full `specs/001-agent-policy-v1/master_spec.md` coverage review, added additional numbered shared-rule modules (`80_planning_reuse_workflow.md`, `90_migration_placement.md`, `100_fallback_defaults.md`, `110_implementation_defaults.md`, `120_layer_contracts.md`, `130_access_write_control.md`, `140_file_size_guidance.md`) and refreshed shared-rule coverage checks in contract/quickstart artifacts.
+- Post-completion action: final precautionary `specs/001-agent-policy-v1/master_spec.md` pass added shared rules for architecture-detection output/bootstrap contract and enforcement heuristics (`150_architecture_detection_contract.md`, `160_enforcement_heuristics.md`) and synchronized SKILL quick-reference plus contract/quickstart coverage criteria.
 - Post-completion action: explicit skill-model guardrails were added so production execution scope remains fixed to the four downstream skills and shared policy/config updates are not treated as new execution skills.
 - Post-completion action: moved Commitlint execution from Husky `pre-commit` to Husky `commit-msg` (`.husky/commit-msg`) and removed `.husky/pre-commit` so only the current commit message is linted.
 

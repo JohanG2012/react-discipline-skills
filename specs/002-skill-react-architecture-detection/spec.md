@@ -3,7 +3,7 @@
 **Feature Branch**: `002-skill-react-architecture-detection`  
 **Created**: 2026-02-23  
 **Status**: Completed  
-**Input**: User description: "This is spec 002-skill-react-architecture-detection. This is spec 2 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react architecture detection skill if the master spec leaves open questions you can also read 1_REACT_ARCHITECTURE_DETECTION.md for project structure read PROJECT_STRUCTURE.md"
+**Input**: User description: "This is spec 002-skill-react-architecture-detection. This is spec 2 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec specs/002-skill-react-architecture-detection/master_spec.md read it. In this spec specifically we will be working on the react architecture detection skill if the master spec leaves open questions you can also read specs/002-skill-react-architecture-detection/master_spec.md for additional structure details"
 
 ## Clarifications
 
@@ -114,8 +114,8 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 
 ### Assumptions
 
-- The master spec (`SPEC.md`) is the authoritative source for architectural rules and migration constraints.
-- `1_REACT_ARCHITECTURE_DETECTION.md` provides the detailed intent and output shape for this skill when additional detail is needed.
+- The master spec (`specs/002-skill-react-architecture-detection/master_spec.md`) is the authoritative source for architectural rules and migration constraints.
+- `specs/002-skill-react-architecture-detection/master_spec.md` provides the detailed intent and output shape for this skill when additional detail is needed.
 - The shared policy baseline (`agent-policy-v1`) applies to this skill and is not counted as a production execution skill.
 - Detection is executed before placement, reuse, and implementation skills for the same task.
 - Repository read/search access is available during detection; if unavailable, an explicit context bundle is provided.
@@ -124,7 +124,7 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 ### Dependencies
 
 - The four-skill production scope remains fixed as defined in the master spec.
-- Project structure conventions in `PROJECT_STRUCTURE.md` remain available for skill artifact organization.
+- Project structure conventions in `specs/002-skill-react-architecture-detection/master_spec.md` remain available for skill artifact organization.
 - Downstream skills consume this skill's gravity map and strategy output without local overrides unless a clarification pause is explicitly resolved.
 - Shared policy constraints continue to govern ambiguity handling, scope discipline, and decision defaults.
 

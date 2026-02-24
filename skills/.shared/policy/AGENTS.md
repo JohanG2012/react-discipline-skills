@@ -111,8 +111,8 @@ All rules defined here are binding for agents and LLMs using this skill.
   execution skill.
 - Shared policy/config updates must not be modeled as new execution skills.
 - Document precedence must remain deterministic:
-  - `SPEC.md` is authoritative.
-  - `POLICY.md` may fill non-conflicting open details only.
+  - `specs/001-agent-policy-v1/master_spec.md` is authoritative.
+  - Supporting policy docs may fill non-conflicting open details only.
 - The shared baseline must explicitly govern:
   - Architecture/dependency boundaries.
   - Deterministic defaults and pause behavior.

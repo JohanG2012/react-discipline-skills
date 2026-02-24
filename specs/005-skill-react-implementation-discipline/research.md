@@ -3,9 +3,7 @@
 ## Context
 
 Research consolidated from `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/spec.md`,
-`<REPO_ROOT>/SPEC.md`,
-`<REPO_ROOT>/4_REACT_IMPLEMENTATION_DISCIPLINE.md`,
-`<REPO_ROOT>/PROJECT_STRUCTURE.md`,
+`<REPO_ROOT>/specs/005-skill-react-implementation-discipline/master_spec.md`,
 and current `react_implementation_discipline` skill artifacts to finalize
 execution, output, and validation behavior before implementation tasks.
 

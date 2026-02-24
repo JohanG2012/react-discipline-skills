@@ -3,7 +3,7 @@
 **Feature Branch**: `005-skill-react-implementation-discipline`  
 **Created**: 2026-02-24  
 **Status**: Completed  
-**Input**: User description: "This is spec 005-skill-react-implementation-discipline. This is spec 5 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react implementatin discipline skill if the master spec leaves open questions you can also read 4_REACT_IMPLEMENTATION_DISCIPLINE.md for project structure read PROJECT_STRUCTURE.md"
+**Input**: User description: "This is spec 005-skill-react-implementation-discipline. This is spec 5 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec specs/005-skill-react-implementation-discipline/master_spec.md read it. In this spec specifically we will be working on the react implementatin discipline skill if the master spec leaves open questions you can also read specs/005-skill-react-implementation-discipline/master_spec.md for additional structure details"
 
 ## Clarifications
 
@@ -137,7 +137,7 @@ As a reviewer, I need implementation output that is easy to apply and validate s
 
 ### Assumptions
 
-- `SPEC.md` remains the authoritative architecture and policy source for this initial phase.
+- `specs/005-skill-react-implementation-discipline/master_spec.md` remains the authoritative architecture and policy source for this initial phase.
 - The first four specs provide upstream skill outputs and baseline governance needed by this skill.
 - Repository read/search access is available for local pattern discovery and validation.
 - The initial production skill scope remains fixed to the four execution skills plus shared baseline policy.
@@ -147,8 +147,8 @@ As a reviewer, I need implementation output that is easy to apply and validate s
 
 - Upstream outputs from architecture detection, placement/layering, and reuse decision workflows.
 - Shared policy constraints and scope-governor defaults defined by `agent-policy-v1`.
-- Repository structure and skill artifact conventions documented in `PROJECT_STRUCTURE.md`.
-- Skill intent and behavior baseline documented in `4_REACT_IMPLEMENTATION_DISCIPLINE.md`.
+- Repository structure and skill artifact conventions documented in `specs/005-skill-react-implementation-discipline/master_spec.md`.
+- Skill intent and behavior baseline documented in `specs/005-skill-react-implementation-discipline/master_spec.md`.
 
 ## Success Criteria *(mandatory)*
 

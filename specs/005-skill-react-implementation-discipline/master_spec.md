@@ -1,191 +1,308 @@
-# Folder Architecture Spec
+# Master Spec: 005 React Implementation Discipline
 
-## Index
-1. Non-negotiables
-2. Goals
-3. Top-level Structure
-4. Import Rules (Dependency Direction)
-5. Before Coding Workflow
-5.1 Decide the Shape of the Work
-5.1.1 Classify the Request
-5.1.2 Pick a Domain Owner
-5.1.3 Map the Layers to Touch
-5.1.4 List Planned File Touches
-5.2 Search for Existing Implementations
-5.2.1 Existing Domain Modules
-5.2.2 Existing UI Building Blocks
-5.2.3 Existing API Capabilities
-5.2.4 Existing State Patterns
-5.2.5 Naming Conventions and Exports
-5.3 Decision Ladder (Reuse vs Update vs New)
-5.3.1 Step 1 Reuse as-is
-5.3.2 Step 2 Update Existing
-5.3.3 Step 3 Create New
-5.4 Layer-specific Reuse Guidance
-5.4.1 UI primitives
-5.4.2 UI composites
-5.4.3 Feature sections
-5.4.4 Feature domain
-5.4.5 API endpoints and DTOs
-5.4.6 Store
-5.5 Change Planning Output
-5.5.1 File Touch Plan Format
-5.5.2 Layer Justification
-5.5.3 Reuse Decision Notes
-5.5.4 Structured Plan Output (JSON + Notes)
-5.5.5 Implementation Output Format
-5.6 Guardrails Against Chaotic Changes
-5.7 Reuse Decision Scoring Heuristic
-5.8 Minimum Required Decisions
-5.9 Migration-aware Prime Directive
-5.10 Migration-aware Architecture Detection
-5.10.1 Scan Routing and Entry Points
-5.10.2 Scan UI Conventions
-5.10.3 Scan Data Access Conventions
-5.10.4 Scan Domain Boundaries
-5.10.5 Classify Current Repo Shape
-5.10.6 Determine Clear Existing Home
-5.10.7 Architecture Detection Output Contract
-5.10.8 Bootstrap Phase (New/Early Repo)
-5.11 Migration Strategy Selection
-5.11.1 Strategy A Follow Existing
-5.11.2 Strategy B Introduce Target Structure at Boundaries
-5.11.3 Strategy C Migrate as You Touch
-5.11.4 Default Strategy Profile Balanced
-5.11.5 Task Type Split (Feature vs Migration)
-5.12 Concrete Placement Rules
-5.12.1 Follow Gravity
-5.12.2 Avoid Duplicate Homes
-5.12.3 Introduce New Structure Only If Isolated
-5.12.4 Prefer Aliases Over Early Moves
-5.12.5 Maintain a Migration Map
-5.13 Two-Architectures Anti-pattern
-5.14 Placement Decision Tree
-5.15 Decision Explanation Format
-5.16 Clarification and Pause Rules
-5.16.1 When to Pause
-5.16.2 Architecture Detection Pause Triggers
-5.16.3 Placement and Layering Pause Triggers
-5.16.4 Reuse vs Update vs New Pause Triggers
-5.16.5 Execution and Validation Pause Triggers
-5.16.6 Optional Pause Modes
-5.17 When Not to Ask
-5.18 Rule of Deterministic Default
-5.19 Clean Pause Protocol
-5.20 Question Quality Filters
-5.21 Final Pause Threshold
-5.22 Fallback Technology Defaults
-5.22.1 Golden Rule
-5.22.2 Server-state
-5.22.3 Client-state
-5.22.4 Routing
-5.22.5 Styling
-5.22.6 UI Component Library
-5.22.7 Forms
-5.22.8 Validation and Schemas
-5.22.9 HTTP Client
-5.22.10 Build Tool
-5.22.11 Date and Localization
-5.22.12 Identifier Strategy
-5.23 Implementation Defaults
-5.23.1 Feature Flag Strategy
-5.23.2 UI Styling Extension Conventions
-5.23.3 Accessibility Baseline
-5.23.4 Performance Posture
-5.23.5 Repository Topology Assumption
-5.23.6 Module Boundary Tooling Posture
-5.23.7 Environment Access Policy
-5.23.8 Logging Policy
-5.23.9 Codegen Policy
-5.23.10 Storybook and Component Docs Policy
-6. Folder Specs
-6.1 `src/pages/`
-6.2 `src/features/`
-6.3 `src/ui/primitives/`
-6.4 `src/ui/composites/`
-6.5 `src/api/`
-6.5.1 `src/api/client/`
-6.5.2 `src/api/dto/`
-6.5.3 `src/api/endpoints/`
-6.5.4 API Contract Source of Truth
-6.6 `src/store/`
-6.6.1 State Persistence Policy
-6.7 `src/core/`
-6.8 `src/lib/`
-6.9 `src/hooks/`
-6.10 `src/config/`
-6.11 Cross-layer Error Handling Standard
-7. Enforcement Heuristics
-8. Where to Put X Cheatsheet
-9. File Size Guidance
-9.1 General Principle
-9.2 Recommended Max Lines Per Folder
-9.2.1 `pages/`
-9.2.2 `features/*/sections/`
-9.2.3 `features/*/hooks/`
-9.2.4 `features/*/domain/`
-9.2.5 `ui/primitives/`
-9.2.6 `ui/composites/`
-9.2.7 `api/endpoints/`
-9.2.8 `lib/`
-9.2.9 `store/`
-9.2.10 `core/`
-9.3 Absolute Red Flag Numbers
-9.4 Responsibility Metric
-9.5 Practical Recommendation
-10. Definition of Done Checks
-10.1 Baseline Priorities
-10.2 Architecture Boundary Audit (Always)
-10.3 TypeScript Correctness (When Tooling Exists)
-10.4 Lint Check (When ESLint Exists)
-10.5 Runtime Safety Essentials (Always)
-10.6 Query Correctness (When Using TanStack Query)
-10.7 Minimal Churn / Scope Guard (Always)
-10.8 Optional Checks (Enable When Relevant)
-10.8.1 Unit/Integration Tests (If Test Suite Exists)
-10.8.2 E2E Tests (Rare)
-10.9 LLM-friendly DoD Order (Recommended)
-10.10 Done Policy Summary
-11. Agent Access and Change Control
-11.1 Default Access Model
-11.2 Why Repo Read/Search Is Required
-11.3 Minimum Read/Search Capabilities
-11.4 Fallback Context Bundle (No Direct Repo Access)
-11.5 Write Control Policy
-12. Scope Governor
-12.1 Hard Defaults (Required Unless Explicit Override)
-12.2 Soft Default Behavior (When Caps Are Exceeded)
-12.3 Expand Scope Escape Hatch
-12.4 Cap Rationale
-13. Skill Model
-13.1 Execution Skills
-13.1.1 Architecture Detection
-13.1.2 Placement and Layering
-13.1.3 Reuse vs Update vs New
-13.1.4 Implementation Discipline
-13.2 Shared Policy Configuration Layer
-13.3 Execution Guidance
-13.4 Optional Extension Skills
+This document aggregates sections that map to spec `005-skill-react-implementation-discipline`.
 
-## Non-negotiables
+## Contents
 
-1. Do not create new folders unless this spec explicitly allows it; specifically, do not add new top-level folders under `src/` unless explicitly allowed by this spec (bootstrap phase) or explicitly requested.
-2. Never put domain business logic or domain-mapped models in `ui/**` or `api/**`.
-3. Never fetch outside the repository's canonical endpoint layer (`api/endpoints/**` or gravity-equivalent).
-4. Prefer small, composable changes over large refactors.
-5. Avoid "shared/common" dumping grounds.
+- [Document Structure](#document-structure)
+- [Appendix A: Shared Project Setup and Tooling](#appendix-a-shared-project-setup-and-tooling)
+- [Appendix B: Relevant Specs/Skills Repository Layout](#appendix-b-relevant-specsskills-repository-layout)
+- [Consolidated Additions](#consolidated-additions)
+- [Product Scope (v1)](#product-scope-v1)
+- [Top-level Structure](#top-level-structure)
+- [Import Rules (Dependency Direction)](#import-rules-dependency-direction)
+- [Folder Specs](#folder-specs)
+- [Enforcement Heuristics](#enforcement-heuristics)
+- [File Size Guidance](#file-size-guidance)
+- [Definition of Done Checks](#definition-of-done-checks)
+- [Agent Access and Change Control](#agent-access-and-change-control)
+- [Scope Governor](#scope-governor)
+- [Skill Model](#skill-model)
 
-This specification is the authoritative source of architectural truth. If repository code conflicts with this document, the document governs new work unless an explicit migration strategy dictates otherwise.
-Changes to this specification require an explicit version increment (for example `v1` -> `v2`) and must not be introduced implicitly through feature work.
-Any shared-policy exception must be approved by a repo maintainer, include explicit rationale, and must not include expiry metadata.
-No implicit specification changes may be inferred from example code or migration behavior.
+---
+## Document Structure
 
-## Goals
+- The normative implementation-discipline baseline begins at
+  `## Consolidated Additions` and continues through the end of this document.
+- Appendix sections below were migrated from former project-structure baseline docs to keep
+  setup and layout context co-located with this spec.
+- Shared cross-spec entities used by specs `002`-`005` are:
+  - `skills/.shared/policy/` (shared policy baseline)
+  - `skills/.shared/templates/` (shared templates)
+  - `skills/.shared/schemas/` (shared base schemas)
+- If appendix text ever conflicts with normative spec text, the normative
+  sections take precedence.
 
-1. Keep UI reusable and side-effect free.
-2. Keep data access predictable and centralized.
-3. Keep domain ownership in features, not in globals.
-4. Prevent "shared/common/utils soup".
+## Appendix A: Shared Project Setup and Tooling
+
+### Build requirements
+
+#### Goals
+
+- Ensure every skill has:
+  - `SKILL.md` with frontmatter
+  - `AGENTS.md` generated from `rules/`
+- Ensure `AGENTS.md` is up to date in PRs
+- Optionally validate example JSON outputs against schemas
+
+#### Node version
+
+- Use Node `20` LTS.
+
+### `package.json` recommended scripts
+
+```json
+{
+  "name": "react-discipline-skills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:agents",
+    "build:agents": "node tools/build/compile_agents.mjs",
+    "check": "npm run check:agents && npm run check:frontmatter && npm run check:examples",
+    "check:agents": "node tools/build/compile_agents.mjs --check",
+    "check:frontmatter": "node tools/build/validate_frontmatter.mjs",
+    "check:examples": "node tools/build/validate_examples.mjs"
+  }
+}
+```
+
+Notes:
+
+- `build:agents` writes `AGENTS.md`.
+- `check:agents` runs in `--check` mode and fails if generated output differs.
+
+### Build script spec: `compile_agents.mjs`
+
+#### Responsibilities
+
+For each production skill under `skills/*/` and the shared baseline at
+`skills/.shared/policy/`:
+
+1. If it has `rules/`:
+   - read files in lexicographic order
+   - concatenate into `AGENTS.md`
+   - generate TOC from headings (recommended)
+   - prepend a `DO NOT EDIT` header
+2. Support:
+   - `--check` mode: do not write; compare expected vs existing `AGENTS.md` and
+     exit non-zero if different
+   - default mode: write changes
+
+#### Behavior requirements
+
+- Deterministic ordering
+- Stable TOC generation
+- Preserve newline normalization (`\n`)
+- Only touch `AGENTS.md` files
+
+### Script spec: `validate_frontmatter.mjs`
+
+#### Responsibilities
+
+For each production `skills/*/SKILL.md` and `skills/.shared/policy/SKILL.md`:
+
+- parse frontmatter
+- require keys:
+  - `name`
+  - `description`
+  - `version`
+  - `license`
+  - `metadata.category`
+  - `metadata.stability`
+- fail if missing
+
+### Script spec: `validate_examples.mjs`
+
+#### Responsibilities
+
+If `schemas/output.schema.json` exists in a skill folder:
+
+- validate every `examples/*.json` file against it
+- fail on mismatch
+
+### GitHub Actions CI baseline
+
+Use `.github/workflows/ci.yml` to:
+
+- install dependencies
+- run `npm run check` (generated `AGENTS.md` freshness, frontmatter validation,
+  and example validation)
+
+Recommended baseline:
+
+```yaml
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Check generated agents + validate skill metadata
+        run: npm run check
+```
+
+Optional policy: do not auto-commit generated files in CI. Prefer failing the
+build and requiring `npm run build:agents` locally.
+
+### Developer workflow baseline
+
+1. Edit `rules/*.md` (source of truth).
+2. Run `npm run build:agents`.
+3. Commit:
+   - updated `AGENTS.md`
+   - rule changes
+
+CI should fail if `AGENTS.md` is stale.
+
+## Appendix B: Relevant Specs/Skills Repository Layout
+
+```text
+repo/
+  skills/
+    .shared/
+      policy/
+        SKILL.md
+        rules/
+        AGENTS.md
+        examples/
+          policy_usage.example.md
+        schemas/
+          policy.schema.json
+      templates/
+        00_OVERVIEW_TEMPLATE.md
+        SKILL_TEMPLATE.md
+        AGENTS_TEMPLATE.md
+        RULE_TEMPLATE.md
+      schemas/
+        skill_base.schema.json
+    react_implementation_discipline/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+      AGENTS.md
+      examples/
+        diff.example.patch
+      schemas/
+        output.schema.json
+  specs/
+    001-agent-policy-v1/
+      master_spec.md
+    002-skill-react-architecture-detection/
+      master_spec.md
+    003-skill-react-placement-layering/
+      master_spec.md
+    004-skill-react-reuse-update-new/
+      master_spec.md
+    005-skill-react-implementation-discipline/
+      master_spec.md
+      spec.md
+      plan.md
+      tasks.md
+      research.md
+      data-model.md
+      quickstart.md
+      implementation-tracker.md
+      contracts/
+        implementation-discipline-output-contract.md
+        implementation-discipline-output.schema.json
+  tools/
+    build/
+      compile_agents.mjs
+      validate_frontmatter.mjs
+      validate_examples.mjs
+```
+
+> Normative implementation-discipline baseline starts below.
+
+
+
+## Consolidated Additions
+
+The following implementation-skill details are retained from legacy guidance
+and aligned to the current `005` contract.
+
+### Implementation Skill Inputs
+
+Required inputs per run:
+
+- `revised_plan`: approved plan with file targets/actions and layer intent.
+- `detection_result`: architecture context and repository-convention signals.
+- `reuse_decisions`: finalized reuse/update/new decisions and constraints.
+- `repo_context`: repository read/search context needed for convention/boundary
+  validation.
+
+Optional inputs:
+
+- `diff_preference` (snippet-first vs unified-diff preference).
+- `strictness` (`strict` default, optional relaxed mode when explicitly
+  allowed).
+- `max_lines_policy` overrides (when explicitly provided).
+
+### Implementation Output Mode Baseline
+
+Implementation output should stay review-friendly and machine-consumable:
+
+- existing-file updates default to patch/snippet output
+- use unified diff when edits are multi-region or high-risk to misapply
+- new files return full content
+- avoid returning unrelated full existing files
+
+Strict result-type/schema/validation-summary behavior is governed by the `005`
+contract and schema artifacts.
+
+### Implementation Sequence Guidance
+
+Preferred bottom-up implementation sequence:
+
+1. `api/dto` types
+2. `api/endpoints` transport functions
+3. feature domain/adapters
+4. feature hooks
+5. shared UI updates (when required)
+6. feature sections
+7. pages
+
+This ordering minimizes rework and keeps data-flow ownership predictable.
+
+### Hard Stop Conditions
+
+Stop and revise before final output when implementation would require:
+
+- domain knowledge in shared `ui/**`
+- endpoint fetching outside canonical endpoint ownership
+- leaky shared-composite generalization beyond safe thresholds
+- touched files above 400 lines without extraction/split path
+- touched files above 600 lines
+
+If unresolved, return blocked output with required fixes instead of forcing a
+non-compliant implementation path.
+
+### Implementation Non-goals
+
+- no repo re-architecture during routine implementation
+- no unrelated cleanup refactors/renames
+- no new tooling/dependency introductions unless explicitly requested
+- no upstream planning-decision redefinition
 
 ## Product Scope (v1)
 
@@ -198,6 +315,7 @@ This repository's production scope is fixed to four execution skills:
 
 `agent-policy-v1` is the shared policy baseline for these four skills and is
 not counted as a production execution skill.
+
 
 ## Top-level Structure
 
@@ -218,6 +336,7 @@ src/
   hooks/
   config/
 ```
+
 
 ## Import Rules (Dependency Direction)
 
@@ -261,42 +380,6 @@ Generic fetch-hook exception policy:
 - If no such canonical documentation exists, `hooks/**` -> `api/**` remains forbidden.
 - The generic fetch-hook exception is defined once and referenced everywhere; no implicit exceptions exist.
 
-## Before Coding Workflow
-
-### Decide the Shape of the Work
-
-#### Classify the Request
-
-Use one or more categories:
-
-1. New page/route
-2. New feature capability
-3. New UI element
-4. New API endpoint/backend integration
-5. Refactor/reuse improvement
-6. Bug fix
-
-#### Pick a Domain Owner
-
-- Choose one owning feature domain (`features/tasks`, `features/projects`, etc.).
-- If no domain owner fits (for example auth/telemetry), place work in `core/` or `api/client/` unless another existing layer already owns it.
-
-#### Map the Layers to Touch
-
-- Page orchestration -> `pages/`
-- Domain UI section -> `features/<x>/sections/`
-- Domain logic -> `features/<x>/domain/`
-- Fetching -> `api/endpoints/` (+ DTOs)
-- Reusable UI pattern -> `ui/composites/`
-- Primitive UI element -> `ui/primitives/`
-- Cross-domain hook -> `hooks/`
-- Pure helpers -> `lib/`
-- App setup/provider -> `core/`
-- Global client state -> `store/`
-
-#### List Planned File Touches
-
-- List the files/modules you expect to touch before implementing.
 
 ### Search for Existing Implementations
 
@@ -341,85 +424,6 @@ Use one or more categories:
 - Default to explicit imports and avoid introducing new barrel files (`index.ts`) unless the repo already uses them consistently.
 - If an area already uses barrels, keep usage consistent within that area and avoid mixing barrel and deep-path imports unpredictably.
 
-### Decision Ladder (Reuse vs Update vs New)
-
-#### Step 1 Reuse as-is
-
-Prefer direct reuse when:
-
-- Existing behavior matches with minimal glue.
-- No mode flags are required.
-- Reuse does not introduce domain leakage.
-
-#### Step 2 Update Existing
-
-Update an existing module only when:
-
-- The change is small.
-- Reusability improves without meaningfully increasing complexity.
-- Existing callers are not broken (or are easy to update).
-- The abstraction stays clean.
-
-Allowed examples:
-
-- Add a small primitive prop such as `disabledReason` or `iconSlot`.
-- Make composites more composable via slots/children/render props.
-- Extract pure helpers into `lib/` for cross-feature reuse.
-
-Avoid:
-
-- Domain mode flags in shared components (for example `variant="tasks|projects|finance"`).
-- Adding many options to force one component to do everything.
-
-Rule of thumb: if reuse needs more than about two new options/props, do not generalize; prefer section-level duplication.
-
-#### Step 3 Create New
-
-Create a new module when:
-
-- Existing code is too opinionated for the new use case.
-- Reuse would require leaky flags/branches.
-- Behavior is likely to diverge over time.
-
-Guidance:
-
-- Duplicating a feature section is acceptable.
-- Duplicating primitives/composites is usually a design smell; prefer extending shared building blocks instead.
-
-### Layer-specific Reuse Guidance
-
-#### UI primitives
-
-- Reuse almost always.
-- If missing, create a primitive.
-- If close, make small primitive updates rather than introducing domain-specific copies.
-
-#### UI composites
-
-- Reuse only for true UI patterns.
-- Generalize via slots, children, or render props.
-- Do not introduce domain modes in composites.
-- If UI shape is shared but meaning differs by domain, inject content instead of encoding business meaning.
-
-#### Feature sections
-
-- Tailored duplication is acceptable inside feature sections.
-- Reuse a section within the same feature when multiple routes/screens need the same domain presentation.
-
-#### Feature domain
-
-- Prefer reuse within the feature domain.
-- Move logic to `lib/` only when it is truly cross-domain and stable.
-
-#### API endpoints and DTOs
-
-- Endpoints should return DTOs.
-- If multiple features consume one endpoint, keep endpoint ownership in `api/endpoints` and perform mapping per feature (adapters/domain).
-
-#### Store
-
-- Use `store/` for global client state only.
-- Do not duplicate server-state in store when React Query is the server-state source of truth.
 
 ### Change Planning Output
 
@@ -462,6 +466,7 @@ Before code changes, provide:
 - Existing files: do not output full file content unless explicitly requested, or the file is very small (about under 60 lines) and the whole file changed.
 - If a new file exceeds about 250 lines, prefer splitting responsibilities rather than outputting a giant file.
 
+
 ### Guardrails Against Chaotic Changes
 
 Avoid:
@@ -473,29 +478,6 @@ Avoid:
 - "Refactor for future" changes without immediate value.
 - Mixing structural migration moves with feature behavior work in one task unless explicitly requested.
 
-### Reuse Decision Scoring Heuristic
-
-When deciding reuse/update/new, score:
-
-- Complexity cost (how many new props/flags are needed).
-- Coupling risk (domain leakage or cross-feature dependency).
-- Divergence probability (likelihood UX/behavior diverges later).
-- Locality benefit (reduced blast radius by keeping logic in-feature).
-
-Decision shortcut:
-
-- Low complexity + low coupling risk -> reuse or small update.
-- High flag cost + high divergence probability -> create a new feature section while reusing shared primitives/composites where possible.
-
-### Minimum Required Decisions
-
-Before implementation, decide at minimum:
-
-1. Feature owner (domain).
-2. Whether a route/page is involved.
-3. Data sources (which endpoints and DTOs already exist).
-4. State type (`server-state` via React Query cache, local client state, or global store state).
-5. UI needs (available primitives/composites, and whether the shape should be a new composite or remain section-specific).
 
 ### Migration-aware Prime Directive
 
@@ -505,96 +487,6 @@ Before implementation, decide at minimum:
 - Treat the target architecture as a direction to converge toward, not as a reason to break local consistency.
 - Optimize for local consistency now and gradual convergence over time.
 
-### Migration-aware Architecture Detection
-
-Before deciding placement in a mixed or legacy repo, scan for existing architecture signals.
-
-#### Scan Routing and Entry Points
-
-- Look for existing route entry patterns (`pages/`, `routes/`, Next `app/`, router setup in `src/router*` or `App.tsx`).
-
-#### Scan UI Conventions
-
-- Identify current component conventions (`components/`, `shared/`, `common/`, `ui/`).
-- Detect design-system structures like `atoms/` and `molecules/`.
-
-#### Scan Data Access Conventions
-
-- Identify existing backend-access homes (`api/`, `services/`, `client/`).
-- Confirm current server-state and state-management stack (for example QueryClientProvider, Redux, Zustand).
-
-#### Scan Domain Boundaries
-
-- Detect existing domain partitioning (`features/`, `modules/`, `domains/`) or absence of boundaries (flat structure).
-
-#### Classify Current Repo Shape
-
-Classify the repository as:
-
-1. Already close to target architecture (for example `features`, `ui`, `api` already present).
-2. Different but internally structured (for example route-based/components-based).
-3. Flat/ad-hoc (concerns mixed together).
-
-#### Determine Clear Existing Home
-
-Treat a concern home as "clear" when at least one signal is true:
-
-- Most related files already live there (about 70% or more).
-- Most imports for that concern resolve there.
-- Recent active edits in that concern consistently use that location.
-
-If no home is clear, treat the repo as ambiguous for that concern and use fallback defaults.
-
-#### Architecture Detection Output Contract
-
-Architecture detection must output a single JSON object with these fields:
-
-- `routing.type`
-- `ui.home`
-- `api.home` (this value is the canonical endpoint layer used by boundary checks for that task)
-- `domain.organization`
-- `gravity_map`
-- `alignment_score` (0-100)
-- `strategy`
-- `notes[]`
-
-`alignment_score` (`0-100`) is a derived presentation score; gravity confidence (`0.0-1.0`) drives placement thresholds.
-
-Gravity decisions are owned by Architecture Detection (Skill 1) and must be reused by subsequent skills in the same task.
-Subsequent skills must not recompute or override gravity within the same task unless a pause is triggered and explicitly resolved.
-
-#### Bootstrap Phase (New/Early Repo)
-
-Trigger:
-
-- Architecture Detection (Skill 1) classifies the repository as `flat/ad-hoc`.
-- Gravity confidence is a normalized score from `0.0` to `1.0`, where `>= 0.7` indicates a clear existing home.
-- No clear homes exist for UI/API/routing/domain (gravity confidence `< 0.7` for each concern).
-
-Allowed folder creation during bootstrap:
-
-- Create only from the canonical set:
-  - `pages/`
-  - `features/`
-  - `ui/primitives/`
-  - `ui/composites/`
-  - `api/client/`
-  - `api/dto/`
-  - `api/endpoints/`
-  - `core/`
-  - `lib/`
-  - `hooks/`
-  - `config/`
-- Create `store/` only when truly global client-state is required.
-
-Bootstrap rules:
-
-- Prefer minimal bootstrap: create only folders needed for the current task.
-- Do not create speculative structure that is unused by the current task.
-
-Exit condition:
-
-- Once a canonical home exists for a concern, creation of alternative homes for that concern is forbidden without explicit migration mode.
 
 ### Migration Strategy Selection
 
@@ -648,91 +540,6 @@ Use this profile by default unless the user explicitly selects another migration
 - Migration task: moves/renames allowed only in explicit migration scope, with complete import updates.
 - Do not mix feature behavior changes with structural migration in one task unless explicitly requested.
 
-### Concrete Placement Rules
-
-#### Follow Gravity
-
-- If a concern already has a working home in this repository, use it.
-- Prefer extending established paths over introducing parallel paths.
-- Examples:
-  - If API calls already live in `src/services/`, continue there for this change.
-  - If reusable UI already lives in `src/components/ui/`, use that instead of creating a second UI home.
-
-#### Avoid Duplicate Homes
-
-- Before introducing a new folder for a concern, check existing homes first.
-- For UI, check whether the repo already uses one of: `src/components/ui/`, `src/shared/ui/`, `src/common/components/`, or `src/ui/`.
-- For backend access, check whether the repo already uses one of: `src/api/`, `src/services/`, or `src/client/`.
-- If an existing home is active, extend it unless this change is an explicit migration with a clear boundary.
-
-#### Introduce New Structure Only If Isolated
-
-- Introduce a new target folder shape only when new code can remain mostly self-contained.
-- Isolation requires:
-  - Clean, predictable imports.
-  - Consistent naming conventions.
-  - Minimal dependency on unrelated legacy internals.
-- If this isolation is not possible yet, defer structural introduction and follow existing placement.
-
-#### Prefer Aliases Over Early Moves
-
-- Early in migration, avoid broad file moves.
-- Prefer adding a new boundary/facade while old code stays in place.
-- Let new code depend on existing modules through stable imports, then extract/move incrementally later.
-- This reduces churn and lowers breakage risk.
-- If the repository already defines a path alias such as `@/` -> `src/`, use that alias for new imports.
-- If path aliases are not already configured, keep relative imports; do not introduce alias configuration as part of routine feature tasks unless explicitly requested.
-
-#### Maintain a Migration Map
-
-- Keep a short, explicit map of current authoritative homes (for example UI/API/domain placement).
-- Example map:
-  - "UI primitives currently live in `src/components/ui/`."
-  - "API calls currently live in `src/services/api/`."
-  - "Feature domain logic currently lives in `src/modules/`."
-- Use this map consistently for placement decisions until an explicit migration step changes it.
-
-### Two-Architectures Anti-pattern
-
-Avoid mixed placement where two locations are both treated as correct for the same concern.
-
-- Bad examples:
-  - Some shared UI in `src/ui/primitives/` and other shared UI in `src/components/common/`.
-  - Some backend access in `src/api/endpoints/` and other backend access in `src/services/api/`.
-- Rule:
-  - If the repository already has "the place", use it.
-  - If it does not, introduce one place and apply it consistently.
-
-### Placement Decision Tree
-
-Use this quick flow before creating new folders:
-
-1. Does an existing folder already serve this concern (UI/API/domain)?
-   - Yes -> use it.
-   - No -> continue.
-2. Is there already a clear but different architecture in this repo?
-   - Yes -> follow it for this change (Strategy A).
-   - No -> continue.
-3. Is the change large enough to justify establishing a new home?
-   - Yes -> introduce target structure only for new isolated scope (Strategy B).
-   - No -> keep placement minimal and near existing structure.
-4. Would this create duplicate homes for the same concern?
-   - Yes -> do not introduce the new home yet.
-   - No -> introduce it and stay consistent.
-
-### Decision Explanation Format
-
-Before implementation, explicitly state:
-
-- Current architecture signals:
-  - "UI currently lives in X."
-  - "API access currently lives in Y."
-  - "Routing/entry currently lives in Z."
-- Chosen direction:
-  - "I will follow the existing structure for this change because ..."
-  - Or: "The repo lacks a clear pattern, so I will introduce a new isolated home for this new scope while leaving old code untouched."
-
-Keep this short and concrete.
 
 ### Clarification and Pause Rules
 
@@ -797,6 +604,7 @@ Use `balanced` by default unless user configuration says otherwise:
 - `balanced` (default): pause only when both `confidence < 0.7` and `impact = structural`.
 - `autonomous`: pause only when both `confidence < 0.5` and `impact = structural`.
 
+
 ### When Not to Ask
 
 Do not pause for minor decisions, including:
@@ -811,6 +619,7 @@ Do not pause for minor decisions, including:
 - Component naming when a local naming pattern already exists.
 
 Over-asking reduces delivery flow and should be treated as a failure mode.
+
 
 ### Rule of Deterministic Default
 
@@ -830,6 +639,7 @@ Each skill should have a deterministic default bias:
 
 Ask only when the wrong default choice would create structural debt.
 
+
 ### Clean Pause Protocol
 
 When pausing for clarification:
@@ -840,6 +650,7 @@ When pausing for clarification:
 4. Stop and wait for confirmation.
 
 Keep pauses terse and non-rambling.
+
 
 ### Question Quality Filters
 
@@ -854,6 +665,7 @@ Questions must be:
 - High-leverage.
 - Structural.
 - Blocking.
+
 
 ### Final Pause Threshold
 
@@ -884,6 +696,7 @@ Pause decision matrix:
 | `>= 0.7` | Any | Proceed |
 | `< 0.7` | Local | Proceed with deterministic default |
 | `< 0.7` | Structural | Pause and ask |
+
 
 ### Fallback Technology Defaults
 
@@ -979,6 +792,7 @@ Use these only when the repository is new or ambiguous for the concern.
 - Use client-generated IDs only for optimistic UI or local drafts, then reconcile with canonical backend IDs.
 - Branded ID types are optional and should be adopted only when the repository explicitly opts into stronger nominal typing.
 
+
 ### Implementation Defaults
 
 #### Feature Flag Strategy
@@ -1059,6 +873,7 @@ Use these only when the repository is new or ambiguous for the concern.
 - If Storybook already exists, add lightweight stories for new primitives and composites.
 - If Storybook is not already present, do not add it as part of normal feature work.
 - Add Storybook only as an explicit decision to invest in design-system workflows.
+
 
 ## Folder Specs
 
@@ -1375,6 +1190,7 @@ Default UI behavior:
 - Queries/page-load failures: render an inline error panel with a `Retry` action.
 - Mutations: use toast/snackbar feedback only for action outcomes when that app pattern already exists; otherwise keep feedback inline near the action.
 
+
 ## Enforcement Heuristics
 
 A file is in the wrong folder if:
@@ -1384,19 +1200,6 @@ A file is in the wrong folder if:
 - It calls `fetch` outside the repository's canonical endpoint layer (`api/endpoints/**` or gravity-equivalent API home).
 - It uses React Query outside feature hooks (exception: core provider setup).
 
-## Where to Put X Cheatsheet
-
-- Endpoint call -> `api/endpoints/*`
-- React Query hook -> `features/<domain>/hooks/*`
-- Map DTO -> domain -> `features/<domain>/adapters/*` or `features/<domain>/domain/*`
-- Button/Input/Card -> `ui/primitives/*`
-- Filter bar/modal shell/table shell -> `ui/composites/*`
-- Route component -> `pages/*`
-- QueryClient/providers -> `core/*`
-- Pure helper -> `lib/*`
-- Generic hook -> `hooks/*`
-- App config/env -> `config/*`
-- Global UI prefs/auth -> `store/*`
 
 ## File Size Guidance
 
@@ -1557,6 +1360,7 @@ Prefer this rule over strict line caps:
 
 No file should require scrolling more than 3 screen heights to understand its main responsibility.
 
+
 ## Definition of Done Checks
 
 ### Baseline Priorities
@@ -1706,6 +1510,7 @@ Required only when an existing test suite exists:
 
 - Relevant tests are updated or added.
 
+
 ## Agent Access and Change Control
 
 ### Default Access Model
@@ -1749,8 +1554,9 @@ When direct repo access is unavailable, provide a context bundle containing:
 - Default: no direct writes; produce patch/snippet output for review and controlled application.
 - Keep changes reviewable and intentional; avoid silent churn.
 - If direct writes are enabled, still enforce plan-followed scope and minimal churn rules.
-- Do not auto-edit architecture/specification documents (`ARCHITECTURE.md`, `SPEC.md`, `spec/**`) during regular implementation tasks.
+- Do not auto-edit architecture/specification documents (`ARCHITECTURE.md`, `specs/**/master_spec.md`, `spec/**`) during regular implementation tasks.
 - Update architecture/specification documents only when explicitly requested; treat those edits as dedicated documentation scope.
+
 
 ## Scope Governor
 
@@ -1797,6 +1603,7 @@ Rules:
 - `0` new dependencies by default prevents high-gravity tooling/style/type drift.
 - The cap set protects against refactor creep, abstraction creep, and dependency creep.
 - These limits keep review time, commit size, and risk bounded by default.
+
 
 ## Skill Model
 

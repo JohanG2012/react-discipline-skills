@@ -36,8 +36,8 @@ Skill artifacts that must align with this contract:
 
 Baseline governance references:
 
-- `<REPO_ROOT>/SPEC.md`
-- `<REPO_ROOT>/POLICY.md`
+- `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/master_spec.md`
+- `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`
 - `<REPO_ROOT>/.specify/memory/constitution.md`
 
 ## Top-Level Contract

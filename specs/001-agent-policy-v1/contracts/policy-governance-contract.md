@@ -31,8 +31,8 @@ Define the normative interface between the shared policy baseline (`agent-policy
      - `react_placement_and_layering`
      - `react_reuse_update_new`
      - `react_implementation_discipline`
-   - `SPEC.md` remains authoritative for policy conflicts.
-   - `POLICY.md` may resolve open questions only when non-conflicting with `SPEC.md`.
+   - `specs/001-agent-policy-v1/master_spec.md` remains authoritative for shared policy conflicts.
+   - No other spec document may override `specs/001-agent-policy-v1/master_spec.md`.
    - Production execution skill scope remains fixed to those four skills;
      `agent-policy-v1` remains shared baseline policy and is not counted as a
      production execution skill.
@@ -90,7 +90,7 @@ A downstream skill spec is compliant when all checks pass:
 - Baseline reference exists and matches `agent-policy-v1`.
 - Baseline coverage includes all four downstream production skills.
 - No unapproved expansion beyond the four-skill production execution scope.
-- Document precedence is explicitly defined (`SPEC.md` first, `POLICY.md` gap-fill only).
+- Document precedence is explicitly defined (`specs/001-agent-policy-v1/master_spec.md` first).
 - No unapproved mandatory-rule conflicts.
 - Any exception is maintainer-approved and rationale-backed.
 - No exception expiry field present.

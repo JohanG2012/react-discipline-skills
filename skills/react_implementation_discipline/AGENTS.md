@@ -381,7 +381,7 @@ missing.
 - Default write control behavior:
   - produce reviewable patch/new-file output
   - avoid direct structural writes outside approved plan
-  - never auto-edit `SPEC.md`, architecture docs, or `specs/**` unless requested
+  - never auto-edit architecture docs or specification docs (`specs/**`, including `specs/**/master_spec.md`) unless requested
 
 ### Forbidden
 

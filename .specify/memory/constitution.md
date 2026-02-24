@@ -70,6 +70,6 @@ production execution skill.
 - Amendments require an explicit version bump and an update to dependent
   templates or guidance when necessary.
 - All PRs MUST include a compliance check against these principles.
-- Use `PROJECT_STRUCTURE.md`, `SPEC.md`, and `ESLINT.md` as runtime guidance.
+- Use `specs/**/master_spec.md` and `eslint/README.md` as runtime guidance.
 
 **Version**: 0.3.0 | **Ratified**: 2026-02-23 | **Last Amended**: 2026-02-23

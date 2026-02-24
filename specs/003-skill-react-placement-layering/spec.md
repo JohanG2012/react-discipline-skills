@@ -3,7 +3,7 @@
 **Feature Branch**: `003-skill-react-placement-layering`  
 **Created**: 2026-02-23  
 **Status**: Completed  
-**Input**: User description: "This is spec 003-skill-react-placement-and-layering. This is spec 3 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec SPEC.md read it. In this spec specifically we will be working on the react placement and layering detection skill if the master spec leaves open questions you can also read 2_REACT_PLACEMENT_AND_LAYERING.md for project structure read PROJECT_STRUCTURE.md"
+**Input**: User description: "This is spec 003-skill-react-placement-and-layering. This is spec 3 out of 5 for the initial phase of the project. The first 5 specs are described in the master spec specs/003-skill-react-placement-layering/master_spec.md read it. In this spec specifically we will be working on the react placement and layering detection skill if the master spec leaves open questions you can also read specs/003-skill-react-placement-layering/master_spec.md for additional structure details"
 
 ## Clarifications
 
@@ -135,8 +135,8 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 
 ### Assumptions
 
-- The master specification (`SPEC.md`) remains the authoritative source for architecture rules and production-skill scope.
-- `2_REACT_PLACEMENT_AND_LAYERING.md` defines detailed behavior for this skill when additional precision is needed.
+- The master specification (`specs/003-skill-react-placement-layering/master_spec.md`) remains the authoritative source for architecture rules and production-skill scope.
+- `specs/003-skill-react-placement-layering/master_spec.md` defines detailed behavior for this skill when additional precision is needed.
 - The input explicitly targets the placement-and-layering skill scope based on the spec identifier and referenced detail document.
 - Architecture detection runs before placement planning and provides required upstream context.
 - Shared baseline policy (`agent-policy-v1`) is active for all four production execution skills.
@@ -146,7 +146,7 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 
 - Valid architecture-detection output is available for each placement-planning run.
 - Shared policy constraints from `agent-policy-v1` are available and enforced.
-- Project structure conventions from `PROJECT_STRUCTURE.md` remain available for artifact organization.
+- Project structure conventions from `specs/003-skill-react-placement-layering/master_spec.md` remain available for artifact organization.
 - Downstream skills consume placement-plan outputs without redefining layer ownership for the same task.
 
 ## Success Criteria *(mandatory)*

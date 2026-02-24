@@ -14,7 +14,8 @@ Apply and validate the shared policy baseline for all four downstream production
 
 1. Review source-of-truth order
    - Confirm shared decisions in `<REPO_ROOT>/specs/001-agent-policy-v1/spec.md`.
-   - Use `SPEC.md` as authoritative source; use `POLICY.md` only for non-conflicting gaps.
+   - Use `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md` as authoritative shared-policy source.
+   - Use relevant spec master documents under `specs/**/master_spec.md` for cross-spec references.
 
 2. Apply baseline governance decisions to policy docs
   - Ensure downstream coverage is defined for four production skills.
@@ -70,7 +71,7 @@ npm run check
 - [ ] Confirm shared baseline references are present in all four downstream `SKILL.md` files.
 - [ ] Confirm required shared-rule categories are covered by numbered files in `skills/.shared/policy/rules/`.
 - [ ] Confirm contract checks include maintainer-only and no-expiry exception validation.
-- [ ] Confirm scope wording is aligned across `README.md`, `AGENTS.md`, `SPEC.md`, `POLICY.md`, and `.specify/memory/constitution.md`.
+- [ ] Confirm scope wording is aligned across `README.md`, `AGENTS.md`, `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/master_spec.md`, `<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`, `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`, `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/master_spec.md`, and `.specify/memory/constitution.md`.
 - [ ] Confirm `AGENTS.md` outputs were regenerated through official build/update scripts.
 
 ## Exit Criteria

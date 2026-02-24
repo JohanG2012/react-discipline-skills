@@ -31,7 +31,7 @@ Research consolidated from the approved feature specification, clarification dec
 
 ## Decision 4: Document precedence remains strict and deterministic
 
-- **Decision**: `SPEC.md` remains the authoritative source; supporting policy documents fill open gaps only when non-conflicting.
+- **Decision**: `specs/001-agent-policy-v1/master_spec.md` remains the authoritative source; supporting policy documents fill open gaps only when non-conflicting.
 - **Rationale**: Preserves deterministic decision ordering and prevents ad hoc rule reinterpretation across downstream specs.
 - **Alternatives considered**:
   - Equal precedence between spec and policy docs: rejected due to conflict ambiguity.

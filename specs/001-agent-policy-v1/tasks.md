@@ -25,8 +25,8 @@
 - [X] T003 Update production-scope principle and repository constraints in <REPO_ROOT>/.specify/memory/constitution.md
 - [X] T004 [P] Update project direction to four production skills in <REPO_ROOT>/README.md
 - [X] T005 [P] Update manual Project Intent scope wording in <REPO_ROOT>/AGENTS.md
-- [X] T006 Update Product Scope and Skill Model sections in <REPO_ROOT>/SPEC.md
-- [X] T007 [P] Update governance scope wording in <REPO_ROOT>/POLICY.md
+- [X] T006 Update Product Scope and Skill Model sections in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
+- [X] T007 [P] Update governance scope wording in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
 - [X] T008 Record cross-document scope-alignment audit results in <REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md
 
 **Checkpoint**: Foundation complete; user story phases can begin.
@@ -88,8 +88,8 @@
 - [X] T027 [P] [US3] Extend governance schema for exception and version records in <REPO_ROOT>/skills/.shared/policy/schemas/policy.schema.json
 - [X] T028 [P] [US3] Update governance example with compliant exception payload in <REPO_ROOT>/skills/.shared/policy/examples/policy_usage.example.md
 - [X] T029 [US3] Add maintainer-approval and no-expiry compliance checks in <REPO_ROOT>/specs/001-agent-policy-v1/contracts/policy-governance-contract.md
-- [X] T030 [US3] Align conflict-governance language with maintainer-only exceptions in <REPO_ROOT>/SPEC.md
-- [X] T031 [US3] Align policy-evolution and exception language in <REPO_ROOT>/POLICY.md
+- [X] T030 [US3] Align conflict-governance language with maintainer-only exceptions in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
+- [X] T031 [US3] Align policy-evolution and exception language in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
 - [X] T032 [US3] Record US3 independent validation evidence in <REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md
 
 **Checkpoint**: Governance updates are auditable, deterministic, and aligned with accepted clarifications.

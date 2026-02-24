@@ -50,7 +50,7 @@
 - `npm run check`: passed (`check:agents`, `check:frontmatter`, `check:examples`).
 - `.specify/scripts/bash/update-agent-context.sh codex`: passed.
 - Contract schema mirror check: passed (`skills/.../schemas/output.schema.json` matches `specs/.../contracts/implementation-discipline-output.schema.json` except `$id`).
-- SPEC parity review: additional rules added to cover validation gate sequence, scope governor caps, fallback access/write-control policy, output-mode selection, UI anti-leakage, flow/order discipline, quick validation, ambiguity strategy, and anti-chaotic-change guardrails:
+- master-spec parity review: additional rules added to cover validation gate sequence, scope governor caps, fallback access/write-control policy, output-mode selection, UI anti-leakage, flow/order discipline, quick validation, ambiguity strategy, and anti-chaotic-change guardrails:
   - `skills/react_implementation_discipline/rules/30_validation_gates.md`
   - `skills/react_implementation_discipline/rules/40_scope_governor.md`
   - `skills/react_implementation_discipline/rules/50_access_control.md`

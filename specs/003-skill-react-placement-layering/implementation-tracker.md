@@ -131,7 +131,7 @@ results, and validation command outcomes for tasks in
   - Verified project setup ignore files and ESLint ignore coverage; no missing
     critical patterns required changes.
 - Master-spec parity review (2026-02-24):
-  - Reviewed `<REPO_ROOT>/SPEC.md`
+  - Reviewed `<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`
     against spec 003 placement rules and added missing rule coverage modules in
     `skills/react_placement_and_layering/rules/`:
     - `30_migration_safety.md`

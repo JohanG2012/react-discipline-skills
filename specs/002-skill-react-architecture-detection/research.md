@@ -2,7 +2,7 @@
 
 ## Context
 
-Research consolidated from `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`, `<REPO_ROOT>/SPEC.md`, and current skill artifacts to resolve technical-context unknowns and confirm contract decisions before design.
+Research consolidated from `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/master_spec.md`, and current skill artifacts to resolve technical-context unknowns and confirm contract decisions before design.
 
 ## Research Task Queue Executed
 
