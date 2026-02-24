@@ -3,7 +3,7 @@
   "skill": "react_implementation_discipline",
   "version": "1.0.0",
   "result_type": "validation_error",
-  "validation_summary": {
+  "validation_status": {
     "is_valid": false,
     "stage": "input_validation",
     "quality_check_status": "not_run",

@@ -45,4 +45,4 @@ levels.
 
 ### Notes
 
-- Record failures in `validation_summary` and return `blocked` when mandatory.
+- Record failures in `validation_status` and return `blocked` when mandatory.

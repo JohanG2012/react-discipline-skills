@@ -22,8 +22,8 @@ review-ready, and policy-verifiable.
   - `skill`
   - `version`
   - `result_type`
-  - `validation_summary`
-- `validation_summary` must report:
+  - `validation_status`
+- `validation_status` must report:
   - `is_valid`
   - `stage`
   - `quality_check_status`

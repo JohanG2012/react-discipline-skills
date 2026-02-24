@@ -55,7 +55,7 @@ Return a **single JSON object** matching this shape:
   "result_type": "plan|validation_error",
   "validation_status": {
     "is_valid": true,
-    "stage": "input-validation|planning|finalized",
+    "stage": "input_validation|planning|finalized",
     "errors": [],
     "warnings": []
   },

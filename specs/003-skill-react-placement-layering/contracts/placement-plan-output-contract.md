@@ -108,7 +108,7 @@ for downstream planning and implementation workflows.
   "result_type": "validation_error",
   "validation_status": {
     "is_valid": false,
-    "stage": "input-validation",
+    "stage": "input_validation",
     "errors": [
       "Missing required input: detection_result_ref"
     ],

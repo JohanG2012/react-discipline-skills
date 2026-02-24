@@ -5,24 +5,59 @@
   "type": "object",
   "required": [
     "schema_version",
-    "routing",
-    "ui",
-    "api",
-    "domain",
-    "state",
-    "gravity_map",
-    "alignment_score",
-    "alignment",
-    "strategy",
-    "strategy_rationale",
-    "pause_decision",
-    "notes"
+    "skill",
+    "version",
+    "result_type",
+    "validation_status"
   ],
   "additionalProperties": false,
   "properties": {
     "schema_version": {
       "type": "string",
       "minLength": 1
+    },
+    "skill": {
+      "type": "string",
+      "const": "react_architecture_detection"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_type": {
+      "type": "string",
+      "enum": [
+        "detection_result",
+        "validation_error",
+        "dependency_error"
+      ]
+    },
+    "validation_status": {
+      "type": "object",
+      "required": ["is_valid", "stage", "errors"],
+      "additionalProperties": false,
+      "properties": {
+        "is_valid": {
+          "type": "boolean"
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["input_validation", "detection", "finalized"]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "routing": {
       "type": "object",
@@ -337,17 +372,237 @@
         }
       ]
     },
-    "skill": {
-      "type": "string"
+    "dependency_issue": {
+      "type": "string",
+      "minLength": 1
     },
-    "version": {
-      "type": "string"
+    "fallback_context_bundle_requirements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   },
   "allOf": [
     {
       "if": {
-        "required": ["ui"],
+        "properties": {
+          "result_type": {
+            "const": "detection_result"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": [
+          "routing",
+          "ui",
+          "api",
+          "domain",
+          "state",
+          "gravity_map",
+          "alignment_score",
+          "alignment",
+          "strategy",
+          "strategy_rationale",
+          "pause_decision",
+          "notes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": ["dependency_issue"]
+            },
+            {
+              "required": ["fallback_context_bundle_requirements"]
+            }
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": true
+              },
+              "stage": {
+                "const": "finalized"
+              },
+              "errors": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "validation_error"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": ["notes"],
+        "not": {
+          "anyOf": [
+            {
+              "required": ["routing"]
+            },
+            {
+              "required": ["ui"]
+            },
+            {
+              "required": ["api"]
+            },
+            {
+              "required": ["domain"]
+            },
+            {
+              "required": ["state"]
+            },
+            {
+              "required": ["gravity_map"]
+            },
+            {
+              "required": ["alignment_score"]
+            },
+            {
+              "required": ["alignment"]
+            },
+            {
+              "required": ["strategy"]
+            },
+            {
+              "required": ["strategy_rationale"]
+            },
+            {
+              "required": ["strategy_basis"]
+            },
+            {
+              "required": ["bootstrap"]
+            },
+            {
+              "required": ["pause_decision"]
+            },
+            {
+              "required": ["dependency_issue"]
+            },
+            {
+              "required": ["fallback_context_bundle_requirements"]
+            }
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": false
+              },
+              "stage": {
+                "const": "input_validation"
+              },
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "dependency_error"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": [
+          "dependency_issue",
+          "fallback_context_bundle_requirements",
+          "notes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": ["routing"]
+            },
+            {
+              "required": ["ui"]
+            },
+            {
+              "required": ["api"]
+            },
+            {
+              "required": ["domain"]
+            },
+            {
+              "required": ["state"]
+            },
+            {
+              "required": ["gravity_map"]
+            },
+            {
+              "required": ["alignment_score"]
+            },
+            {
+              "required": ["alignment"]
+            },
+            {
+              "required": ["strategy"]
+            },
+            {
+              "required": ["strategy_rationale"]
+            },
+            {
+              "required": ["strategy_basis"]
+            },
+            {
+              "required": ["bootstrap"]
+            },
+            {
+              "required": ["pause_decision"]
+            }
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": false
+              },
+              "stage": {
+                "const": "detection"
+              },
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "detection_result"
+          }
+        },
+        "required": ["result_type", "ui"],
         "properties": {
           "ui": {
             "type": "object",
@@ -376,7 +631,12 @@
     },
     {
       "if": {
-        "required": ["api"],
+        "properties": {
+          "result_type": {
+            "const": "detection_result"
+          }
+        },
+        "required": ["result_type", "api"],
         "properties": {
           "api": {
             "type": "object",
@@ -405,7 +665,12 @@
     },
     {
       "if": {
-        "required": ["domain"],
+        "properties": {
+          "result_type": {
+            "const": "detection_result"
+          }
+        },
+        "required": ["result_type", "domain"],
         "properties": {
           "domain": {
             "type": "object",
@@ -434,7 +699,12 @@
     },
     {
       "if": {
-        "required": ["state"],
+        "properties": {
+          "result_type": {
+            "const": "detection_result"
+          }
+        },
+        "required": ["result_type", "state"],
         "properties": {
           "state": {
             "type": "object",

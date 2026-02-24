@@ -19,7 +19,7 @@ execution, output, and validation behavior before implementation tasks.
 
 ## Decision 1: Use explicit result types with a stable validation summary
 
-- **Decision**: Use three result types: `implementation_package`, `validation_error`, and `dependency_error`, with a mandatory `validation_summary` in every output.
+- **Decision**: Use three result types: `implementation_package`, `validation_error`, and `dependency_error`, with a mandatory `validation_status` in every output.
 - **Rationale**: Explicit result typing prevents ambiguous downstream parsing and keeps failure handling deterministic.
 - **Alternatives considered**:
   - Single generic output envelope: rejected due to weak state semantics.
@@ -59,7 +59,7 @@ execution, output, and validation behavior before implementation tasks.
 
 ## Decision 6: Require structured validation summary content in all outputs
 
-- **Decision**: `validation_summary` must include quality-check status, boundary status, scope-deviation status, stage, errors, and final state.
+- **Decision**: `validation_status` must include quality-check status, boundary status, scope-deviation status, stage, errors, and final state.
 - **Rationale**: Centralizes verification signals for both humans and downstream automation.
 - **Alternatives considered**:
   - Summary only for failed runs: rejected because accepted runs also need verifiable signals.

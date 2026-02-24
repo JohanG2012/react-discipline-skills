@@ -111,6 +111,10 @@ gravity ownership, migration strategy, and pause behavior.
 - **Description**: Machine-consumable output payload produced by the skill.
 - **Fields**:
   - `schema_version` (string, required): contract schema identifier.
+  - `skill` (string, required): `react_architecture_detection`.
+  - `version` (string, required): skill version identifier.
+  - `result_type` (enum, required): `detection_result | validation_error | dependency_error`.
+  - `validation_status` (object, required): standardized validation envelope.
   - `routing` (object, required): includes routing type and entry points.
   - `ui` (object, required): concern assessment for UI home.
   - `api` (object, required): concern assessment for canonical endpoint home.
@@ -125,9 +129,15 @@ gravity ownership, migration strategy, and pause behavior.
   - `bootstrap` (object, optional): bootstrap trigger metadata and constraints
     when the repository is `flat/ad-hoc` with no clear homes.
   - `notes` (array[string], required): metadata notes, maximum 5 entries.
-  - `skill` (string, optional): `react_architecture_detection`.
-  - `version` (string, optional): skill version identifier.
+  - `dependency_issue` (string, required for `dependency_error`).
+  - `fallback_context_bundle_requirements` (array[string], required for
+    `dependency_error`).
 - **Validation rules**:
+  - `detection_result` includes structural architecture fields and excludes
+    dependency-only fields.
+  - `validation_error` includes `notes` and excludes detection payload fields.
+  - `dependency_error` includes `dependency_issue`,
+    `fallback_context_bundle_requirements`, and `notes`.
   - Output must contain structural metadata only.
   - Raw code snippets are not allowed in standard output.
   - If any structural concern has `confidence < 0.7`, `pause_decision.pause_required` must be `true`.

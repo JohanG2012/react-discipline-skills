@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react_placement_and_layering",
+  "version": "1.0.0",
+  "result_type": "validation_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "input_validation",
+    "errors": [
+      "Missing required input: detection_result_ref"
+    ],
+    "warnings": []
+  },
+  "notes": [
+    "No placement plan emitted due to invalid required inputs."
+  ]
+}

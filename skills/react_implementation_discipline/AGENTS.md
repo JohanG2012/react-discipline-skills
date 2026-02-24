@@ -223,8 +223,8 @@ review-ready, and policy-verifiable.
   - `skill`
   - `version`
   - `result_type`
-  - `validation_summary`
-- `validation_summary` must report:
+  - `validation_status`
+- `validation_status` must report:
   - `is_valid`
   - `stage`
   - `quality_check_status`
@@ -732,7 +732,7 @@ levels.
 
 ### Notes
 
-- Record failures in `validation_summary` and return `blocked` when mandatory.
+- Record failures in `validation_status` and return `blocked` when mandatory.
 
 ---
 

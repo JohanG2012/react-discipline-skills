@@ -248,7 +248,7 @@
         },
         "stage": {
           "type": "string",
-          "enum": ["input-validation", "planning", "finalized"]
+          "enum": ["input_validation", "planning", "finalized"]
         },
         "errors": {
           "type": "array",
@@ -371,7 +371,7 @@
                 "const": false
               },
               "stage": {
-                "const": "input-validation"
+                "const": "input_validation"
               },
               "errors": {
                 "minItems": 1

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://react-discipline-skills/skills/react_reuse_update_new/schemas/output.schema.json",
+  "$id": "https://react-discipline-skills/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output.schema.json",
   "title": "React Reuse Update New Output",
   "type": "object",
   "additionalProperties": false,

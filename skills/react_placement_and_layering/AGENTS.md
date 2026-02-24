@@ -292,7 +292,7 @@ Defines the expected output structure for placement decisions.
   - `skill`
   - `version`
   - `result_type`
-  - `validation_status` (`is_valid=false`, `stage=input-validation`, and at
+  - `validation_status` (`is_valid=false`, `stage=input_validation`, and at
     least one error)
   - `notes`
 - `result_type=validation_error` must not include plan fields (`strategy_used`,
@@ -308,7 +308,7 @@ Defines the expected output structure for placement decisions.
 - Omitting justification for layer selection.
 - Returning free-form prose outside JSON output.
 - Returning plan output that omits mandatory contract fields.
-- Returning validation-error output without explicit input-validation errors.
+- Returning validation-error output without explicit input_validation errors.
 - Returning output fields with raw source snippets or secret-like values.
 - Using `effective_source=repository_evidence` for structural conflicts without
   `resolution_mode=pause_resolved`.

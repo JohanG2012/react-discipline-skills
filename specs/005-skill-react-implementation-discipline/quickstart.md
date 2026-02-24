@@ -59,7 +59,7 @@ npm run check
 
 ## Validation Checklist
 
-- [x] Implementation package supports `accepted` and `blocked` states with mandatory `validation_summary`.
+- [x] Implementation package supports `accepted` and `blocked` states with mandatory `validation_status`.
 - [x] Blocked outputs include failed checks and required fixes.
 - [x] Dependency and validation errors are explicit result types and exclude implementation payload.
 - [x] Out-of-scope requests are represented via scope deviation and expansion guidance.

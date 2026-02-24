@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.1.0",
+  "skill": "react_architecture_detection",
+  "version": "1.0.0",
+  "result_type": "dependency_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "detection",
+    "errors": [
+      "Repository evidence unavailable for architecture scan."
+    ],
+    "warnings": []
+  },
+  "dependency_issue": "repo_scan_unavailable",
+  "fallback_context_bundle_requirements": [
+    "Top-level file tree with src depth about 3-4.",
+    "Routing entry files and router config.",
+    "Representative UI folders and component examples.",
+    "Representative API/data-access files.",
+    "Representative state setup files."
+  ],
+  "notes": [
+    "Retry after repository indexing or context sync."
+  ]
+}

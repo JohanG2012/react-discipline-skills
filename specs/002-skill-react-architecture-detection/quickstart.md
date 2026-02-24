@@ -25,13 +25,14 @@ with deterministic, machine-consumable output behavior.
    - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/00_overview.md` to keep scope detection-only (no refactors, no direct edits).
    - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md` with deterministic scan rules, single-strategy selection, and low-confidence pause behavior.
    - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md` with:
-     - mandatory `schema_version`
+     - mandatory envelope (`schema_version`, `skill`, `version`, `result_type`, `validation_status`)
      - `confidence < 0.7 => home=unknown`
      - required `pause_decision` when ambiguity is structural/high-impact
      - pause-mode thresholds (`strict | balanced | autonomous`, default `balanced`)
      - metadata-only output (no raw code snippets)
    - Update `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json` to match the new contract.
    - Update `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json` to a valid payload under the updated schema.
+   - Add `<REPO_ROOT>/skills/react_architecture_detection/examples/validation-error.example.json` and `dependency-error.example.json` for error envelopes.
 
 3. Regenerate derived agent docs
 
@@ -54,7 +55,7 @@ npm run check
 
 ## Execution Checklist
 
-- [x] Output contract includes mandatory `schema_version`.
+- [x] Output contract includes mandatory envelope fields (`schema_version`, `skill`, `version`, `result_type`, `validation_status`).
 - [x] Output includes classification fields for routing, UI, domain, data access, and state plus one gravity map.
 - [x] Output includes exactly one strategy (`follow-existing`, `introduce-boundaries`, or `migrate-as-you-touch`) with rationale.
 - [x] Low-confidence rule (`< 0.7`) forces `home=unknown` and `status=ambiguous`.

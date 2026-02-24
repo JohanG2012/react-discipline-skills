@@ -18,11 +18,19 @@ Define the normative interface emitted by `react_architecture_detection` and con
 - Source of contract truth for this feature phase:
   - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
 
-## Required Payload Shape
+## Required Payload Shape (`result_type=detection_result`)
 
 ```json
 {
   "schema_version": "1.1.0",
+  "skill": "react_architecture_detection",
+  "version": "1.0.0",
+  "result_type": "detection_result",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "finalized",
+    "errors": []
+  },
   "routing": {"type": "react-router", "entry_points": ["src/main.tsx"]},
   "ui": {"home": "src/components", "confidence": 0.92, "status": "resolved", "evidence_paths": ["src/components"]},
   "api": {"home": "src/services/api", "pattern": "services", "confidence": 0.9, "status": "resolved", "evidence_paths": ["src/services/api"]},
@@ -71,6 +79,13 @@ Define the normative interface emitted by `react_architecture_detection` and con
 
 1. **Master Contract Field Rule**
    - Output MUST include:
+     - `schema_version`
+     - `skill`
+     - `version`
+     - `result_type`
+     - `validation_status`
+     - `notes[]`
+   - `result_type=detection_result` MUST include:
      - `routing.type`
      - `ui.home`
      - `api.home`
@@ -84,13 +99,19 @@ Define the normative interface emitted by `react_architecture_detection` and con
      - `pause_decision.pause_mode`
      - `pause_decision.decision_safety_confidence`
      - `pause_decision.impact`
-     - `notes[]`
 
-2. **Canonical Endpoint Rule**
+2. **Result-Type Rule**
+   - `result_type` MUST be one of:
+     - `detection_result`
+     - `validation_error`
+     - `dependency_error`
+   - `validation_error` MUST include `notes[]` and must not include detection fields.
+   - `dependency_error` MUST include `dependency_issue`,
+     `fallback_context_bundle_requirements[]`, and `notes[]`, and must not
+     include detection fields.
+
+3. **Canonical Endpoint Rule**
    - `api.home` is the canonical endpoint layer for downstream boundary checks in the task.
-
-3. **Schema Version Rule**
-   - `schema_version` is mandatory on every output payload.
 
 4. **Metadata-Only Rule**
    - Output must contain structural metadata only.
@@ -132,13 +153,18 @@ Define the normative interface emitted by `react_architecture_detection` and con
 - Contract changes require a coordinated update to:
   - `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`
   - `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`
+  - `<REPO_ROOT>/skills/react_architecture_detection/examples/validation-error.example.json`
+  - `<REPO_ROOT>/skills/react_architecture_detection/examples/dependency-error.example.json`
   - `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`
 
 ## Failure Modes
 
 - Missing required master contract fields -> reject payload as invalid.
+- Missing `result_type` or `validation_status` -> reject payload as invalid.
 - Missing `api.home` -> reject payload as invalid.
 - `confidence < 0.7` with non-`unknown` home -> reject payload as invalid.
 - `pause_required=true` without options/recommendation -> reject payload as invalid.
 - Missing `pause_mode`, `decision_safety_confidence`, or `impact` -> reject payload as invalid.
+- `validation_error` or `dependency_error` with detection payload fields ->
+  reject payload as invalid.
 - Raw code snippets in output fields -> reject payload as policy violation.

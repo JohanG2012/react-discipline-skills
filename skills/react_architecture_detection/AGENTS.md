@@ -232,7 +232,18 @@ Defines the expected output structure for architecture detection.
 ### Requirement
 
 - Output must be a single machine-readable JSON object.
-- Output must include required architecture contract fields:
+- Output must include envelope fields:
+  - `schema_version`
+  - `skill`
+  - `version`
+  - `result_type`
+  - `validation_status`
+- `result_type` must be one of:
+  - `detection_result`
+  - `validation_error`
+  - `dependency_error`
+- Output with `result_type=detection_result` must include required
+  architecture fields:
   - `routing.type`
   - `ui.home`
   - `api.home`
@@ -258,11 +269,23 @@ Defines the expected output structure for architecture detection.
   - `pause_decision.impact`
 - Output should include `bootstrap` metadata when bootstrap trigger conditions
   are detected (`flat/ad-hoc` and no clear routing/UI/API/domain homes).
+- `result_type=validation_error` must include `notes` and must not include
+  detection fields.
+- `result_type=dependency_error` must include:
+  - `dependency_issue`
+  - `fallback_context_bundle_requirements`
+  - `notes`
+  and must not include detection fields.
 
 ### Required fields
 
-- Root fields:
+- Root fields for every result:
   - `schema_version`
+  - `skill`
+  - `version`
+  - `result_type`
+  - `validation_status`
+- Additional required fields for `result_type=detection_result`:
   - `routing`
   - `ui`
   - `api`
@@ -288,6 +311,7 @@ Defines the expected output structure for architecture detection.
 - Omitting required pause-evaluation metadata from `pause_decision`.
 - Omitting `api.home` from output.
 - Emitting raw code snippets in standard output fields.
+- Returning error result types with detection payload fields.
 
 ### Notes
 

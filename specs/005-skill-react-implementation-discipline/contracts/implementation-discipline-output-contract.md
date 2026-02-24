@@ -48,7 +48,7 @@ All outputs must include:
 - `skill` (`react_implementation_discipline`)
 - `version` (string)
 - `result_type` (`implementation_package` | `validation_error` | `dependency_error`)
-- `validation_summary`
+- `validation_status`
   - `is_valid`
   - `stage`
   - `quality_check_status`
@@ -76,7 +76,7 @@ Required fields:
 
 Behavioral constraints:
 
-- `validation_summary.final_state` must be `accepted` or `blocked`.
+- `validation_status.final_state` must be `accepted` or `blocked`.
 - If final state is `blocked`, include failed checks and `required_fixes[]`.
 - Out-of-scope requests without explicit approval must be excluded from the
   implementation payload and represented as scope deviations.
@@ -87,8 +87,8 @@ Required fields:
 
 - `notes[]`
 - no `output_package`
-- `validation_summary.is_valid=false`
-- `validation_summary.final_state=validation_error`
+- `validation_status.is_valid=false`
+- `validation_status.final_state=validation_error`
 
 ### Result Type: `dependency_error`
 
@@ -98,8 +98,8 @@ Required fields:
 - `fallback_context_bundle_requirements[]` (minimum 5 actionable items)
 - `notes[]`
 - no `output_package`
-- `validation_summary.is_valid=false`
-- `validation_summary.final_state=dependency_error`
+- `validation_status.is_valid=false`
+- `validation_status.final_state=dependency_error`
 
 ## Behavioral Guarantees
 

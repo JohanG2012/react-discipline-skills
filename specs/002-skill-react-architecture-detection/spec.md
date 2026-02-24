@@ -89,7 +89,11 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 - **FR-010**: The system MUST choose exactly one migration strategy (`follow-existing`, `introduce-boundaries`, or `migrate-as-you-touch`) for the task and provide rationale.
 - **FR-011**: The system MUST apply deterministic defaults when confidence is sufficient and MUST avoid unnecessary clarification pauses.
 - **FR-012**: The system MUST trigger a clarification pause only when structural ambiguity is high impact and decision-safety confidence is below `0.7`.
-- **FR-013**: The system MUST output results in a machine-consumable, downstream-reusable contract that includes a mandatory `schema_version`, classification fields, gravity map, alignment metadata, strategy, `strategy_rationale`, notes, and a `pause_decision` record.
+- **FR-013**: The system MUST output results in a machine-consumable,
+  downstream-reusable contract that includes mandatory envelope fields
+  (`schema_version`, `skill`, `version`, `result_type`, `validation_status`) and
+  result-type-specific payloads (`detection_result`, `validation_error`,
+  `dependency_error`).
 - **FR-014**: The system MUST prevent two-architecture outcomes by prohibiting recommendations that establish parallel homes for the same concern in one task.
 - **FR-015**: The system MUST limit this skill to detection, mapping, and strategy guidance and MUST NOT implement features, move files, or perform refactors.
 - **FR-016**: The system MUST return structural metadata only by default and MUST NOT include raw code snippets in standard architecture-detection output.

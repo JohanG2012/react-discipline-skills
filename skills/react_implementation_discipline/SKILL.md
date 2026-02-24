@@ -69,7 +69,7 @@ Return a single JSON object only (no extra prose) with:
 - `skill`: `react_implementation_discipline`
 - `version`
 - `result_type`: `implementation_package | validation_error | dependency_error`
-- `validation_summary`
+- `validation_status`
 
 `implementation_package` includes `output_package` with changed files, patch/new
 file payloads, quality checks, boundary audit findings, and scope deviations.

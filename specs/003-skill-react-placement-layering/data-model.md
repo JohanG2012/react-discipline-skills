@@ -152,7 +152,7 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 - **Description**: Structured validity state for the current run.
 - **Fields**:
   - `is_valid` (boolean, required)
-  - `stage` (enum, required): `input-validation | planning | finalized`
+  - `stage` (enum, required): `input_validation | planning | finalized`
   - `errors` (array[string], required)
   - `warnings` (array[string], optional)
 - **Validation rules**:
@@ -218,8 +218,8 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 
 ### ValidationStatus
 
-- `input-validation -> validation_error` (required input missing/invalid)
-- `input-validation -> planning` (all required inputs valid)
+- `input_validation -> validation_error` (required input missing/invalid)
+- `input_validation -> planning` (all required inputs valid)
 - `planning -> finalized` (guardrails pass and plan output emitted)
 
 ### SourceOfTruthResolution

@@ -1,28 +1,49 @@
 {
   "schema_version": "1.1.0",
+  "skill": "react_architecture_detection",
+  "version": "1.0.0",
+  "result_type": "detection_result",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "finalized",
+    "errors": [],
+    "warnings": []
+  },
   "routing": {
     "type": "react-router",
-    "entry_points": ["src/main.tsx", "src/router.tsx"]
+    "entry_points": [
+      "src/main.tsx",
+      "src/router.tsx"
+    ]
   },
   "ui": {
     "home": "src/components",
     "confidence": 0.89,
     "status": "resolved",
-    "evidence_paths": ["src/components", "src/components/ui"]
+    "evidence_paths": [
+      "src/components",
+      "src/components/ui"
+    ]
   },
   "api": {
     "pattern": "services",
     "home": "unknown",
     "confidence": 0.62,
     "status": "ambiguous",
-    "evidence_paths": ["src/services", "src/api", "src/lib/http"]
+    "evidence_paths": [
+      "src/services",
+      "src/api",
+      "src/lib/http"
+    ]
   },
   "domain": {
     "organization": "features",
     "home": "src/features",
     "confidence": 0.86,
     "status": "resolved",
-    "evidence_paths": ["src/features"]
+    "evidence_paths": [
+      "src/features"
+    ]
   },
   "state": {
     "server": "react-query",
@@ -30,7 +51,9 @@
     "home": "src/store",
     "confidence": 0.81,
     "status": "resolved",
-    "evidence_paths": ["src/store"]
+    "evidence_paths": [
+      "src/store"
+    ]
   },
   "gravity_map": {
     "pages_or_routes": "src/pages",
@@ -75,7 +98,5 @@
       "Treat src/api/endpoints as canonical endpoint layer"
     ],
     "recommended_option": "Treat src/services/api as canonical endpoint layer"
-  },
-  "skill": "react_architecture_detection",
-  "version": "1.0.0"
+  }
 }

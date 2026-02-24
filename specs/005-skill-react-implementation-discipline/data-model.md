@@ -114,7 +114,7 @@ for deterministic downstream consumption.
   - `required_fixes` must exist when final state is `blocked`.
   - `changed_files` must contain all paths represented in `updated_patches` and `new_files`.
 
-### 10. ValidationSummary
+### 10. ValidationStatus
 
 - **Description**: Structured verification summary required in all outputs.
 - **Fields**:
@@ -142,7 +142,7 @@ for deterministic downstream consumption.
   - `skill` (const, required): `react_implementation_discipline`
   - `version` (string, required)
   - `result_type` (const, required): `implementation_package`
-  - `validation_summary` (ValidationSummary, required, final state `accepted` or `blocked`)
+  - `validation_status` (ValidationStatus, required, final state `accepted` or `blocked`)
   - `output_package` (ImplementationOutputPackage, required)
   - `scope_expansion_needed` (array[ScopeExpansionItem], optional)
 
@@ -154,7 +154,7 @@ for deterministic downstream consumption.
   - `skill` (const, required)
   - `version` (string, required)
   - `result_type` (const, required): `validation_error`
-  - `validation_summary` (ValidationSummary, required, final state `validation_error`)
+  - `validation_status` (ValidationStatus, required, final state `validation_error`)
   - `notes` (array[string], required, max 5)
 
 ### 14. DependencyErrorOutput
@@ -165,7 +165,7 @@ for deterministic downstream consumption.
   - `skill` (const, required)
   - `version` (string, required)
   - `result_type` (const, required): `dependency_error`
-  - `validation_summary` (ValidationSummary, required, final state `dependency_error`)
+  - `validation_status` (ValidationStatus, required, final state `dependency_error`)
   - `dependency_issue` (string, required)
   - `fallback_context_bundle_requirements` (array[string], required, min 5)
   - `notes` (array[string], required, max 5)
@@ -179,11 +179,11 @@ for deterministic downstream consumption.
 - `ImplementationOutputPackage (1) -> (many) BoundaryAuditFinding`
 - `ImplementationOutputPackage (1) -> (many) ScopeDeviation`
 - `ImplementationPackageOutput (0..1) -> (0..many) ScopeExpansionItem`
-- `ValidationSummary (1) -> (1) ImplementationPackageOutput | ValidationErrorOutput | DependencyErrorOutput`
+- `ValidationStatus (1) -> (1) ImplementationPackageOutput | ValidationErrorOutput | DependencyErrorOutput`
 
 ## State Transitions
 
-### ValidationSummary
+### ValidationStatus
 
 - `input_validation -> validation_error` (required input missing/invalid)
 - `input_validation -> context_validation` (required input valid)
@@ -207,7 +207,7 @@ for deterministic downstream consumption.
 
 ## Invariants
 
-- Every output must include `validation_summary`.
+- Every output must include `validation_status`.
 - `blocked` outputs must include at least one `required_fixes` entry.
 - `dependency_error` and `validation_error` outputs must not include `output_package`.
 - `scope_expansion_needed` entries must be bounded and concrete (`why`, `would_touch`).

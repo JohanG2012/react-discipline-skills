@@ -58,6 +58,14 @@ Return a **single JSON object** matching this shape:
 ```json
 {
   "schema_version": "1.1.0",
+  "skill": "react_architecture_detection",
+  "version": "1.0.0",
+  "result_type": "detection_result|validation_error|dependency_error",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "input_validation|detection|finalized",
+    "errors": []
+  },
   "routing": {"type": "react-router", "entry_points": ["src/main.tsx"]},
   "ui": {"home": "src/components", "confidence": 0.9, "status": "resolved", "evidence_paths": ["src/components"]},
   "api": {"home": "src/services/api", "pattern": "services", "confidence": 0.9, "status": "resolved", "evidence_paths": ["src/services/api"]},
@@ -93,23 +101,32 @@ Return a **single JSON object** matching this shape:
 Constraints:
 
 - Output must be JSON only.
+- Output must include `schema_version`, `skill`, `version`, `result_type`, and
+  `validation_status`.
+- `result_type=detection_result` must include architecture classification fields.
+- Missing/invalid required inputs must return `result_type=validation_error`.
+- Missing repository evidence must return `result_type=dependency_error` and
+  include `dependency_issue` plus `fallback_context_bundle_requirements[]`.
 - `notes[]` max 5 items.
 - Output must contain structural metadata only.
 - Raw code snippets are prohibited in standard output.
-- Output must include at minimum: `routing.type`, `ui.home`, `api.home`,
-  `domain.organization`, `gravity_map`, `alignment_score`, `strategy`, and
-  `notes[]`.
-- Output must include `strategy_rationale`, `alignment.blockers`,
+- For `result_type=detection_result`, output must include at minimum:
+  `routing.type`, `ui.home`, `api.home`, `domain.organization`, `gravity_map`,
+  `alignment_score`, `strategy`, and `notes[]`.
+- For `result_type=detection_result`, output must include
+  `strategy_rationale`, `alignment.blockers`,
   `alignment.next_migration_step`, and `pause_decision`.
-- Output should include `strategy_basis` using explicit strategy criteria
+- For `result_type=detection_result`, output should include `strategy_basis`
+  using explicit strategy criteria
   (for example `stable-local-gravity`, `flat-or-messy-repo`,
   `explicit-migration-scope`).
-- Output must include `pause_decision.pause_mode`,
-  `pause_decision.decision_safety_confidence`, and `pause_decision.impact`.
-- `api.home` is the canonical endpoint layer for downstream boundary checks in
-  the task.
-- If any structural concern confidence is below `0.7`, output must set
-  `pause_decision.pause_required` to `true`.
+- For `result_type=detection_result`, output must include
+  `pause_decision.pause_mode`, `pause_decision.decision_safety_confidence`, and
+  `pause_decision.impact`.
+- For `result_type=detection_result`, `api.home` is the canonical endpoint
+  layer for downstream boundary checks in the task.
+- For `result_type=detection_result`, if any structural concern confidence is
+  below `0.7`, output must set `pause_decision.pause_required` to `true`.
 - No extra prose outside JSON.
 
 ## Quick reference rules
@@ -128,4 +145,7 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 ## Examples
 
 - See `examples/` for sample outputs.
+- See `examples/output.example.json` for successful `detection_result`.
+- See `examples/validation-error.example.json` for `validation_error`.
+- See `examples/dependency-error.example.json` for `dependency_error`.
 - See `fixtures/` for sample repo trees and patterns.
