@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-implementation-discipline",
+  "version": "1.0.0",
+  "result_type": "dependency_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "context_validation",
+    "quality_check_status": "not_run",
+    "boundary_status": "not_run",
+    "scope_deviation_status": "none",
+    "final_state": "dependency_error",
+    "errors": [
+      "Repository context unavailable for convention matching."
+    ],
+    "warnings": []
+  },
+  "dependency_issue": "Missing repository files required for boundary and convention checks.",
+  "fallback_context_bundle_requirements": [
+    "Provide revised_plan with explicit file actions.",
+    "Provide detection_result with architecture boundary map.",
+    "Provide revised_plan.decisions with target paths.",
+    "Provide neighboring module samples for naming/export conventions.",
+    "Provide policy references for allowed hook/api exceptions."
+  ],
+  "notes": [
+    "Fail-closed behavior applied; no implementation package emitted."
+  ]
+}

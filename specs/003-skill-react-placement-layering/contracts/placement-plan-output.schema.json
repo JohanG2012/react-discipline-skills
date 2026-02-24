@@ -19,7 +19,7 @@
     },
     "skill": {
       "type": "string",
-      "const": "react_placement_and_layering"
+      "const": "react-placement-and-layering"
     },
     "version": {
       "type": "string",

@@ -82,7 +82,7 @@ As a skill user, I need the plan to favor existing artifacts when suitable so im
 
 ### Functional Requirements
 
-- **FR-001**: The system MUST define `react_placement_and_layering` as one of the four production execution skills in the initial scope.
+- **FR-001**: The system MUST define `react-placement-and-layering` as one of the four production execution skills in the initial scope.
 - **FR-002**: The system MUST require three core inputs for each run: implementation request, target architecture rules, and architecture-detection result.
 - **FR-003**: The system MUST interpret the implementation request into a checklist of concrete needs before planning artifacts.
 - **FR-004**: The system MUST select exactly one primary feature owner for the request.

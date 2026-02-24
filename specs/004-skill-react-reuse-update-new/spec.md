@@ -82,7 +82,7 @@ As a downstream skill consumer, I need a revised plan and guardrails that can be
 
 ### Functional Requirements
 
-- **FR-001**: The system MUST define `react_reuse_update_new` as one of the four production execution skills in initial project scope.
+- **FR-001**: The system MUST define `react-reuse-update-new` as one of the four production execution skills in initial project scope.
 - **FR-002**: The system MUST require valid upstream context from architecture detection, placement planning, and repository search before evaluating decisions.
 - **FR-003**: The system MUST evaluate each needed artifact using a deterministic ladder in this order: reuse as-is, update existing, then create new.
 - **FR-004**: The system MUST emit exactly one final decision (`reuse`, `update`, `new`, or `decision_blocked`) for every needed artifact in scope.

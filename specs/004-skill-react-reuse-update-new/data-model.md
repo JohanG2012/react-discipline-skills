@@ -202,7 +202,7 @@ when repository evidence is unavailable.
 - **Description**: Strict success output.
 - **Fields**:
   - `schema_version` (string, required)
-  - `skill` (string, required; `react_reuse_update_new`)
+  - `skill` (string, required; `react-reuse-update-new`)
   - `version` (string, required)
   - `result_type` (enum, required): `decision_plan`
   - `validation_status` (ValidationStatus, required; `is_valid=true`)

@@ -82,7 +82,7 @@ As a reviewer, I need implementation output that is easy to apply and validate s
 
 ### Functional Requirements
 
-- **FR-001**: The system MUST define `react_implementation_discipline` as one of the four production execution skills for initial project scope.
+- **FR-001**: The system MUST define `react-implementation-discipline` as one of the four production execution skills for initial project scope.
 - **FR-002**: The system MUST require valid `revised_plan`, `detection_result`, `reuse_decisions`, and repository context before generating implementation output.
 - **FR-002A**: The system MUST support optional execution controls from the governing master spec: `diff_preference` (snippet-first or unified-diff bias), `strictness` (`strict` default; `relaxed` only when explicitly allowed), and explicit `max_lines_policy` overrides.
 - **FR-003**: The system MUST execute implementation according to revised plan intent and touched-file scope.

@@ -77,7 +77,7 @@ As a reviewer, I need ambiguity and confidence to be explicit so structural deci
 
 ### Functional Requirements
 
-- **FR-001**: The system MUST define `react_architecture_detection` as one of the four production execution skills for the initial phase scope.
+- **FR-001**: The system MUST define `react-architecture-detection` as one of the four production execution skills for the initial phase scope.
 - **FR-002**: The system MUST accept repository context, target architecture context, and task-scope context as required detection inputs.
 - **FR-003**: The system MUST detect and classify the repository routing approach and identify route entry points.
 - **FR-004**: The system MUST detect and classify the current reusable UI home and identify whether shared UI structure is cohesive or fragmented.

@@ -139,7 +139,7 @@ for deterministic downstream consumption.
 - **Description**: Success-path top-level output when context is sufficient.
 - **Fields**:
   - `schema_version` (string, required)
-  - `skill` (const, required): `react_implementation_discipline`
+  - `skill` (const, required): `react-implementation-discipline`
   - `version` (string, required)
   - `result_type` (const, required): `implementation_package`
   - `validation_status` (ValidationStatus, required, final state `accepted` or `blocked`)

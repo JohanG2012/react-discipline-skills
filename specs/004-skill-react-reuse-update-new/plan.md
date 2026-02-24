@@ -5,7 +5,7 @@
 
 ## Summary
 
-Define and harden the `react_reuse_update_new` skill with deterministic per-artifact decisions, explicit safe-update thresholds (including abstraction-risk cap), stable artifact identity (`needed_artifact_id`), deterministic tie-break ordering, structured decision marks, fail-closed dependency handling with fallback context requirements, scope-governor expansion signaling, and explicit `decision_blocked` behavior when constraints eliminate all safe options. This planning phase delivers design and contract artifacts only within existing repository boundaries.
+Define and harden the `react-reuse-update-new` skill with deterministic per-artifact decisions, explicit safe-update thresholds (including abstraction-risk cap), stable artifact identity (`needed_artifact_id`), deterministic tie-break ordering, structured decision marks, fail-closed dependency handling with fallback context requirements, scope-governor expansion signaling, and explicit `decision_blocked` behavior when constraints eliminate all safe options. This planning phase delivers design and contract artifacts only within existing repository boundaries.
 
 ## Technical Context
 
@@ -17,7 +17,7 @@ Define and harden the `react_reuse_update_new` skill with deterministic per-arti
 **Project Type**: Documentation-and-tooling repository for Codex/agent skills  
 **Performance Goals**: Decision outputs satisfy the feature target of at least 90% completion within 2 minutes for runs with up to 30 artifacts; deterministic output contract fields for every run  
 **Constraints**: No new top-level directories or dependencies; deterministic decision ladder; default update thresholds (`max_new_props_for_update=2`, `max_flags_allowed_composites=0` for domain modes, `max_generic_flags_allowed_primitives=1`, `max_abstraction_risk_score=6`); tie-break order is authoritative-home then risk/complexity then lexical path; `decision_blocked` is required when constraints block all safe options; repository-discovery failure returns dependency error with fallback context requirements and no decision package; revised plans require context decisions plus file/layer justification records; scope-cap expansion must be structured and bounded; stable `needed_artifact_id` must be preserved end-to-end  
-**Scale/Scope**: One feature scope for `react_reuse_update_new` in `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/`
+**Scale/Scope**: One feature scope for `react-reuse-update-new` in `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/`
 
 ## Constitution Check
 
@@ -36,7 +36,7 @@ Define and harden the `react_reuse_update_new` skill with deterministic per-arti
 - **V. Minimal Scope and Dependencies**: PASS
   - No new dependencies and no top-level directory expansion are planned.
 - **VI. Four-Skill Product Scope**: PASS
-  - Scope remains within one fixed production skill (`react_reuse_update_new`) under shared baseline policy.
+  - Scope remains within one fixed production skill (`react-reuse-update-new`) under shared baseline policy.
 
 **Gate Decision (Pre-Phase 0)**: PASS
 
@@ -70,14 +70,14 @@ Define and harden the `react_reuse_update_new` skill with deterministic per-arti
 ├── skills/
 │   ├── .shared/
 │   │   └── policy/
-│   ├── react_architecture_detection/
-│   ├── react_placement_and_layering/
-│   ├── react_reuse_update_new/
+│   ├── react-architecture-detection/
+│   ├── react-placement-and-layering/
+│   ├── react-reuse-update-new/
 │   │   ├── SKILL.md
 │   │   ├── rules/
 │   │   ├── examples/
 │   │   └── schemas/
-│   └── react_implementation_discipline/
+│   └── react-implementation-discipline/
 ├── tools/
 │   └── build/
 ├── specs/
@@ -89,7 +89,7 @@ Define and harden the `react_reuse_update_new` skill with deterministic per-arti
 └── .specify/
 ```
 
-**Structure Decision**: Use the existing single-repository skills layout and add planning/design artifacts only under `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/`. Implementation follow-up remains in existing `skills/react_reuse_update_new/` paths.
+**Structure Decision**: Use the existing single-repository skills layout and add planning/design artifacts only under `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/`. Implementation follow-up remains in existing `skills/react-reuse-update-new/` paths.
 
 ## Complexity Tracking
 

@@ -14,10 +14,10 @@ Define the normative interface between the shared policy baseline (`agent-policy
 
 | Skill | Required Baseline Reference | Required Status |
 |-------|-----------------------------|-----------------|
-| `react_architecture_detection` | `agent-policy-v1` | Mandatory |
-| `react_placement_and_layering` | `agent-policy-v1` | Mandatory |
-| `react_reuse_update_new` | `agent-policy-v1` | Mandatory |
-| `react_implementation_discipline` | `agent-policy-v1` | Mandatory |
+| `react-architecture-detection` | `agent-policy-v1` | Mandatory |
+| `react-placement-and-layering` | `agent-policy-v1` | Mandatory |
+| `react-reuse-update-new` | `agent-policy-v1` | Mandatory |
+| `react-implementation-discipline` | `agent-policy-v1` | Mandatory |
 
 ## Required Interface Rules
 
@@ -27,10 +27,10 @@ Define the normative interface between the shared policy baseline (`agent-policy
 
 2. **Baseline Coverage and Precedence Contract**
    - Shared baseline coverage MUST include all four downstream production skills:
-     - `react_architecture_detection`
-     - `react_placement_and_layering`
-     - `react_reuse_update_new`
-     - `react_implementation_discipline`
+     - `react-architecture-detection`
+     - `react-placement-and-layering`
+     - `react-reuse-update-new`
+     - `react-implementation-discipline`
    - `specs/001-agent-policy-v1/master_spec.md` remains authoritative for shared policy conflicts.
    - No other spec document may override `specs/001-agent-policy-v1/master_spec.md`.
    - Production execution skill scope remains fixed to those four skills;

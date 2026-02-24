@@ -8,9 +8,7 @@ metadata:
   category: agent-skill
   language: en
   stability: stable
-  tags:
-    - policy
-    - governance
+  tags: policy, governance, baseline
 ---
 
 # Agent Policy v1

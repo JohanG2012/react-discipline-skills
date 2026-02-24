@@ -3,15 +3,15 @@
 ## Purpose
 
 Define the normative output interface produced by
-`react_reuse_update_new` and consumed by downstream planning and
+`react-reuse-update-new` and consumed by downstream planning and
 implementation workflows.
 
 ## Scope
 
 - **Producer**:
-  `<REPO_ROOT>/skills/react_reuse_update_new/`
+  `<REPO_ROOT>/skills/react-reuse-update-new/`
 - **Consumers**:
-  - `react_implementation_discipline`
+  - `react-implementation-discipline`
   - feature planning workflows that consume revised decision plans
 
 ## Source of Truth
@@ -25,10 +25,10 @@ Contract artifacts for this feature:
 
 Skill artifacts that must align with this contract:
 
-- `<REPO_ROOT>/skills/react_reuse_update_new/SKILL.md`
-- `<REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md`
-- `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json`
-- `<REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json`
+- `<REPO_ROOT>/skills/react-reuse-update-new/SKILL.md`
+- `<REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md`
+- `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json`
+- `<REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json`
 
 Baseline governance references:
 
@@ -42,7 +42,7 @@ Baseline governance references:
 All outputs must include:
 
 - `schema_version` (string)
-- `skill` (`react_reuse_update_new`)
+- `skill` (`react-reuse-update-new`)
 - `version` (string)
 - `result_type` (`decision_plan` | `validation_error` | `dependency_error`)
 - `validation_status` object (`is_valid`, `stage`, `errors`, optional `warnings`)

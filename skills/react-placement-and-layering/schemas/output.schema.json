@@ -1,0 +1,531 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://react-discipline-skills/specs/003-skill-react-placement-layering/contracts/placement-plan-output.schema.json",
+  "title": "React Placement and Layering Output Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "skill",
+    "version",
+    "result_type",
+    "validation_status",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill": {
+      "type": "string",
+      "const": "react-placement-and-layering"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_type": {
+      "type": "string",
+      "enum": ["placement_plan", "validation_error", "dependency_error"]
+    },
+    "strategy_used": {
+      "type": "string",
+      "enum": ["follow-existing", "introduce-boundaries", "migrate-as-you-touch"]
+    },
+    "feature_owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_endpoint_layer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authoritative_home_map": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "ui": {
+          "type": "string",
+          "minLength": 1
+        },
+        "api": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "routing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "store": {
+          "type": "string",
+          "minLength": 1
+        },
+        "core": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["purpose", "action", "action_rationale", "layer", "path"],
+        "additionalProperties": false,
+        "properties": {
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action": {
+            "type": "string",
+            "enum": ["reuse", "update", "create"]
+          },
+          "action_rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 280
+          },
+          "layer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "layer_justifications": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["layer", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "layer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 280
+          }
+        }
+      }
+    },
+    "decision_explanation": {
+      "type": "object",
+      "required": ["detected_signals", "chosen_direction"],
+      "additionalProperties": false,
+      "properties": {
+        "detected_signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "chosen_direction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 280
+        }
+      }
+    },
+    "import_guardrails": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_of_truth_resolutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "concern",
+          "default_source",
+          "architecture_confidence",
+          "override_threshold",
+          "effective_source",
+          "resolution_mode",
+          "resolution_reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "concern": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default_source": {
+            "type": "string",
+            "const": "architecture_detection"
+          },
+          "architecture_confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "override_threshold": {
+            "type": "number",
+            "const": 0.7
+          },
+          "effective_source": {
+            "type": "string",
+            "enum": ["architecture_detection", "repository_evidence"]
+          },
+          "resolution_mode": {
+            "type": "string",
+            "enum": ["inherited", "pause_resolved"]
+          },
+          "resolution_reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "move_operations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["old_path", "new_path", "import_update_targets"],
+        "additionalProperties": false,
+        "properties": {
+          "old_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "new_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "import_update_targets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "move_concern": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_status": {
+      "type": "object",
+      "required": ["is_valid", "stage", "errors"],
+      "additionalProperties": false,
+      "properties": {
+        "is_valid": {
+          "type": "boolean"
+        },
+        "stage": {
+          "type": "string",
+          "enum": ["input_validation", "planning", "finalized"]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "maxLength": 280
+      }
+    },
+    "scope_expansion_needed": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["why", "would_touch"],
+        "additionalProperties": false,
+        "properties": {
+          "why": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 280
+          },
+          "would_touch": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "dependency_issue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fallback_context_bundle_requirements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "placement_plan"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": [
+          "strategy_used",
+          "feature_owner",
+          "canonical_endpoint_layer",
+          "authoritative_home_map",
+          "artifacts",
+          "layer_justifications",
+          "decision_explanation",
+          "import_guardrails",
+          "source_of_truth_resolutions"
+        ],
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": true
+              },
+              "stage": {
+                "const": "finalized"
+              },
+              "errors": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "validation_error"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {"required": ["strategy_used"]},
+            {"required": ["feature_owner"]},
+            {"required": ["canonical_endpoint_layer"]},
+            {"required": ["authoritative_home_map"]},
+            {"required": ["artifacts"]},
+            {"required": ["layer_justifications"]},
+            {"required": ["decision_explanation"]},
+            {"required": ["import_guardrails"]},
+            {"required": ["source_of_truth_resolutions"]},
+            {"required": ["move_operations"]},
+            {"required": ["move_concern"]},
+            {"required": ["scope_expansion_needed"]}
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": false
+              },
+              "stage": {
+                "const": "input_validation"
+              },
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "dependency_error"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": [
+          "dependency_issue",
+          "fallback_context_bundle_requirements"
+        ],
+        "not": {
+          "anyOf": [
+            {"required": ["strategy_used"]},
+            {"required": ["feature_owner"]},
+            {"required": ["canonical_endpoint_layer"]},
+            {"required": ["authoritative_home_map"]},
+            {"required": ["artifacts"]},
+            {"required": ["layer_justifications"]},
+            {"required": ["decision_explanation"]},
+            {"required": ["import_guardrails"]},
+            {"required": ["source_of_truth_resolutions"]},
+            {"required": ["move_operations"]},
+            {"required": ["move_concern"]},
+            {"required": ["scope_expansion_needed"]}
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": false
+              },
+              "stage": {
+                "const": "planning"
+              },
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["source_of_truth_resolutions"]
+      },
+      "then": {
+        "properties": {
+          "source_of_truth_resolutions": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "architecture_confidence": {
+                        "type": "number",
+                        "exclusiveMaximum": 0.7
+                      }
+                    },
+                    "required": ["architecture_confidence"]
+                  },
+                  "then": {
+                    "properties": {
+                      "effective_source": {
+                        "const": "repository_evidence"
+                      },
+                      "resolution_mode": {
+                        "const": "pause_resolved"
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "effective_source": {
+                        "const": "architecture_detection"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "effective_source": {
+                        "const": "repository_evidence"
+                      }
+                    },
+                    "required": ["effective_source"]
+                  },
+                  "then": {
+                    "properties": {
+                      "resolution_mode": {
+                        "const": "pause_resolved"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["move_operations"]
+      },
+      "then": {
+        "required": ["move_concern"],
+        "properties": {
+          "strategy_used": {
+            "const": "migrate-as-you-touch"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["scope_expansion_needed"]
+      },
+      "then": {
+        "properties": {
+          "result_type": {
+            "const": "placement_plan"
+          }
+        }
+      }
+    }
+  ]
+}

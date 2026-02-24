@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-implementation-discipline",
+  "version": "1.0.0",
+  "result_type": "implementation_package",
+  "validation_status": {
+    "is_valid": true,
+    "stage": "finalized",
+    "quality_check_status": "fail",
+    "boundary_status": "pass",
+    "scope_deviation_status": "present",
+    "final_state": "blocked",
+    "errors": [
+      "Mandatory quality check failed."
+    ],
+    "warnings": []
+  },
+  "scope_expansion_needed": [
+    {
+      "why": "Shared rule split required",
+      "would_touch": 2
+    }
+  ],
+  "output_package": {
+    "changed_files": [
+      "skills/react-implementation-discipline/rules/10_process.md",
+      "skills/react-implementation-discipline/rules/20_output.md"
+    ],
+    "updated_patches": [
+      {
+        "path": "skills/react-implementation-discipline/rules/20_output.md",
+        "patch": "@@ -10,4 +10,9 @@\n-Old\n+New"
+      }
+    ],
+    "quality_checks": [
+      {
+        "check_id": "quality-gate-final",
+        "status": "fail",
+        "summary": "Missing remediation step for one failed check.",
+        "required_fix": "Add explicit required_fixes entry."
+      }
+    ],
+    "boundary_audit": [
+      {
+        "file_path": "skills/react-implementation-discipline/rules/10_process.md",
+        "status": "pass"
+      }
+    ],
+    "scope_deviations": [
+      {
+        "type": "scope_limit_exceeded",
+        "description": "Requested change exceeds max files touched.",
+        "action_taken": "scope_expansion"
+      }
+    ],
+    "required_fixes": [
+      "Address failed quality check before acceptance."
+    ],
+    "recommended_follow_up_scope": [
+      "Split process rule updates into two files."
+    ],
+    "notes": [
+      "Blocked output returned for reviewer visibility."
+    ]
+  }
+}

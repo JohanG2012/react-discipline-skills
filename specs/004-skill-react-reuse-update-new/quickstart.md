@@ -2,7 +2,7 @@
 
 ## Goal
 
-Implement and validate `react_reuse_update_new` updates defined in
+Implement and validate `react-reuse-update-new` updates defined in
 `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/spec.md`
 with deterministic decision outputs, explicit thresholds, stable artifact IDs,
 tie-break determinism, explicit decision marks, blocked-decision behavior,
@@ -26,33 +26,33 @@ dependency error handling with fallback context-bundle requirements.
    - Read `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md`.
 
 2. Update skill policy and process artifacts
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/SKILL.md` for strict output-result handling (`decision_plan`, `validation_error`, `dependency_error`).
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/rules/00_overview.md` with bounded scope and deterministic behavior guarantees.
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md` to include:
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/SKILL.md` for strict output-result handling (`decision_plan`, `validation_error`, `dependency_error`).
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/rules/00_overview.md` with bounded scope and deterministic behavior guarantees.
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md` to include:
      - stable `needed_artifact_id` handling
      - default safe-update thresholds
      - deterministic tie-break order
      - `decision_blocked` behavior when constraints block all safe options
      - fail-closed dependency handling when repository evidence is unavailable
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md` with strict contract fields and result-type behavior.
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md` with strict contract fields and result-type behavior.
    - Add and align cross-cutting rules:
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/30_discovery_conventions.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/40_default_bias.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/50_upstream_alignment.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/60_decision_thresholds.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/70_scope_governor.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/80_access_control.md`
-     - `<REPO_ROOT>/skills/react_reuse_update_new/rules/90_skill_model_alignment.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/30_discovery_conventions.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/40_default_bias.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/50_upstream_alignment.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/60_decision_thresholds.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/70_scope_governor.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/80_access_control.md`
+     - `<REPO_ROOT>/skills/react-reuse-update-new/rules/90_skill_model_alignment.md`
 
 3. Align schema and examples
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json` to match the contract.
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json` to match the contract.
    - Mirror schema updates into `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output.schema.json` (only `$id` differs).
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json` to include:
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json` to include:
      - `decision_mark`
      - `discovery_status`/`discovery_paths`
      - `max_abstraction_risk_score`
      - structured `revised_plan.context_decisions`, `file_actions`, and `layer_justifications`
-   - Update `<REPO_ROOT>/skills/react_reuse_update_new/examples/dependency-error.example.json` to include `fallback_context_bundle_requirements`.
+   - Update `<REPO_ROOT>/skills/react-reuse-update-new/examples/dependency-error.example.json` to include `fallback_context_bundle_requirements`.
 
 4. Regenerate derived agent docs
 

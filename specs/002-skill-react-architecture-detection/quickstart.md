@@ -21,18 +21,18 @@ with deterministic, machine-consumable output behavior.
    - Read `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
 
 2. Apply skill contract changes
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/SKILL.md` output contract guidance.
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/00_overview.md` to keep scope detection-only (no refactors, no direct edits).
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md` with deterministic scan rules, single-strategy selection, and low-confidence pause behavior.
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md` with:
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/SKILL.md` output contract guidance.
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/rules/00_overview.md` to keep scope detection-only (no refactors, no direct edits).
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md` with deterministic scan rules, single-strategy selection, and low-confidence pause behavior.
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md` with:
      - mandatory envelope (`schema_version`, `skill`, `version`, `result_type`, `validation_status`)
      - `confidence < 0.7 => home=unknown`
      - required `pause_decision` when ambiguity is structural/high-impact
      - pause-mode thresholds (`strict | balanced | autonomous`, default `balanced`)
      - metadata-only output (no raw code snippets)
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json` to match the new contract.
-   - Update `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json` to a valid payload under the updated schema.
-   - Add `<REPO_ROOT>/skills/react_architecture_detection/examples/validation-error.example.json` and `dependency-error.example.json` for error envelopes.
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json` to match the new contract.
+   - Update `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json` to a valid payload under the updated schema.
+   - Add `<REPO_ROOT>/skills/react-architecture-detection/examples/validation-error.example.json` and `dependency-error.example.json` for error envelopes.
 
 3. Regenerate derived agent docs
 
@@ -65,7 +65,7 @@ npm run check
 - [x] Bootstrap behavior is constrained to canonical/minimal recommendations when triggered.
 - [x] Output contains structural metadata only and no raw code snippets.
 - [x] Example output validates against updated schema.
-- [x] Generated `<REPO_ROOT>/skills/react_architecture_detection/AGENTS.md` is up to date.
+- [x] Generated `<REPO_ROOT>/skills/react-architecture-detection/AGENTS.md` is up to date.
 - [x] `npm run check` passes.
 
 ## Validation Notes

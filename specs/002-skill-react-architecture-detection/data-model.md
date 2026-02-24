@@ -111,7 +111,7 @@ gravity ownership, migration strategy, and pause behavior.
 - **Description**: Machine-consumable output payload produced by the skill.
 - **Fields**:
   - `schema_version` (string, required): contract schema identifier.
-  - `skill` (string, required): `react_architecture_detection`.
+  - `skill` (string, required): `react-architecture-detection`.
   - `version` (string, required): skill version identifier.
   - `result_type` (enum, required): `detection_result | validation_error | dependency_error`.
   - `validation_status` (object, required): standardized validation envelope.

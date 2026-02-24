@@ -191,7 +191,7 @@ repo/
         RULE_TEMPLATE.md
       schemas/
         skill_base.schema.json
-    react_placement_and_layering/
+    react-placement-and-layering/
       SKILL.md
       rules/
         00_overview.md
@@ -277,10 +277,10 @@ feature contract and schema artifacts.
 
 This repository's production scope is fixed to four execution skills:
 
-1. `react_architecture_detection`
-2. `react_placement_and_layering`
-3. `react_reuse_update_new`
-4. `react_implementation_discipline`
+1. `react-architecture-detection`
+2. `react-placement-and-layering`
+3. `react-reuse-update-new`
+4. `react-implementation-discipline`
 
 `agent-policy-v1` is the shared policy baseline for these four skills and is
 not counted as a production execution skill.

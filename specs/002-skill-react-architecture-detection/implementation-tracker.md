@@ -26,13 +26,13 @@ independent-test outcomes per user story.
     state ownership, and a single gravity map.
 - Evidence:
   - Updated detection workflow in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md`.
   - Updated output contract rules in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md`.
   - Expanded schema fields in
-    `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`.
   - Updated example payload in
-    `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
   - Ran `node tools/build/validate_examples.mjs` successfully.
 
 ### US2 - Select Safe Migration Strategy
@@ -43,13 +43,13 @@ independent-test outcomes per user story.
     for the same concern.
 - Evidence:
   - Added strategy-selection process constraints in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md`.
   - Added strategy output requirements in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md`.
   - Added `alignment_score`, `strategy`, and `strategy_rationale` fields in
-    `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`.
   - Updated example payload strategy fields in
-    `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
   - Updated downstream strategy consumption expectations in
     `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
   - Re-ran `node tools/build/validate_examples.mjs` successfully.
@@ -62,18 +62,18 @@ independent-test outcomes per user story.
     `home=unknown` and include required `pause_decision` metadata.
 - Evidence:
   - Added confidence-threshold and pause-trigger rules in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md`.
   - Added `schema_version`, pause-decision, and no-snippet output requirements
     in
-    `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md`.
   - Added `schema_version` and `pause_decision` schema fields plus threshold
     conditional rules in
-    `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`.
   - Updated example payload with low-confidence `unknown` handling and required
     `pause_decision` structure in
-    `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
   - Updated skill output constraints in
-    `<REPO_ROOT>/skills/react_architecture_detection/SKILL.md`.
+    `<REPO_ROOT>/skills/react-architecture-detection/SKILL.md`.
   - Re-ran `node tools/build/validate_examples.mjs` successfully.
 
 ## Validation Runs
@@ -86,16 +86,16 @@ independent-test outcomes per user story.
 
 - Added explicit strategy-selection criteria alignment (`follow-existing`,
   `introduce-boundaries`, `migrate-as-you-touch`) in
-  `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+  `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md`.
 - Added bootstrap minimal/exit-condition constraints in
-  `<REPO_ROOT>/skills/react_architecture_detection/rules/10_process.md`.
+  `<REPO_ROOT>/skills/react-architecture-detection/rules/10_process.md`.
 - Added pause-mode metadata and thresholds (`strict | balanced | autonomous`)
   across:
-  - `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`
-  - `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md`
+  - `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`
   - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output.schema.json`
 - Updated contract examples and narrative artifacts:
-  - `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`
   - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`
   - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/spec.md`
   - `<REPO_ROOT>/specs/002-skill-react-architecture-detection/data-model.md`
@@ -107,12 +107,12 @@ independent-test outcomes per user story.
   tasks are completed.
 - Foundational completion evidence (T006):
   - `rules/00_overview.md` updated to enforce detection-only scope.
-  - `skills/react_architecture_detection/SKILL.md` updated with baseline
+  - `skills/react-architecture-detection/SKILL.md` updated with baseline
     compliance and output-contract summary constraints.
   - `contracts/architecture-detection-output-contract.md` updated with canonical
     field and failure-mode alignment.
 - Polish completion evidence:
-  - Regenerated `<REPO_ROOT>/skills/react_architecture_detection/AGENTS.md`.
+  - Regenerated `<REPO_ROOT>/skills/react-architecture-detection/AGENTS.md`.
   - `npm run check` passed fully.
   - Refreshed `<REPO_ROOT>/AGENTS.md` via update-agent-context script.
   - Final quickstart validation checklist marked complete.

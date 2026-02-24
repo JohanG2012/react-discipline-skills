@@ -5,7 +5,7 @@
 
 ## Summary
 
-Define and harden the `react_architecture_detection` skill contract so downstream skills receive deterministic, machine-consumable architecture signals (including explicit schema versioning, confidence-driven pause behavior, and metadata-only output). The plan delivers design artifacts only and keeps implementation scope constrained to existing repository structure, tooling, and four-skill product boundaries.
+Define and harden the `react-architecture-detection` skill contract so downstream skills receive deterministic, machine-consumable architecture signals (including explicit schema versioning, confidence-driven pause behavior, and metadata-only output). The plan delivers design artifacts only and keeps implementation scope constrained to existing repository structure, tooling, and four-skill product boundaries.
 
 ## Technical Context
 
@@ -17,7 +17,7 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 **Project Type**: Documentation-and-tooling repository for Codex/agent skills  
 **Performance Goals**: Explicit runtime/scale thresholds are deferred for this phase; focus is deterministic contract correctness, confidence-gated ambiguity handling, and downstream compatibility  
 **Constraints**: No new top-level directories or dependencies; four-skill production scope fixed; architecture output must include mandatory `schema_version`; confidence below `0.7` on structural concerns requires pause; default output is structural metadata only (no raw code snippets)  
-**Scale/Scope**: One skill-focused feature scope for `react_architecture_detection` design and contract updates in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/`
+**Scale/Scope**: One skill-focused feature scope for `react-architecture-detection` design and contract updates in `<REPO_ROOT>/specs/002-skill-react-architecture-detection/`
 
 ## Constitution Check
 
@@ -36,7 +36,7 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 - **V. Minimal Scope and Dependencies**: PASS
   - No dependency additions and no new top-level directories are planned.
 - **VI. Four-Skill Product Scope**: PASS
-  - Scope remains limited to one of the four production skills (`react_architecture_detection`) with shared baseline inheritance intact.
+  - Scope remains limited to one of the four production skills (`react-architecture-detection`) with shared baseline inheritance intact.
 
 **Gate Decision (Pre-Phase 0)**: PASS
 
@@ -70,14 +70,14 @@ Define and harden the `react_architecture_detection` skill contract so downstrea
 ├── skills/
 │   ├── .shared/
 │   │   └── policy/
-│   ├── react_architecture_detection/
+│   ├── react-architecture-detection/
 │   │   ├── SKILL.md
 │   │   ├── rules/
 │   │   ├── examples/
 │   │   └── schemas/
-│   ├── react_placement_and_layering/
-│   ├── react_reuse_update_new/
-│   └── react_implementation_discipline/
+│   ├── react-placement-and-layering/
+│   ├── react-reuse-update-new/
+│   └── react-implementation-discipline/
 ├── tools/
 │   └── build/
 ├── specs/

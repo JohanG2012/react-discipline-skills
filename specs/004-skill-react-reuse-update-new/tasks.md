@@ -22,11 +22,11 @@
 
 **⚠️ CRITICAL**: No user story work should begin until this phase is complete.
 
-- [X] T003 Update scope boundaries and shared-baseline inheritance constraints in <REPO_ROOT>/skills/react_reuse_update_new/rules/00_overview.md
-- [X] T004 [P] Update skill-level output envelope and result-type summary in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md
+- [X] T003 Update scope boundaries and shared-baseline inheritance constraints in <REPO_ROOT>/skills/react-reuse-update-new/rules/00_overview.md
+- [X] T004 [P] Update skill-level output envelope and result-type summary in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md
 - [X] T005 [P] Sync contract narrative and source-of-truth references in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output-contract.md
-- [X] T006 Establish base schema envelope fields (`schema_version`, `result_type`, `validation_status`) in <REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json
-- [X] T007 Add base output envelope example aligned with schema envelope in <REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json
+- [X] T006 Establish base schema envelope fields (`schema_version`, `result_type`, `validation_status`) in <REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json
+- [X] T007 Add base output envelope example aligned with schema envelope in <REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json
 - [X] T008 Record foundational completion evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 
 **Checkpoint**: Foundation complete; user story phases can begin.
@@ -41,11 +41,11 @@
 
 ### Implementation for User Story 1
 
-- [X] T009 [P] [US1] Add deterministic decision ladder, candidate scoring, and threshold defaults in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md
-- [X] T010 [P] [US1] Add decision output requirements for per-artifact reasoning and tie-break metadata in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md
-- [X] T011 [US1] Implement `decision_plan` schema sections for thresholds, score profile, tie-break, and decision records in <REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json
-- [X] T012 [US1] Update successful output example with deterministic `reuse`/`update`/`new` decisions in <REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json
-- [X] T013 [US1] Sync skill contract summary with deterministic `decision_plan` requirements in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md
+- [X] T009 [P] [US1] Add deterministic decision ladder, candidate scoring, and threshold defaults in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md
+- [X] T010 [P] [US1] Add decision output requirements for per-artifact reasoning and tie-break metadata in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md
+- [X] T011 [US1] Implement `decision_plan` schema sections for thresholds, score profile, tie-break, and decision records in <REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json
+- [X] T012 [US1] Update successful output example with deterministic `reuse`/`update`/`new` decisions in <REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json
+- [X] T013 [US1] Sync skill contract summary with deterministic `decision_plan` requirements in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md
 - [X] T014 [US1] Record US1 independent-test evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 
 **Checkpoint**: User Story 1 should be independently functional and verifiable.
@@ -60,10 +60,10 @@
 
 ### Implementation for User Story 2
 
-- [X] T015 [P] [US2] Add anti-leakage process rules for shared UI (no domain mode flags, no domain naming leakage) in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md
-- [X] T016 [P] [US2] Add output guardrail requirements and blocked-decision rationale rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md
-- [X] T017 [US2] Add schema constraints for `decision_blocked`, `override_required`, and `constraint_blockers` in <REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json
-- [X] T018 [US2] Update example payload to demonstrate blocked decisions and guardrail messaging in <REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json
+- [X] T015 [P] [US2] Add anti-leakage process rules for shared UI (no domain mode flags, no domain naming leakage) in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md
+- [X] T016 [P] [US2] Add output guardrail requirements and blocked-decision rationale rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md
+- [X] T017 [US2] Add schema constraints for `decision_blocked`, `override_required`, and `constraint_blockers` in <REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json
+- [X] T018 [US2] Update example payload to demonstrate blocked decisions and guardrail messaging in <REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json
 - [X] T019 [US2] Update contract behavior section for anti-leakage and `decision_blocked` semantics in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output-contract.md
 - [X] T020 [US2] Record US2 independent-test evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 
@@ -79,11 +79,11 @@
 
 ### Implementation for User Story 3
 
-- [X] T021 [P] [US3] Add fail-closed process rules for missing/incomplete repository evidence and invalid inputs in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md
-- [X] T022 [P] [US3] Add output requirements for `validation_error`, `dependency_error`, and `needed_artifact_id` continuity in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md
-- [X] T023 [US3] Implement conditional schema branches for `decision_plan`, `validation_error`, and `dependency_error` in <REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json
-- [X] T024 [US3] Update output examples to include successful plan plus both error result types in <REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json
-- [X] T025 [US3] Update skill-level output contract example to reflect stable `needed_artifact_id` and result-type variants in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md
+- [X] T021 [P] [US3] Add fail-closed process rules for missing/incomplete repository evidence and invalid inputs in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md
+- [X] T022 [P] [US3] Add output requirements for `validation_error`, `dependency_error`, and `needed_artifact_id` continuity in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md
+- [X] T023 [US3] Implement conditional schema branches for `decision_plan`, `validation_error`, and `dependency_error` in <REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json
+- [X] T024 [US3] Update output examples to include successful plan plus both error result types in <REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json
+- [X] T025 [US3] Update skill-level output contract example to reflect stable `needed_artifact_id` and result-type variants in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md
 - [X] T026 [US3] Record US3 independent-test evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 
 **Checkpoint**: User Story 3 should be independently functional and verifiable.
@@ -94,24 +94,24 @@
 
 **Purpose**: Regenerate derived docs, run validations, and finalize handoff evidence.
 
-- [X] T027 Regenerate <REPO_ROOT>/skills/react_reuse_update_new/AGENTS.md via `npm run build:agents`
+- [X] T027 Regenerate <REPO_ROOT>/skills/react-reuse-update-new/AGENTS.md via `npm run build:agents`
 - [X] T028 Run repository validation via `npm run check` and record outcomes in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 - [X] T029 [P] Refresh Codex agent context via `.specify/scripts/bash/update-agent-context.sh codex` and review <REPO_ROOT>/AGENTS.md
 - [X] T030 Finalize execution checklist and validation notes in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/quickstart.md
 - [X] T031 Perform final cross-file consistency review and capture sign-off evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
-- [X] T032 [P] Add discovery coverage and convention-fit rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/30_discovery_conventions.md
-- [X] T033 [P] Add deterministic default-bias and pause-discipline rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/40_default_bias.md
-- [X] T034 [P] Add upstream-alignment and migration-safety rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/50_upstream_alignment.md
-- [X] T035 [P] Add explicit outcome-threshold interpretation rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/60_decision_thresholds.md
-- [X] T036 [P] Add scope-governor cap and expansion-signaling rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/70_scope_governor.md
-- [X] T037 [P] Add access-control fallback-context requirements in <REPO_ROOT>/skills/react_reuse_update_new/rules/80_access_control.md
-- [X] T038 [P] Add fixed-skill-model alignment constraints in <REPO_ROOT>/skills/react_reuse_update_new/rules/90_skill_model_alignment.md
-- [X] T039 Sync expanded decision output schema fields (`decision_mark`, fallback requirements, scope expansion, structured revised plan) in <REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json
+- [X] T032 [P] Add discovery coverage and convention-fit rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/30_discovery_conventions.md
+- [X] T033 [P] Add deterministic default-bias and pause-discipline rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/40_default_bias.md
+- [X] T034 [P] Add upstream-alignment and migration-safety rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/50_upstream_alignment.md
+- [X] T035 [P] Add explicit outcome-threshold interpretation rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/60_decision_thresholds.md
+- [X] T036 [P] Add scope-governor cap and expansion-signaling rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/70_scope_governor.md
+- [X] T037 [P] Add access-control fallback-context requirements in <REPO_ROOT>/skills/react-reuse-update-new/rules/80_access_control.md
+- [X] T038 [P] Add fixed-skill-model alignment constraints in <REPO_ROOT>/skills/react-reuse-update-new/rules/90_skill_model_alignment.md
+- [X] T039 Sync expanded decision output schema fields (`decision_mark`, fallback requirements, scope expansion, structured revised plan) in <REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json
 - [X] T040 [P] Sync contract schema mirror with implementation schema in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output.schema.json
 - [X] T041 [P] Sync contract narrative with expanded output semantics in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output-contract.md
-- [X] T042 [P] Update successful decision output example with structured revised-plan fields in <REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json
-- [X] T043 [P] Update dependency-error example with fallback context-bundle requirements in <REPO_ROOT>/skills/react_reuse_update_new/examples/dependency-error.example.json
-- [X] T044 [P] Update skill-level rule index and output constraints in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md
+- [X] T042 [P] Update successful decision output example with structured revised-plan fields in <REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json
+- [X] T043 [P] Update dependency-error example with fallback context-bundle requirements in <REPO_ROOT>/skills/react-reuse-update-new/examples/dependency-error.example.json
+- [X] T044 [P] Update skill-level rule index and output constraints in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md
 - [X] T045 Record expanded cross-cutting completion evidence in <REPO_ROOT>/specs/004-skill-react-reuse-update-new/implementation-tracker.md
 
 ---
@@ -156,22 +156,22 @@ US2 + US3
 ## Parallel Example: User Story 1
 
 ```bash
-Task: "Add deterministic decision ladder, candidate scoring, and threshold defaults in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md"
-Task: "Add decision output requirements for per-artifact reasoning and tie-break metadata in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md"
+Task: "Add deterministic decision ladder, candidate scoring, and threshold defaults in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md"
+Task: "Add decision output requirements for per-artifact reasoning and tie-break metadata in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md"
 ```
 
 ## Parallel Example: User Story 2
 
 ```bash
-Task: "Add anti-leakage process rules for shared UI in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md"
-Task: "Add output guardrail requirements and blocked-decision rationale rules in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md"
+Task: "Add anti-leakage process rules for shared UI in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md"
+Task: "Add output guardrail requirements and blocked-decision rationale rules in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md"
 ```
 
 ## Parallel Example: User Story 3
 
 ```bash
-Task: "Add fail-closed process rules for missing/incomplete repository evidence in <REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md"
-Task: "Add output requirements for `validation_error`, `dependency_error`, and `needed_artifact_id` continuity in <REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md"
+Task: "Add fail-closed process rules for missing/incomplete repository evidence in <REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md"
+Task: "Add output requirements for `validation_error`, `dependency_error`, and `needed_artifact_id` continuity in <REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md"
 ```
 
 ---

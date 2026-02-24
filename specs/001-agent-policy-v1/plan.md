@@ -70,10 +70,10 @@ Define and document a shared governance baseline (`agent-policy-v1`) that all fo
 │   ├── .shared/
 │   │   ├── policy/
 │   │   └── templates/
-│   ├── react_architecture_detection/
-│   ├── react_implementation_discipline/
-│   ├── react_placement_and_layering/
-│   └── react_reuse_update_new/
+│   ├── react-architecture-detection/
+│   ├── react-implementation-discipline/
+│   ├── react-placement-and-layering/
+│   └── react-reuse-update-new/
 ├── tools/
 │   └── build/
 ├── eslint/

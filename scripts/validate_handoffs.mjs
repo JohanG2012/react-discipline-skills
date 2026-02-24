@@ -31,9 +31,9 @@ const fixtureExpectations = {
 };
 
 const schemaPaths = {
-  skill1_output: path.join(repoRoot, "skills", "react_architecture_detection", "schemas", "output.schema.json"),
-  skill2_output: path.join(repoRoot, "skills", "react_placement_and_layering", "schemas", "output.schema.json"),
-  skill3_output: path.join(repoRoot, "skills", "react_reuse_update_new", "schemas", "output.schema.json"),
+  skill1_output: path.join(repoRoot, "skills", "react-architecture-detection", "schemas", "output.schema.json"),
+  skill2_output: path.join(repoRoot, "skills", "react-placement-and-layering", "schemas", "output.schema.json"),
+  skill3_output: path.join(repoRoot, "skills", "react-reuse-update-new", "schemas", "output.schema.json"),
   skill4_input: path.join(repoRoot, "scripts", "schemas", "skill4_input.schema.json"),
 };
 

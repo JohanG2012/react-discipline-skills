@@ -5,7 +5,7 @@
 Research consolidated from `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/spec.md`,
 `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`,
 `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`,
-and current `react_reuse_update_new` skill artifacts to finalize deterministic
+and current `react-reuse-update-new` skill artifacts to finalize deterministic
 decision and contract behavior before implementation tasks.
 
 ## Research Task Queue Executed

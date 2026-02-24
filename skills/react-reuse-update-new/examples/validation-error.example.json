@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-reuse-update-new",
+  "version": "1.0.0",
+  "result_type": "validation_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "input_validation",
+    "errors": [
+      "Missing required field: needed_artifacts"
+    ]
+  },
+  "notes": [
+    "Provide needed_artifacts with stable needed_artifact_id values."
+  ]
+}

@@ -257,10 +257,10 @@ No implicit specification changes may be inferred from example code or migration
 
 This repository's production scope is fixed to four execution skills:
 
-1. `react_architecture_detection`
-2. `react_placement_and_layering`
-3. `react_reuse_update_new`
-4. `react_implementation_discipline`
+1. `react-architecture-detection`
+2. `react-placement-and-layering`
+3. `react-reuse-update-new`
+4. `react-implementation-discipline`
 
 `agent-policy-v1` is the shared policy baseline for these four skills and is
 not counted as a production execution skill.
@@ -1892,10 +1892,10 @@ Use `4` execution skills plus `1` shared policy configuration layer.
 - Implementation discipline remains mandatory and is represented by an explicit execution skill.
 - Shared policy, DoD checks, and task execution workflows continue to constrain all execution skills.
 - The production skill set remains fixed at:
-  - `react_architecture_detection`
-  - `react_placement_and_layering`
-  - `react_reuse_update_new`
-  - `react_implementation_discipline`
+  - `react-architecture-detection`
+  - `react-placement-and-layering`
+  - `react-reuse-update-new`
+  - `react-implementation-discipline`
 
 ### Optional Extension Skills
 

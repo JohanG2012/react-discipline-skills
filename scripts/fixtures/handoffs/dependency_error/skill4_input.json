@@ -1,7 +1,7 @@
 {
   "detection_result": {
     "schema_version": "1.1.0",
-    "skill": "react_architecture_detection",
+    "skill": "react-architecture-detection",
     "version": "1.0.0",
     "result_type": "detection_result",
     "validation_status": {

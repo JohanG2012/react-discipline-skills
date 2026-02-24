@@ -43,23 +43,23 @@ results, and validation command outcomes for tasks in
 - Evidence:
   - Added deterministic ladder, scoring dimensions, threshold defaults, and
     tie-break ordering in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md`.
   - Added per-artifact output requirements and tie-break metadata expectations
     in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md`.
   - Added discovery-coverage, naming-convention, deterministic-default, and
     threshold-interpretation rules in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/30_discovery_conventions.md`,
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/40_default_bias.md`,
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/30_discovery_conventions.md`,
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/40_default_bias.md`,
     and
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/60_decision_thresholds.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/60_decision_thresholds.md`.
   - Implemented strict `decision_plan` schema sections in
-    `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json`.
   - Updated example output to demonstrate deterministic `reuse`, `update`, and
     `new` outcomes in
-    `<REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json`.
   - Synced skill-level contract summary in
-    `<REPO_ROOT>/skills/react_reuse_update_new/SKILL.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/SKILL.md`.
 
 ### US2 - Prevent Leaky Generalization
 
@@ -69,17 +69,17 @@ results, and validation command outcomes for tasks in
     domain-owned section ownership.
 - Evidence:
   - Added anti-leakage process rules and domain-mode prohibitions in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md`.
   - Added blocked-decision rationale and guardrail output requirements in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md`.
   - Added upstream-alignment constraints to preserve architecture/placement
     ownership boundaries in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/50_upstream_alignment.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/50_upstream_alignment.md`.
   - Added stronger schema constraints for `decision_blocked` blocker lists in
-    `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json`.
   - Updated example output with explicit `decision_blocked` and guardrail-aware
     messaging in
-    `<REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json`.
   - Synced contract behavior language for anti-leakage and blocked outcomes in
     `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output-contract.md`.
 
@@ -91,27 +91,27 @@ results, and validation command outcomes for tasks in
     required decision fields.
 - Evidence:
   - Added fail-closed process rules for invalid inputs and discovery failures in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/10_process.md`.
   - Added explicit output requirements for `validation_error`,
     `dependency_error`, and ID continuity in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/20_output.md`.
   - Added scope-cap expansion and access-control fallback requirements in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/70_scope_governor.md`
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/70_scope_governor.md`
     and
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/80_access_control.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/80_access_control.md`.
   - Implemented conditional schema branches for all output result types in
-    `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json`.
   - Expanded output schema to require `decision_mark`,
     `fallback_context_bundle_requirements`, structured `revised_plan`
     (`context_decisions`, `file_actions`, `layer_justifications`), and optional
     scope-expansion signaling with required `follow_up_scope` linkage.
   - Added error-state examples:
-    `<REPO_ROOT>/skills/react_reuse_update_new/examples/validation-error.example.json`
+    `<REPO_ROOT>/skills/react-reuse-update-new/examples/validation-error.example.json`
     and
-    `<REPO_ROOT>/skills/react_reuse_update_new/examples/dependency-error.example.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/examples/dependency-error.example.json`.
   - Synced SKILL-level contract examples to include stable
     `needed_artifact_id` and result-type variants in
-    `<REPO_ROOT>/skills/react_reuse_update_new/SKILL.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/SKILL.md`.
 
 ## Validation Runs
 
@@ -128,15 +128,15 @@ results, and validation command outcomes for tasks in
     references.
 - Foundational completion evidence:
   - Updated scope boundaries in
-    `<REPO_ROOT>/skills/react_reuse_update_new/rules/00_overview.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/rules/00_overview.md`.
   - Updated skill envelope and result-type summary in
-    `<REPO_ROOT>/skills/react_reuse_update_new/SKILL.md`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/SKILL.md`.
   - Synced contract source-of-truth references in
     `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/contracts/reuse-decision-output-contract.md`.
   - Established strict schema envelope in
-    `<REPO_ROOT>/skills/react_reuse_update_new/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/schemas/output.schema.json`.
   - Updated base output example in
-    `<REPO_ROOT>/skills/react_reuse_update_new/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-reuse-update-new/examples/output.example.json`.
 - Validation completion evidence:
   - Regenerated `AGENTS.md` output for skill rules via `npm run build:agents`.
   - Ran `npm run check` successfully (`check:agents`, `check:frontmatter`,

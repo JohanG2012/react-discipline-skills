@@ -16,7 +16,7 @@ Track execution evidence for tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tas
 - T003: Updated constitution production-scope principle to four execution skills.
 - T004: Updated README production-scope statement and skill list.
 - T005: Updated AGENTS manual project intent scope to four production skills.
-- T006: Updated `specs/001-agent-policy-v1/master_spec.md` product scope and skill model to include `react_implementation_discipline`.
+- T006: Updated `specs/001-agent-policy-v1/master_spec.md` product scope and skill model to include `react-implementation-discipline`.
 - T007: Updated `specs/001-agent-policy-v1/master_spec.md` scope wording to align four-skill production coverage.
 - T008: Completed cross-document scope-alignment audit across constitution, README, AGENTS, and `specs/**/master_spec.md` documents.
 

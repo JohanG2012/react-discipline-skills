@@ -22,10 +22,10 @@
 
 **⚠️ CRITICAL**: No user story work should begin until this phase is complete.
 
-- [X] T003 Update placement scope and shared-baseline inheritance constraints in <REPO_ROOT>/skills/react_placement_and_layering/rules/00_overview.md
-- [X] T004 [P] Update strict input/output contract summary in <REPO_ROOT>/skills/react_placement_and_layering/SKILL.md
+- [X] T003 Update placement scope and shared-baseline inheritance constraints in <REPO_ROOT>/skills/react-placement-and-layering/rules/00_overview.md
+- [X] T004 [P] Update strict input/output contract summary in <REPO_ROOT>/skills/react-placement-and-layering/SKILL.md
 - [X] T005 [P] Sync implementation-facing contract failure modes in <REPO_ROOT>/specs/003-skill-react-placement-layering/contracts/placement-plan-output-contract.md
-- [X] T006 Establish base strict output envelope fields in <REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json
+- [X] T006 Establish base strict output envelope fields in <REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json
 
 **Checkpoint**: Foundation complete; user story phases can begin.
 
@@ -39,10 +39,10 @@
 
 ### Implementation for User Story 1
 
-- [X] T007 [P] [US1] Define strict plan output field requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md
-- [X] T008 [P] [US1] Define artifact-level planning requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md
-- [X] T009 [US1] Implement `result_type=plan` required fields and strict shape rules in <REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json
-- [X] T010 [US1] Update successful plan example payload in <REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json
+- [X] T007 [P] [US1] Define strict plan output field requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md
+- [X] T008 [P] [US1] Define artifact-level planning requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md
+- [X] T009 [US1] Implement `result_type=plan` required fields and strict shape rules in <REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json
+- [X] T010 [US1] Update successful plan example payload in <REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json
 - [X] T011 [US1] Run schema/example validation and record US1 results in <REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md
 - [X] T012 [US1] Record US1 independent-test evidence in <REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md
 
@@ -58,11 +58,11 @@
 
 ### Implementation for User Story 2
 
-- [X] T013 [P] [US2] Add guardrail enforcement rules for layer dependency direction in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md
-- [X] T014 [US2] Add architecture-vs-repository precedence rule with pause-resolved structural behavior for `<0.7` conflicts in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md
-- [X] T015 [US2] Add `source_of_truth_resolutions` and threshold-conditional source logic in <REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json
-- [X] T016 [P] [US2] Add `result_type=validation_error` fail-fast output requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md
-- [X] T017 [US2] Update output example with guardrails and source-of-truth resolution fields in <REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json
+- [X] T013 [P] [US2] Add guardrail enforcement rules for layer dependency direction in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md
+- [X] T014 [US2] Add architecture-vs-repository precedence rule with pause-resolved structural behavior for `<0.7` conflicts in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md
+- [X] T015 [US2] Add `source_of_truth_resolutions` and threshold-conditional source logic in <REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json
+- [X] T016 [P] [US2] Add `result_type=validation_error` fail-fast output requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md
+- [X] T017 [US2] Update output example with guardrails and source-of-truth resolution fields in <REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json
 - [X] T018 [US2] Record US2 independent-test evidence in <REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md
 
 **Checkpoint**: User Story 2 should be independently functional and verifiable.
@@ -77,11 +77,11 @@
 
 ### Implementation for User Story 3
 
-- [X] T019 [P] [US3] Add required existing-artifact lookup checklist in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md
-- [X] T020 [US3] Add deterministic reuse-update-create decision ladder and ambiguity fallback in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md
-- [X] T021 [P] [US3] Add explicit action-rationale and structural-note requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md
-- [X] T022 [US3] Tighten reuse/action constraints and note limits in <REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json
-- [X] T023 [US3] Update output example to demonstrate reuse/update-first behavior in <REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json
+- [X] T019 [P] [US3] Add required existing-artifact lookup checklist in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md
+- [X] T020 [US3] Add deterministic reuse-update-create decision ladder and ambiguity fallback in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md
+- [X] T021 [P] [US3] Add explicit action-rationale and structural-note requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md
+- [X] T022 [US3] Tighten reuse/action constraints and note limits in <REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json
+- [X] T023 [US3] Update output example to demonstrate reuse/update-first behavior in <REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json
 - [X] T024 [US3] Record US3 independent-test evidence in <REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md
 
 **Checkpoint**: User Story 3 should be independently functional and verifiable.
@@ -92,7 +92,7 @@
 
 **Purpose**: Regenerate derived artifacts, run validations, and finalize handoff evidence.
 
-- [X] T025 Regenerate <REPO_ROOT>/skills/react_placement_and_layering/AGENTS.md via `npm run build:agents`
+- [X] T025 Regenerate <REPO_ROOT>/skills/react-placement-and-layering/AGENTS.md via `npm run build:agents`
 - [X] T026 Run repository validation via `npm run check` and record results in <REPO_ROOT>/specs/003-skill-react-placement-layering/implementation-tracker.md
 - [X] T027 [P] Refresh Codex agent context and review <REPO_ROOT>/AGENTS.md via `.specify/scripts/bash/update-agent-context.sh codex`
 - [X] T028 Finalize execution checklist and validation notes in <REPO_ROOT>/specs/003-skill-react-placement-layering/quickstart.md
@@ -138,22 +138,22 @@ US2 + US3
 ## Parallel Example: User Story 1
 
 ```bash
-Task: "Define strict plan output field requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md"
-Task: "Define artifact-level planning requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md"
+Task: "Define strict plan output field requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md"
+Task: "Define artifact-level planning requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md"
 ```
 
 ## Parallel Example: User Story 2
 
 ```bash
-Task: "Add guardrail enforcement rules for layer dependency direction in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md"
-Task: "Add `result_type=validation_error` fail-fast output requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md"
+Task: "Add guardrail enforcement rules for layer dependency direction in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md"
+Task: "Add `result_type=validation_error` fail-fast output requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md"
 ```
 
 ## Parallel Example: User Story 3
 
 ```bash
-Task: "Add required existing-artifact lookup checklist in <REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md"
-Task: "Add explicit action-rationale and structural-note requirements in <REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md"
+Task: "Add required existing-artifact lookup checklist in <REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md"
+Task: "Add explicit action-rationale and structural-note requirements in <REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md"
 ```
 
 ---

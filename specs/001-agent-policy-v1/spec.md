@@ -112,7 +112,7 @@ As a reviewer, I need clear policy evolution rules so updates to shared guidance
 
 ### Terminology
 
-- **Downstream Production Skill Specs**: The four production skill specs governed by this shared baseline (`react_architecture_detection`, `react_placement_and_layering`, `react_reuse_update_new`, `react_implementation_discipline`).
+- **Downstream Production Skill Specs**: The four production skill specs governed by this shared baseline (`react-architecture-detection`, `react-placement-and-layering`, `react-reuse-update-new`, `react-implementation-discipline`).
 - **Exception Record**: A maintainer-approved policy conflict allowance with rationale and no expiry metadata.
 
 ### Assumptions

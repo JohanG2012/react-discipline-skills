@@ -13,7 +13,7 @@
 
 - [X] T001 Create implementation tracker with phase and user-story checkpoints in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 - [X] T002 Align execution checklist and requirement-trace references in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/quickstart.md
-- [X] T003 [P] Create JSON example scaffold files in <REPO_ROOT>/skills/react_implementation_discipline/examples/output.example.json, <REPO_ROOT>/skills/react_implementation_discipline/examples/blocked-output.example.json, and <REPO_ROOT>/skills/react_implementation_discipline/examples/dependency-error.example.json
+- [X] T003 [P] Create JSON example scaffold files in <REPO_ROOT>/skills/react-implementation-discipline/examples/output.example.json, <REPO_ROOT>/skills/react-implementation-discipline/examples/blocked-output.example.json, and <REPO_ROOT>/skills/react-implementation-discipline/examples/dependency-error.example.json
 
 ---
 
@@ -23,11 +23,11 @@
 
 **⚠️ CRITICAL**: No user story work should begin until this phase is complete.
 
-- [X] T004 Update scope boundaries and shared-policy inheritance constraints in <REPO_ROOT>/skills/react_implementation_discipline/rules/00_overview.md
-- [X] T005 [P] Expand skill-level inputs, workflow steps, and result-type summary in <REPO_ROOT>/skills/react_implementation_discipline/SKILL.md
-- [X] T006 [P] Define process prerequisites for required upstream inputs and repository-context availability in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T007 [P] Define mandatory validation-summary and output-envelope requirements in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md
-- [X] T008 Implement top-level schema envelope (`schema_version`, `result_type`, `validation_summary`) in <REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json
+- [X] T004 Update scope boundaries and shared-policy inheritance constraints in <REPO_ROOT>/skills/react-implementation-discipline/rules/00_overview.md
+- [X] T005 [P] Expand skill-level inputs, workflow steps, and result-type summary in <REPO_ROOT>/skills/react-implementation-discipline/SKILL.md
+- [X] T006 [P] Define process prerequisites for required upstream inputs and repository-context availability in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T007 [P] Define mandatory validation-summary and output-envelope requirements in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md
+- [X] T008 Implement top-level schema envelope (`schema_version`, `result_type`, `validation_summary`) in <REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json
 - [X] T009 Mirror foundational schema envelope in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output.schema.json
 - [X] T010 Record foundational completion evidence in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 
@@ -43,12 +43,12 @@
 
 ### Implementation for User Story 1
 
-- [X] T011 [US1] Add plan-fidelity execution rules (planned file actions, minimal exception handling, concise exception rationale) in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T012 [US1] Add boundary-audit process rules covering forbidden import-direction violations in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T013 [P] [US1] Add output requirements for changed-file traceability and boundary audit findings in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md
-- [X] T014 [US1] Extend output schema with `output_package.changed_files` and `output_package.boundary_audit` constraints in <REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json
+- [X] T011 [US1] Add plan-fidelity execution rules (planned file actions, minimal exception handling, concise exception rationale) in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T012 [US1] Add boundary-audit process rules covering forbidden import-direction violations in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T013 [P] [US1] Add output requirements for changed-file traceability and boundary audit findings in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md
+- [X] T014 [US1] Extend output schema with `output_package.changed_files` and `output_package.boundary_audit` constraints in <REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json
 - [X] T015 [P] [US1] Sync contract narrative for plan-fidelity and boundary-audit guarantees in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output-contract.md
-- [X] T016 [US1] Create accepted implementation-package example payload in <REPO_ROOT>/skills/react_implementation_discipline/examples/output.example.json
+- [X] T016 [US1] Create accepted implementation-package example payload in <REPO_ROOT>/skills/react-implementation-discipline/examples/output.example.json
 - [X] T017 [US1] Record US1 independent-test evidence in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 
 **Checkpoint**: User Story 1 is independently functional and verifiable.
@@ -63,12 +63,12 @@
 
 ### Implementation for User Story 2
 
-- [X] T018 [US2] Add convention-matching and minimal-churn process rules in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T019 [US2] Add explicit file-size threshold rules (layer soft caps, split >400, hard stop >600) in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T020 [P] [US2] Add output rules for blocked state, failed checks, required fixes, and scope deviations in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md
-- [X] T021 [US2] Extend output schema with `quality_checks`, `required_fixes`, `scope_deviations`, and `scope_expansion_needed` in <REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json
+- [X] T018 [US2] Add convention-matching and minimal-churn process rules in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T019 [US2] Add explicit file-size threshold rules (layer soft caps, split >400, hard stop >600) in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T020 [P] [US2] Add output rules for blocked state, failed checks, required fixes, and scope deviations in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md
+- [X] T021 [US2] Extend output schema with `quality_checks`, `required_fixes`, `scope_deviations`, and `scope_expansion_needed` in <REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json
 - [X] T022 [P] [US2] Sync contract schema mirror for US2 fields in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output.schema.json
-- [X] T023 [US2] Create blocked implementation-package example with failed mandatory checks and required fixes in <REPO_ROOT>/skills/react_implementation_discipline/examples/blocked-output.example.json
+- [X] T023 [US2] Create blocked implementation-package example with failed mandatory checks and required fixes in <REPO_ROOT>/skills/react-implementation-discipline/examples/blocked-output.example.json
 - [X] T024 [US2] Record US2 independent-test evidence in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 
 **Checkpoint**: User Story 2 is independently functional and verifiable.
@@ -83,13 +83,13 @@
 
 ### Implementation for User Story 3
 
-- [X] T025 [US3] Add process rules for fail-closed dependency handling and fallback context-bundle requirements in <REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md
-- [X] T026 [US3] Add output rules for `implementation_package`, `validation_error`, and `dependency_error` with required `validation_summary.final_state` behavior in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md
-- [X] T027 [US3] Implement conditional schema branches for all result types and final-state constraints in <REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json
+- [X] T025 [US3] Add process rules for fail-closed dependency handling and fallback context-bundle requirements in <REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md
+- [X] T026 [US3] Add output rules for `implementation_package`, `validation_error`, and `dependency_error` with required `validation_summary.final_state` behavior in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md
+- [X] T027 [US3] Implement conditional schema branches for all result types and final-state constraints in <REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json
 - [X] T028 [P] [US3] Sync contract schema mirror with result-type branches and blocked-state requirements in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output.schema.json
-- [X] T029 [P] [US3] Add validation-error example payload in <REPO_ROOT>/skills/react_implementation_discipline/examples/validation-error.example.json
-- [X] T030 [P] [US3] Add dependency-error example payload with fallback bundle requirements in <REPO_ROOT>/skills/react_implementation_discipline/examples/dependency-error.example.json
-- [X] T031 [US3] Update skill-level output contract snippet and example references in <REPO_ROOT>/skills/react_implementation_discipline/SKILL.md
+- [X] T029 [P] [US3] Add validation-error example payload in <REPO_ROOT>/skills/react-implementation-discipline/examples/validation-error.example.json
+- [X] T030 [P] [US3] Add dependency-error example payload with fallback bundle requirements in <REPO_ROOT>/skills/react-implementation-discipline/examples/dependency-error.example.json
+- [X] T031 [US3] Update skill-level output contract snippet and example references in <REPO_ROOT>/skills/react-implementation-discipline/SKILL.md
 - [X] T032 [US3] Update contract narrative for result-type semantics and validation-summary guarantees in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output-contract.md
 - [X] T033 [US3] Record US3 independent-test evidence in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 
@@ -101,7 +101,7 @@
 
 **Purpose**: Regenerate derived docs, run validations, and finalize handoff evidence.
 
-- [X] T034 Regenerate <REPO_ROOT>/skills/react_implementation_discipline/AGENTS.md via `npm run build:agents`
+- [X] T034 Regenerate <REPO_ROOT>/skills/react-implementation-discipline/AGENTS.md via `npm run build:agents`
 - [X] T035 Run repository validation via `npm run check` and record outcomes in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/implementation-tracker.md
 - [X] T036 [P] Refresh Codex context via `.specify/scripts/bash/update-agent-context.sh codex` and review <REPO_ROOT>/AGENTS.md
 - [X] T037 Finalize execution checklist and validation notes in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/quickstart.md
@@ -147,22 +147,22 @@ US2 + US3
 ## Parallel Example: User Story 1
 
 ```bash
-Task: "Add output requirements for changed-file traceability and boundary audit findings in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md"
+Task: "Add output requirements for changed-file traceability and boundary audit findings in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md"
 Task: "Sync contract narrative for plan-fidelity and boundary-audit guarantees in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output-contract.md"
 ```
 
 ## Parallel Example: User Story 2
 
 ```bash
-Task: "Add output rules for blocked state, failed checks, required fixes, and scope deviations in <REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md"
+Task: "Add output rules for blocked state, failed checks, required fixes, and scope deviations in <REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md"
 Task: "Sync contract schema mirror for US2 fields in <REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output.schema.json"
 ```
 
 ## Parallel Example: User Story 3
 
 ```bash
-Task: "Add validation-error example payload in <REPO_ROOT>/skills/react_implementation_discipline/examples/validation-error.example.json"
-Task: "Add dependency-error example payload with fallback bundle requirements in <REPO_ROOT>/skills/react_implementation_discipline/examples/dependency-error.example.json"
+Task: "Add validation-error example payload in <REPO_ROOT>/skills/react-implementation-discipline/examples/validation-error.example.json"
+Task: "Add dependency-error example payload with fallback bundle requirements in <REPO_ROOT>/skills/react-implementation-discipline/examples/dependency-error.example.json"
 ```
 
 ---
@@ -186,9 +186,9 @@ Task: "Add dependency-error example payload with fallback bundle requirements in
 
 ### Parallel Team Strategy
 
-1. Contributor A: process-rule updates in `<REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md`.
-2. Contributor B: output and schema updates in `<REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md` and `<REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json`.
-3. Contributor C: contract/example/tracker updates in `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/` and `<REPO_ROOT>/skills/react_implementation_discipline/examples/`.
+1. Contributor A: process-rule updates in `<REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md`.
+2. Contributor B: output and schema updates in `<REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md` and `<REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json`.
+3. Contributor C: contract/example/tracker updates in `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/` and `<REPO_ROOT>/skills/react-implementation-discipline/examples/`.
 
 ---
 

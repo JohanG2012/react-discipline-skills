@@ -18,7 +18,7 @@
     },
     "skill": {
       "type": "string",
-      "const": "react_reuse_update_new"
+      "const": "react-reuse-update-new"
     },
     "version": {
       "type": "string",

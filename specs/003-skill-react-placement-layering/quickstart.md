@@ -22,9 +22,9 @@ source-of-truth precedence with pause-resolved structural overrides.
    - Read `<REPO_ROOT>/specs/003-skill-react-placement-layering/contracts/placement-plan-output-contract.md`.
 
 2. Apply skill contract and rule updates
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/SKILL.md` to reflect strict versioned output expectations.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/00_overview.md` with explicit scope and sensitive-output prohibition.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md` with:
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/SKILL.md` to reflect strict versioned output expectations.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/00_overview.md` with explicit scope and sensitive-output prohibition.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md` with:
      - required-input validation sequence
      - request-classification categories before artifact planning
      - architecture-vs-repository precedence handling
@@ -32,16 +32,16 @@ source-of-truth precedence with pause-resolved structural overrides.
      - cross-layer error ownership expectations
      - state-persistence policy for store/global-state placement
      - authoritative-home mapping and move-mode constraints
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md` with:
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md` with:
      - strict output field requirements for plan results
      - validation-error output shape
      - optional structured scope-expansion escape hatch field
      - no raw source snippets or secret-like values
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/60_scope_governor.md` with structured scope-expansion behavior.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/70_access_control.md` with explicit write-control policy for architecture/spec docs.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/rules/90_implementation_handoff.md` with implementation-output formatting defaults.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json` to align with the contract.
-   - Update `<REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json` to match the updated schema.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/60_scope_governor.md` with structured scope-expansion behavior.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/70_access_control.md` with explicit write-control policy for architecture/spec docs.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/rules/90_implementation_handoff.md` with implementation-output formatting defaults.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json` to align with the contract.
+   - Update `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json` to match the updated schema.
 
 3. Regenerate derived agent docs
 
@@ -90,7 +90,7 @@ npm run check
 - [x] Implementation handoff formatting defaults are codified for downstream stages.
 - [x] Output excludes raw source snippets and secret-like values.
 - [x] Updated example output validates against updated schema.
-- [x] Generated `<REPO_ROOT>/skills/react_placement_and_layering/AGENTS.md` is up to date.
+- [x] Generated `<REPO_ROOT>/skills/react-placement-and-layering/AGENTS.md` is up to date.
 - [x] `npm run check` passes.
 
 ## Validation Notes

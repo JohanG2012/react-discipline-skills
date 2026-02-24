@@ -164,7 +164,7 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 - **Description**: Strict versioned output payload for successful planning runs.
 - **Fields**:
   - `schema_version` (string, required)
-  - `skill` (string, required): `react_placement_and_layering`
+  - `skill` (string, required): `react-placement-and-layering`
   - `version` (string, required): skill version.
   - `result_type` (enum, required): `plan`
   - `strategy_used` (enum, required): `follow-existing | introduce-boundaries | migrate-as-you-touch`
@@ -194,7 +194,7 @@ validation, source-of-truth precedence, planned artifacts, and output safety.
 - **Description**: Strict versioned output payload for failed input validation.
 - **Fields**:
   - `schema_version` (string, required)
-  - `skill` (string, required): `react_placement_and_layering`
+  - `skill` (string, required): `react-placement-and-layering`
   - `version` (string, required)
   - `result_type` (enum, required): `validation_error`
   - `validation_status` (ValidationStatus, required)

@@ -5,7 +5,7 @@
 
 ## Summary
 
-Define and harden `react_implementation_discipline` so downstream implementation execution is deterministic, boundary-safe, and low-churn. The plan formalizes blocked-output behavior on quality-gate failure, strict out-of-scope filtering, fail-closed dependency handling when repository context is unavailable, explicit file-size enforcement thresholds, and mandatory structured validation summaries in every output package.
+Define and harden `react-implementation-discipline` so downstream implementation execution is deterministic, boundary-safe, and low-churn. The plan formalizes blocked-output behavior on quality-gate failure, strict out-of-scope filtering, fail-closed dependency handling when repository context is unavailable, explicit file-size enforcement thresholds, and mandatory structured validation summaries in every output package.
 
 ## Technical Context
 
@@ -17,7 +17,7 @@ Define and harden `react_implementation_discipline` so downstream implementation
 **Project Type**: Documentation-and-tooling repository for Codex/agent skills  
 **Performance Goals**: At least 90% of implementation outputs for tasks touching up to 8 files produced within 5 minutes; 100% of outputs include structured validation summary with final state (`accepted`, `blocked`, `dependency_error`, or `validation_error`)  
 **Constraints**: No new top-level directories or dependencies; strict plan-fidelity and boundary enforcement; mandatory blocked output on failed mandatory quality checks; fail-closed dependency behavior when repository context is unavailable; explicit out-of-scope exclusions unless approved; file-size discipline with layer soft caps, mandatory split over 400 lines, hard stop over 600 lines  
-**Scale/Scope**: One feature scope under `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/`, with implementation follow-up confined to `skills/react_implementation_discipline/**` and aligned shared policy artifacts
+**Scale/Scope**: One feature scope under `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/`, with implementation follow-up confined to `skills/react-implementation-discipline/**` and aligned shared policy artifacts
 
 ## Constitution Check
 
@@ -36,7 +36,7 @@ Define and harden `react_implementation_discipline` so downstream implementation
 - **V. Minimal Scope and Dependencies**: PASS
   - No new dependency additions are planned; scope is limited to this skill and its contracts.
 - **VI. Four-Skill Product Scope**: PASS
-  - Work is scoped to one approved production execution skill: `react_implementation_discipline`.
+  - Work is scoped to one approved production execution skill: `react-implementation-discipline`.
 
 **Gate Decision (Pre-Phase 0)**: PASS
 
@@ -70,10 +70,10 @@ Define and harden `react_implementation_discipline` so downstream implementation
 ├── skills/
 │   ├── .shared/
 │   │   └── policy/
-│   ├── react_architecture_detection/
-│   ├── react_placement_and_layering/
-│   ├── react_reuse_update_new/
-│   └── react_implementation_discipline/
+│   ├── react-architecture-detection/
+│   ├── react-placement-and-layering/
+│   ├── react-reuse-update-new/
+│   └── react-implementation-discipline/
 │       ├── SKILL.md
 │       ├── rules/
 │       ├── examples/
@@ -90,7 +90,7 @@ Define and harden `react_implementation_discipline` so downstream implementation
 └── .specify/
 ```
 
-**Structure Decision**: Use the current single-repository skills layout and keep all planning/design artifacts under `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/`. Implementation updates remain within existing `skills/react_implementation_discipline/` module boundaries.
+**Structure Decision**: Use the current single-repository skills layout and keep all planning/design artifacts under `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/`. Implementation updates remain within existing `skills/react-implementation-discipline/` module boundaries.
 
 ## Complexity Tracking
 

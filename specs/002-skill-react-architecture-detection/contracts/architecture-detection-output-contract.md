@@ -2,15 +2,15 @@
 
 ## Purpose
 
-Define the normative interface emitted by `react_architecture_detection` and consumed by downstream planning/implementation skills.
+Define the normative interface emitted by `react-architecture-detection` and consumed by downstream planning/implementation skills.
 
 ## Contract Scope
 
-- **Producer**: `<REPO_ROOT>/skills/react_architecture_detection/`
+- **Producer**: `<REPO_ROOT>/skills/react-architecture-detection/`
 - **Consumers**:
-  - `react_placement_and_layering`
-  - `react_reuse_update_new`
-  - `react_implementation_discipline`
+  - `react-placement-and-layering`
+  - `react-reuse-update-new`
+  - `react-implementation-discipline`
 - **Contract Type**: Internal machine-consumable JSON output contract.
 
 ## Normative Schema
@@ -23,7 +23,7 @@ Define the normative interface emitted by `react_architecture_detection` and con
 ```json
 {
   "schema_version": "1.1.0",
-  "skill": "react_architecture_detection",
+  "skill": "react-architecture-detection",
   "version": "1.0.0",
   "result_type": "detection_result",
   "validation_status": {
@@ -151,11 +151,11 @@ Define the normative interface emitted by `react_architecture_detection` and con
 - Downstream skills must consume `api.home` as the canonical endpoint layer for boundary checks.
 - Downstream skills must consume the selected strategy as authoritative for the task and must not output competing strategy recommendations in the same execution flow.
 - Contract changes require a coordinated update to:
-  - `<REPO_ROOT>/skills/react_architecture_detection/schemas/output.schema.json`
-  - `<REPO_ROOT>/skills/react_architecture_detection/examples/output.example.json`
-  - `<REPO_ROOT>/skills/react_architecture_detection/examples/validation-error.example.json`
-  - `<REPO_ROOT>/skills/react_architecture_detection/examples/dependency-error.example.json`
-  - `<REPO_ROOT>/skills/react_architecture_detection/rules/20_output.md`
+  - `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/examples/validation-error.example.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/examples/dependency-error.example.json`
+  - `<REPO_ROOT>/skills/react-architecture-detection/rules/20_output.md`
 
 ## Failure Modes
 

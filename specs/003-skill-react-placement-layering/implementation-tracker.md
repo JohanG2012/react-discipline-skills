@@ -28,13 +28,13 @@ results, and validation command outcomes for tasks in
     complete placement plan with clear artifact actions.
 - Evidence:
   - Updated strict output requirements in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md`.
   - Updated artifact-level process requirements in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md`.
   - Synced strict `result_type=plan` schema shape in
-    `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`.
   - Updated successful example payload in
-    `<REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json`.
   - Ran `node tools/build/validate_examples.mjs` successfully.
 
 ### US2 - Enforce Layer Guardrails
@@ -45,15 +45,15 @@ results, and validation command outcomes for tasks in
     before implementation starts.
 - Evidence:
   - Added explicit guardrail checks and unresolved-violation blocking in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md`.
   - Added architecture-vs-repository precedence rule with pause-resolved
     structural override behavior below `<0.7` in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md`.
   - Confirmed schema support for `source_of_truth_resolutions` and threshold
     conditional behavior in
-    `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`.
   - Added explicit `result_type=validation_error` contract rules in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md`.
   - Validated updated example with
     `node tools/build/validate_examples.mjs`.
 
@@ -65,17 +65,17 @@ results, and validation command outcomes for tasks in
     unnecessary creation.
 - Evidence:
   - Added explicit repository artifact-lookup requirements in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md`.
   - Added deterministic `reuse -> update -> create` decision ladder and
     ambiguity fallback rules in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/10_process.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/10_process.md`.
   - Added artifact-level `action_rationale` and structural-note requirements in
-    `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md`.
   - Tightened schema constraints (`action_rationale` required, artifact and
     guardrail list minimums, notes uniqueness/limits) in
-    `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`.
   - Updated example output to demonstrate reuse/update-first behavior in
-    `<REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json`.
   - Re-ran `node tools/build/validate_examples.mjs` successfully.
 
 ## Validation Runs
@@ -94,12 +94,12 @@ results, and validation command outcomes for tasks in
 - Foundational completion evidence:
   - Updated `rules/00_overview.md` with required-input validation, strict JSON
     output scope, and sensitive-output constraints.
-  - Updated `skills/react_placement_and_layering/SKILL.md` to document
+  - Updated `skills/react-placement-and-layering/SKILL.md` to document
     versioned result envelope and validation-error behavior.
   - Updated contract failure modes in
     `contracts/placement-plan-output-contract.md`.
   - Synced base strict output envelope into
-    `skills/react_placement_and_layering/schemas/output.schema.json`.
+    `skills/react-placement-and-layering/schemas/output.schema.json`.
 - US1 completion evidence:
   - Strict plan output and artifact process rules are documented and aligned.
   - Example payload validates against updated schema.
@@ -119,7 +119,7 @@ results, and validation command outcomes for tasks in
   - Updated example demonstrates reuse and update before create.
 - Polish completion evidence:
   - Regenerated
-    `<REPO_ROOT>/skills/react_placement_and_layering/AGENTS.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/AGENTS.md`.
   - Ran repository validation via `npm run check` successfully.
   - Refreshed agent context in
     `<REPO_ROOT>/AGENTS.md`.
@@ -133,7 +133,7 @@ results, and validation command outcomes for tasks in
 - Master-spec parity review (2026-02-24):
   - Reviewed `<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`
     against spec 003 placement rules and added missing rule coverage modules in
-    `skills/react_placement_and_layering/rules/`:
+    `skills/react-placement-and-layering/rules/`:
     - `30_migration_safety.md`
     - `40_default_bias.md`
     - `50_discovery_conventions.md`
@@ -141,26 +141,26 @@ results, and validation command outcomes for tasks in
     - `70_access_control.md`
     - `80_skill_model_alignment.md`
   - Updated quick-reference rule IDs in
-    `<REPO_ROOT>/skills/react_placement_and_layering/SKILL.md`.
+    `<REPO_ROOT>/skills/react-placement-and-layering/SKILL.md`.
   - Recompiled agent docs and re-ran `npm run check` successfully.
   - Elevated FR-015 behavior to normative process rules in
-    `skills/react_placement_and_layering/rules/10_process.md`:
+    `skills/react-placement-and-layering/rules/10_process.md`:
     unresolved high-impact structural ambiguity now explicitly blocks
     `result_type=plan` finalization until clarification is resolved.
 - Master-spec parity closure pass (2026-02-24):
   - Added explicit request-classification categories and missing master-policy
-    coverage in `skills/react_placement_and_layering/rules/10_process.md`:
+    coverage in `skills/react-placement-and-layering/rules/10_process.md`:
     cross-layer error ownership and state-persistence constraints for
     store/global-state placement.
   - Added scope-expansion structured escape-hatch behavior in
-    `skills/react_placement_and_layering/rules/20_output.md` and
-    `skills/react_placement_and_layering/rules/60_scope_governor.md`.
+    `skills/react-placement-and-layering/rules/20_output.md` and
+    `skills/react-placement-and-layering/rules/60_scope_governor.md`.
   - Added write-control policy for architecture/specification documents in
-    `skills/react_placement_and_layering/rules/70_access_control.md`.
+    `skills/react-placement-and-layering/rules/70_access_control.md`.
   - Added implementation-output formatting defaults in
-    `skills/react_placement_and_layering/rules/90_implementation_handoff.md`.
+    `skills/react-placement-and-layering/rules/90_implementation_handoff.md`.
   - Synced schema and contract for optional `scope_expansion_needed` shape in:
-    - `skills/react_placement_and_layering/schemas/output.schema.json`
+    - `skills/react-placement-and-layering/schemas/output.schema.json`
     - `specs/003-skill-react-placement-layering/contracts/placement-plan-output.schema.json`
     - `specs/003-skill-react-placement-layering/contracts/placement-plan-output-contract.md`
   - Synced spec artifacts (`spec.md`, `data-model.md`, `quickstart.md`) with

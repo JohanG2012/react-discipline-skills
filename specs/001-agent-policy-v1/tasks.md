@@ -60,16 +60,16 @@
 
 ### Implementation for User Story 2
 
-- [X] T015 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_architecture_detection/SKILL.md
-- [X] T016 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_placement_and_layering/SKILL.md
-- [X] T017 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md
-- [X] T018 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_implementation_discipline/SKILL.md
-- [X] T019 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react_architecture_detection/rules/00_overview.md
-- [X] T020 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react_placement_and_layering/rules/00_overview.md
-- [X] T021 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react_reuse_update_new/rules/00_overview.md
-- [X] T022 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react_implementation_discipline/rules/00_overview.md
+- [X] T015 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-architecture-detection/SKILL.md
+- [X] T016 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-placement-and-layering/SKILL.md
+- [X] T017 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md
+- [X] T018 [P] [US2] Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-implementation-discipline/SKILL.md
+- [X] T019 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react-architecture-detection/rules/00_overview.md
+- [X] T020 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react-placement-and-layering/rules/00_overview.md
+- [X] T021 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react-reuse-update-new/rules/00_overview.md
+- [X] T022 [P] [US2] Add baseline conformance rule to overview module in <REPO_ROOT>/skills/react-implementation-discipline/rules/00_overview.md
 - [X] T023 [US2] Add four-skill baseline-reference compliance matrix in <REPO_ROOT>/specs/001-agent-policy-v1/contracts/policy-governance-contract.md
-- [X] T024 [US2] Regenerate downstream skill bundles in <REPO_ROOT>/skills/react_architecture_detection/AGENTS.md, <REPO_ROOT>/skills/react_placement_and_layering/AGENTS.md, <REPO_ROOT>/skills/react_reuse_update_new/AGENTS.md, and <REPO_ROOT>/skills/react_implementation_discipline/AGENTS.md via `npm run build:agents`
+- [X] T024 [US2] Regenerate downstream skill bundles in <REPO_ROOT>/skills/react-architecture-detection/AGENTS.md, <REPO_ROOT>/skills/react-placement-and-layering/AGENTS.md, <REPO_ROOT>/skills/react-reuse-update-new/AGENTS.md, and <REPO_ROOT>/skills/react-implementation-discipline/AGENTS.md via `npm run build:agents`
 - [X] T025 [US2] Record US2 independent validation evidence in <REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md
 
 **Checkpoint**: All downstream skill specs consistently inherit shared baseline behavior.
@@ -145,10 +145,10 @@ Task: "Add deterministic defaults and scope-governor constraints in <REPO_ROOT>/
 ## Parallel Example: User Story 2
 
 ```bash
-Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_architecture_detection/SKILL.md"
-Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_placement_and_layering/SKILL.md"
-Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_reuse_update_new/SKILL.md"
-Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react_implementation_discipline/SKILL.md"
+Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-architecture-detection/SKILL.md"
+Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-placement-and-layering/SKILL.md"
+Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-reuse-update-new/SKILL.md"
+Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/react-implementation-discipline/SKILL.md"
 ```
 
 ## Parallel Example: User Story 3

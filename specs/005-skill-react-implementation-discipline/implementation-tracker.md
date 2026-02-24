@@ -2,7 +2,7 @@
 
 ## Scope
 
-- Feature: `react_implementation_discipline`
+- Feature: `react-implementation-discipline`
 - Branch: `005-skill-react-implementation-discipline`
 - Spec: `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/spec.md`
 - Tasks: `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/tasks.md`
@@ -51,18 +51,18 @@
 - `.specify/scripts/bash/update-agent-context.sh codex`: passed.
 - Contract schema mirror check: passed (`skills/.../schemas/output.schema.json` matches `specs/.../contracts/implementation-discipline-output.schema.json` except `$id`).
 - master-spec parity review: additional rules added to cover validation gate sequence, scope governor caps, fallback access/write-control policy, output-mode selection, UI anti-leakage, flow/order discipline, quick validation, ambiguity strategy, and anti-chaotic-change guardrails:
-  - `skills/react_implementation_discipline/rules/30_validation_gates.md`
-  - `skills/react_implementation_discipline/rules/40_scope_governor.md`
-  - `skills/react_implementation_discipline/rules/50_access_control.md`
-  - `skills/react_implementation_discipline/rules/60_output_mode_selection.md`
-  - `skills/react_implementation_discipline/rules/70_ui_genericity.md`
-  - `skills/react_implementation_discipline/rules/80_data_flow_and_exports.md`
-  - `skills/react_implementation_discipline/rules/90_quick_validation.md`
-  - `skills/react_implementation_discipline/rules/100_ambiguity_strategy.md`
-  - `skills/react_implementation_discipline/rules/110_chaotic_change_guardrails.md`
-  - `skills/react_implementation_discipline/rules/120_pause_defaults_protocol.md`
-  - `skills/react_implementation_discipline/rules/130_boundary_runtime_query.md`
-  - `skills/react_implementation_discipline/rules/140_stop_conditions.md`
+  - `skills/react-implementation-discipline/rules/30_validation_gates.md`
+  - `skills/react-implementation-discipline/rules/40_scope_governor.md`
+  - `skills/react-implementation-discipline/rules/50_access_control.md`
+  - `skills/react-implementation-discipline/rules/60_output_mode_selection.md`
+  - `skills/react-implementation-discipline/rules/70_ui_genericity.md`
+  - `skills/react-implementation-discipline/rules/80_data_flow_and_exports.md`
+  - `skills/react-implementation-discipline/rules/90_quick_validation.md`
+  - `skills/react-implementation-discipline/rules/100_ambiguity_strategy.md`
+  - `skills/react-implementation-discipline/rules/110_chaotic_change_guardrails.md`
+  - `skills/react-implementation-discipline/rules/120_pause_defaults_protocol.md`
+  - `skills/react-implementation-discipline/rules/130_boundary_runtime_query.md`
+  - `skills/react-implementation-discipline/rules/140_stop_conditions.md`
 - parity cleanup: optional input controls (`diff_preference`, `strictness`, `max_lines_policy`) and full soft-cap guidance (`features/*/domain`, `lib`, `store`, `core`) are now represented in split `005` artifacts and skill process rules.
 
 ## Final Sign-off

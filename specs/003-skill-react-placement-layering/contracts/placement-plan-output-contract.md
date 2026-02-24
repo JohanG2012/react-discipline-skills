@@ -2,15 +2,15 @@
 
 ## Purpose
 
-Define the normative output interface emitted by `react_placement_and_layering`
+Define the normative output interface emitted by `react-placement-and-layering`
 for downstream planning and implementation workflows.
 
 ## Contract Scope
 
-- **Producer**: `<REPO_ROOT>/skills/react_placement_and_layering/`
+- **Producer**: `<REPO_ROOT>/skills/react-placement-and-layering/`
 - **Consumers**:
-  - `react_reuse_update_new`
-  - `react_implementation_discipline`
+  - `react-reuse-update-new`
+  - `react-implementation-discipline`
   - feature-level planning/review flows
 - **Contract Type**: Internal machine-consumable JSON output contract.
 
@@ -26,7 +26,7 @@ for downstream planning and implementation workflows.
 ```json
 {
   "schema_version": "1.0.0",
-  "skill": "react_placement_and_layering",
+  "skill": "react-placement-and-layering",
   "version": "1.0.0",
   "result_type": "plan",
   "strategy_used": "follow-existing",
@@ -103,7 +103,7 @@ for downstream planning and implementation workflows.
 ```json
 {
   "schema_version": "1.0.0",
-  "skill": "react_placement_and_layering",
+  "skill": "react-placement-and-layering",
   "version": "1.0.0",
   "result_type": "validation_error",
   "validation_status": {
@@ -184,9 +184,9 @@ for downstream planning and implementation workflows.
 - Consumers must handle both contract shapes (`plan` and `validation_error`).
 - Consumers must not proceed to implementation when `result_type=validation_error`.
 - Contract changes require coordinated updates to:
-  - `<REPO_ROOT>/skills/react_placement_and_layering/schemas/output.schema.json`
-  - `<REPO_ROOT>/skills/react_placement_and_layering/examples/output.example.json`
-  - `<REPO_ROOT>/skills/react_placement_and_layering/rules/20_output.md`
+  - `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`
+  - `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json`
+  - `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md`
 
 ## Failure Modes
 

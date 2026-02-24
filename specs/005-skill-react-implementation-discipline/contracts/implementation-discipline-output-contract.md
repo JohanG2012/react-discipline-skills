@@ -3,13 +3,13 @@
 ## Purpose
 
 Define the normative output interface produced by
-`react_implementation_discipline` and consumed by reviewers and downstream
+`react-implementation-discipline` and consumed by reviewers and downstream
 automation.
 
 ## Scope
 
 - **Producer**:
-  `<REPO_ROOT>/skills/react_implementation_discipline/`
+  `<REPO_ROOT>/skills/react-implementation-discipline/`
 - **Consumers**:
   - review workflows validating implementation discipline behavior
   - automation that checks boundary/quality/scope outcomes
@@ -26,13 +26,13 @@ Contract artifacts for this feature:
 
 Skill artifacts that must align with this contract:
 
-- `<REPO_ROOT>/skills/react_implementation_discipline/SKILL.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/rules/10_process.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/rules/20_output.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/rules/30_validation_gates.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/rules/40_scope_governor.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/rules/50_access_control.md`
-- `<REPO_ROOT>/skills/react_implementation_discipline/schemas/output.schema.json`
+- `<REPO_ROOT>/skills/react-implementation-discipline/SKILL.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/10_process.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/20_output.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/30_validation_gates.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/40_scope_governor.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/50_access_control.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json`
 
 Baseline governance references:
 
@@ -45,7 +45,7 @@ Baseline governance references:
 All outputs must include:
 
 - `schema_version` (string)
-- `skill` (`react_implementation_discipline`)
+- `skill` (`react-implementation-discipline`)
 - `version` (string)
 - `result_type` (`implementation_package` | `validation_error` | `dependency_error`)
 - `validation_status`

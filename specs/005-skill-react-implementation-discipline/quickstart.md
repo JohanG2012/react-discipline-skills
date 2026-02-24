@@ -2,7 +2,7 @@
 
 ## Goal
 
-Implement and validate `react_implementation_discipline` updates defined in
+Implement and validate `react-implementation-discipline` updates defined in
 `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/spec.md`
 with strict plan fidelity, boundary-safe behavior, blocked output handling,
 fail-closed dependency behavior, out-of-scope exclusion, file-size discipline,
@@ -16,10 +16,10 @@ and structured validation summary reporting.
 
 ## Requirement Trace Map
 
-- `FR-002`, `FR-002A`, `FR-003` to `FR-012`: Input discipline, boundary behavior, convention matching, file-size guardrails, and data-flow rules in `skills/react_implementation_discipline/rules/10_process.md`, `rules/70_ui_genericity.md`, `rules/80_data_flow_and_exports.md`, and `rules/140_stop_conditions.md`
-- `FR-013` to `FR-016`: Output mode and ambiguity/migration-aware flow in `skills/react_implementation_discipline/rules/20_output.md`, `rules/60_output_mode_selection.md`, and `rules/100_ambiguity_strategy.md`
-- `FR-017` to `FR-020`: Shared policy inheritance and implementation-scope constraints in `skills/react_implementation_discipline/rules/00_overview.md` with `agent-policy-v1`
-- `FR-021` to `FR-029`: Blocked/dependency/error behavior, strict result variants, payload constraints, fallback context bundle requirements, and scope caps in `skills/react_implementation_discipline/schemas/output.schema.json`, `rules/20_output.md`, `rules/40_scope_governor.md`, and `rules/50_access_control.md`
+- `FR-002`, `FR-002A`, `FR-003` to `FR-012`: Input discipline, boundary behavior, convention matching, file-size guardrails, and data-flow rules in `skills/react-implementation-discipline/rules/10_process.md`, `rules/70_ui_genericity.md`, `rules/80_data_flow_and_exports.md`, and `rules/140_stop_conditions.md`
+- `FR-013` to `FR-016`: Output mode and ambiguity/migration-aware flow in `skills/react-implementation-discipline/rules/20_output.md`, `rules/60_output_mode_selection.md`, and `rules/100_ambiguity_strategy.md`
+- `FR-017` to `FR-020`: Shared policy inheritance and implementation-scope constraints in `skills/react-implementation-discipline/rules/00_overview.md` with `agent-policy-v1`
+- `FR-021` to `FR-029`: Blocked/dependency/error behavior, strict result variants, payload constraints, fallback context bundle requirements, and scope caps in `skills/react-implementation-discipline/schemas/output.schema.json`, `rules/20_output.md`, `rules/40_scope_governor.md`, and `rules/50_access_control.md`
 - `SC-011` to `SC-018`: Validated by output examples and `npm run check`
 
 ## Steps
@@ -32,17 +32,17 @@ and structured validation summary reporting.
    - `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output.schema.json`
 
 2. Update skill artifacts
-   - `skills/react_implementation_discipline/SKILL.md`
-   - `skills/react_implementation_discipline/rules/00_overview.md`
-   - `skills/react_implementation_discipline/rules/10_process.md`
-   - `skills/react_implementation_discipline/rules/20_output.md`
-   - `skills/react_implementation_discipline/schemas/output.schema.json`
+   - `skills/react-implementation-discipline/SKILL.md`
+   - `skills/react-implementation-discipline/rules/00_overview.md`
+   - `skills/react-implementation-discipline/rules/10_process.md`
+   - `skills/react-implementation-discipline/rules/20_output.md`
+   - `skills/react-implementation-discipline/schemas/output.schema.json`
 
 3. Update examples
-   - `skills/react_implementation_discipline/examples/output.example.json`
-   - `skills/react_implementation_discipline/examples/blocked-output.example.json`
-   - `skills/react_implementation_discipline/examples/validation-error.example.json`
-   - `skills/react_implementation_discipline/examples/dependency-error.example.json`
+   - `skills/react-implementation-discipline/examples/output.example.json`
+   - `skills/react-implementation-discipline/examples/blocked-output.example.json`
+   - `skills/react-implementation-discipline/examples/validation-error.example.json`
+   - `skills/react-implementation-discipline/examples/dependency-error.example.json`
 
 4. Keep contract mirror in sync
    - `specs/005-skill-react-implementation-discipline/contracts/implementation-discipline-output-contract.md`
@@ -64,7 +64,7 @@ npm run check
 - [x] Dependency and validation errors are explicit result types and exclude implementation payload.
 - [x] Out-of-scope requests are represented via scope deviation and expansion guidance.
 - [x] File-size discipline thresholds are explicit and testable.
-- [x] Examples validate against `skills/react_implementation_discipline/schemas/output.schema.json`.
+- [x] Examples validate against `skills/react-implementation-discipline/schemas/output.schema.json`.
 
 ## Exit Criteria
 
@@ -78,4 +78,4 @@ npm run check
 - `npm run build:agents`: passed.
 - `npm run check`: passed.
 - `.specify/scripts/bash/update-agent-context.sh codex`: passed.
-- Output examples validated against `skills/react_implementation_discipline/schemas/output.schema.json`.
+- Output examples validated against `skills/react-implementation-discipline/schemas/output.schema.json`.
