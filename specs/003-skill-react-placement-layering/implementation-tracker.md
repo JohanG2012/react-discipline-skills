@@ -35,7 +35,7 @@ results, and validation command outcomes for tasks in
     `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`.
   - Updated successful example payload in
     `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json`.
-  - Ran `node tools/build/validate_examples.mjs` successfully.
+  - Ran `node scripts/validators/validate_examples.mjs` successfully.
 
 ### US2 - Enforce Layer Guardrails
 
@@ -55,7 +55,7 @@ results, and validation command outcomes for tasks in
   - Added explicit `result_type=validation_error` contract rules in
     `<REPO_ROOT>/skills/react-placement-and-layering/rules/20_output.md`.
   - Validated updated example with
-    `node tools/build/validate_examples.mjs`.
+    `node scripts/validators/validate_examples.mjs`.
 
 ### US3 - Prefer Reuse Before New Artifacts
 
@@ -76,7 +76,7 @@ results, and validation command outcomes for tasks in
     `<REPO_ROOT>/skills/react-placement-and-layering/schemas/output.schema.json`.
   - Updated example output to demonstrate reuse/update-first behavior in
     `<REPO_ROOT>/skills/react-placement-and-layering/examples/output.example.json`.
-  - Re-ran `node tools/build/validate_examples.mjs` successfully.
+  - Re-ran `node scripts/validators/validate_examples.mjs` successfully.
 
 ## Validation Runs
 

@@ -14,7 +14,7 @@
 - Q: Who can approve shared-policy exception requests? → A: Repo maintainers only.
 - Q: Where must the pre-approved collision field live? → A: It must exist only in the shared baseline header as the single source of truth.
 - Q: Do shared-policy exceptions expire? → A: No; approved exceptions have no expiry and remain active until explicitly revoked or superseded by a newer shared policy version.
-- Q: How should shared baseline rule coverage be organized in policy files? → A: Shared rule coverage must be explicit and modularized in numbered rule files, with rule IDs mapped in `skills/.shared/policy/SKILL.md` and mirrored by compliance checks in contract and quickstart artifacts.
+- Q: How should shared baseline rule coverage be organized in policy files? → A: Shared rule coverage must be explicit and modularized in numbered rule files, with rule IDs mapped in `shared/SKILL.md` and mirrored by compliance checks in contract and quickstart artifacts.
 - Q: Which additional shared-rule areas from `specs/001-agent-policy-v1/master_spec.md` must be explicitly represented in baseline modules? → A: Planning/reuse workflow, migration strategy, fallback defaults, implementation defaults, layer contracts, access/write control, and file-size guidance must be included as explicit numbered shared-rule modules.
 - Q: After final precaution review, which remaining shared rules still required explicit modules? → A: Architecture-detection output/bootstrap contract and enforcement heuristics were added as dedicated numbered modules and included in shared baseline coverage checks.
 

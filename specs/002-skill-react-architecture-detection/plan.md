@@ -10,7 +10,7 @@ Define and harden the `react-architecture-detection` skill contract so downstrea
 ## Technical Context
 
 **Language/Version**: JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/policy/spec artifacts  
-**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint  
+**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint  
 **Storage**: Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`)  
 **Testing**: `npm run check` and contract/spec consistency review against feature requirements  
 **Target Platform**: Local developer environments and GitHub Actions on Ubuntu (`ubuntu-latest`)  
@@ -67,9 +67,15 @@ Define and harden the `react-architecture-detection` skill contract so downstrea
 
 ```text
 <REPO_ROOT>/
+├── shared/
+│   ├── SKILL.md
+│   └── rules/
+├── templates/
+│   ├── 00_OVERVIEW_TEMPLATE.md
+│   ├── SKILL_TEMPLATE.md
+│   ├── AGENTS_TEMPLATE.md
+│   └── RULE_TEMPLATE.md
 ├── skills/
-│   ├── .shared/
-│   │   └── policy/
 │   ├── react-architecture-detection/
 │   │   ├── SKILL.md
 │   │   ├── rules/
@@ -78,8 +84,11 @@ Define and harden the `react-architecture-detection` skill contract so downstrea
 │   ├── react-placement-and-layering/
 │   ├── react-reuse-update-new/
 │   └── react-implementation-discipline/
-├── tools/
-│   └── build/
+├── scripts/
+│   ├── generators/
+│   ├── validators/
+│   ├── lib/
+│   └── fixtures/
 ├── specs/
 │   ├── 001-agent-policy-v1/
 │   └── 002-skill-react-architecture-detection/

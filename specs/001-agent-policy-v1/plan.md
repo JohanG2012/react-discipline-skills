@@ -10,7 +10,7 @@ Define and document a shared governance baseline (`agent-policy-v1`) that all fo
 ## Technical Context
 
 **Language/Version**: JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown for policy/spec artifacts  
-**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`tools/build/compile_agents.mjs`, `tools/build/validate_frontmatter.mjs`, `tools/build/validate_examples.mjs`), Husky/Commitlint  
+**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`scripts/generators/generate_agents.mjs`, `scripts/validators/validate_frontmatter.mjs`, `scripts/validators/validate_examples.mjs`), Husky/Commitlint  
 **Storage**: Filesystem-based repository artifacts (Markdown specs, policy docs, generated agent docs)  
 **Testing**: `npm run check` plus spec/contract consistency review against feature requirements  
 **Target Platform**: Local developer environments and GitHub Actions on Ubuntu (`ubuntu-latest`)  
@@ -66,16 +66,24 @@ Define and document a shared governance baseline (`agent-policy-v1`) that all fo
 
 ```text
 <REPO_ROOT>/
+├── shared/
+│   ├── SKILL.md
+│   └── rules/
+├── templates/
+│   ├── 00_OVERVIEW_TEMPLATE.md
+│   ├── SKILL_TEMPLATE.md
+│   ├── AGENTS_TEMPLATE.md
+│   └── RULE_TEMPLATE.md
 ├── skills/
-│   ├── .shared/
-│   │   ├── policy/
-│   │   └── templates/
 │   ├── react-architecture-detection/
 │   ├── react-implementation-discipline/
 │   ├── react-placement-and-layering/
 │   └── react-reuse-update-new/
-├── tools/
-│   └── build/
+├── scripts/
+│   ├── generators/
+│   ├── validators/
+│   ├── lib/
+│   └── fixtures/
 ├── eslint/
 │   ├── 8.50.0/
 │   └── 10.0.0/

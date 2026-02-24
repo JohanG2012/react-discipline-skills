@@ -34,8 +34,8 @@ Baseline governance references:
 
 - `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`
 - `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`
-- `<REPO_ROOT>/skills/.shared/policy/rules/30_architecture_boundaries.md` (dependency direction, canonical endpoint layer, alias-boundary parity, generic fetch-hook exception policy)
-- `<REPO_ROOT>/skills/.shared/policy/rules/130_access_write_control.md` (read/search assumptions and write-control policy for architecture/spec documents)
+- `<REPO_ROOT>/shared/rules/30_architecture_boundaries.md` (dependency direction, canonical endpoint layer, alias-boundary parity, generic fetch-hook exception policy)
+- `<REPO_ROOT>/shared/rules/130_access_write_control.md` (read/search assumptions and write-control policy for architecture/spec documents)
 
 ## Top-Level Contract
 

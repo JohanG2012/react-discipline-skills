@@ -72,7 +72,7 @@ Define the normative interface between the shared policy baseline (`agent-policy
      - Scope-governor hard defaults and expansion path.
      - Completion and quality baseline checks.
    - The shared baseline MUST expose the corresponding rule IDs in
-     `skills/.shared/policy/SKILL.md` quick-reference rules.
+     `shared/SKILL.md` quick-reference rules.
 
 ## Exception Validation Checks
 
@@ -81,7 +81,7 @@ Define the normative interface between the shared policy baseline (`agent-policy
 - Exception records MUST NOT include expiry metadata.
 - Exceptions remain active until explicitly revoked or superseded by shared policy version change.
 - Shared rule IDs listed in `SKILL.md` MUST resolve to concrete rules in
-  `skills/.shared/policy/rules/` files.
+  `shared/rules/` files.
 
 ## Compliance Verification
 
@@ -101,7 +101,7 @@ A downstream skill spec is compliant when all checks pass:
   implementation defaults, layer contracts, access/write control, file-size
   guidance, architecture-detection contract, enforcement heuristics,
   naming/ownership, and completion checks.
-- Rule IDs in `skills/.shared/policy/SKILL.md` map to existing rule definitions.
+- Rule IDs in `shared/SKILL.md` map to existing rule definitions.
 
 ## Failure Modes
 

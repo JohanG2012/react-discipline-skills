@@ -10,7 +10,7 @@ Define and harden the `react-reuse-update-new` skill with deterministic per-arti
 ## Technical Context
 
 **Language/Version**: JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts  
-**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/tools/build/compile_agents.mjs`, `<REPO_ROOT>/tools/build/validate_frontmatter.mjs`, `<REPO_ROOT>/tools/build/validate_examples.mjs`), Husky/Commitlint  
+**Primary Dependencies**: Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint  
 **Storage**: Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`)  
 **Testing**: `npm run check` plus contract/spec consistency review against feature requirements  
 **Target Platform**: Local developer environments and GitHub Actions on Ubuntu (`ubuntu-latest`)  
@@ -67,9 +67,15 @@ Define and harden the `react-reuse-update-new` skill with deterministic per-arti
 
 ```text
 <REPO_ROOT>/
+├── shared/
+│   ├── SKILL.md
+│   └── rules/
+├── templates/
+│   ├── 00_OVERVIEW_TEMPLATE.md
+│   ├── SKILL_TEMPLATE.md
+│   ├── AGENTS_TEMPLATE.md
+│   └── RULE_TEMPLATE.md
 ├── skills/
-│   ├── .shared/
-│   │   └── policy/
 │   ├── react-architecture-detection/
 │   ├── react-placement-and-layering/
 │   ├── react-reuse-update-new/
@@ -78,8 +84,11 @@ Define and harden the `react-reuse-update-new` skill with deterministic per-arti
 │   │   ├── examples/
 │   │   └── schemas/
 │   └── react-implementation-discipline/
-├── tools/
-│   └── build/
+├── scripts/
+│   ├── generators/
+│   ├── validators/
+│   ├── lib/
+│   └── fixtures/
 ├── specs/
 │   ├── 001-agent-policy-v1/
 │   ├── 004-skill-react-reuse-update-new/

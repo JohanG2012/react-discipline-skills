@@ -41,11 +41,11 @@
 
 ### Implementation for User Story 1
 
-- [X] T009 [P] [US1] Update baseline purpose, applicability, and precedence wording in <REPO_ROOT>/skills/.shared/policy/SKILL.md
-- [X] T010 [P] [US1] Add authoritative scope and document-precedence rules in <REPO_ROOT>/skills/.shared/policy/rules/00_overview.md
-- [X] T011 [P] [US1] Add deterministic defaults and scope-governor constraints in <REPO_ROOT>/skills/.shared/policy/rules/10_constraints.md
+- [X] T009 [P] [US1] Update baseline purpose, applicability, and precedence wording in <REPO_ROOT>/shared/SKILL.md
+- [X] T010 [P] [US1] Add authoritative scope and document-precedence rules in <REPO_ROOT>/shared/rules/00_overview.md
+- [X] T011 [P] [US1] Add deterministic defaults and scope-governor constraints in <REPO_ROOT>/shared/rules/10_constraints.md
 - [X] T012 [US1] Add baseline coverage and precedence verification clauses in <REPO_ROOT>/specs/001-agent-policy-v1/contracts/policy-governance-contract.md
-- [X] T013 [US1] Regenerate baseline skill bundle in <REPO_ROOT>/skills/.shared/policy/AGENTS.md via `npm run build:agents`
+- [X] T013 [US1] Regenerate production skill bundles with baked-in shared rules from <REPO_ROOT>/shared/rules/ via `npm run build:agents`
 - [X] T014 [US1] Record US1 independent validation evidence in <REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md
 
 **Checkpoint**: Shared baseline is independently complete and verifiable.
@@ -84,9 +84,9 @@
 
 ### Implementation for User Story 3
 
-- [X] T026 [P] [US3] Add maintainer-only exception workflow and no-expiry rule in <REPO_ROOT>/skills/.shared/policy/rules/20_governance.md
-- [X] T027 [P] [US3] Extend governance schema for exception and version records in <REPO_ROOT>/skills/.shared/policy/schemas/policy.schema.json
-- [X] T028 [P] [US3] Update governance example with compliant exception payload in <REPO_ROOT>/skills/.shared/policy/examples/policy_usage.example.md
+- [X] T026 [P] [US3] Add maintainer-only exception workflow and no-expiry rule in <REPO_ROOT>/shared/rules/20_governance.md
+- [X] T027 [P] [US3] Consolidate shared policy artifacts so only build-used sources remain in <REPO_ROOT>/shared/
+- [X] T028 [P] [US3] Ensure baked-in policy behavior remains documented in shared rules and downstream skill specs
 - [X] T029 [US3] Add maintainer-approval and no-expiry compliance checks in <REPO_ROOT>/specs/001-agent-policy-v1/contracts/policy-governance-contract.md
 - [X] T030 [US3] Align conflict-governance language with maintainer-only exceptions in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
 - [X] T031 [US3] Align policy-evolution and exception language in <REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md
@@ -137,9 +137,9 @@
 ## Parallel Example: User Story 1
 
 ```bash
-Task: "Update baseline purpose, applicability, and precedence wording in <REPO_ROOT>/skills/.shared/policy/SKILL.md"
-Task: "Add authoritative scope and document-precedence rules in <REPO_ROOT>/skills/.shared/policy/rules/00_overview.md"
-Task: "Add deterministic defaults and scope-governor constraints in <REPO_ROOT>/skills/.shared/policy/rules/10_constraints.md"
+Task: "Update baseline purpose, applicability, and precedence wording in <REPO_ROOT>/shared/SKILL.md"
+Task: "Add authoritative scope and document-precedence rules in <REPO_ROOT>/shared/rules/00_overview.md"
+Task: "Add deterministic defaults and scope-governor constraints in <REPO_ROOT>/shared/rules/10_constraints.md"
 ```
 
 ## Parallel Example: User Story 2
@@ -154,9 +154,9 @@ Task: "Add explicit shared-baseline inheritance contract in <REPO_ROOT>/skills/r
 ## Parallel Example: User Story 3
 
 ```bash
-Task: "Add maintainer-only exception workflow and no-expiry rule in <REPO_ROOT>/skills/.shared/policy/rules/20_governance.md"
-Task: "Extend governance schema for exception and version records in <REPO_ROOT>/skills/.shared/policy/schemas/policy.schema.json"
-Task: "Update governance example with compliant exception payload in <REPO_ROOT>/skills/.shared/policy/examples/policy_usage.example.md"
+Task: "Add maintainer-only exception workflow and no-expiry rule in <REPO_ROOT>/shared/rules/20_governance.md"
+Task: "Consolidate shared policy artifacts so only build-used sources remain in <REPO_ROOT>/shared/"
+Task: "Ensure baked-in policy behavior remains documented in shared rules and downstream skill specs"
 ```
 
 ---
@@ -181,7 +181,7 @@ Task: "Update governance example with compliant exception payload in <REPO_ROOT>
 
 1. One maintainer handles foundational top-level docs (T003, T006).
 2. One contributor handles downstream skill inheritance edits (T015-T022).
-3. One contributor handles governance schema/example updates (T026-T028).
+3. One contributor handles shared-policy governance and consolidation updates (T026-T028).
 4. Merge via contract updates and final validation tasks.
 
 ---

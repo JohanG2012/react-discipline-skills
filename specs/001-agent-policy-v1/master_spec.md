@@ -56,11 +56,11 @@ This document aggregates sections that map to spec `001-agent-policy-v1`.
   "type": "module",
   "scripts": {
     "build": "npm run build:agents",
-    "build:agents": "node tools/build/compile_agents.mjs",
+    "build:agents": "node scripts/generators/generate_agents.mjs",
     "check": "npm run check:agents && npm run check:frontmatter && npm run check:examples",
-    "check:agents": "node tools/build/compile_agents.mjs --check",
-    "check:frontmatter": "node tools/build/validate_frontmatter.mjs",
-    "check:examples": "node tools/build/validate_examples.mjs"
+    "check:agents": "node scripts/generators/generate_agents.mjs --check",
+    "check:frontmatter": "node scripts/validators/validate_frontmatter.mjs",
+    "check:examples": "node scripts/validators/validate_examples.mjs"
   }
 }
 ```
@@ -70,12 +70,12 @@ Notes:
 - `build:agents` writes `AGENTS.md`.
 - `check:agents` runs in `--check` mode and fails if generated output differs.
 
-### Build script spec: `compile_agents.mjs`
+### Build script spec: `generate_agents.mjs`
 
 #### Responsibilities
 
 For each production skill under `skills/*/` and the shared baseline at
-`skills/.shared/policy/`:
+`shared/`:
 
 1. If it has `rules/`:
    - read files in lexicographic order
@@ -98,7 +98,7 @@ For each production skill under `skills/*/` and the shared baseline at
 
 #### Responsibilities
 
-For each production `skills/*/SKILL.md` and `skills/.shared/policy/SKILL.md`:
+For each production `skills/*/SKILL.md` and `shared/SKILL.md`:
 
 - parse frontmatter
 - require keys:
@@ -174,24 +174,35 @@ CI should fail if `AGENTS.md` is stale.
 
 ```text
 repo/
+  shared/
+    policy/
+      SKILL.md
+      rules/
+        00_overview.md
+        10_<topic>.md
+        20_<topic>.md
+  templates/
+    00_OVERVIEW_TEMPLATE.md
+    SKILL_TEMPLATE.md
+    AGENTS_TEMPLATE.md
+    RULE_TEMPLATE.md
   skills/
-    .shared/
-      policy/
-        SKILL.md
-        rules/
-          00_overview.md
-          10_<topic>.md
-          20_<topic>.md
-        AGENTS.md
-        examples/
-          policy_usage.example.md
-        schemas/
-          policy.schema.json
-      templates/
-        00_OVERVIEW_TEMPLATE.md
-        SKILL_TEMPLATE.md
-        AGENTS_TEMPLATE.md
-        RULE_TEMPLATE.md
+    react-architecture-detection/
+      SKILL.md
+      rules/
+      AGENTS.md
+    react-placement-and-layering/
+      SKILL.md
+      rules/
+      AGENTS.md
+    react-reuse-update-new/
+      SKILL.md
+      rules/
+      AGENTS.md
+    react-implementation-discipline/
+      SKILL.md
+      rules/
+      AGENTS.md
   specs/
     001-agent-policy-v1/
       master_spec.md
@@ -207,11 +218,18 @@ repo/
   .specify/
     memory/
       constitution.md
-  tools/
-    build/
-      compile_agents.mjs
+  scripts/
+    generators/
+      generate_agents.mjs
+    validators/
       validate_frontmatter.mjs
       validate_examples.mjs
+      validate_handoffs.mjs
+    lib/
+      schema_validator.mjs
+      utils.mjs
+    fixtures/
+      handoffs/
 ```
 
 > Normative policy baseline starts below.

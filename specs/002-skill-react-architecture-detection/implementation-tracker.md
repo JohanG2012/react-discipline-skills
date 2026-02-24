@@ -33,7 +33,7 @@ independent-test outcomes per user story.
     `<REPO_ROOT>/skills/react-architecture-detection/schemas/output.schema.json`.
   - Updated example payload in
     `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
-  - Ran `node tools/build/validate_examples.mjs` successfully.
+  - Ran `node scripts/validators/validate_examples.mjs` successfully.
 
 ### US2 - Select Safe Migration Strategy
 
@@ -52,7 +52,7 @@ independent-test outcomes per user story.
     `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
   - Updated downstream strategy consumption expectations in
     `<REPO_ROOT>/specs/002-skill-react-architecture-detection/contracts/architecture-detection-output-contract.md`.
-  - Re-ran `node tools/build/validate_examples.mjs` successfully.
+  - Re-ran `node scripts/validators/validate_examples.mjs` successfully.
 
 ### US3 - Handle Ambiguity With Confidence Rules
 
@@ -74,7 +74,7 @@ independent-test outcomes per user story.
     `<REPO_ROOT>/skills/react-architecture-detection/examples/output.example.json`.
   - Updated skill output constraints in
     `<REPO_ROOT>/skills/react-architecture-detection/SKILL.md`.
-  - Re-ran `node tools/build/validate_examples.mjs` successfully.
+  - Re-ran `node scripts/validators/validate_examples.mjs` successfully.
 
 ## Validation Runs
 
