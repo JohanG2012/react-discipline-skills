@@ -84,6 +84,7 @@ As a reviewer, I need implementation output that is easy to apply and validate s
 
 - **FR-001**: The system MUST define `react_implementation_discipline` as one of the four production execution skills for initial project scope.
 - **FR-002**: The system MUST require valid `revised_plan`, `detection_result`, `reuse_decisions`, and repository context before generating implementation output.
+- **FR-002A**: The system MUST support optional execution controls from the governing master spec: `diff_preference` (snippet-first or unified-diff bias), `strictness` (`strict` default; `relaxed` only when explicitly allowed), and explicit `max_lines_policy` overrides.
 - **FR-003**: The system MUST execute implementation according to revised plan intent and touched-file scope.
 - **FR-004**: The system MUST restrict changes to planned files unless a minimal dependency or export wiring touch is required to keep the change functional.
 - **FR-005**: The system MUST explicitly identify every out-of-plan file touch and include a concise reason.
@@ -95,6 +96,7 @@ As a reviewer, I need implementation output that is easy to apply and validate s
 - **FR-010A**: The system MUST enforce default soft caps by layer: pages 120-150 lines, sections 200-250, composites 200-250, hooks 150-200, endpoints 80-120, and primitives up to 150.
 - **FR-010B**: The system MUST require mandatory split/extraction when any touched file would exceed 400 lines.
 - **FR-010C**: The system MUST apply a hard stop when any touched file would exceed 600 lines and return blocked output with required refactor actions.
+- **FR-010D**: The system MUST include the remaining default soft-cap guidance from the governing master spec: feature domain files around 200 lines, `lib` files 120-200, `store` slices 150-250, and `core` files around 150.
 - **FR-011**: The system MUST keep shared UI assets generic and prevent domain-specific leakage into shared abstractions.
 - **FR-012**: The system MUST preserve predictable data flow boundaries and avoid bypassing the canonical endpoint ownership model.
 - **FR-013**: The system MUST produce review-friendly implementation output that lists changed files and provides scoped patch-style updates for modified files.

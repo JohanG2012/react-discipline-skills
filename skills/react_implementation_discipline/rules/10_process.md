@@ -25,6 +25,12 @@ policy constraints.
   stop.
 - Dependency-error handling must include actionable fallback context-bundle
   requirements for no-direct-access execution.
+- Honor optional execution controls when provided:
+  - `diff_preference`: prefer snippet-first or unified-diff output as requested,
+    unless safer output mode rules require escalation.
+  - `strictness`: default to `strict`; allow `relaxed` only when explicitly
+    permitted in request context.
+  - `max_lines_policy`: allow explicit soft-cap overrides when provided.
 - Enforce plan fidelity:
   - touch only files in the revised plan
   - allow extra touches only for minimal dependency/export wiring requirements
@@ -45,7 +51,9 @@ policy constraints.
   - no speculative refactors
 - Enforce file-size discipline:
   - soft caps by layer: pages `120-150`, sections `200-250`, composites
-    `200-250`, hooks `150-200`, endpoints `80-120`, primitives `<=150`
+    `200-250`, hooks `150-200`, feature domain files around `200`, endpoints
+    `80-120`, primitives `<=150`, `lib` files `120-200`, `store` slices
+    `150-250`, and `core` files around `150`
   - mandatory split/extraction when any touched file would exceed `400` lines
   - hard stop when any touched file would exceed `600` lines
 - Enforce out-of-scope policy:

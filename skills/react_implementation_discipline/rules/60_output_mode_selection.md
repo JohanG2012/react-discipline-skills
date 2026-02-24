@@ -15,6 +15,9 @@ Defines deterministic selection between snippet/diff updates and full-file outpu
 ### Requirement
 
 - For existing files, default to changed snippets or unified diffs.
+- If `diff_preference` is provided, treat it as the initial mode bias:
+  - `snippet_first` -> prefer snippets when safe.
+  - `unified_diff` -> prefer unified diffs.
 - Automatically prefer unified diff when:
   - edits are non-adjacent in one file
   - imports/exports and logic are changed together

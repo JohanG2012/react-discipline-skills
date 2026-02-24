@@ -21,9 +21,14 @@ for deterministic downstream consumption.
   - `reuse_decisions_ref` (string, required): reference to reuse decision output.
   - `planned_actions` (array[RevisedPlanAction], required): planned file actions.
   - `scope_policy` (ScopeGovernorPolicy, optional): explicit scope overrides.
+  - `diff_preference` (enum, optional): `snippet_first | unified_diff`.
+  - `strictness` (enum, optional, default `strict`): `strict | relaxed` (relaxed allowed only when explicitly permitted).
+  - `max_lines_policy` (object, optional): explicit per-layer soft-cap overrides provided by request context.
 - **Validation rules**:
   - Missing required references return `validation_error`.
   - Empty `planned_actions` is invalid.
+  - `strictness=relaxed` is invalid unless explicit permission is present in request scope/policy context.
+  - `max_lines_policy` may adjust soft caps but does not remove mandatory stop conditions unless explicitly overridden.
 
 ### 2. RevisedPlanAction
 

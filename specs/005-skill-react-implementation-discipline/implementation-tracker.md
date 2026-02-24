@@ -63,9 +63,10 @@
   - `skills/react_implementation_discipline/rules/120_pause_defaults_protocol.md`
   - `skills/react_implementation_discipline/rules/130_boundary_runtime_query.md`
   - `skills/react_implementation_discipline/rules/140_stop_conditions.md`
+- parity cleanup: optional input controls (`diff_preference`, `strictness`, `max_lines_policy`) and full soft-cap guidance (`features/*/domain`, `lib`, `store`, `core`) are now represented in split `005` artifacts and skill process rules.
 
 ## Final Sign-off
 
-- Requirements coverage: completed for `FR-001` through `FR-025` and `SC-001` through `SC-015` via rules, schema, contracts, and examples.
+- Requirements coverage: completed for `FR-001` through `FR-029` (including `FR-002A` and `FR-010A` through `FR-010D`) and `SC-001` through `SC-018` via rules, schema, contracts, and examples.
 - Remaining blockers: none.
 - Ready for review: yes.

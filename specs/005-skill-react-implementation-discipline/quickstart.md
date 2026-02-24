@@ -16,10 +16,11 @@ and structured validation summary reporting.
 
 ## Requirement Trace Map
 
-- `FR-003` to `FR-007`: Process and boundary rules in `skills/react_implementation_discipline/rules/10_process.md`
-- `FR-013` to `FR-016`: Output structure and flow in `skills/react_implementation_discipline/rules/20_output.md`
-- `FR-021` to `FR-025`: Blocked/dependency/error behavior in `skills/react_implementation_discipline/schemas/output.schema.json` and examples
-- `SC-011` to `SC-015`: Validated by output examples and `npm run check`
+- `FR-002`, `FR-002A`, `FR-003` to `FR-012`: Input discipline, boundary behavior, convention matching, file-size guardrails, and data-flow rules in `skills/react_implementation_discipline/rules/10_process.md`, `rules/70_ui_genericity.md`, `rules/80_data_flow_and_exports.md`, and `rules/140_stop_conditions.md`
+- `FR-013` to `FR-016`: Output mode and ambiguity/migration-aware flow in `skills/react_implementation_discipline/rules/20_output.md`, `rules/60_output_mode_selection.md`, and `rules/100_ambiguity_strategy.md`
+- `FR-017` to `FR-020`: Shared policy inheritance and implementation-scope constraints in `skills/react_implementation_discipline/rules/00_overview.md` with `agent-policy-v1`
+- `FR-021` to `FR-029`: Blocked/dependency/error behavior, strict result variants, payload constraints, fallback context bundle requirements, and scope caps in `skills/react_implementation_discipline/schemas/output.schema.json`, `rules/20_output.md`, `rules/40_scope_governor.md`, and `rules/50_access_control.md`
+- `SC-011` to `SC-018`: Validated by output examples and `npm run check`
 
 ## Steps
 

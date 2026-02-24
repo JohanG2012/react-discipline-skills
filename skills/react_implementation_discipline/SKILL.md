@@ -44,6 +44,12 @@ Required:
 - `reuse_decisions`
 - repository context for convention and boundary validation
 
+Optional:
+
+- `diff_preference` (`snippet_first` or `unified_diff`)
+- `strictness` (`strict` default; `relaxed` only when explicitly allowed)
+- `max_lines_policy` (explicit soft-cap overrides when provided)
+
 Shared baseline:
 
 - `agent-policy-v1` must be available and enforced.
