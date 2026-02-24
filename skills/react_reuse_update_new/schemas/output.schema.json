@@ -430,9 +430,9 @@
         "action": {
           "type": "string",
           "enum": [
-            "Create",
-            "Update",
-            "Reuse"
+            "create",
+            "update",
+            "reuse"
           ]
         },
         "path": {

@@ -29,7 +29,7 @@ speculative structure changes.
   - API client/home location currently in use
   - representative primitive/composite/section/hook/endpoint examples
 - Without repository evidence or fallback bundle, return
-  `result_type=validation_error` and do not emit a plan.
+  `result_type=dependency_error` and do not emit a placement plan.
 - This skill remains planning-only and does not perform implementation edits.
 - Default write posture is controlled/review-oriented output; avoid silent churn
   and unreviewed direct edits as routine behavior.

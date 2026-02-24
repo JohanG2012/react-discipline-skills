@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://react-discipline-skills/scripts/schemas/skill4_input.schema.json",
+  "title": "Implementation Discipline Input Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "detection_result",
+    "revised_plan"
+  ],
+  "properties": {
+    "task_request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "detection_result": {
+      "type": "object"
+    },
+    "revised_plan": {
+      "type": "object"
+    },
+    "policy_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diff_preference": {
+      "type": "string",
+      "enum": [
+        "snippet_first",
+        "unified_diff"
+      ]
+    },
+    "strictness": {
+      "type": "string",
+      "enum": [
+        "strict",
+        "relaxed"
+      ]
+    },
+    "max_lines_policy": {
+      "type": "object"
+    }
+  }
+}

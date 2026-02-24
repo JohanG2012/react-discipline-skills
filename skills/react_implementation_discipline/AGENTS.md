@@ -140,7 +140,6 @@ policy constraints.
 - Validate required inputs before any implementation output:
   - `revised_plan`
   - `detection_result`
-  - `reuse_decisions`
   - repository context needed for convention and boundary checks
 - If required inputs are invalid, return `validation_error` and stop.
 - If required repository context is unavailable, return `dependency_error` and

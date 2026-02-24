@@ -93,9 +93,9 @@ Defines deterministic evaluation for reuse, update, or new creation.
 - Do not pause for minor decisions when a safe default exists
   (for example: small harmless prop additions).
 - Pause mode defaults are inherited from shared policy:
-  - `balanced` by default (`confidence < 0.7` and structural impact)
-  - `strict` for any structural ambiguity
-  - `autonomous` only when `confidence < 0.5` and structural impact
+  - default `pause_mode` is `balanced`
+  - use `strict` or `autonomous` only when explicitly configured by policy
+    override
 - Require upstream minimum decision context before finalizing outcomes:
   - feature owner/domain
   - route/page involvement

@@ -31,11 +31,13 @@ Do not use this skill when:
 
 ## Inputs
 The skill expects:
-- **Task request:** The requested change or feature
-- **Repository context:** Architecture detection outputs and file tree
+- **Task request:** `task_request`
+- **Architecture context:** upstream `detection_result`
+- **Repository context:** file tree and local conventions
 - **Policy:** `agent-policy-v1` (must be available)
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
+- **Pause defaults:** default `pause_mode` is taken from shared policy
 
 ## How to use
 Follow this workflow in order:
@@ -52,7 +54,7 @@ Return a **single JSON object** matching this shape:
   "schema_version": "1.0.0",
   "skill": "react_placement_and_layering",
   "version": "1.0.0",
-  "result_type": "plan|validation_error",
+  "result_type": "placement_plan|validation_error|dependency_error",
   "validation_status": {
     "is_valid": true,
     "stage": "input_validation|planning|finalized",
@@ -70,8 +72,10 @@ Constraints:
 - Required-input validation happens before plan generation.
 - Missing or invalid required inputs return `result_type=validation_error` with
   no plan artifacts.
-- Successful outputs return `result_type=plan` and include planning fields
-  defined in `rules/20_output.md`.
+- Missing repository evidence returns `result_type=dependency_error` with
+  `dependency_issue` and `fallback_context_bundle_requirements[]`.
+- Successful outputs return `result_type=placement_plan` and include planning
+  fields defined in `rules/20_output.md`.
 - Plan outputs include canonical endpoint layer, per-layer justifications, and
   a short decision explanation tied to detected architecture signals.
 - Plan outputs include an authoritative-home map for active concerns.
@@ -109,3 +113,6 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 ## Examples
 
 - See `examples/` for sample outputs.
+- See `examples/output.example.json` for successful `placement_plan`.
+- See `examples/validation-error.example.json` for `validation_error`.
+- See `examples/dependency-error.example.json` for `dependency_error`.

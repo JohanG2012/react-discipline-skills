@@ -27,7 +27,7 @@
     },
     "result_type": {
       "type": "string",
-      "enum": ["plan", "validation_error"]
+      "enum": ["placement_plan", "validation_error", "dependency_error"]
     },
     "strategy_used": {
       "type": "string",
@@ -293,6 +293,18 @@
           }
         }
       }
+    },
+    "dependency_issue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fallback_context_bundle_requirements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   },
   "allOf": [
@@ -300,7 +312,7 @@
       "if": {
         "properties": {
           "result_type": {
-            "const": "plan"
+            "const": "placement_plan"
           }
         },
         "required": ["result_type"]
@@ -372,6 +384,55 @@
               },
               "stage": {
                 "const": "input_validation"
+              },
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "dependency_error"
+          }
+        },
+        "required": ["result_type"]
+      },
+      "then": {
+        "required": [
+          "dependency_issue",
+          "fallback_context_bundle_requirements"
+        ],
+        "not": {
+          "anyOf": [
+            {"required": ["strategy_used"]},
+            {"required": ["feature_owner"]},
+            {"required": ["canonical_endpoint_layer"]},
+            {"required": ["authoritative_home_map"]},
+            {"required": ["artifacts"]},
+            {"required": ["layer_justifications"]},
+            {"required": ["decision_explanation"]},
+            {"required": ["import_guardrails"]},
+            {"required": ["source_of_truth_resolutions"]},
+            {"required": ["move_operations"]},
+            {"required": ["move_concern"]},
+            {"required": ["scope_expansion_needed"]}
+          ]
+        },
+        "properties": {
+          "validation_status": {
+            "type": "object",
+            "required": ["is_valid", "stage", "errors"],
+            "properties": {
+              "is_valid": {
+                "const": false
+              },
+              "stage": {
+                "const": "planning"
               },
               "errors": {
                 "minItems": 1
@@ -461,7 +522,7 @@
       "then": {
         "properties": {
           "result_type": {
-            "const": "plan"
+            "const": "placement_plan"
           }
         }
       }

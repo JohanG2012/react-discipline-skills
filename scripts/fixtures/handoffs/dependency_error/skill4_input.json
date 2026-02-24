@@ -1,18 +1,105 @@
 {
-  "schema_version": "1.0.0",
-  "skill": "react_reuse_update_new",
-  "version": "1.0.0",
-  "result_type": "decision_plan",
-  "validation_status": {
-    "is_valid": true,
-    "stage": "finalized",
-    "errors": []
-  },
-  "thresholds_applied": {
-    "max_new_props_for_update": 2,
-    "max_flags_allowed_composites": 0,
-    "max_generic_flags_allowed_primitives": 1,
-    "max_abstraction_risk_score": 6
+  "detection_result": {
+    "schema_version": "1.1.0",
+    "skill": "react_architecture_detection",
+    "version": "1.0.0",
+    "result_type": "detection_result",
+    "validation_status": {
+      "is_valid": true,
+      "stage": "finalized",
+      "errors": [],
+      "warnings": []
+    },
+    "routing": {
+      "type": "react-router",
+      "entry_points": [
+        "src/main.tsx",
+        "src/router.tsx"
+      ]
+    },
+    "ui": {
+      "home": "src/components",
+      "confidence": 0.89,
+      "status": "resolved",
+      "evidence_paths": [
+        "src/components",
+        "src/components/ui"
+      ]
+    },
+    "api": {
+      "pattern": "services",
+      "home": "unknown",
+      "confidence": 0.62,
+      "status": "ambiguous",
+      "evidence_paths": [
+        "src/services",
+        "src/api",
+        "src/lib/http"
+      ]
+    },
+    "domain": {
+      "organization": "features",
+      "home": "src/features",
+      "confidence": 0.86,
+      "status": "resolved",
+      "evidence_paths": [
+        "src/features"
+      ]
+    },
+    "state": {
+      "server": "react-query",
+      "client": "zustand",
+      "home": "src/store",
+      "confidence": 0.81,
+      "status": "resolved",
+      "evidence_paths": [
+        "src/store"
+      ]
+    },
+    "gravity_map": {
+      "pages_or_routes": "src/pages",
+      "domain_modules": "src/features",
+      "ui_primitives": "src/components/ui",
+      "ui_composites": "src/components/composites",
+      "api": "unknown",
+      "store": "src/store",
+      "pure_utils": "src/lib",
+      "generic_hooks": "src/hooks",
+      "app_setup": "src/core"
+    },
+    "alignment_score": 82,
+    "alignment": {
+      "blockers": [
+        "Competing API homes (`src/services` and `src/api`) reduce placement clarity."
+      ],
+      "next_migration_step": "Adopt src/services/api as the canonical endpoint layer for this task."
+    },
+    "strategy": "follow-existing",
+    "strategy_rationale": [
+      "Current repository gravity is stable enough outside the ambiguous API concern.",
+      "Introducing competing homes would increase migration risk for this task scope."
+    ],
+    "strategy_basis": [
+      "low-migration-churn"
+    ],
+    "bootstrap": {
+      "triggered": false
+    },
+    "notes": [
+      "Detected mixed route and API conventions; bootstrap mode not required."
+    ],
+    "pause_decision": {
+      "pause_required": true,
+      "pause_mode": "balanced",
+      "decision_safety_confidence": 0.64,
+      "impact": "structural",
+      "trigger": "Competing data-access homes with low confidence",
+      "options": [
+        "Treat src/services/api as canonical endpoint layer",
+        "Treat src/api/endpoints as canonical endpoint layer"
+      ],
+      "recommended_option": "Treat src/services/api as canonical endpoint layer"
+    }
   },
   "revised_plan": {
     "source_plan_ref": "placement-plan://sample",
@@ -164,5 +251,7 @@
       "Decision package is deterministic and downstream-consumable.",
       "Decisions demonstrate reuse, update, new, and blocked outcomes."
     ]
-  }
+  },
+  "policy_ref": "agent-policy-v1",
+  "policy_version": "1.0.0"
 }

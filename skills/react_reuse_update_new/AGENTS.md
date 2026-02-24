@@ -194,9 +194,9 @@ Defines deterministic evaluation for reuse, update, or new creation.
 - Do not pause for minor decisions when a safe default exists
   (for example: small harmless prop additions).
 - Pause mode defaults are inherited from shared policy:
-  - `balanced` by default (`confidence < 0.7` and structural impact)
-  - `strict` for any structural ambiguity
-  - `autonomous` only when `confidence < 0.5` and structural impact
+  - default `pause_mode` is `balanced`
+  - use `strict` or `autonomous` only when explicitly configured by policy
+    override
 - Require upstream minimum decision context before finalizing outcomes:
   - feature owner/domain
   - route/page involvement
@@ -272,8 +272,8 @@ Defines the expected deterministic output structure for reuse decisions.
   - forcing multi-mode shared composites when section-level duplication is safer
   - "refactor for future" scope creep without immediate value
   - mixed migration + feature-behavior churn in one decision package unless explicitly requested
-- `revised_plan.file_actions[]` must map each planned touch to `Create`,
-  `Update`, or `Reuse` and include concrete paths.
+- `revised_plan.file_actions[]` must map each planned touch to `create`,
+  `update`, or `reuse` and include concrete paths.
 - If any move/rename is planned, output must include `revised_plan.move_actions[]`
   entries with `from_path`, `to_path`, and `import_update_targets[]`.
 - `revised_plan.layer_justifications[]` must provide concise layer rationale and

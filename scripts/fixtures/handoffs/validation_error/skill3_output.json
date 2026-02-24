@@ -1,0 +1,13 @@
+{
+  "skill": "react_reuse_update_new",
+  "result_type": "decision_plan",
+  "revised_plan": {
+    "file_actions": [
+      {
+        "action": "Reuse",
+        "path": "src/ui/composites/FilterBar.tsx",
+        "needed_artifact_id": "na-filter-bar"
+      }
+    ]
+  }
+}

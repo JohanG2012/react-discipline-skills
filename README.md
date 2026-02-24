@@ -41,7 +41,8 @@ Each skill should follow the same high-level shape used in those ecosystems:
 
 - `skills/`: Skill definitions, rules, examples, and generated `AGENTS.md`
 - `skills/.shared/policy/`: Shared baseline policy bundle (`agent-policy-v1`)
-- `tools/build/`: Generation and validation scripts
+- `tools/build/`: Agent bundle generation and skill-level validation scripts
+- `scripts/`: Cross-skill handoff validators and fixture sets
 - `eslint/`: Recommended ESLint rule sets for supported versions
 - `.github/workflows/`: CI configuration
 
@@ -49,6 +50,11 @@ Each skill should follow the same high-level shape used in those ecosystems:
 
 - Generate agent summaries: `npm run build:agents`
 - Run all checks: `npm run check`
+- Validate cross-skill handoffs: `npm run check:handoffs`
+- Strict single-set handoff checks: `node scripts/validate_handoffs.mjs --set success`
+- Expected-failure checks:
+  - `node scripts/validate_handoffs.mjs --set validation_error` (non-zero exit expected)
+  - `node scripts/validate_handoffs.mjs --set dependency_error` (non-zero exit expected)
 
 ## ESLint Recommendations
 

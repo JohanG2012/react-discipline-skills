@@ -38,14 +38,15 @@ Do not use this skill when:
 
 Required:
 
-- `task_request`
 - `revised_plan`
 - `detection_result`
-- `reuse_decisions`
 - repository context for convention and boundary validation
 
 Optional:
 
+- `task_request` (traceability context when provided)
+- `policy_ref`
+- `policy_version`
 - `diff_preference` (`snippet_first` or `unified_diff`)
 - `strictness` (`strict` default; `relaxed` only when explicitly allowed)
 - `max_lines_policy` (explicit soft-cap overrides when provided)
@@ -53,6 +54,7 @@ Optional:
 Shared baseline:
 
 - `agent-policy-v1` must be available and enforced.
+- Default `pause_mode` is taken from shared policy.
 
 ## Workflow
 

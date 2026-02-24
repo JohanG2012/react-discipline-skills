@@ -43,6 +43,7 @@ The skill expects:
 - **Policy:** `agent-policy-v1` (must be available)
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
+- **Pause defaults:** default `pause_mode` is taken from shared policy
 
 ## How to use
 Follow this workflow in order:
@@ -88,7 +89,7 @@ Return a **single JSON object** matching this shape:
     },
     "file_actions": [
       {
-        "action": "Reuse",
+        "action": "reuse",
         "path": "src/ui/composites/FilterBar.tsx",
         "needed_artifact_id": "na-filter-bar"
       }

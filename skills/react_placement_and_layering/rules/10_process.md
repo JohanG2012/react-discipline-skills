@@ -109,7 +109,7 @@ Defines the placement workflow for new or updated files.
 - Recomputing gravity independently from architecture-detection output.
 - Applying repository-evidence override without explicit pause resolution when
   structural impact is present.
-- Finalizing `result_type=plan` while unresolved high-impact structural
+- Finalizing `result_type=placement_plan` while unresolved high-impact structural
   ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.
 

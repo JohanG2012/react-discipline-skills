@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react_placement_and_layering",
+  "version": "1.0.0",
+  "result_type": "dependency_error",
+  "validation_status": {
+    "is_valid": false,
+    "stage": "planning",
+    "errors": [
+      "Repository discovery evidence unavailable for placement checks."
+    ],
+    "warnings": []
+  },
+  "dependency_issue": "repo_discovery_unavailable",
+  "fallback_context_bundle_requirements": [
+    "File tree (top-level and src depth about 3-4).",
+    "package.json.",
+    "Router entry and route configuration files.",
+    "Current API home and endpoint examples.",
+    "Representative primitive/composite/section/hook samples."
+  ],
+  "notes": [
+    "Retry after repository indexing or provide fallback bundle."
+  ]
+}

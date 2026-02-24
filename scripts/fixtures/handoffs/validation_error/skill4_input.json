@@ -1,0 +1,7 @@
+{
+  "detection_result": {
+    "skill": "react_architecture_detection",
+    "result_type": "detection_result"
+  },
+  "policy_ref": "agent-policy-v1"
+}

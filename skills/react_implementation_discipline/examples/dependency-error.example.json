@@ -19,7 +19,7 @@
   "fallback_context_bundle_requirements": [
     "Provide revised_plan with explicit file actions.",
     "Provide detection_result with architecture boundary map.",
-    "Provide reuse_decisions with target paths.",
+    "Provide revised_plan.decisions with target paths.",
     "Provide neighboring module samples for naming/export conventions.",
     "Provide policy references for allowed hook/api exceptions."
   ],
