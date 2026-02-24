@@ -8,7 +8,8 @@ Sets expectations for compliance, documentation, and review.
 ## Rule: Governance Compliance
 **Rule ID:** apv-governance  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Ensures policies are enforced consistently across changes.
 
 ### Requirement

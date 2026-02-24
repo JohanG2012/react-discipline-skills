@@ -9,7 +9,8 @@ missing or ambiguous.
 ## Rule: Fallback Technology Defaults
 **Rule ID:** apv-fallback-defaults  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Ensures deterministic cross-skill defaults while honoring
 existing repository gravity first.
 

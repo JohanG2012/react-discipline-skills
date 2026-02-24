@@ -9,7 +9,8 @@ must enforce.
 ## Rule: Architecture and Dependency Boundaries
 **Rule ID:** apv-architecture-boundaries  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Ensures all downstream skills enforce one consistent
 architecture and import-boundary model.
 

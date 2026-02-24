@@ -9,7 +9,8 @@ skills.
 ## Rule: Access and Write Control
 **Rule ID:** apv-access-write-control  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Keeps structural decisions grounded in repository signals and
 maintains controlled, reviewable changes.
 

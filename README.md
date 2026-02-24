@@ -14,7 +14,8 @@ as Codex:
 3. `react-reuse-update-new`
 4. `react-implementation-discipline`
 
-`agent-policy-v1` is a shared policy baseline used by all skills, but it is not
+`agent-policy-v1` is a shared policy baseline source in `shared/` that
+is baked into generated `AGENTS.md` for all 4 production skills. It is not
 counted as one of the 4 production skills.
 
 If other skill folders exist in the repo, treat them as non-goal/legacy unless
@@ -46,16 +47,37 @@ Each skill should follow the same high-level shape used in those ecosystems:
 ## Structure
 
 - `skills/`: Skill definitions, rules, examples, and generated `AGENTS.md`
-- `skills/.shared/policy/`: Shared baseline policy bundle (`agent-policy-v1`)
-- `tools/build/`: Agent bundle generation and skill-level validation scripts
-- `scripts/`: Cross-skill handoff validators and fixture sets
+- `shared/`: Shared baseline policy source baked into generated
+  production skill bundles (`shared/rules` uses `__TARGET_SKILL__` for
+  `Applies to`, resolved per target skill at build time)
+- `templates/`: Authoring scaffolds for initializing `SKILL.md`, rule modules,
+  and generated-agent-document structure
+- `scripts/generators/`: Build-flow generators (for example `AGENTS.md`)
+- `scripts/validators/`: Validation entrypoints (frontmatter, examples, handoffs)
+- `scripts/lib/`: Shared script utilities and schema-validation helpers
+- `scripts/fixtures/`: Fixture sets for cross-skill handoff validation
 - `eslint/`: Recommended ESLint rule sets for supported versions
 - `.github/workflows/`: CI configuration
+
+## Templates
+
+`templates/` is for development-time scaffolding only. These files provide
+starting formats for:
+
+- `SKILL.md` contracts (including baseline-compliance and
+  `result_type`/`validation_status` output envelopes)
+- `rules/*.md` modules (`shared/rules` uses `Applies to: __TARGET_SKILL__`
+  and `Inherited from: shared-rules`)
+- generated `AGENTS.md` structure
+- `00_overview` scope rules (including baseline inheritance and conflict guards)
+
+They are not installed as runtime skills and are not loaded by Codex directly.
 
 ## Install Into Codex
 
 This repository is the source for developing skills. Runtime use happens by
-installing skill folders into a Codex-recognized skills directory.
+installing the 4 production skill folders into a Codex-recognized skills
+directory. Shared policy is already baked into each generated `AGENTS.md`.
 
 - Project-local install target: `<target-repo>/.agents/skills/`
 - User-level install target: `$HOME/.agents/skills/`
@@ -68,7 +90,6 @@ cp -R skills/react-architecture-detection /path/to/target-repo/.agents/skills/
 cp -R skills/react-placement-and-layering /path/to/target-repo/.agents/skills/
 cp -R skills/react-reuse-update-new /path/to/target-repo/.agents/skills/
 cp -R skills/react-implementation-discipline /path/to/target-repo/.agents/skills/
-cp -R skills/.shared/policy /path/to/target-repo/.agents/skills/agent-policy-v1
 ```
 
 Example (symlink for live development):
@@ -79,18 +100,18 @@ ln -s /path/to/react-discipline-skills/skills/react-architecture-detection /path
 ln -s /path/to/react-discipline-skills/skills/react-placement-and-layering /path/to/target-repo/.agents/skills/react-placement-and-layering
 ln -s /path/to/react-discipline-skills/skills/react-reuse-update-new /path/to/target-repo/.agents/skills/react-reuse-update-new
 ln -s /path/to/react-discipline-skills/skills/react-implementation-discipline /path/to/target-repo/.agents/skills/react-implementation-discipline
-ln -s /path/to/react-discipline-skills/skills/.shared/policy /path/to/target-repo/.agents/skills/agent-policy-v1
 ```
 
 ## Build and Validation
 
 - Generate agent summaries: `npm run build:agents`
 - Run all checks: `npm run check`
+- Validate shared baseline rules and quick-reference parity: `npm run check:shared`
 - Validate cross-skill handoffs: `npm run check:handoffs`
-- Strict single-set handoff checks: `node scripts/validate_handoffs.mjs --set success`
+- Strict single-set handoff checks: `node scripts/validators/validate_handoffs.mjs --set success`
 - Expected-failure checks:
-  - `node scripts/validate_handoffs.mjs --set validation_error` (non-zero exit expected)
-  - `node scripts/validate_handoffs.mjs --set dependency_error` (non-zero exit expected)
+  - `node scripts/validators/validate_handoffs.mjs --set validation_error` (non-zero exit expected)
+  - `node scripts/validators/validate_handoffs.mjs --set dependency_error` (non-zero exit expected)
 
 ## ESLint Recommendations
 

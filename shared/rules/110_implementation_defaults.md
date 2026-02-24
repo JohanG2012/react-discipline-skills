@@ -8,7 +8,8 @@ Defines shared implementation posture defaults inherited by downstream skills.
 ## Rule: Implementation Defaults
 **Rule ID:** apv-implementation-defaults  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Aligns downstream implementation behavior on quality, environment
 access, logging, and tooling posture.
 

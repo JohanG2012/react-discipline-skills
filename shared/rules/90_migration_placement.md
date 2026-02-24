@@ -8,7 +8,8 @@ Defines migration-aware placement rules and strategy selection constraints.
 ## Rule: Migration and Placement Strategy
 **Rule ID:** apv-migration-placement  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Prevents mixed-architecture drift and keeps placement decisions
 deterministic in legacy or evolving repositories.
 

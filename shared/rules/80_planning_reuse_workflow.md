@@ -9,7 +9,8 @@ all downstream skills.
 ## Rule: Planning and Reuse Workflow
 **Rule ID:** apv-planning-reuse  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Prevents ad hoc implementation choices and improves consistency
 across downstream planning outputs.
 

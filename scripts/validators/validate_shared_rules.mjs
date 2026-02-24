@@ -9,6 +9,8 @@ const repoRoot = process.cwd();
 const sharedRoot = path.join(repoRoot, "shared");
 const sharedSkillPath = path.join(sharedRoot, "SKILL.md");
 const sharedRulesPath = path.join(sharedRoot, "rules");
+const sharedAppliesToken = "__TARGET_SKILL__";
+const sharedInheritedFromValue = "shared-rules";
 
 function findRuleBlocks(content) {
   const lines = content.split("\n");
@@ -108,6 +110,7 @@ async function validateSharedRules() {
       const ruleId = extractFieldValue(block.text, "Rule ID");
       const priority = extractFieldValue(block.text, "Priority");
       const appliesTo = extractFieldValue(block.text, "Applies to");
+      const inheritedFrom = extractFieldValue(block.text, "Inherited from");
       const rationale = extractFieldValue(block.text, "Rationale");
       const hasRequirement = hasSection(block.text, "Requirement");
       const hasForbidden = hasSection(block.text, "Forbidden");
@@ -131,6 +134,19 @@ async function validateSharedRules() {
       if (!appliesTo) {
         errors.push(
           `${filePath}:${block.startLine}: missing "**Applies to:**" in rule block "${block.title}"`,
+        );
+      } else if (appliesTo !== sharedAppliesToken) {
+        errors.push(
+          `${filePath}:${block.startLine}: "**Applies to:**" must be "${sharedAppliesToken}" in shared rule sources`,
+        );
+      }
+      if (!inheritedFrom) {
+        errors.push(
+          `${filePath}:${block.startLine}: missing "**Inherited from:**" in rule block "${block.title}"`,
+        );
+      } else if (inheritedFrom !== sharedInheritedFromValue) {
+        errors.push(
+          `${filePath}:${block.startLine}: "**Inherited from:**" must be "${sharedInheritedFromValue}" in shared rule sources`,
         );
       }
       if (!rationale) {

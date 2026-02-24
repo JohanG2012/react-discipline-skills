@@ -17,6 +17,7 @@ const repoRoot = process.cwd();
 const skillsRoot = path.join(repoRoot, "skills");
 const sharedRoot = path.join(repoRoot, "shared");
 const sharedRulesPath = path.join(sharedRoot, "rules");
+const sharedTargetSkillToken = "__TARGET_SKILL__";
 
 function extractSkillTitle(skillContent, fallback) {
   const lines = skillContent.split("\n");
@@ -113,6 +114,10 @@ async function loadRuleContents(rulesPath) {
   return ruleContents.join("\n\n---\n\n");
 }
 
+function materializeSharedRulesForSkill(sharedRules, skillName) {
+  return sharedRules.replaceAll(sharedTargetSkillToken, skillName);
+}
+
 async function buildSkillAgents(skillDir, sharedRules) {
   const skillPath = path.join(skillsRoot, skillDir);
   const localRules = await loadRuleContents(path.join(skillPath, "rules"));
@@ -123,8 +128,12 @@ async function buildSkillAgents(skillDir, sharedRules) {
   const frontmatter = parseFrontmatter(skillContent) || {};
   const skillName = frontmatter.name || skillDir;
   const skillTitle = extractSkillTitle(skillContent, skillName);
+  const resolvedSharedRules = materializeSharedRulesForSkill(
+    sharedRules,
+    skillName,
+  );
 
-  const combinedRules = [sharedRules, localRules]
+  const combinedRules = [resolvedSharedRules, localRules]
     .filter(Boolean)
     .join("\n\n---\n\n");
   const headings = extractHeadings(combinedRules);

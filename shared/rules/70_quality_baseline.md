@@ -9,7 +9,8 @@ all downstream skills.
 ## Rule: Completion and Quality Baseline
 **Rule ID:** apv-dod-baseline  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Ensures every downstream skill validates critical correctness and
 safety gates before completion.
 

@@ -8,7 +8,8 @@ Defines deterministic default behavior and high-impact clarification triggers.
 ## Rule: Deterministic Defaults and Pause Protocol
 **Rule ID:** apv-decision-defaults  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Reduces unnecessary clarification loops while protecting
 high-impact structural decisions.
 

@@ -31,7 +31,7 @@ The skill expects:
 - **Task request:** `task_request`
 - **Architecture context:** upstream `detection_result`
 - **Repository context:** file tree and local conventions
-- **Policy:** `agent-policy-v1` (must be available)
+- **Policy baseline:** baked in from `shared/rules` at build time (`shared-rules`)
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy

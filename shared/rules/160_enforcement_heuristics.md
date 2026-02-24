@@ -9,7 +9,8 @@ folder-fit decisions.
 ## Rule: Enforcement Heuristics
 **Rule ID:** apv-enforcement-heuristics  
 **Priority:** SHOULD  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Provides consistent review heuristics across downstream skills
 without over-prescribing implementation details.
 

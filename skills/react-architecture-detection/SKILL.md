@@ -31,7 +31,7 @@ The skill expects:
 - **Repository root/context:** File tree and key entry points
 - **Target architecture context:** Active architecture policy/spec reference
 - **Task scope:** `small_change | feature_change | new_route | refactor`
-- **Policy:** `agent-policy-v1` (must be available)
+- **Policy baseline:** baked in from `shared/rules` at build time (`shared-rules`)
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy
@@ -40,7 +40,7 @@ The skill expects:
 ## Baseline compliance
 
 - This skill is detection-only and must not modify repository files.
-- Shared baseline constraints from `agent-policy-v1` are mandatory.
+- Shared baseline constraints from `shared-rules` are mandatory.
 - If a local convention appears to conflict with baseline policy, the skill must
   report the conflict in output notes rather than override baseline rules.
 

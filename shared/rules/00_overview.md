@@ -14,7 +14,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 ## Rule: Skill Scope Definition
 **Rule ID:** apv-overview-scope  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Ensures the policy skill stays focused on governance and scope.
 
 ### Requirement
@@ -23,10 +24,10 @@ All rules defined here are binding for agents and LLMs using this skill.
 - The skill must not perform responsibilities assigned to other skills.
 - The skill must not reinterpret or override policy without explicit approval.
 - The shared baseline must apply uniformly to:
-  - `react_architecture_detection`
-  - `react_placement_and_layering`
-  - `react_reuse_update_new`
-  - `react_implementation_discipline`
+  - `react-architecture-detection`
+  - `react-placement-and-layering`
+  - `react-reuse-update-new`
+  - `react-implementation-discipline`
 - The production execution skill set for this initiative is fixed to those four
   skills; `agent-policy-v1` is shared baseline policy and not a production
   execution skill.
@@ -54,7 +55,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 ## Rule: Baseline Non-goals
 **Rule ID:** apv-overview-nongoals  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Prevents policy drift into implementation-specific prescriptions.
 
 ### Requirement

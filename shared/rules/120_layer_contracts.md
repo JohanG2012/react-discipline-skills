@@ -8,7 +8,8 @@ Defines shared folder-layer contracts and cross-layer error handling ownership.
 ## Rule: Layer Contracts and Error Ownership
 **Rule ID:** apv-layer-contracts  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Keeps ownership deterministic across pages, features, UI, API,
 store, core, hooks, lib, and config.
 

@@ -1,6 +1,6 @@
 ---
 name: agent-policy-v1
-description: Baseline policy constraints for all skills
+description: Build-time shared baseline policy constraints baked into all production skills
 version: 1.0.0
 license: MIT
 pre_approved_collisions: []
@@ -39,7 +39,7 @@ The skill expects:
 
 ## How to use
 Follow this workflow in order:
-1. Read the policy rules in `AGENTS.md`.
+1. Read the policy rules in `rules/`.
 2. Verify baseline applicability across all four production execution skills.
 3. Identify scope, precedence, and governance constraints relevant to the task.
 4. Apply constraints and pause if violations are required.
@@ -64,7 +64,7 @@ Constraints:
 
 ## Quick reference rules
 
-The skill must follow these rule IDs (see `AGENTS.md` for details):
+The policy source must maintain these rule IDs (see `rules/` for details):
 
 - apv-overview-scope
 - apv-overview-nongoals
@@ -88,10 +88,6 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 
 ## Files
 
-- `AGENTS.md` contains the full rules for agents and LLMs (generated from `rules/`).
-- `rules/` contains the source-of-truth modular rules.
-
-## Examples
-
-- See `examples/` for sample outputs.
-- See `fixtures/` (if present) for sample repo trees and patterns.
+- `rules/` contains the source-of-truth modular policy rules.
+- This shared policy is a build-time source and is baked into production skill
+  `AGENTS.md` artifacts.

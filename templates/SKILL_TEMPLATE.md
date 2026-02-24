@@ -29,14 +29,14 @@ Do not use this skill when:
 The skill expects:
 - **Task request:** <what the user asked for>
 - **Repository context:** <tree/read/search OR context bundle>
-- **Policy baseline:** baked in from `shared/rules` at build time (`agent-policy-v1`)
+- **Policy baseline:** baked in from `shared/rules` at build time (`shared-rules`)
 - **Baseline inheritance:** shared baseline rules are mandatory unless an
   approved exception exists
 - **Pause defaults:** default `pause_mode` is inherited from shared policy
 
 ## Baseline compliance
 
-- This skill must enforce shared baseline constraints from `agent-policy-v1`.
+- This skill must enforce shared baseline constraints from `shared-rules`.
 - This skill must not define local mandatory rules that conflict with shared
   baseline rules.
 - If local conventions conflict with shared baseline policy, report the conflict

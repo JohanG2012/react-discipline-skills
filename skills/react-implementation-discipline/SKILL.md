@@ -49,7 +49,7 @@ Optional:
 
 Shared baseline:
 
-- `agent-policy-v1` must be available and enforced.
+- `shared-rules` are baked in from `shared/rules` at build time and must be enforced.
 - Default `pause_mode` is taken from shared policy.
 
 ## Workflow

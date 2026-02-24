@@ -8,7 +8,8 @@ Defines soft file-size and responsibility guidance to prevent oversized modules.
 ## Rule: File Size and Responsibility Guidance
 **Rule ID:** apv-file-size-guidance  
 **Priority:** SHOULD  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Encourages maintainable module boundaries and limits
 responsibility drift.
 

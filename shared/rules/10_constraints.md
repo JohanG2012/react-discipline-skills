@@ -8,7 +8,8 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ## Rule: Minimal Scope Enforcement
 **Rule ID:** apv-constraints  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Prevents uncontrolled scope expansion and dependency creep.
 
 ### Requirement
@@ -39,7 +40,8 @@ Defines non-negotiable scope and cap controls for downstream skill work.
 ## Rule: Scope Governor Hard Defaults
 **Rule ID:** apv-scope-governor  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Controls churn and keeps delivery bounded.
 
 ### Requirement

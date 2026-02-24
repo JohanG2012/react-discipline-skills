@@ -8,7 +8,8 @@ Defines required output structure for planning and implementation guidance.
 ## Rule: Output and Planning Discipline
 **Rule ID:** apv-output-discipline  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Keeps downstream planning and implementation outputs consistent,
 compact, and reviewable.
 

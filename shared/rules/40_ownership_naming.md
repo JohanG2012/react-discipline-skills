@@ -9,7 +9,8 @@ specifications.
 ## Rule: Ownership and Naming Contract
 **Rule ID:** apv-ownership-naming  
 **Priority:** MUST  
-**Applies to:** agent-policy-v1  
+**Applies to:** __TARGET_SKILL__  
+**Inherited from:** shared-rules  
 **Rationale:** Keeps responsibility boundaries and naming deterministic across
 all downstream specs.
 
