@@ -127,6 +127,7 @@ Return a single JSON object only (no extra prose) with:
 - `rid-pause-defaults-protocol`
 - `rid-boundary-runtime-query`
 - `rid-stop-conditions`
+- `rid-naming-discoverability`
 
 ## Files
 
