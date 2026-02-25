@@ -53,6 +53,15 @@
         "reason": "Requested change exceeds max files touched."
       }
     ],
+    "refactoring_consult": {
+      "consulted_skill": "react-refactoring-progression",
+      "mode": "opportunistic",
+      "status": "no_actions",
+      "result_type": "refactor_plan",
+      "summary": "No additional in-scope opportunistic refactor actions identified.",
+      "generated_steps": 0,
+      "follow_up_findings": 0
+    },
     "required_fixes": [
       "Address failed quality check before acceptance."
     ],

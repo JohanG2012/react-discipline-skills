@@ -358,7 +358,8 @@
         "changed_files",
         "quality_checks",
         "boundary_audit",
-        "scope_deviations"
+        "scope_deviations",
+        "refactoring_consult"
       ],
       "properties": {
         "changed_files": {
@@ -399,6 +400,9 @@
             "$ref": "#/$defs/scope_deviation"
           }
         },
+        "refactoring_consult": {
+          "$ref": "#/$defs/refactoring_consult"
+        },
         "required_fixes": {
           "type": "array",
           "minItems": 1,
@@ -419,6 +423,155 @@
           "$ref": "#/$defs/notes"
         }
       }
+    },
+    "refactoring_consult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "consulted_skill",
+        "mode",
+        "status",
+        "result_type",
+        "summary"
+      ],
+      "properties": {
+        "consulted_skill": {
+          "type": "string",
+          "const": "react-refactoring-progression"
+        },
+        "mode": {
+          "type": "string",
+          "const": "opportunistic"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "applied",
+            "no_actions",
+            "validation_error",
+            "dependency_error",
+            "unavailable"
+          ]
+        },
+        "result_type": {
+          "type": "string",
+          "enum": [
+            "refactor_plan",
+            "validation_error",
+            "dependency_error",
+            "unavailable"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "follow_up_findings": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "applied"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_type": {
+                "const": "refactor_plan"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "validation_error"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_type": {
+                "const": "validation_error"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "dependency_error"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_type": {
+                "const": "dependency_error"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unavailable"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_type": {
+                "const": "unavailable"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "no_actions"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_type": {
+                "const": "refactor_plan"
+              }
+            }
+          }
+        }
+      ]
     },
     "patch_update": {
       "type": "object",

@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-refactoring-progression",
+  "version": "1.0.0",
+  "result_type": "refactor_plan",
+  "validation_status": "accepted",
+  "refactor_mode": "opportunistic",
+  "plan": {
+    "touch_budget": {
+      "max_files_touched": 8,
+      "max_new_files": 4,
+      "max_moved_or_renamed": 0,
+      "max_new_dependencies": 0,
+      "max_new_top_level_folders": 0,
+      "plan_step_cap": 5
+    },
+    "steps": [
+      {
+        "tier": "A",
+        "title": "Remove dead helper branches",
+        "files": [
+          "src/features/tasks/components/TaskTable.tsx"
+        ],
+        "change_type": "safety",
+        "risk": "low",
+        "behavior_change": "none",
+        "why_now": "Reduces no-op complexity before further edits.",
+        "standard_alignment": "Improves implementation-discipline hygiene baseline."
+      },
+      {
+        "tier": "B",
+        "title": "Normalize endpoint access ownership",
+        "files": [
+          "src/features/tasks/hooks/useTaskList.ts"
+        ],
+        "change_type": "boundary",
+        "risk": "medium",
+        "behavior_change": "none",
+        "why_now": "Eliminates localized boundary drift in touched file set.",
+        "unblocks": "Prevents future direct transport calls from this feature hook."
+      }
+    ],
+    "behavior_preservation": [
+      {
+        "step_id": "step-a-1",
+        "status": "pass",
+        "invariants_checked": [
+          "external contracts unchanged",
+          "route behavior unchanged"
+        ]
+      }
+    ],
+    "anti_pattern_findings": [
+      {
+        "finding_id": "ap-implicit-visibility-1",
+        "type": "implicit_visibility",
+        "tier": "A",
+        "affected_files": [
+          "src/ui/composites/FilterBar.tsx"
+        ],
+        "recommended_step_id": "step-a-1"
+      }
+    ],
+    "semantic_duplication_clusters": [
+      {
+        "cluster_id": "dup-rows-1",
+        "pattern_type": "domain_parallel_component",
+        "candidate_files": [
+          "src/features/tasks/components/TaskRow.tsx",
+          "src/features/projects/components/ProjectRow.tsx"
+        ],
+        "signals": [
+          "responsibility_equivalence",
+          "layout_skeleton_similarity"
+        ],
+        "evidence": {
+          "shared_responsibility": "Both rows render domain entities with the same action bar and metadata layout.",
+          "structural_similarity": [
+            "Each row has title, status badge, metadata, and trailing actions.",
+            "Both rows use the same selection and inline-action flow."
+          ],
+          "variation_surface": "Status mapping and secondary metadata formatting differ by feature domain.",
+          "target_layer_rationale": "Feature-level extraction keeps domain semantics local while reducing structural drift."
+        },
+        "why_now": "This duplication increases drift risk across similar feature flows.",
+        "reduces_future_cost": "Consolidates structural decisions before additional row variants are added.",
+        "recommended_target": "extract_feature_section",
+        "abstraction_cost": {
+          "new_props_count": 2,
+          "needs_mode_flags": false,
+          "needs_slots": 1,
+          "touch_count_estimate": 4,
+          "breaking_change_risk": "medium"
+        },
+        "leakage_risk": "low",
+        "divergence_risk": "medium",
+        "refactor_radius": "medium",
+        "recommended_next_step": "Extract a feature-local shared row section in the tasks domain and migrate one caller first.",
+        "variation_points": [
+          "status badge color mapping",
+          "secondary metadata formatting"
+        ],
+        "candidate_api": "Accept entity display props plus an actions slot; keep status formatting injected by each feature.",
+        "non_goals": [
+          "Do not merge task and project domain models.",
+          "Do not extract this into shared ui/** in the first step."
+        ]
+      }
+    ],
+    "follow_up_findings": [
+      {
+        "tier": "C",
+        "title": "Normalize duplicate concern homes",
+        "reason": "Detected cross-home helper duplication outside opportunistic scope.",
+        "files": [
+          "src/features/tasks/utils/formatTaskState.ts",
+          "src/features/projects/utils/formatProjectState.ts"
+        ]
+      }
+    ],
+    "test_file_touches": [
+      "src/features/tasks/hooks/__tests__/useTaskList.test.ts"
+    ],
+    "notes": [
+      "Tier C opportunities are deferred because mode is opportunistic."
+    ]
+  }
+}

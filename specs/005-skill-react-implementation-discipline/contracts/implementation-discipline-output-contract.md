@@ -32,6 +32,7 @@ Skill artifacts that must align with this contract:
 - `<REPO_ROOT>/skills/react-implementation-discipline/rules/30_validation_gates.md`
 - `<REPO_ROOT>/skills/react-implementation-discipline/rules/40_scope_governor.md`
 - `<REPO_ROOT>/skills/react-implementation-discipline/rules/50_access_control.md`
+- `<REPO_ROOT>/skills/react-implementation-discipline/rules/160_refactoring_consult.md`
 - `<REPO_ROOT>/skills/react-implementation-discipline/schemas/output.schema.json`
 
 Baseline governance references:
@@ -78,6 +79,15 @@ Required fields:
   - `quality_checks[]` (`check_id`, `status`, `summary`, optional `required_fix`)
   - `boundary_audit[]` (`file_path`, `status`, optional `issues[]`)
   - `scope_deviations[]` (`path`, `type`, `reason`)
+  - `refactoring_consult`
+    - `consulted_skill=react-refactoring-progression`
+    - `mode=opportunistic`
+    - `status` (`applied` | `no_actions` | `validation_error` |
+      `dependency_error` | `unavailable`)
+    - `result_type` (`refactor_plan` | `validation_error` |
+      `dependency_error` | `unavailable`)
+    - `summary`
+    - optional `generated_steps`, `follow_up_findings`
   - optional `required_fixes[]` (required when `final_state=blocked`)
   - optional `recommended_follow_up_scope[]` (required when `scope_expansion_needed[]` is present)
   - optional `notes[]`
@@ -88,6 +98,11 @@ Behavioral constraints:
 - `result_type=implementation_package` requires
   `validation_status.final_state` in (`accepted`, `blocked`).
 - If final state is `blocked`, include failed checks and `required_fixes[]`.
+- Implementation-package outputs must include explicit
+  `output_package.refactoring_consult` metadata.
+- Downstream refactoring consult is non-blocking for implementation final state;
+  consult errors are reported in consult metadata and do not change
+  `validation_status.final_state`.
 - Out-of-scope requests without explicit approval must be excluded from the
   implementation payload and represented as scope deviations.
 - Micro mode must still include complete boundary/quality evidence and

@@ -1,0 +1,909 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://react-discipline-skills/skills/react-refactoring-progression/schemas/output.schema.json",
+  "title": "React Refactoring Progression Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill",
+    "version",
+    "result_type",
+    "validation_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill": {
+      "type": "string",
+      "const": "react-refactoring-progression"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_type": {
+      "type": "string",
+      "enum": [
+        "refactor_plan",
+        "validation_error",
+        "dependency_error"
+      ]
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "blocked",
+        "validation_error",
+        "dependency_error"
+      ]
+    },
+    "refactor_mode": {
+      "type": "string",
+      "enum": [
+        "opportunistic",
+        "dedicated"
+      ]
+    },
+    "plan": {
+      "$ref": "#/$defs/plan"
+    },
+    "dependency_issue": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fallback_context_bundle_requirements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "$ref": "#/$defs/notes"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "refactor_plan"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "refactor_mode",
+          "plan"
+        ],
+        "properties": {
+          "validation_status": {
+            "enum": [
+              "accepted",
+              "blocked"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "dependency_issue"
+              ]
+            },
+            {
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "validation_error"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "notes"
+        ],
+        "properties": {
+          "validation_status": {
+            "const": "validation_error"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "plan"
+              ]
+            },
+            {
+              "required": [
+                "refactor_mode"
+              ]
+            },
+            {
+              "required": [
+                "dependency_issue"
+              ]
+            },
+            {
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "dependency_error"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependency_issue",
+          "fallback_context_bundle_requirements",
+          "notes"
+        ],
+        "properties": {
+          "validation_status": {
+            "const": "dependency_error"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "plan"
+              ]
+            },
+            {
+              "required": [
+                "refactor_mode"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "refactor_plan"
+          },
+          "refactor_mode": {
+            "const": "opportunistic"
+          }
+        },
+        "required": [
+          "result_type",
+          "refactor_mode",
+          "plan"
+        ]
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "steps": {
+                "maxItems": 5,
+                "items": {
+                  "properties": {
+                    "tier": {
+                      "enum": [
+                        "A",
+                        "B"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "refactor_plan"
+          },
+          "plan": {
+            "properties": {
+              "test_file_touches": {
+                "minItems": 3
+              }
+            },
+            "required": [
+              "test_file_touches"
+            ]
+          }
+        },
+        "required": [
+          "result_type",
+          "plan"
+        ]
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "required": [
+              "scope_expansion_needed"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 5
+    },
+    "scope_expansion_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "why",
+        "would_touch"
+      ],
+      "properties": {
+        "why": {
+          "type": "string",
+          "minLength": 1
+        },
+        "would_touch": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "behavior_preservation_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "step_id",
+        "status",
+        "invariants_checked"
+      ],
+      "properties": {
+        "step_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "needs_approval"
+          ]
+        },
+        "invariants_checked": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "anti_pattern_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id",
+        "type",
+        "tier",
+        "affected_files",
+        "recommended_step_id"
+      ],
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "implicit_visibility",
+            "fetch_outside_endpoint_layer",
+            "domain_leakage_shared_ui",
+            "redundant_server_state_mirror",
+            "other"
+          ]
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "affected_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "recommended_step_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "duplication_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shared_responsibility",
+        "structural_similarity",
+        "variation_surface",
+        "target_layer_rationale"
+      ],
+      "properties": {
+        "shared_responsibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structural_similarity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 2
+        },
+        "variation_surface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_layer_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "duplication_abstraction_cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "new_props_count",
+        "needs_mode_flags",
+        "needs_slots",
+        "touch_count_estimate",
+        "breaking_change_risk"
+      ],
+      "properties": {
+        "new_props_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "needs_mode_flags": {
+          "type": "boolean"
+        },
+        "needs_slots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "touch_count_estimate": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "breaking_change_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "semantic_duplication_cluster": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cluster_id",
+        "pattern_type",
+        "candidate_files",
+        "signals",
+        "evidence",
+        "why_now",
+        "recommended_target",
+        "abstraction_cost",
+        "leakage_risk",
+        "divergence_risk",
+        "refactor_radius",
+        "recommended_next_step",
+        "variation_points",
+        "candidate_api",
+        "non_goals"
+      ],
+      "properties": {
+        "cluster_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pattern_type": {
+          "type": "string",
+          "enum": [
+            "layout_skeleton",
+            "data_state_boundary",
+            "interaction_state_machine",
+            "config_schema",
+            "hook_orchestration",
+            "domain_parallel_component",
+            "mapping_pipeline",
+            "permission_gating",
+            "other"
+          ]
+        },
+        "type_explanation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 2
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "responsibility_equivalence",
+              "decision_tree_similarity",
+              "hook_orchestration_similarity",
+              "layout_skeleton_similarity",
+              "config_schema_similarity",
+              "state_machine_similarity",
+              "mapping_pipeline_similarity"
+            ]
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "evidence": {
+          "$ref": "#/$defs/duplication_evidence"
+        },
+        "why_now": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unblocks": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reduces_future_cost": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard_alignment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recommended_target": {
+          "type": "string",
+          "enum": [
+            "keep_separate",
+            "extract_ui_primitive",
+            "extract_ui_composite",
+            "extract_feature_section",
+            "extract_feature_hook",
+            "extract_lib_utility"
+          ]
+        },
+        "abstraction_cost": {
+          "$ref": "#/$defs/duplication_abstraction_cost"
+        },
+        "leakage_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "divergence_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "refactor_radius": {
+          "type": "string",
+          "enum": [
+            "local",
+            "medium",
+            "large"
+          ]
+        },
+        "recommended_next_step": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variation_points": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "candidate_api": {
+          "type": "string",
+          "minLength": 1
+        },
+        "non_goals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "keep_separate_reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "unblocks"
+              ]
+            },
+            {
+              "required": [
+                "reduces_future_cost"
+              ]
+            },
+            {
+              "required": [
+                "standard_alignment"
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "pattern_type": {
+                "const": "other"
+              }
+            },
+            "required": [
+              "pattern_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "type_explanation"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "recommended_target": {
+                "const": "keep_separate"
+              }
+            },
+            "required": [
+              "recommended_target"
+            ]
+          },
+          "then": {
+            "required": [
+              "keep_separate_reason"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "recommended_target": {
+                "const": "extract_ui_composite"
+              }
+            },
+            "required": [
+              "recommended_target",
+              "abstraction_cost"
+            ]
+          },
+          "then": {
+            "properties": {
+              "abstraction_cost": {
+                "properties": {
+                  "new_props_count": {
+                    "maximum": 2
+                  },
+                  "needs_mode_flags": {
+                    "const": false
+                  },
+                  "needs_slots": {
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "follow_up_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tier",
+        "title",
+        "reason",
+        "files"
+      ],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "C",
+            "D"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "plan_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tier",
+        "title",
+        "files",
+        "change_type",
+        "risk",
+        "behavior_change",
+        "why_now"
+      ],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "safety",
+            "boundary",
+            "structure",
+            "abstraction",
+            "migration"
+          ]
+        },
+        "risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "behavior_change": {
+          "type": "string",
+          "enum": [
+            "none",
+            "requires_approval"
+          ]
+        },
+        "why_now": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unblocks": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reduces_future_cost": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard_alignment": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "unblocks"
+          ]
+        },
+        {
+          "required": [
+            "reduces_future_cost"
+          ]
+        },
+        {
+          "required": [
+            "standard_alignment"
+          ]
+        }
+      ]
+    },
+    "touch_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_files_touched",
+        "max_new_files",
+        "max_moved_or_renamed",
+        "max_new_dependencies",
+        "max_new_top_level_folders"
+      ],
+      "properties": {
+        "max_files_touched": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_new_files": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_moved_or_renamed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_new_dependencies": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_new_top_level_folders": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "plan_step_cap": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "touch_budget",
+        "steps"
+      ],
+      "properties": {
+        "touch_budget": {
+          "$ref": "#/$defs/touch_budget"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/plan_step"
+          }
+        },
+        "behavior_preservation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/behavior_preservation_record"
+          }
+        },
+        "anti_pattern_findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/anti_pattern_finding"
+          }
+        },
+        "semantic_duplication_clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/semantic_duplication_cluster"
+          }
+        },
+        "scope_expansion_needed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scope_expansion_item"
+          }
+        },
+        "follow_up_findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/follow_up_finding"
+          }
+        },
+        "test_file_touches": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "$ref": "#/$defs/notes"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-refactoring-progression",
+  "version": "1.0.0",
+  "result_type": "refactor_plan",
+  "validation_status": "blocked",
+  "refactor_mode": "dedicated",
+  "plan": {
+    "touch_budget": {
+      "max_files_touched": 8,
+      "max_new_files": 4,
+      "max_moved_or_renamed": 0,
+      "max_new_dependencies": 0,
+      "max_new_top_level_folders": 0
+    },
+    "steps": [
+      {
+        "tier": "B",
+        "title": "Consolidate duplicated local error formatting",
+        "files": [
+          "src/features/tasks/hooks/useTaskList.ts",
+          "src/features/projects/hooks/useProjectList.ts"
+        ],
+        "change_type": "abstraction",
+        "risk": "medium",
+        "behavior_change": "none",
+        "why_now": "Removes duplicate logic with low coupling impact.",
+        "reduces_future_cost": "Keeps error-shape handling consistent across feature hooks."
+      },
+      {
+        "tier": "C",
+        "title": "Re-home feature composite to remove domain leakage",
+        "files": [
+          "src/ui/composites/DomainSpecificSummaryCard.tsx"
+        ],
+        "change_type": "structure",
+        "risk": "high",
+        "behavior_change": "requires_approval",
+        "why_now": "Current ownership violates shared-UI boundary rules.",
+        "standard_alignment": "Aligns shared UI with no-domain-knowledge constraint."
+      }
+    ],
+    "behavior_preservation": [
+      {
+        "step_id": "step-c-1",
+        "status": "needs_approval",
+        "invariants_checked": [
+          "external props contract",
+          "user-visible empty/error behavior"
+        ],
+        "details": "Approval needed before applying Tier C ownership change."
+      }
+    ],
+    "scope_expansion_needed": [
+      {
+        "why": "Completing safe migration needs one additional dependent section file.",
+        "would_touch": 1
+      }
+    ],
+    "notes": [
+      "Plan blocked pending explicit approval for non-default Tier C change."
+    ]
+  }
+}

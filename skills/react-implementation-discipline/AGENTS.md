@@ -53,6 +53,7 @@ Generated on: 2026-02-25
 - [Rule: Boundary, Runtime, and Query Correctness [rid-boundary-runtime-query]](#rule-boundary-runtime-and-query-correctness)
 - [Rule: Stop and Revise Conditions [rid-stop-conditions]](#rule-stop-and-revise-conditions)
 - [Rule: Naming and Discoverability Contract [rid-naming-discoverability]](#rule-naming-and-discoverability-contract)
+- [Rule: Mandatory Opportunistic Refactoring Consult [rid-refactoring-consult]](#rule-mandatory-opportunistic-refactoring-consult)
 
 ## Overview
 This document defines the authoritative rules for agents/LLMs using the `react-implementation-discipline` skill.
@@ -105,6 +106,7 @@ Key constraints:
 - rid-boundary-runtime-query
 - rid-stop-conditions
 - rid-naming-discoverability
+- rid-refactoring-consult
 
 ---
 
@@ -1339,6 +1341,11 @@ policy constraints.
   - represent excluded work through bounded scope-expansion guidance
 - Require final quality-gate checks before completion and map result to final
   state (`accepted` or `blocked`).
+- Before finalizing any `implementation_package`, run a downstream consult to
+  `react-refactoring-progression` in opportunistic mode using the touched file
+  set and record consult outcome metadata in output.
+- Treat downstream refactoring consult failures as non-blocking for
+  implementation final state, while preserving explicit consult-status reporting.
 
 ### Forbidden
 
@@ -1350,6 +1357,8 @@ policy constraints.
 - Returning accepted output when mandatory quality checks fail.
 - Including unapproved out-of-scope work in implementation payload.
 - Violating boundary rules to satisfy convenience implementation.
+- Skipping downstream opportunistic refactoring consult for an
+  `implementation_package` result.
 
 ### Notes
 
@@ -1412,9 +1421,16 @@ review-ready, and policy-verifiable.
   - `quality_checks`
   - `boundary_audit`
   - `scope_deviations`
+  - `refactoring_consult`
   - optional `required_fixes` (required when `final_state=blocked`)
   - optional `recommended_follow_up_scope`
   - optional `notes`
+- `output_package.refactoring_consult` must include:
+  - `consulted_skill=react-refactoring-progression`
+  - `mode=opportunistic`
+  - consult `status`
+  - consult `result_type`
+  - concise `summary`
 - Micro-mode outputs must still include boundary/quality evidence and keep
   implementation bounded to behavior-preserving in-place refactor scope.
 - If `scope_expansion_needed` is present, include
@@ -1437,6 +1453,8 @@ review-ready, and policy-verifiable.
 - Omitting validation summary fields.
 - Returning `blocked` without `required_fixes`.
 - Returning error outputs with implementation payload.
+- Omitting `output_package.refactoring_consult` in
+  `implementation_package` results.
 
 ### Notes
 
@@ -2104,3 +2122,51 @@ leakage, improves searchability, and makes duplicate patterns easier to detect.
   component name should find the defining file quickly.
 - For duplicate pattern extraction, prefer pattern names (for example
   `DataStateBoundary`, `FilterBarShell`) over domain names.
+
+---
+
+# Downstream Refactoring Consult
+
+## Summary
+
+Defines mandatory end-of-execution consultation of
+`react-refactoring-progression` in opportunistic mode.
+
+---
+
+## Rule: Mandatory Opportunistic Refactoring Consult
+**Rule ID:** rid-refactoring-consult  
+**Priority:** MUST  
+**Applies to:** react-implementation-discipline  
+**Rationale:** Ensures every implementation run gets a bounded, non-blocking
+cleanup/refactor plan derived from the touched file set.
+
+### Requirement
+
+- For every `implementation_package` result, run a downstream consult to
+  `react-refactoring-progression` in `opportunistic` mode before finalizing
+  output.
+- Pass the current touched file set as consult scope:
+  - `output_package.changed_files[]`
+  - plus any `output_package.new_files[].path` when present
+- Treat consult output as planning-only and non-blocking:
+  - it must not mutate already-produced implementation patches
+  - consult failures must not convert a previously valid implementation outcome
+    into `blocked`
+- Always record consult result metadata in
+  `output_package.refactoring_consult`.
+- If refactoring skill/context is unavailable, record `status=unavailable` with
+  reason and continue finalization.
+
+### Forbidden
+
+- Skipping consult for `implementation_package` outputs.
+- Using consult findings to introduce out-of-scope implementation churn in the
+  same execution response.
+- Treating consult `validation_error` or `dependency_error` as hard blockers for
+  implementation output final state.
+
+### Notes
+
+- Opportunistic consult findings are follow-up guidance for subsequent
+  execution, not immediate patch payload.

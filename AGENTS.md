@@ -18,6 +18,9 @@ Auto-generated from all feature plans. Last updated: 2026-02-23
 - Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (004-skill-react-reuse-update-new)
 - Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (005-skill-react-implementation-discipline)
 - Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (005-skill-react-implementation-discipline)
+- JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing repository scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint (006-skill-react-refactoring-progression)
+- Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (006-skill-react-refactoring-progression)
+- Filesystem-based repository artifacts (`skills/**`, `specs/**`, generated `AGENTS.md`) (006-skill-react-refactoring-progression)
 
 - (001-init-codex-skills)
 
@@ -37,9 +40,9 @@ tests/
 : Follow standard conventions
 
 ## Recent Changes
+- 006-skill-react-refactoring-progression: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing repository scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint
+- 006-skill-react-refactoring-progression: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing repository scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint
 - 005-skill-react-implementation-discipline: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint
-- 005-skill-react-implementation-discipline: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint
-- 004-skill-react-reuse-update-new: Added JavaScript (Node.js 20 LTS, ES modules) for tooling; Markdown and JSON for skill/spec contracts + Node.js runtime, npm scripts, existing build/validation scripts (`<REPO_ROOT>/scripts/generators/generate_agents.mjs`, `<REPO_ROOT>/scripts/validators/validate_frontmatter.mjs`, `<REPO_ROOT>/scripts/validators/validate_examples.mjs`), Husky/Commitlint
 
 
 <!-- MANUAL ADDITIONS START -->

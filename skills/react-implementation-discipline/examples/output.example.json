@@ -39,6 +39,15 @@
       }
     ],
     "scope_deviations": [],
+    "refactoring_consult": {
+      "consulted_skill": "react-refactoring-progression",
+      "mode": "opportunistic",
+      "status": "applied",
+      "result_type": "refactor_plan",
+      "summary": "Generated 2 opportunistic Tier A/B follow-up steps.",
+      "generated_steps": 2,
+      "follow_up_findings": 1
+    },
     "notes": [
       "Output follows approved revised plan scope."
     ]

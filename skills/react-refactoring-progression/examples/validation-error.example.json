@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-refactoring-progression",
+  "version": "1.0.0",
+  "result_type": "validation_error",
+  "validation_status": "validation_error",
+  "notes": [
+    "Missing required input_refs.placement_result_ref.",
+    "touched_file_set is required for opportunistic mode."
+  ]
+}

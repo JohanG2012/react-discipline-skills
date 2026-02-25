@@ -52,9 +52,16 @@ review-ready, and policy-verifiable.
   - `quality_checks`
   - `boundary_audit`
   - `scope_deviations`
+  - `refactoring_consult`
   - optional `required_fixes` (required when `final_state=blocked`)
   - optional `recommended_follow_up_scope`
   - optional `notes`
+- `output_package.refactoring_consult` must include:
+  - `consulted_skill=react-refactoring-progression`
+  - `mode=opportunistic`
+  - consult `status`
+  - consult `result_type`
+  - concise `summary`
 - Micro-mode outputs must still include boundary/quality evidence and keep
   implementation bounded to behavior-preserving in-place refactor scope.
 - If `scope_expansion_needed` is present, include
@@ -77,6 +84,8 @@ review-ready, and policy-verifiable.
 - Omitting validation summary fields.
 - Returning `blocked` without `required_fixes`.
 - Returning error outputs with implementation payload.
+- Omitting `output_package.refactoring_consult` in
+  `implementation_package` results.
 
 ### Notes
 

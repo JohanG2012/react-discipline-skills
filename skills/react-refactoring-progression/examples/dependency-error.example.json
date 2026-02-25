@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-refactoring-progression",
+  "version": "1.0.0",
+  "result_type": "dependency_error",
+  "validation_status": "dependency_error",
+  "dependency_issue": "Repository discovery context unavailable for required anti-pattern and duplication analysis.",
+  "fallback_context_bundle_requirements": [
+    "Provide touched file list with absolute repository paths.",
+    "Provide canonical endpoint-layer ownership summary.",
+    "Provide current placement-plan artifact mapping.",
+    "Provide reuse-decision output for in-scope artifacts.",
+    "Provide architecture detection summary including concern homes."
+  ],
+  "notes": [
+    "No refactor_plan payload emitted because required context was unavailable."
+  ]
+}

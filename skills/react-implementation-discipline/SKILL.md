@@ -68,7 +68,9 @@ Shared baseline:
    standard mode before continuing implementation output.
 4. Execute implementation within approved scope (or bounded micro scope).
 5. Run boundary, quality, and scope-deviation checks.
-6. Return one structured output result type.
+6. Run downstream `react-refactoring-progression` consult in opportunistic mode
+   using touched files from this execution.
+7. Return one structured output result type.
 
 ## Output contract
 
@@ -93,6 +95,7 @@ Return a single JSON object only (no extra prose) with:
 - `output_package.boundary_audit`
 - `output_package.quality_checks`
 - `output_package.scope_deviations[]` (`path`, `type`, `reason`)
+- `output_package.refactoring_consult`
 - `output_package.required_fixes[]` (required when `final_state=blocked`)
 
 - `validation_error` output must include `notes[]` and must not include
@@ -109,6 +112,9 @@ Return a single JSON object only (no extra prose) with:
   - no new endpoint/hook/composite homes
 - If implementation in micro mode needs file creation, escalate to standard
   mode before producing output.
+- For every `implementation_package`, include consult metadata from
+  `react-refactoring-progression` opportunistic mode in
+  `output_package.refactoring_consult`; if unavailable, record `status=unavailable`.
 
 ## Quick reference rules
 
@@ -128,6 +134,7 @@ Return a single JSON object only (no extra prose) with:
 - `rid-boundary-runtime-query`
 - `rid-stop-conditions`
 - `rid-naming-discoverability`
+- `rid-refactoring-consult`
 
 ## Files
 

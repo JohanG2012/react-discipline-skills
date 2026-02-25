@@ -81,6 +81,11 @@ policy constraints.
   - represent excluded work through bounded scope-expansion guidance
 - Require final quality-gate checks before completion and map result to final
   state (`accepted` or `blocked`).
+- Before finalizing any `implementation_package`, run a downstream consult to
+  `react-refactoring-progression` in opportunistic mode using the touched file
+  set and record consult outcome metadata in output.
+- Treat downstream refactoring consult failures as non-blocking for
+  implementation final state, while preserving explicit consult-status reporting.
 
 ### Forbidden
 
@@ -92,6 +97,8 @@ policy constraints.
 - Returning accepted output when mandatory quality checks fail.
 - Including unapproved out-of-scope work in implementation payload.
 - Violating boundary rules to satisfy convenience implementation.
+- Skipping downstream opportunistic refactoring consult for an
+  `implementation_package` result.
 
 ### Notes
 
