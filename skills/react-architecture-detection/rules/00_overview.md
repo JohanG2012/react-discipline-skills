@@ -29,11 +29,13 @@ All rules defined here are binding for agents and LLMs using this skill.
 
 ### Forbidden
 
-- Recommending migrations without explicit instruction.
+- Recommending direct file moves/refactors as mandatory actions during
+  detection.
 - Editing files as part of detection.
 - Implementing runtime/business logic changes in repository source files.
 - Defining local mandatory rules that conflict with `shared-rules`.
 
 ### Notes
 
-- If signals are ambiguous, report uncertainty and recommend follow-up.
+- If signals are ambiguous, report uncertainty and provide bounded follow-up
+  options in structured output fields.
