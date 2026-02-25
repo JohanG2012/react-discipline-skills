@@ -2,14 +2,14 @@
 
 ## Summary
 Defines required pre-implementation workflow and reuse decision discipline for
-all downstream skills.
+selected downstream skills.
 
 ---
 
 ## Rule: Planning and Reuse Workflow
 **Rule ID:** sr-planning-reuse  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents ad hoc implementation choices and improves consistency
 across downstream planning outputs.
@@ -25,6 +25,9 @@ across downstream planning outputs.
   - Decide server/local/global state ownership.
   - Decide UI reuse shape (reuse/update/new).
   - List planned file touches.
+- For `micro_change` runs that satisfy `sr-micro-change-bypass`, the full
+  pre-implementation planning sequence may be abbreviated and handled directly
+  by Skill 4 micro mode.
 - Existing implementations must be searched before creating new modules in:
   - Feature/domain modules.
   - UI primitives/composites.

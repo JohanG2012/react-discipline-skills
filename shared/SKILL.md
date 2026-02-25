@@ -1,6 +1,6 @@
 ---
 name: shared-rules
-description: Build-time shared baseline policy constraints baked into all production skills
+description: Build-time shared baseline policy constraints baked into all production skills for React code workflows. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 pre_approved_collisions: []
@@ -84,6 +84,12 @@ The policy source must maintain these rule IDs (see `rules/` for details):
 - sr-file-size-guidance
 - sr-architecture-detection-contract
 - sr-enforcement-heuristics
+- sr-micro-change-bypass
+- sr-component-folderization
+- sr-component-folder-structure
+- sr-component-folder-exports
+- sr-component-helper-promotion
+- sr-folderization-no-new-home
 - sr-governance
 
 ## Files
