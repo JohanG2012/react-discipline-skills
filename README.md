@@ -4,22 +4,55 @@ This repository contains Codex skills for disciplined React architecture and
 implementation workflows. It includes skill definitions, rule sources, and build
 scripts to generate agent-readable rule bundles.
 
+## Project Status
+
+**Work in progress / experimental.**
+
+Interfaces, folder contents, and skill behavior may change as specs are refined.
+Use for evaluation and active development, not as a stable long-term contract.
+
 ## Project Direction
 
-This project is intentionally scoped to **4 production skills** for agents such
+This project is intentionally scoped to **5 maintained skills** for agents such
 as Codex:
 
-1. `react-architecture-detection`
-2. `react-placement-and-layering`
-3. `react-reuse-update-new`
-4. `react-implementation-discipline`
+1. `react-architecture-detection` (core production)
+2. `react-placement-and-layering` (core production)
+3. `react-reuse-update-new` (core production)
+4. `react-implementation-discipline` (core production)
+5. `react-refactoring-progression` (optional extension)
 
-`agent-policy-v1` is a shared policy baseline source in `shared/` that
-is baked into generated `AGENTS.md` for all 4 production skills. It is not
-counted as one of the 4 production skills.
+`shared` is a shared policy baseline source in `shared/` that
+is baked into generated `AGENTS.md` for all maintained skills. It is not
+counted as a skill itself.
 
-If other skill folders exist in the repo, treat them as non-goal/legacy unless
-explicitly promoted by a new spec.
+## Skill Overview
+
+| Skill | Primary role | Typical output |
+|-------|--------------|----------------|
+| `react-architecture-detection` | Detect current repository architecture and concern homes from real signals | `detection_result` |
+| `react-placement-and-layering` | Decide where new/changed artifacts should live based on detected architecture | `placement_plan` |
+| `react-reuse-update-new` | Decide per artifact: reuse, safely update, or create new | `decision_plan` |
+| `react-implementation-discipline` | Execute implementation with boundary, scope, and quality gates | `implementation_package` |
+| `react-refactoring-progression` | Produce behavior-preserving refactor progression plans after implementation | `refactor_progression_plan` |
+
+## How the Skills Work Together
+
+Standard implementation flow:
+
+1. Run `react-architecture-detection` to ground decisions in existing repository signals.
+2. Run `react-placement-and-layering` to select canonical homes/layers for planned artifacts.
+3. Run `react-reuse-update-new` to choose reuse vs update vs new for each artifact.
+4. Run `react-implementation-discipline` to produce implementation output with governance checks.
+5. Optionally run `react-refactoring-progression` to plan safe follow-up refactors after delivery.
+
+This sequence minimizes architectural drift and keeps planning/implementation decisions auditable.
+
+## Example Use Cases
+
+- **Adding a new route feature**: detect architecture -> plan placement -> decide reuse/update/new for UI/API pieces -> implement with discipline gates.
+- **Refactoring a feature area safely**: detect current structure -> validate target placement -> decide what to reuse vs split/extract -> implement with scope limits.
+- **Large change review before coding**: run first three skills to produce evidence-backed planning artifacts before implementation starts.
 
 ## Official Skill Standards
 
@@ -73,10 +106,33 @@ starting formats for:
 
 They are not installed as runtime skills and are not loaded by Codex directly.
 
+## Developer First Setup
+
+Prerequisites:
+
+- Node.js 20 LTS
+- npm
+
+Initial setup from repository root:
+
+```bash
+npm ci
+npm run build:agents
+npm run check
+```
+
+Strongly recommended local git hook setup (commit message standard enforcement):
+
+```bash
+npm run prepare
+```
+
+This installs Husky hooks, including Commitlint on `commit-msg`.
+
 ## Install Into Codex
 
 This repository is the source for developing skills. Runtime use happens by
-installing the 4 production skill folders into a Codex-recognized skills
+installing the maintained skill folders into a Codex-recognized skills
 directory. Shared policy is already baked into each generated `AGENTS.md`.
 
 - Project-local install target: `<target-repo>/.agents/skills/`
@@ -90,6 +146,7 @@ cp -R skills/react-architecture-detection /path/to/target-repo/.agents/skills/
 cp -R skills/react-placement-and-layering /path/to/target-repo/.agents/skills/
 cp -R skills/react-reuse-update-new /path/to/target-repo/.agents/skills/
 cp -R skills/react-implementation-discipline /path/to/target-repo/.agents/skills/
+cp -R skills/react-refactoring-progression /path/to/target-repo/.agents/skills/
 ```
 
 Example (symlink for live development):
@@ -100,7 +157,15 @@ ln -s /path/to/react-discipline-skills/skills/react-architecture-detection /path
 ln -s /path/to/react-discipline-skills/skills/react-placement-and-layering /path/to/target-repo/.agents/skills/react-placement-and-layering
 ln -s /path/to/react-discipline-skills/skills/react-reuse-update-new /path/to/target-repo/.agents/skills/react-reuse-update-new
 ln -s /path/to/react-discipline-skills/skills/react-implementation-discipline /path/to/target-repo/.agents/skills/react-implementation-discipline
+ln -s /path/to/react-discipline-skills/skills/react-refactoring-progression /path/to/target-repo/.agents/skills/react-refactoring-progression
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contributor workflow, commit and PR
+expectations, and validation steps.
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community behavior standards.
 
 ## Build and Validation
 
@@ -113,7 +178,26 @@ ln -s /path/to/react-discipline-skills/skills/react-implementation-discipline /p
   - `node scripts/validators/validate_handoffs.mjs --set validation_error` (non-zero exit expected)
   - `node scripts/validators/validate_handoffs.mjs --set dependency_error` (non-zero exit expected)
 
+## Changelog Maintenance
+
+Update `CHANGELOG.md` when merged milestone-level changes are introduced.
+
+- Use `major` entries for the four core production skills:
+  - `react-architecture-detection`
+  - `react-placement-and-layering`
+  - `react-reuse-update-new`
+  - `react-implementation-discipline`
+- Use `context` entries for supporting/extension milestones (including
+  `react-refactoring-progression` unless promoted to core production scope).
+- Keep each entry readable with:
+  - what changed
+  - why it matters
+
 ## ESLint Recommendations
 
 See `eslint/README.md` for copy-ready rule sets you can merge into your ESLint
 config to enforce skill constraints and catch violations early.
+
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).

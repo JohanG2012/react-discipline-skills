@@ -5,10 +5,16 @@ node_modules/
 dist/
 build/
 *.log
+.eslintcache
+.nyc_output/
 .env*
+.env
+.direnv/
+.envrc
 .DS_Store
 Thumbs.db
 *.tmp
 *.swp
 .vscode/
 .idea/
+coverage/

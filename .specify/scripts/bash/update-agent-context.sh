@@ -378,14 +378,25 @@ update_existing_agent_file() {
     local tech_stack=$(format_technology_stack "$NEW_LANG" "$NEW_FRAMEWORK")
     local new_tech_entries=()
     local new_change_entry=""
+    local tech_stack_entry=""
+    local db_entry=""
+    local should_add_new_change_entry=true
     
     # Prepare new technology entries
-    if [[ -n "$tech_stack" ]] && ! grep -q "$tech_stack" "$target_file"; then
-        new_tech_entries+=("- $tech_stack ($CURRENT_BRANCH)")
+    if [[ -n "$tech_stack" ]]; then
+        tech_stack_entry="- $tech_stack ($CURRENT_BRANCH)"
     fi
-    
-    if [[ -n "$NEW_DB" ]] && [[ "$NEW_DB" != "N/A" ]] && [[ "$NEW_DB" != "NEEDS CLARIFICATION" ]] && ! grep -q "$NEW_DB" "$target_file"; then
-        new_tech_entries+=("- $NEW_DB ($CURRENT_BRANCH)")
+
+    if [[ -n "$tech_stack_entry" ]] && ! grep -Fqx -- "$tech_stack_entry" "$target_file"; then
+        new_tech_entries+=("$tech_stack_entry")
+    fi
+
+    if [[ -n "$NEW_DB" ]] && [[ "$NEW_DB" != "N/A" ]] && [[ "$NEW_DB" != "NEEDS CLARIFICATION" ]]; then
+        db_entry="- $NEW_DB ($CURRENT_BRANCH)"
+    fi
+
+    if [[ -n "$db_entry" ]] && [[ "$db_entry" != "$tech_stack_entry" ]] && ! grep -Fqx -- "$db_entry" "$target_file"; then
+        new_tech_entries+=("$db_entry")
     fi
     
     # Prepare new change entry
@@ -393,6 +404,10 @@ update_existing_agent_file() {
         new_change_entry="- $CURRENT_BRANCH: Added $tech_stack"
     elif [[ -n "$NEW_DB" ]] && [[ "$NEW_DB" != "N/A" ]] && [[ "$NEW_DB" != "NEEDS CLARIFICATION" ]]; then
         new_change_entry="- $CURRENT_BRANCH: Added $NEW_DB"
+    fi
+
+    if [[ -n "$new_change_entry" ]] && grep -Fqx -- "$new_change_entry" "$target_file"; then
+        should_add_new_change_entry=false
     fi
     
     # Check if sections exist in the file
@@ -411,15 +426,23 @@ update_existing_agent_file() {
     local in_tech_section=false
     local in_changes_section=false
     local tech_entries_added=false
-    local changes_entries_added=false
     local existing_changes_count=0
-    local file_ended=false
+    local seen_tech_entries
+    seen_tech_entries=$'\n'
+    local seen_change_entries
+    seen_change_entries=$'\n'
     
     while IFS= read -r line || [[ -n "$line" ]]; do
         # Handle Active Technologies section
         if [[ "$line" == "## Active Technologies" ]]; then
             echo "$line" >> "$temp_file"
             in_tech_section=true
+            continue
+        elif [[ $in_tech_section == true ]] && [[ "$line" == "- "* ]]; then
+            if ! printf '%s' "$seen_tech_entries" | grep -Fqx -- "$line"; then
+                echo "$line" >> "$temp_file"
+                seen_tech_entries+="$line"$'\n'
+            fi
             continue
         elif [[ $in_tech_section == true ]] && [[ "$line" =~ ^##[[:space:]] ]]; then
             # Add new tech entries before closing the section
@@ -444,20 +467,21 @@ update_existing_agent_file() {
         if [[ "$line" == "## Recent Changes" ]]; then
             echo "$line" >> "$temp_file"
             # Add new change entry right after the heading
-            if [[ -n "$new_change_entry" ]]; then
+            if [[ -n "$new_change_entry" ]] && [[ "$should_add_new_change_entry" == true ]]; then
                 echo "$new_change_entry" >> "$temp_file"
+                seen_change_entries+="$new_change_entry"$'\n'
             fi
             in_changes_section=true
-            changes_entries_added=true
             continue
         elif [[ $in_changes_section == true ]] && [[ "$line" =~ ^##[[:space:]] ]]; then
             echo "$line" >> "$temp_file"
             in_changes_section=false
             continue
         elif [[ $in_changes_section == true ]] && [[ "$line" == "- "* ]]; then
-            # Keep only first 2 existing changes
-            if [[ $existing_changes_count -lt 2 ]]; then
+            # Keep only first 2 existing unique changes
+            if [[ $existing_changes_count -lt 2 ]] && ! printf '%s' "$seen_change_entries" | grep -Fqx -- "$line"; then
                 echo "$line" >> "$temp_file"
+                seen_change_entries+="$line"$'\n'
                 ((existing_changes_count++))
             fi
             continue
@@ -489,7 +513,6 @@ update_existing_agent_file() {
         echo "" >> "$temp_file"
         echo "## Recent Changes" >> "$temp_file"
         echo "$new_change_entry" >> "$temp_file"
-        changes_entries_added=true
     fi
     
     # Move temp file to target atomically
@@ -807,4 +830,3 @@ main() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
-

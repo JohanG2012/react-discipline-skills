@@ -21,5 +21,16 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Check generated agents + validate skill metadata
+      - name: Build generated agents
+        run: npm run build:agents
+
+      - name: Verify generated artifacts are committed
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::Generated artifacts are out of date. Run 'npm run build:agents' and commit the results."
+            git status --short
+            exit 1
+          fi
+
+      - name: Run validation suite
         run: npm run check
