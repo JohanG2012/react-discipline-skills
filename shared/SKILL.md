@@ -90,6 +90,8 @@ The policy source must maintain these rule IDs (see `rules/` for details):
 - sr-component-folder-exports
 - sr-component-helper-promotion
 - sr-folderization-no-new-home
+- sr-layout-shell-placement
+- sr-layout-shell-subfolder-policy
 - sr-governance
 
 ## Files

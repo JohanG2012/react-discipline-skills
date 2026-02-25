@@ -34,6 +34,8 @@ Generated on: 2026-02-25
 - [Rule: Naming and Exports Inside Folderized Components [sr-component-folder-exports]](#rule-naming-and-exports-inside-folderized-components)
 - [Rule: Promotion and Demotion for Component Helpers [sr-component-helper-promotion]](#rule-promotion-and-demotion-for-component-helpers)
 - [Rule: Folderization Must Not Create a New Home [sr-folderization-no-new-home]](#rule-folderization-must-not-create-a-new-home)
+- [Rule: Layout and Shell Ownership Decision [sr-layout-shell-placement]](#rule-layout-and-shell-ownership-decision)
+- [Rule: Layout and Shell Subfolder Policy [sr-layout-shell-subfolder-policy]](#rule-layout-and-shell-subfolder-policy)
 - [Rule: Skill Scope Definition [rpl-overview-scope]](#rule-skill-scope-definition-1)
 - [Rule: Layer Mapping [rpl-process]](#rule-layer-mapping)
 - [Rule: Structured Placement Output [rpl-output]](#rule-structured-placement-output)
@@ -77,6 +79,8 @@ Key constraints:
 - sr-component-folder-exports
 - sr-component-helper-promotion
 - sr-folderization-no-new-home
+- sr-layout-shell-placement
+- sr-layout-shell-subfolder-policy
 - rpl-overview-scope
 - rpl-process
 - rpl-output
@@ -1042,6 +1046,89 @@ layers.
 
 ---
 
+# Layout and Shell Placement
+
+## Summary
+Defines deterministic placement for layout/shell components and prevents
+parallel layout homes.
+
+---
+
+## Rule: Layout and Shell Ownership Decision
+**Rule ID:** sr-layout-shell-placement  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Removes ambiguity between `ui/primitives`, `ui/composites`, and
+`features/<domain>/sections` for layout-like components.
+
+### Requirement
+
+- Place in `ui/primitives/**` only when the component is a low-level building
+  block with minimal structure/behavior.
+  - Typical primitives: `Stack`, `Box`, `Spacer`, `Grid`, thin `Container`.
+- Place in `ui/composites/**` when the component composes multiple primitives
+  into a reusable UI pattern.
+  - Typical composites: `PageShell`, `ModalShell`, `PanelShell`,
+    `MasterDetailLayout`, `AppShell`, `SidebarLayout`, `CardLayout`,
+    `TableShell`, `EmptyStatePanel`.
+- Place in `features/<domain>/sections/**` when the layout is domain-owned
+  composition, even if it looks like a generic layout.
+  - Example: project-specific layout section with domain navigation, filters,
+    or domain-state behavior.
+- Fast decision rule:
+  - minimal low-level building block -> primitive
+  - reusable composed pattern -> composite
+  - domain-owned composition/behavior -> feature section
+- This rule applies to all skills and must be enforced most strongly during
+  execution in `react-implementation-discipline`.
+
+### Forbidden
+
+- Treating reusable shells/layout patterns as primitives.
+- Treating domain-owned layout composition as shared composite by default.
+- Using unclear "looks like layout" labeling to bypass domain ownership checks.
+
+### Notes
+
+- If ownership is ambiguous and impact is structural, use shared pause protocol
+  thresholds.
+
+---
+
+## Rule: Layout and Shell Subfolder Policy
+**Rule ID:** sr-layout-shell-subfolder-policy  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Prevents creation of competing layout homes while allowing
+bounded categorization inside composites when needed.
+
+### Requirement
+
+- Default policy: do not create dedicated top-level layout homes for
+  `layouts/` or `shells/`.
+- If categorization is needed, keep it inside existing composite home:
+  - `src/ui/composites/layouts/*`
+  - `src/ui/composites/shells/*`
+- Allow this subfolder split only when all are true:
+  - composite catalog is large/noisy (for example around ten or more layout/shell
+    components)
+  - repository already uses category subfolders inside `ui/**`
+  - split does not create a competing second home
+- Folderization/categorization must preserve existing gravity home and
+  one-home-per-concern discipline.
+
+### Forbidden
+
+- Creating a parallel top-level home like `src/ui/layouts/*` or
+  `src/ui/shells/*` by default.
+- Using category split to bypass migration-scope rules.
+- Introducing both `ui/composites/*` and new top-level `ui/layouts/*` as active
+  homes for the same concern.
+
+---
+
 # Overview
 
 ## Summary
@@ -1157,6 +1244,21 @@ Defines the placement workflow for new or updated files.
     justified by performance-critical caching, offline-first requirements, or a
     documented architectural decision
 - Map requested changes to a single owning layer per artifact.
+- Apply explicit layout/shell placement ownership before finalizing each
+  layout-like artifact:
+  - choose `ui/primitives/**` only for low-level minimal-structure building
+    blocks (for example `Stack`, `Box`, `Spacer`, `Grid`, thin `Container`)
+  - choose `ui/composites/**` for reusable shell/layout patterns that compose
+    multiple primitives (for example `PageShell`, `ModalShell`, `AppShell`,
+    `MasterDetailLayout`, `TableShell`, `EmptyStatePanel`)
+  - choose `features/<domain>/sections/**` when the layout is domain-owned
+    composition (for example domain navigation, filters, or domain states)
+- Default to no dedicated top-level `ui/layouts/**` or `ui/shells/**` homes.
+- Allow composite categorization folders only under existing composite home:
+  - `ui/composites/layouts/**`
+  - `ui/composites/shells/**`
+  and only when local `ui/**` already uses category subfolders and the split
+  does not create a competing second home.
 - Perform required repository lookup before proposing new artifacts:
   - existing route files
   - existing feature sections
@@ -1210,6 +1312,10 @@ Defines the placement workflow for new or updated files.
 - Recomputing gravity independently from architecture-detection output.
 - Applying repository-evidence override without explicit pause resolution when
   structural impact is present.
+- Creating a parallel top-level `ui/layouts/**` or `ui/shells/**` home by
+  default.
+- Classifying reusable shell/layout patterns as primitives.
+- Classifying domain-owned layout composition as shared composite by default.
 - Finalizing `result_type=placement_plan` while unresolved high-impact structural
   ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.

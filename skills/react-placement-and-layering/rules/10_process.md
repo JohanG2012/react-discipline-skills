@@ -67,6 +67,21 @@ Defines the placement workflow for new or updated files.
     justified by performance-critical caching, offline-first requirements, or a
     documented architectural decision
 - Map requested changes to a single owning layer per artifact.
+- Apply explicit layout/shell placement ownership before finalizing each
+  layout-like artifact:
+  - choose `ui/primitives/**` only for low-level minimal-structure building
+    blocks (for example `Stack`, `Box`, `Spacer`, `Grid`, thin `Container`)
+  - choose `ui/composites/**` for reusable shell/layout patterns that compose
+    multiple primitives (for example `PageShell`, `ModalShell`, `AppShell`,
+    `MasterDetailLayout`, `TableShell`, `EmptyStatePanel`)
+  - choose `features/<domain>/sections/**` when the layout is domain-owned
+    composition (for example domain navigation, filters, or domain states)
+- Default to no dedicated top-level `ui/layouts/**` or `ui/shells/**` homes.
+- Allow composite categorization folders only under existing composite home:
+  - `ui/composites/layouts/**`
+  - `ui/composites/shells/**`
+  and only when local `ui/**` already uses category subfolders and the split
+  does not create a competing second home.
 - Perform required repository lookup before proposing new artifacts:
   - existing route files
   - existing feature sections
@@ -120,6 +135,10 @@ Defines the placement workflow for new or updated files.
 - Recomputing gravity independently from architecture-detection output.
 - Applying repository-evidence override without explicit pause resolution when
   structural impact is present.
+- Creating a parallel top-level `ui/layouts/**` or `ui/shells/**` home by
+  default.
+- Classifying reusable shell/layout patterns as primitives.
+- Classifying domain-owned layout composition as shared composite by default.
 - Finalizing `result_type=placement_plan` while unresolved high-impact structural
   ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.
