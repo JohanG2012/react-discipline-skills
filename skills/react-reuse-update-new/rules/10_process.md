@@ -21,6 +21,13 @@ Defines deterministic evaluation for reuse, update, or new creation.
   4. Endpoint/DTO/hook match
 - For each lookup tier, record repository evidence as concrete paths or explicit
   `not_found`.
+- For DRY logic extraction/refactor work across two or more call sites, a
+  low-overhead discovery mode is allowed before full scoring:
+  - run a quick repo search for existing helpers/patterns (for example
+    `isRecord`, `getStringField`, and equivalent typed field-parsing helpers)
+  - if a suitable helper exists, prefer `reuse` or small `update`
+  - if no suitable helper is found, `new` is allowed with minimal scope
+    and feature-appropriate ownership
 - Discovery coverage must include:
   - Existing domain modules (`sections/`, `hooks/`, `domain/`) in the owning
     feature area before proposing new modules.
@@ -33,6 +40,16 @@ Defines deterministic evaluation for reuse, update, or new creation.
 - Evaluate each candidate with scored signals:
   - Required scores: `fit`, `complexity_cost`, `coupling_risk`,
     `divergence_risk`, and `locality_benefit` (0-10 scale)
+  - Use score normalization anchors:
+    - `coupling_risk=0`: no new imports and no new cross-domain references
+    - `coupling_risk=5`: new imports within the same feature boundary
+    - `coupling_risk=10`: cross-domain import or new global dependency
+    - `divergence_risk=0`: behavior is effectively identical
+    - `divergence_risk=5`: behavior is similar but likely to evolve separately
+    - `divergence_risk=10`: behavior is expected to diverge significantly over time
+    - `locality_benefit=0`: change pulls ownership away from the feature/domain home
+    - `locality_benefit=5`: neutral ownership/locality impact
+    - `locality_benefit=10`: change keeps ownership close to the feature/domain home
 - Apply the reuse ladder in strict order:
   1. Reuse as-is
   2. Update existing
@@ -80,6 +97,8 @@ Defines deterministic evaluation for reuse, update, or new creation.
 - Enforce anti-leakage guardrails:
   - Shared composites must not receive domain-specific mode flags.
   - Shared abstractions must not encode domain-specific naming.
+  - Do not expand shared API client surface area casually; allow expansion only
+    when endpoint behavior is stable and truly cross-domain.
   - If divergence risk is high, prefer domain-owned sections over forced
     cross-domain generalization.
 - If explicit constraints block all safe options for an artifact, emit
@@ -107,6 +126,8 @@ Defines deterministic evaluation for reuse, update, or new creation.
 - If repository discovery/search evidence is unavailable or incomplete, emit
   `dependency_error` and stop.
 - Preserve `needed_artifact_id` identity from input through final output.
+- Treat refactor sessions as valid decision-plan runs; this skill remains
+  decision-only even when the outcome is a tiny shared helper addition.
 
 ### Forbidden
 

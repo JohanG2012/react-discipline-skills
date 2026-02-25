@@ -538,11 +538,15 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "path",
         "type",
-        "description",
-        "action_taken"
+        "reason"
       ],
       "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -552,17 +556,9 @@
             "other"
           ]
         },
-        "description": {
+        "reason": {
           "type": "string",
           "minLength": 1
-        },
-        "action_taken": {
-          "type": "string",
-          "enum": [
-            "excluded",
-            "accepted_exception",
-            "scope_expansion"
-          ]
         }
       }
     }

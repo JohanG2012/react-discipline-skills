@@ -26,6 +26,12 @@ Defines the placement workflow for new or updated files.
   - new API endpoint/backend integration
   - refactor/reuse improvement
   - bug fix
+- Apply this skill whenever a new frontend file is introduced (for example
+  React component, hook, route, API client, store module, or shared utility),
+  including when that need is discovered mid-implementation.
+- Just-in-time trigger: if implementation is already in progress and a new file
+  is discovered as necessary, pause implementation, run this placement skill,
+  then continue implementation using the placement result.
 - Select one primary feature owner for the run.
 - Select one strategy for the run (`follow-existing`,
   `introduce-boundaries`, or `migrate-as-you-touch`).
@@ -76,6 +82,8 @@ Defines the placement workflow for new or updated files.
 - Produce explicit artifact records with purpose, action, layer, and path.
 - For architecture/repository concern conflicts:
   - use architecture detection as default source and do not recompute gravity
+  - set `override_threshold` to the shared structural pause-confidence
+    threshold (`0.7` under current shared defaults)
   - if architecture confidence is below `0.7` and impact is structural, trigger
     clean pause protocol and, after explicit resolution, select repository
     evidence with `resolution_mode=pause_resolved`
@@ -97,6 +105,9 @@ Defines the placement workflow for new or updated files.
   new_path` and import-update targets before finalizing.
 - In move-enabled runs, keep moves small (default: three files or fewer) and
   keep moves scoped to one concern in the run.
+- If edits are confined to existing files and no new placement decision is
+  required, emit a no-op placement outcome with `artifacts: []`,
+  `file_actions: []`, and a short stay-in-place justification.
 
 ### Forbidden
 
@@ -112,6 +123,8 @@ Defines the placement workflow for new or updated files.
 - Finalizing `result_type=placement_plan` while unresolved high-impact structural
   ambiguity remains.
 - Emitting move/rename plans without explicit import-update targets.
+- Continuing implementation after discovering a new-file requirement without
+  first running placement.
 
 ### Notes
 

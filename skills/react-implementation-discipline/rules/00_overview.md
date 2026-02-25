@@ -23,6 +23,10 @@ with architecture and policy.
 ### Requirement
 
 - Enforce plan fidelity: implementation must follow the approved revised plan.
+- Allow direct execution in micro mode only when shared
+  `sr-micro-change-bypass` conditions are fully satisfied.
+- If file creation becomes necessary, execution must escalate from micro mode
+  to standard mode before continuing.
 - Enforce boundary and quality gates before output is finalized.
 - Enforce minimal churn: avoid unrelated refactors and speculative cleanup.
 - Inherit and enforce shared baseline constraints from `shared-rules`.
@@ -43,6 +47,9 @@ with architecture and policy.
 - Modifying architecture/specification policy artifacts unless explicitly requested.
 - Defining local mandatory rules that conflict with `shared-rules`.
 - Returning unqualified implementation output when mandatory checks fail.
+- Using micro mode without explicit behavior-preserving evidence and bounded
+  scope constraints.
+- Continuing in micro mode after determining new file creation is required.
 
 ### Notes
 

@@ -423,6 +423,7 @@
       "additionalProperties": false,
       "required": [
         "action",
+        "layer",
         "path",
         "needed_artifact_id"
       ],
@@ -430,10 +431,14 @@
         "action": {
           "type": "string",
           "enum": [
-            "Create",
-            "Update",
-            "Reuse"
+            "create",
+            "update",
+            "reuse"
           ]
+        },
+        "layer": {
+          "type": "string",
+          "minLength": 1
         },
         "path": {
           "type": "string",
@@ -492,6 +497,49 @@
             "type": "string",
             "minLength": 1
           }
+        }
+      }
+    },
+    "placement_override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "needed_artifact_id",
+        "upstream_path",
+        "upstream_layer",
+        "revised_path",
+        "revised_layer",
+        "resolution_mode",
+        "resolution_reason"
+      ],
+      "properties": {
+        "needed_artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "upstream_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "upstream_layer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revised_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revised_layer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_mode": {
+          "type": "string",
+          "const": "pause_resolved"
+        },
+        "resolution_reason": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -766,8 +814,19 @@
         },
         "move_actions": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/$defs/move_action"
+          }
+        },
+        "migration_scope_enabled": {
+          "type": "boolean"
+        },
+        "placement_overrides": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/placement_override"
           }
         },
         "layer_justifications": {
@@ -795,7 +854,37 @@
             "minLength": 1
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "move_actions"
+            ]
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "migration_scope_enabled"
+                ],
+                "properties": {
+                  "migration_scope_enabled": {
+                    "const": true
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "move_actions": {
+                    "maxItems": 3
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
   }
 }

@@ -28,6 +28,27 @@
       "path": "src/api/endpoints/projects.ts"
     },
     {
+      "purpose": "toolbar actions composite",
+      "action": "update",
+      "action_rationale": "Existing toolbar can be extended with one generic action slot.",
+      "layer": "ui/composites",
+      "path": "src/ui/composites/Toolbar.tsx"
+    },
+    {
+      "purpose": "project insights feature section",
+      "action": "create",
+      "action_rationale": "Project-domain behavior diverges from shared sections.",
+      "layer": "features/projects/sections",
+      "path": "src/features/projects/sections/ProjectInsightsSection.tsx"
+    },
+    {
+      "purpose": "grid shell mode switch assessment",
+      "action": "update",
+      "action_rationale": "Evaluate whether shared shell update is safe under leakage guardrails.",
+      "layer": "ui/composites",
+      "path": "src/ui/composites/GridShell.tsx"
+    },
+    {
       "purpose": "route entry",
       "action": "create",
       "action_rationale": "No existing route entry handles this flow.",
@@ -48,6 +69,10 @@
     {
       "layer": "api/endpoints",
       "rationale": "Transport calls stay in endpoint wrappers to preserve boundary ownership."
+    },
+    {
+      "layer": "features/projects/sections",
+      "rationale": "Domain-specific orchestration belongs in project-owned sections."
     },
     {
       "layer": "pages",

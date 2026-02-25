@@ -1,6 +1,6 @@
 ---
 name: react-architecture-detection
-description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when downstream placement, routing, endpoint-layer, or domain-boundary decisions must be evidence-based. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations.
+description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when downstream placement, routing, endpoint-layer, or domain-boundary decisions must be evidence-based, especially during React refactoring sessions. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations. If this skill is skipped for a code-changing task, use react-implementation-discipline (standard or micro mode) for enforcement. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 metadata:
@@ -21,6 +21,7 @@ Use this skill when:
 - You need to classify the current repository structure
 - You need to identify the current canonical home for features or APIs
 - You need to detect migration strategy signals
+- You are in a React refactoring session and existing code is being touched
 
 Do not use this skill when:
 - The repository structure is already explicitly documented and fixed
@@ -36,6 +37,8 @@ The skill expects:
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy
 - **Optional hints:** `framework_hint`, `router_hint`, `state_hint`
+- **Optional cache:** previously produced `detection_result` for the same
+  repository/session
 
 ## Baseline compliance
 
@@ -50,6 +53,8 @@ Follow this workflow in order:
 2. Classify the architecture shape and gravity.
 3. Validate output constraints against shared baseline policy.
 4. Output a structured detection contract for downstream skills.
+5. Persist the latest valid `detection_result` in in-memory session cache and
+   reuse it for subsequent related turns.
 
 ## Output contract
 Return a **single JSON object** matching this shape:
@@ -125,6 +130,11 @@ Constraints:
   `pause_decision.impact`.
 - For `result_type=detection_result`, `api.home` is the canonical endpoint
   layer for downstream boundary checks in the task.
+- Fast path is allowed during React refactor sessions when existing code is
+  touched and a trusted in-memory cached `detection_result` exists:
+  - minimally refresh concern homes plus `gravity_map` from current evidence
+  - reuse unchanged fields from cache
+  - still emit a full schema-valid `detection_result`
 - No extra prose outside JSON.
 
 ## Quick reference rules
@@ -134,6 +144,11 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 - rad-overview-scope
 - rad-process
 - rad-output
+- rad-migration-safety
+- rad-default-bias
+- rad-access-control
+- rad-skill-model-alignment
+- rad-fast-path-cache
 
 ## Files
 

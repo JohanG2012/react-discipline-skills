@@ -22,6 +22,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 
 - The skill must evaluate reuse vs update vs new for each needed artifact in
   scope.
+- The skill applies to decision-only refactor planning, including tiny shared
+  helper extraction, and remains planning-only (no implementation output).
 - The skill must preserve deterministic behavior for thresholding, tie-breaks,
   and output states.
 - The skill must avoid over-generalization of components and prefer minimal

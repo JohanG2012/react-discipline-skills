@@ -369,6 +369,42 @@
               "pause_required": { "const": true }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "structural" },
+              "pause_mode": { "const": "balanced" },
+              "decision_safety_confidence": {
+                "type": "number",
+                "minimum": 0.7
+              }
+            },
+            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": false }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "impact": { "const": "structural" },
+              "pause_mode": { "const": "autonomous" },
+              "decision_safety_confidence": {
+                "type": "number",
+                "minimum": 0.5
+              }
+            },
+            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+          },
+          "then": {
+            "properties": {
+              "pause_required": { "const": false }
+            }
+          }
         }
       ]
     },
@@ -590,142 +626,6 @@
               "errors": {
                 "minItems": 1
               }
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "result_type": {
-            "const": "detection_result"
-          }
-        },
-        "required": ["result_type", "ui"],
-        "properties": {
-          "ui": {
-            "type": "object",
-            "required": ["confidence"],
-            "properties": {
-              "confidence": {
-                "type": "number",
-                "exclusiveMaximum": 0.7
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "pause_decision": {
-            "type": "object",
-            "required": ["pause_required"],
-            "properties": {
-              "pause_required": { "const": true },
-              "impact": { "const": "structural" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "result_type": {
-            "const": "detection_result"
-          }
-        },
-        "required": ["result_type", "api"],
-        "properties": {
-          "api": {
-            "type": "object",
-            "required": ["confidence"],
-            "properties": {
-              "confidence": {
-                "type": "number",
-                "exclusiveMaximum": 0.7
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "pause_decision": {
-            "type": "object",
-            "required": ["pause_required"],
-            "properties": {
-              "pause_required": { "const": true },
-              "impact": { "const": "structural" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "result_type": {
-            "const": "detection_result"
-          }
-        },
-        "required": ["result_type", "domain"],
-        "properties": {
-          "domain": {
-            "type": "object",
-            "required": ["confidence"],
-            "properties": {
-              "confidence": {
-                "type": "number",
-                "exclusiveMaximum": 0.7
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "pause_decision": {
-            "type": "object",
-            "required": ["pause_required"],
-            "properties": {
-              "pause_required": { "const": true },
-              "impact": { "const": "structural" }
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "result_type": {
-            "const": "detection_result"
-          }
-        },
-        "required": ["result_type", "state"],
-        "properties": {
-          "state": {
-            "type": "object",
-            "required": ["confidence"],
-            "properties": {
-              "confidence": {
-                "type": "number",
-                "exclusiveMaximum": 0.7
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "pause_decision": {
-            "type": "object",
-            "required": ["pause_required"],
-            "properties": {
-              "pause_required": { "const": true },
-              "impact": { "const": "structural" }
             }
           }
         }

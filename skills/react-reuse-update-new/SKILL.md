@@ -1,6 +1,6 @@
 ---
 name: react-reuse-update-new
-description: Decide whether planned artifacts should be reused, safely updated, or created new within the approved placement. Use after placement_plan is defined and before implementation. Evaluate abstraction cost, domain leakage risk, flag explosion, divergence probability, and locality benefit to produce a revised_plan with per-artifact decisions and rationale. Do not use to choose folders, perform architecture detection, or generate implementation patches.
+description: Decide whether planned artifacts should be reused, safely updated, or created new within the approved placement. Use after placement_plan is defined and before implementation. Evaluate abstraction cost, domain leakage risk, flag explosion, divergence probability, and locality benefit to produce a revised_plan with per-artifact decisions and rationale. Do not use to choose folders, perform architecture detection, or generate implementation patches. If this skill is skipped for a code-changing task, use react-implementation-discipline (standard or micro mode) for enforcement. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 metadata:
@@ -22,10 +22,12 @@ Use this skill when:
 - You need per-artifact reuse/update/new decisions
 - Existing components may already cover the request
 - You want to avoid unnecessary duplication and abstraction leakage
+- You are extracting shared logic for DRY reuse across 2 or more call sites
+- You are refactoring and need a decision-only check before creating a tiny shared helper
 
 Do not use this skill when:
 - The change is explicitly mandated to create new files
-- No existing code is relevant to the request
+- The work is strictly in-place in existing files and no reuse/update/new decision is needed
 
 ## Inputs
 The skill expects:
@@ -47,12 +49,15 @@ Follow this workflow in order:
 1. Search for existing implementations in order (exact/near-name, pattern,
    primitive, endpoint/DTO/hook) and record concrete evidence paths or
    `not_found`.
-2. Score candidates on fit, complexity, coupling risk, divergence risk, and
+2. For low-overhead helper refactors, run a quick repo search first for existing
+   helpers (for example `isRecord`, `getStringField`); if found, prefer
+   reuse/update, otherwise allow new helper creation.
+3. Score candidates on fit, complexity, coupling risk, divergence risk, and
    locality benefit.
-3. Apply default thresholds (or provided overrides) and deterministic tie-break
+4. Apply default thresholds (or provided overrides) and deterministic tie-break
    ordering.
-4. Validate decision constraints against shared baseline policy.
-5. Output one strict result type with explicit reasoning and guardrails.
+5. Validate decision constraints against shared baseline policy.
+6. Output one strict result type with explicit reasoning and guardrails.
 
 ## Output contract
 Return a **single JSON object** matching this shape:
@@ -87,6 +92,7 @@ Return a **single JSON object** matching this shape:
     "file_actions": [
       {
         "action": "reuse",
+        "layer": "ui/composites",
         "path": "src/ui/composites/FilterBar.tsx",
         "needed_artifact_id": "na-filter-bar"
       }
@@ -119,6 +125,12 @@ Constraints:
 - `decision_plan` outputs must include threshold values, revised decisions, and
   stable `needed_artifact_id` continuity, plus context decisions, file actions,
   and layer justifications.
+- `decision_plan.revised_plan.file_actions[]` and
+  `decision_plan.revised_plan.decisions[]` must match one-to-one by
+  `needed_artifact_id`.
+- `decision_plan.revised_plan.file_actions[]` must preserve upstream
+  `placement_plan` layer/path decisions unless explicit pause-resolved override
+  metadata is provided in `revised_plan.placement_overrides[]`.
 - `decision_plan.revised_plan.decisions[]` entries must include a single final
   decision per artifact plus concise reasons; tie-break metadata is required
   when tie-break logic is used.
@@ -132,6 +144,8 @@ Constraints:
   `locality_benefit`).
 - If move/rename actions exist, include `from_path -> to_path` plus explicit
   `import_update_targets`.
+- `revised_plan.move_actions[]` is capped at 3 entries unless
+  `revised_plan.migration_scope_enabled=true`.
 - If material completeness needs exceed scope caps, include bounded
   `scope_expansion_needed[]` entries (`why`, `would_touch`) while still
   returning the in-cap minimal decision package.

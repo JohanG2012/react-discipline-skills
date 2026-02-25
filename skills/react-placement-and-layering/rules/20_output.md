@@ -32,6 +32,8 @@ Defines the expected output structure for placement decisions.
   - `source_of_truth_resolutions`
   - `validation_status`
   - `notes`
+- `result_type=placement_plan` may include `file_actions` as a concise
+  placement action summary.
 - `result_type=placement_plan` may include `scope_expansion_needed` when
   out-of-cap
   follow-up work would materially improve completeness.
@@ -54,6 +56,16 @@ Defines the expected output structure for placement decisions.
   layer.
 - `decision_explanation` must summarize detected architecture signals and the
   chosen direction.
+- No-op placement outcome is valid when edits are confined to existing files
+  and no new placement decision is needed:
+  - keep `result_type=placement_plan`
+  - set `artifacts` to `[]`
+  - set `file_actions` to `[]`
+  - include a short stay-in-place justification in
+    `decision_explanation.chosen_direction`
+- `canonical_endpoint_layer` must match `detection_result.api.home` unless a
+  structural conflict was explicitly pause-resolved and recorded in
+  `source_of_truth_resolutions`.
 - `authoritative_home_map` must provide a concise map of current authoritative
   homes for relevant concerns (for example `ui`, `api`, `domain`, `routing`).
 - If move/rename operations are present, output must include
@@ -75,7 +87,7 @@ Defines the expected output structure for placement decisions.
   - `notes`
 - `result_type=validation_error` must not include plan fields (`strategy_used`,
   `feature_owner`, `canonical_endpoint_layer`, `authoritative_home_map`,
-  `artifacts`,
+  `artifacts`, `file_actions`,
   `layer_justifications`, `decision_explanation`, `import_guardrails`,
   `source_of_truth_resolutions`, `move_operations`, `move_concern`,
   `scope_expansion_needed`).
@@ -91,7 +103,7 @@ Defines the expected output structure for placement decisions.
   - `notes`
 - `result_type=dependency_error` must not include plan fields (`strategy_used`,
   `feature_owner`, `canonical_endpoint_layer`, `authoritative_home_map`,
-  `artifacts`, `layer_justifications`, `decision_explanation`,
+  `artifacts`, `file_actions`, `layer_justifications`, `decision_explanation`,
   `import_guardrails`, `source_of_truth_resolutions`, `move_operations`,
   `move_concern`, `scope_expansion_needed`).
 
@@ -106,6 +118,8 @@ Defines the expected output structure for placement decisions.
 - Returning output fields with raw source snippets or secret-like values.
 - Using `effective_source=repository_evidence` for structural conflicts without
   `resolution_mode=pause_resolved`.
+- Returning a no-op placement output without explicit stay-in-place
+  justification.
 
 ### Notes
 

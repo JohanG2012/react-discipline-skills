@@ -119,7 +119,8 @@ Define the normative interface emitted by `react-architecture-detection` and con
 
 5. **Low-Confidence Rule**
    - If a structural concern confidence is below `0.7`, concern `home` must be `unknown` and concern `status` must be `ambiguous`.
-   - In this case, `pause_decision.pause_required` must be `true` and include bounded options with one recommended option.
+   - Low concern confidence alone does not force `pause_required=true`.
+   - Pause requirement follows `pause_mode` thresholds using decision-safety confidence and structural impact.
    - `pause_decision` is mandatory in all runs; use `pause_required=false` when no structural pause is required.
 
 6. **Single Strategy Rule**

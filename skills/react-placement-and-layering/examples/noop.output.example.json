@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-placement-and-layering",
+  "version": "1.0.0",
+  "result_type": "placement_plan",
+  "strategy_used": "follow-existing",
+  "feature_owner": "projects",
+  "canonical_endpoint_layer": "src/api/endpoints",
+  "authoritative_home_map": {
+    "ui": "src/ui/composites",
+    "api": "src/api/endpoints",
+    "domain": "src/features/projects",
+    "routing": "src/pages"
+  },
+  "artifacts": [],
+  "file_actions": [],
+  "layer_justifications": [
+    {
+      "layer": "existing-files",
+      "rationale": "No new files are required, so edits stay in existing homes."
+    }
+  ],
+  "decision_explanation": {
+    "detected_signals": [
+      "Requested scope touches only existing files.",
+      "No new concern home or route is introduced."
+    ],
+    "chosen_direction": "Stay in place: keep edits in existing files and paths."
+  },
+  "import_guardrails": [
+    "ui/* must not import from features/*",
+    "api/* must not import React",
+    "lib/* must not import React",
+    "pages/* must not call endpoints directly"
+  ],
+  "source_of_truth_resolutions": [
+    {
+      "concern": "ui",
+      "default_source": "architecture_detection",
+      "architecture_confidence": 0.91,
+      "override_threshold": 0.7,
+      "effective_source": "architecture_detection",
+      "resolution_mode": "inherited",
+      "resolution_reason": "No structural conflict was detected."
+    }
+  ],
+  "validation_status": {
+    "is_valid": true,
+    "stage": "finalized",
+    "errors": [],
+    "warnings": []
+  },
+  "notes": [
+    "No-op placement plan selected because scope remains in existing files."
+  ]
+}

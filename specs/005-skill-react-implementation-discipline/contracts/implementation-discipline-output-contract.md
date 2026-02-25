@@ -59,6 +59,14 @@ All outputs must include:
   - optional `warnings[]`
 - optional `scope_expansion_needed[]` (`why`, `would_touch`)
 
+Execution modes:
+
+- `standard`: consumes upstream `detection_result` + `revised_plan`.
+- `micro`: allowed only for behavior-preserving in-place refactors that satisfy
+  shared `sr-micro-change-bypass` constraints (small touched-file count, no
+  new files, no moves/renames, no new endpoint/hook/composite homes, no routing
+  changes).
+
 ### Result Type: `implementation_package`
 
 Required fields:
@@ -69,7 +77,7 @@ Required fields:
   - optional `new_files[]` (`path`, `content`)
   - `quality_checks[]` (`check_id`, `status`, `summary`, optional `required_fix`)
   - `boundary_audit[]` (`file_path`, `status`, optional `issues[]`)
-  - `scope_deviations[]` (`type`, `description`, `action_taken`)
+  - `scope_deviations[]` (`path`, `type`, `reason`)
   - optional `required_fixes[]` (required when `final_state=blocked`)
   - optional `recommended_follow_up_scope[]` (required when `scope_expansion_needed[]` is present)
   - optional `notes[]`
@@ -77,9 +85,13 @@ Required fields:
 Behavioral constraints:
 
 - `validation_status.final_state` must be `accepted` or `blocked`.
+- `result_type=implementation_package` requires
+  `validation_status.final_state` in (`accepted`, `blocked`).
 - If final state is `blocked`, include failed checks and `required_fixes[]`.
 - Out-of-scope requests without explicit approval must be excluded from the
   implementation payload and represented as scope deviations.
+- Micro mode must still include complete boundary/quality evidence and
+  deterministic validation state reporting.
 
 ### Result Type: `validation_error`
 

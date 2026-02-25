@@ -29,18 +29,27 @@
     "file_actions": [
       {
         "action": "reuse",
+        "layer": "ui/composites",
         "path": "src/ui/composites/FilterBar.tsx",
         "needed_artifact_id": "na-filter-bar"
       },
       {
         "action": "update",
+        "layer": "ui/composites",
         "path": "src/ui/composites/Toolbar.tsx",
         "needed_artifact_id": "na-toolbar-actions"
       },
       {
         "action": "create",
+        "layer": "features/projects/sections",
         "path": "src/features/projects/sections/ProjectInsightsSection.tsx",
         "needed_artifact_id": "na-project-domain-section"
+      },
+      {
+        "action": "update",
+        "layer": "ui/composites",
+        "path": "src/ui/composites/GridShell.tsx",
+        "needed_artifact_id": "na-shared-grid-mode-switch"
       }
     ],
     "layer_justifications": [
@@ -153,6 +162,7 @@
       "No domain flags in shared composites.",
       "Prefer domain-owned sections when divergence risk is high.",
       "Do not introduce new shared/common dumping-ground abstractions.",
+      "Do not expand shared API client surface area unless endpoint behavior is stable and cross-domain.",
       "Do not bypass endpoint layers from hooks or UI.",
       "Do not place reusable utilities inline in pages/sections when they belong in domain/lib.",
       "Do not expand shared components with excessive mode/flag complexity.",

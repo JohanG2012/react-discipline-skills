@@ -1,6 +1,6 @@
 ---
 name: react-placement-and-layering
-description: Decide where new or modified code should live within a React repository using detected architecture and shared policy constraints. Use after architecture detection and before reuse analysis or implementation to produce a placement_plan that defines touched layers and rationale. Apply gravity rules, migration strategy, and boundary constraints to prevent duplicate homes and architectural drift. Do not use for code generation, reuse complexity analysis, or implementation discipline.
+description: Decide where new or modified code should live within a React repository using detected architecture and shared policy constraints. Use after architecture detection and before reuse analysis or implementation to produce a placement_plan that defines touched layers and rationale. Apply gravity rules, migration strategy, and boundary constraints to prevent duplicate homes and architectural drift. Do not use for code generation, reuse complexity analysis, or implementation discipline. If this skill is skipped for a code-changing task, use react-implementation-discipline (standard or micro mode) for enforcement. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 metadata:
@@ -19,12 +19,13 @@ architecture detection outputs and boundary rules.
 ## When to apply
 Use this skill when:
 - You need to place new files in the correct layer
+- You introduce any new frontend file (for example React component, hook, route, API client, store module, or shared utility)
 - You must validate boundary rules between layers
 - You need to justify placement decisions
+- You are mid-implementation and discover that a new file is needed; pause implementation, run placement, then continue implementation
 
 Do not use this skill when:
 - Placement is explicitly dictated in the request
-- The change is limited to existing files with no new placement
 
 ## Inputs
 The skill expects:
@@ -41,7 +42,8 @@ Follow this workflow in order:
 1. Confirm architecture detection results and gravity.
 2. Map the change to the correct layer.
 3. Validate placement output against shared baseline constraints.
-4. Produce a placement decision with justification.
+4. If edits stay confined to existing files and no new placement decision is needed, emit a no-op placement plan (`artifacts: []`, `file_actions: []`) with a short stay-in-place justification.
+5. Produce a placement decision with justification.
 
 ## Output contract
 Return a **single JSON object** matching this shape:
@@ -76,6 +78,9 @@ Constraints:
 - Plan outputs include canonical endpoint layer, per-layer justifications, and
   a short decision explanation tied to detected architecture signals.
 - Plan outputs include an authoritative-home map for active concerns.
+- No-op placement outcomes are allowed when edits remain in existing files:
+  return `result_type=placement_plan` with `artifacts: []`,
+  `file_actions: []`, and a short stay-in-place justification.
 - Repository-evidence overrides for structural conflicts require explicit
   pause-resolved metadata.
 - If move/rename operations are present, they are limited to small scope and

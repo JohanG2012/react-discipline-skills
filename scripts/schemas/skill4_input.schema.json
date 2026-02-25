@@ -4,10 +4,6 @@
   "title": "Implementation Discipline Input Envelope",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "detection_result",
-    "revised_plan"
-  ],
   "properties": {
     "task_request": {
       "type": "string",
@@ -18,6 +14,44 @@
     },
     "revised_plan": {
       "type": "object"
+    },
+    "micro_change_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavior_preserving_refactor",
+        "touched_files_max",
+        "no_new_files",
+        "no_moves_or_renames",
+        "no_new_endpoints_hooks_composites",
+        "no_routing_changes",
+        "in_place_refactor"
+      ],
+      "properties": {
+        "behavior_preserving_refactor": {
+          "const": true
+        },
+        "touched_files_max": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "no_new_files": {
+          "const": true
+        },
+        "no_moves_or_renames": {
+          "const": true
+        },
+        "no_new_endpoints_hooks_composites": {
+          "const": true
+        },
+        "no_routing_changes": {
+          "const": true
+        },
+        "in_place_refactor": {
+          "const": true
+        }
+      }
     },
     "policy_ref": {
       "type": "string",
@@ -44,5 +78,19 @@
     "max_lines_policy": {
       "type": "object"
     }
-  }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "detection_result",
+        "revised_plan"
+      ]
+    },
+    {
+      "required": [
+        "task_request",
+        "micro_change_context"
+      ]
+    }
+  ]
 }

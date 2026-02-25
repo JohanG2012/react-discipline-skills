@@ -41,6 +41,8 @@ Defines the expected deterministic output structure for reuse decisions.
 - `revised_plan.guardrails[]` must also include concise constraints against:
   - new shared/common dumping-ground abstractions
   - endpoint bypass patterns in hooks/UI layers
+  - casual shared API client surface expansion when endpoint behavior is not
+    stable and cross-domain
   - inline utility placement in pages/sections when the utility belongs in
     domain/lib boundaries
   - mega component expansion through excessive mode/flag props
@@ -48,9 +50,25 @@ Defines the expected deterministic output structure for reuse decisions.
   - "refactor for future" scope creep without immediate value
   - mixed migration + feature-behavior churn in one decision package unless explicitly requested
 - `revised_plan.file_actions[]` must map each planned touch to `create`,
-  `update`, or `reuse` and include concrete paths.
+  `update`, or `reuse` and include `needed_artifact_id`, `layer`, and concrete
+  `path`.
+- `revised_plan.file_actions[]` and `revised_plan.decisions[]` must match
+  one-to-one by `needed_artifact_id` (no missing or extra ids in either list).
+- `revised_plan.file_actions[]` must preserve `placement_plan` layer/path
+  decisions by default.
+- If a file action intentionally deviates from upstream `placement_plan`
+  layer/path, output must include `revised_plan.placement_overrides[]` with:
+  - `needed_artifact_id`
+  - `upstream_path`
+  - `upstream_layer`
+  - `revised_path`
+  - `revised_layer`
+  - `resolution_mode` (`pause_resolved`)
+  - `resolution_reason`
 - If any move/rename is planned, output must include `revised_plan.move_actions[]`
   entries with `from_path`, `to_path`, and `import_update_targets[]`.
+- `revised_plan.move_actions[]` must contain at most 3 entries unless
+  `revised_plan.migration_scope_enabled=true`.
 - `revised_plan.layer_justifications[]` must provide concise layer rationale and
   why adjacent layers were not chosen (1-2 sentences per touched layer).
 - `decision_blocked` entries must include:

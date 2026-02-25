@@ -66,13 +66,15 @@ Required fields:
     - `data_sources_summary[]`
     - `state_type`
     - `ui_need_shape`
-  - `file_actions[]` (`Create` | `Update` | `Reuse` with concrete path + artifact id)
+  - `file_actions[]` (`Create` | `Update` | `Reuse` with concrete layer, path, and artifact id)
   - `layer_justifications[]` (layer rationale + adjacent layers not chosen)
   - `decisions[]`
   - `guardrails[]`
   - `notes[]` (max 5)
   - optional `follow_up_scope[]` (max 5 short items when scope expansion is requested)
   - optional `move_actions[]` (`from_path`, `to_path`, `import_update_targets[]`)
+  - optional `migration_scope_enabled` (boolean)
+  - optional `placement_overrides[]` (`needed_artifact_id`, `upstream_path`, `upstream_layer`, `revised_path`, `revised_layer`, `resolution_mode=pause_resolved`, `resolution_reason`)
 
 Each `decisions[]` entry must include:
 
@@ -93,6 +95,7 @@ Decision constraints:
 
 - `decision_blocked` requires `override_required=true`.
 - All `needed_artifact_id` values must be unique per output.
+- `file_actions[].needed_artifact_id` and `decisions[].needed_artifact_id` must match one-to-one.
 - `decision_mark` must match the final decision:
   - `reuse` -> `reuse as-is`
   - `update` -> `updated`
@@ -100,8 +103,11 @@ Decision constraints:
   - `decision_blocked` -> `decision_blocked`
 - `reuse` and `update` decisions require `discovery_status=found`.
 - `new` decisions require a concrete `target_path` for planned creation scope.
+- `file_actions[]` must preserve upstream `placement_plan` path/layer unless explicitly documented in `placement_overrides[]`.
+- Every `placement_overrides[]` entry must be pause-resolved and must match a file action by `needed_artifact_id`.
 - If any move/rename is present, include explicit `from_path -> to_path` plus
   import update targets before execution.
+- `move_actions[]` length must be `<= 3` unless `migration_scope_enabled=true`.
 - If tie-break is present and applied, criteria order must be:
   `authoritative_home`, `coupling_risk`, `divergence_risk`,
   `complexity_cost`, `lexical_path`.
@@ -128,12 +134,17 @@ Required fields:
 
 - Output is JSON only and machine-consumable.
 - Output must remain deterministic for threshold defaults and tie-break ordering.
+- Scoring normalization anchors are fixed for consistency:
+  - `coupling_risk`: `0` no new imports/cross-domain refs; `5` same-feature import expansion; `10` cross-domain import or new global dependency
+  - `divergence_risk`: `0` identical behavior; `5` similar behavior likely to evolve separately; `10` expected strong divergence over time
+  - `locality_benefit`: `0` ownership pulled away from domain home; `5` neutral locality; `10` ownership remains close to domain home
 - `revised_plan.notes[]` remains concise (max 5) and limited to high-leverage
   tradeoffs, uncertainties, constraints, or risks.
 - Output guardrails must explicitly prohibit domain-mode leakage in shared
   abstractions.
 - Output guardrails must include constraints against new shared/common
-  dumping-ground abstractions, endpoint bypass in hooks/UI, inline utility
+  dumping-ground abstractions, casual shared API client surface expansion,
+  endpoint bypass in hooks/UI, inline utility
   leakage in pages/sections, mega mode/flag component growth, forced multi-mode
   shared composites where section-level duplication is safer, refactor-only scope
   creep, and mixed migration plus feature-behavior churn unless explicitly

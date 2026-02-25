@@ -32,10 +32,19 @@ review-ready, and policy-verifiable.
   - `final_state`
   - `errors`
   - optional `warnings`
+- `validation_status.final_state` must be one of:
+  - `accepted`
+  - `blocked`
+  - `validation_error`
+  - `dependency_error`
 - Supported `result_type` values:
   - `implementation_package`
   - `validation_error`
   - `dependency_error`
+- `result_type` and `validation_status.final_state` must align:
+  - `implementation_package` -> `accepted` or `blocked`
+  - `validation_error` -> `validation_error`
+  - `dependency_error` -> `dependency_error`
 - `implementation_package` must include `output_package` with:
   - `changed_files`
   - optional `updated_patches`
@@ -46,13 +55,19 @@ review-ready, and policy-verifiable.
   - optional `required_fixes` (required when `final_state=blocked`)
   - optional `recommended_follow_up_scope`
   - optional `notes`
+- Micro-mode outputs must still include boundary/quality evidence and keep
+  implementation bounded to behavior-preserving in-place refactor scope.
 - If `scope_expansion_needed` is present, include
   `output_package.recommended_follow_up_scope`.
+- Each `scope_deviations[]` entry must include:
+  - `path`
+  - `type`
+  - `reason`
 - `validation_error` output must include `notes` and must not include
   `output_package`.
 - `dependency_error` output must include:
   - `dependency_issue`
-  - `fallback_context_bundle_requirements`
+  - `fallback_context_bundle_requirements[]`
   - `notes`
   and must not include `output_package`.
 

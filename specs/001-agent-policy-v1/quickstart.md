@@ -54,25 +54,25 @@ npm run check
 
 ## Execution Checklist
 
-- [ ] Foundational scope alignment completed across constitution and top-level policy docs.
-- [ ] Shared baseline rules updated in `shared/rules/`.
-- [ ] Shared baseline rule IDs listed in `shared/SKILL.md` map to concrete rule definitions.
-- [ ] Shared baseline includes numbered rule modules for planning/reuse, migration, fallback defaults, implementation defaults, layer contracts, access/write control, and file-size guidance.
-- [ ] Shared baseline includes numbered modules for architecture-detection contract and enforcement heuristics.
-- [ ] All four downstream production skills explicitly reference shared baseline inheritance.
-- [ ] Governance exception model confirms maintainer-only approval and no expiry metadata.
-- [ ] Agent bundles regenerated with `npm run build:agents`.
-- [ ] Repository checks pass with `npm run check`.
-- [ ] Execution evidence recorded in `<REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md`.
+- [x] Foundational scope alignment completed across constitution and top-level policy docs.
+- [x] Shared baseline rules updated in `shared/rules/`.
+- [x] Shared baseline rule IDs listed in `shared/SKILL.md` map to concrete rule definitions.
+- [x] Shared baseline includes numbered rule modules for planning/reuse, migration, fallback defaults, implementation defaults, layer contracts, access/write control, and file-size guidance.
+- [x] Shared baseline includes numbered modules for architecture-detection contract and enforcement heuristics.
+- [x] All four downstream production skills explicitly reference shared baseline inheritance.
+- [x] Governance exception model confirms maintainer-only approval and no expiry metadata.
+- [x] Agent bundles regenerated with `npm run build:agents`.
+- [x] Repository checks pass with `npm run check`.
+- [x] Execution evidence recorded in `<REPO_ROOT>/specs/001-agent-policy-v1/implementation-tracker.md`.
 
 ## Final Verification and Handoff Checklist
 
-- [ ] Confirm all tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tasks.md` are marked complete.
-- [ ] Confirm shared baseline references are present in all four downstream `SKILL.md` files.
-- [ ] Confirm required shared-rule categories are covered by numbered files in `shared/rules/`.
-- [ ] Confirm contract checks include maintainer-only and no-expiry exception validation.
-- [ ] Confirm scope wording is aligned across `README.md`, `AGENTS.md`, `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/master_spec.md`, `<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`, `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`, `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/master_spec.md`, and `.specify/memory/constitution.md`.
-- [ ] Confirm `AGENTS.md` outputs were regenerated through official build/update scripts.
+- [x] Confirm all tasks in `<REPO_ROOT>/specs/001-agent-policy-v1/tasks.md` are marked complete.
+- [x] Confirm shared baseline references are present in all four downstream `SKILL.md` files.
+- [x] Confirm required shared-rule categories are covered by numbered files in `shared/rules/`.
+- [x] Confirm contract checks include maintainer-only and no-expiry exception validation.
+- [x] Confirm scope wording is aligned across `README.md`, `AGENTS.md`, `<REPO_ROOT>/specs/001-agent-policy-v1/master_spec.md`, `<REPO_ROOT>/specs/002-skill-react-architecture-detection/master_spec.md`, `<REPO_ROOT>/specs/003-skill-react-placement-layering/master_spec.md`, `<REPO_ROOT>/specs/004-skill-react-reuse-update-new/master_spec.md`, `<REPO_ROOT>/specs/005-skill-react-implementation-discipline/master_spec.md`, and `.specify/memory/constitution.md`.
+- [x] Confirm `AGENTS.md` outputs were regenerated through official build/update scripts.
 
 ## Exit Criteria
 

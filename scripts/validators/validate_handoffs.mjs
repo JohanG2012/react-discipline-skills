@@ -102,6 +102,27 @@ function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+function duplicateValues(values) {
+  const seen = new Set();
+  const duplicates = new Set();
+  for (const value of values) {
+    if (seen.has(value)) {
+      duplicates.add(value);
+      continue;
+    }
+    seen.add(value);
+  }
+  return [...duplicates];
+}
+
+function setsEqual(a, b) {
+  if (a.size !== b.size) return false;
+  for (const value of a) {
+    if (!b.has(value)) return false;
+  }
+  return true;
+}
+
 async function pathExists(filePath) {
   try {
     await fs.access(filePath);
@@ -227,32 +248,36 @@ function validateFixtureSetSchemas({
 
   const skill4Input = setPayloads["skill4_input.json"];
 
-  const nestedDetectionErrors = validatePayloadWithSchema({
-    payload: skill4Input.detection_result,
-    fixturePath: setPaths["skill4_input.json"],
-    schemaDef: schemas.skill1_output,
-    maxErrorsToShow,
-  });
-  if (nestedDetectionErrors.length) {
-    schemaErrors.push(
-      `[${rel(setPaths["skill4_input.json"])}] skill4_input.detection_result is invalid`,
-      ...nestedDetectionErrors.map((line) => `  ${line}`),
-    );
-    return schemaErrors;
+  if (Object.hasOwn(skill4Input, "detection_result")) {
+    const nestedDetectionErrors = validatePayloadWithSchema({
+      payload: skill4Input.detection_result,
+      fixturePath: setPaths["skill4_input.json"],
+      schemaDef: schemas.skill1_output,
+      maxErrorsToShow,
+    });
+    if (nestedDetectionErrors.length) {
+      schemaErrors.push(
+        `[${rel(setPaths["skill4_input.json"])}] skill4_input.detection_result is invalid`,
+        ...nestedDetectionErrors.map((line) => `  ${line}`),
+      );
+      return schemaErrors;
+    }
   }
 
-  const nestedRevisedPlanErrors = validatePayloadWithSchema({
-    payload: skill4Input.revised_plan,
-    fixturePath: setPaths["skill4_input.json"],
-    schemaDef: schemas.skill3_revised_plan,
-    maxErrorsToShow,
-  });
-  if (nestedRevisedPlanErrors.length) {
-    schemaErrors.push(
-      `[${rel(setPaths["skill4_input.json"])}] skill4_input.revised_plan is invalid`,
-      ...nestedRevisedPlanErrors.map((line) => `  ${line}`),
-    );
-    return schemaErrors;
+  if (Object.hasOwn(skill4Input, "revised_plan")) {
+    const nestedRevisedPlanErrors = validatePayloadWithSchema({
+      payload: skill4Input.revised_plan,
+      fixturePath: setPaths["skill4_input.json"],
+      schemaDef: schemas.skill3_revised_plan,
+      maxErrorsToShow,
+    });
+    if (nestedRevisedPlanErrors.length) {
+      schemaErrors.push(
+        `[${rel(setPaths["skill4_input.json"])}] skill4_input.revised_plan is invalid`,
+        ...nestedRevisedPlanErrors.map((line) => `  ${line}`),
+      );
+      return schemaErrors;
+    }
   }
 
   return schemaErrors;
@@ -297,6 +322,174 @@ function runPipelineAssertions(setPayloads) {
   if (isObject(skill3.revised_plan) && isObject(skill4.revised_plan)) {
     if (!deepEqual(skill4.revised_plan, skill3.revised_plan)) {
       errors.push("skill4_input.revised_plan must match skill3_output.revised_plan");
+    }
+  }
+
+  if (skill3.result_type === "decision_plan" && isObject(skill3.revised_plan)) {
+    const revisedPlan = skill3.revised_plan;
+    const fileActions = Array.isArray(revisedPlan.file_actions)
+      ? revisedPlan.file_actions
+      : [];
+    const decisions = Array.isArray(revisedPlan.decisions)
+      ? revisedPlan.decisions
+      : [];
+
+    const fileActionIds = fileActions
+      .map((item) => item?.needed_artifact_id)
+      .filter((value) => typeof value === "string" && value.length > 0);
+    const decisionIds = decisions
+      .map((item) => item?.needed_artifact_id)
+      .filter((value) => typeof value === "string" && value.length > 0);
+
+    for (const duplicate of duplicateValues(fileActionIds)) {
+      errors.push(
+        `skill3_output.revised_plan.file_actions has duplicate needed_artifact_id "${duplicate}"`,
+      );
+    }
+    for (const duplicate of duplicateValues(decisionIds)) {
+      errors.push(
+        `skill3_output.revised_plan.decisions has duplicate needed_artifact_id "${duplicate}"`,
+      );
+    }
+
+    if (!setsEqual(new Set(fileActionIds), new Set(decisionIds))) {
+      errors.push(
+        "skill3_output.revised_plan.file_actions and decisions must match one-to-one by needed_artifact_id",
+      );
+    }
+
+    if (
+      Array.isArray(revisedPlan.move_actions)
+      && revisedPlan.move_actions.length > 3
+      && revisedPlan.migration_scope_enabled !== true
+    ) {
+      errors.push(
+        "skill3_output.revised_plan.move_actions must be <= 3 unless migration_scope_enabled=true",
+      );
+    }
+  }
+
+  if (
+    skill2.result_type === "placement_plan"
+    && skill3.result_type === "decision_plan"
+    && isObject(skill3.revised_plan)
+  ) {
+    const placementArtifacts = Array.isArray(skill2.artifacts)
+      ? skill2.artifacts
+      : [];
+    const placementByPath = new Map();
+    for (const artifact of placementArtifacts) {
+      if (
+        isObject(artifact)
+        && typeof artifact.path === "string"
+        && artifact.path.length > 0
+        && typeof artifact.layer === "string"
+        && artifact.layer.length > 0
+      ) {
+        placementByPath.set(artifact.path, artifact.layer);
+      }
+    }
+
+    const fileActions = Array.isArray(skill3.revised_plan.file_actions)
+      ? skill3.revised_plan.file_actions
+      : [];
+    const placementOverrides = Array.isArray(skill3.revised_plan.placement_overrides)
+      ? skill3.revised_plan.placement_overrides
+      : [];
+    const fileActionById = new Map();
+    for (const action of fileActions) {
+      if (
+        isObject(action)
+        && typeof action.needed_artifact_id === "string"
+        && action.needed_artifact_id.length > 0
+      ) {
+        fileActionById.set(action.needed_artifact_id, action);
+      }
+    }
+    const overrideById = new Map();
+    for (const override of placementOverrides) {
+      if (
+        isObject(override)
+        && typeof override.needed_artifact_id === "string"
+        && override.needed_artifact_id.length > 0
+      ) {
+        overrideById.set(override.needed_artifact_id, override);
+      }
+    }
+
+    for (const action of fileActions) {
+      if (
+        !isObject(action)
+        || typeof action.path !== "string"
+        || action.path.length === 0
+        || typeof action.layer !== "string"
+        || action.layer.length === 0
+        || typeof action.needed_artifact_id !== "string"
+        || action.needed_artifact_id.length === 0
+      ) {
+        continue;
+      }
+
+      const upstreamLayer = placementByPath.get(action.path);
+      if (typeof upstreamLayer === "string") {
+        if (upstreamLayer !== action.layer) {
+          errors.push(
+            `skill3_output file_action ${action.needed_artifact_id} layer "${action.layer}" must match placement layer "${upstreamLayer}" for path "${action.path}"`,
+          );
+        }
+        continue;
+      }
+
+      const override = overrideById.get(action.needed_artifact_id);
+      if (!override) {
+        errors.push(
+          `skill3_output file_action ${action.needed_artifact_id} path "${action.path}" is not in placement artifacts and has no pause-resolved placement_overrides entry`,
+        );
+        continue;
+      }
+
+      if (override.resolution_mode !== "pause_resolved") {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} must use resolution_mode=pause_resolved`,
+        );
+      }
+      if (override.revised_path !== action.path) {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} revised_path must match file_action path`,
+        );
+      }
+      if (override.revised_layer !== action.layer) {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} revised_layer must match file_action layer`,
+        );
+      }
+
+      if (typeof override.upstream_path !== "string" || override.upstream_path.length === 0) {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} must include upstream_path`,
+        );
+        continue;
+      }
+      const expectedUpstreamLayer = placementByPath.get(override.upstream_path);
+      if (!expectedUpstreamLayer) {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} upstream_path "${override.upstream_path}" is not present in placement artifacts`,
+        );
+        continue;
+      }
+      if (override.upstream_layer !== expectedUpstreamLayer) {
+        errors.push(
+          `skill3_output placement_overrides ${action.needed_artifact_id} upstream_layer must match placement layer "${expectedUpstreamLayer}"`,
+        );
+      }
+    }
+
+    for (const [id] of overrideById) {
+      if (!fileActionById.has(id)) {
+        errors.push(
+          `skill3_output placement_overrides ${id} has no matching revised_plan.file_actions entry`,
+        );
+      }
     }
   }
 

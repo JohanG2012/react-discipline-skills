@@ -20,6 +20,16 @@ reviewer-dependent outcomes.
   - `7-9`: minor wiring/extension
   - `4-6`: significant differences
   - `0-3`: wrong abstraction
+- Use score normalization anchors for coupling/divergence/locality:
+  - `coupling_risk=0`: no new imports and no cross-domain references
+  - `coupling_risk=5`: new imports within the same feature boundary
+  - `coupling_risk=10`: cross-domain import or new global dependency
+  - `divergence_risk=0`: behavior is effectively identical
+  - `divergence_risk=5`: behavior is similar but likely to evolve separately
+  - `divergence_risk=10`: behavior is expected to diverge significantly over time
+  - `locality_benefit=0`: ownership is pulled away from the feature/domain home
+  - `locality_benefit=5`: neutral ownership/locality impact
+  - `locality_benefit=10`: ownership remains close to the feature/domain home
 - Apply these default threshold values unless explicit overrides are supplied:
   - `max_new_props_for_update=2`
   - `max_flags_allowed_composites=0` (domain modes)

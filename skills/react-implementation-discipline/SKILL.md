@@ -1,6 +1,6 @@
 ---
 name: react-implementation-discipline
-description: Generate or modify React code from an approved revised_plan while enforcing architectural boundaries, scope limits, and shared policy constraints. Use only after architecture detection, placement planning, and reuse decisions are complete. Consume detection_result and revised_plan to produce patches/snippets that respect import rules, canonical endpoint-layer constraints, scope governor limits, and Definition-of-Done checks. Enforce boundary audits, loading/error/empty states, and anti-drift controls. Do not use for architecture detection, placement decisions, or reuse analysis.
+description: Generate or modify React code while enforcing architectural boundaries, scope limits, and shared policy constraints. Use by default after architecture detection, placement planning, and reuse decisions are complete; for qualified behavior-preserving micro refactors, this skill may run directly in micro mode. Consume detection_result and revised_plan in standard mode, or bounded micro-change context in micro mode, to produce patches/snippets that respect import rules, canonical endpoint-layer constraints, scope governor limits, and Definition-of-Done checks. Enforce boundary audits, loading/error/empty states, and anti-drift controls. Do not use for architecture detection, placement decisions, or reuse analysis. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 metadata:
@@ -22,6 +22,8 @@ boundaries, minimal churn, quality gates, and deterministic output behavior.
 Use this skill when:
 
 - You are implementing changes after planning and reuse decisions are complete.
+- You are applying a behavior-preserving micro refactor that qualifies for
+  shared `sr-micro-change-bypass` conditions.
 - You need strict boundary checks and scope-governor enforcement.
 - You need structured output that can be reviewed or consumed by automation.
 
@@ -32,11 +34,17 @@ Do not use this skill when:
 
 ## Inputs
 
-Required:
+Required in standard mode:
 
 - `revised_plan`
 - `detection_result`
 - repository context for convention and boundary validation
+
+Required in micro mode:
+
+- `task_request` with explicit behavior-preserving refactor intent
+- repository context for convention and boundary validation
+- evidence that all shared `sr-micro-change-bypass` constraints are satisfied
 
 Optional:
 
@@ -54,10 +62,13 @@ Shared baseline:
 
 ## Workflow
 
-1. Validate required inputs and context availability.
-2. Execute implementation only within approved plan scope.
-3. Run boundary, quality, and scope-deviation checks.
-4. Return one structured output result type.
+1. Select execution mode (`standard` or `micro`) from available evidence.
+2. Validate required inputs and context availability for the selected mode.
+3. If micro mode is selected and file creation becomes necessary, escalate to
+   standard mode before continuing implementation output.
+4. Execute implementation within approved scope (or bounded micro scope).
+5. Run boundary, quality, and scope-deviation checks.
+6. Return one structured output result type.
 
 ## Output contract
 
@@ -68,14 +79,36 @@ Return a single JSON object only (no extra prose) with:
 - `version`
 - `result_type`: `implementation_package | validation_error | dependency_error`
 - `validation_status`
+  - `final_state` in `validation_status.final_state`
+  - allowed `final_state` values:
+    `accepted | blocked | validation_error | dependency_error`
+  - when `result_type=implementation_package`, `final_state` must be
+    `accepted` or `blocked`
 
-`implementation_package` includes `output_package` with changed files, patch/new
-file payloads, quality checks, boundary audit findings, and scope deviations.
+`implementation_package` includes `output_package` with:
 
-If final state is `blocked`, include `required_fixes`.
+- `output_package.changed_files[]`
+- `output_package.updated_patches[]` (diffs/snippets)
+- `output_package.new_files[]` (full content)
+- `output_package.boundary_audit`
+- `output_package.quality_checks`
+- `output_package.scope_deviations[]` (`path`, `type`, `reason`)
+- `output_package.required_fixes[]` (required when `final_state=blocked`)
 
-`validation_error` and `dependency_error` outputs must not include
-`output_package`.
+- `validation_error` output must include `notes[]` and must not include
+  `output_package`.
+- `dependency_error` output must include:
+  - `dependency_issue`
+  - `fallback_context_bundle_requirements[]` (minimum 5 actionable items)
+  - `notes[]`
+  and must not include `output_package`.
+- Micro mode must remain behavior-preserving and in-place:
+  - no new files
+  - no moves/renames
+  - no routing changes
+  - no new endpoint/hook/composite homes
+- If implementation in micro mode needs file creation, escalate to standard
+  mode before producing output.
 
 ## Quick reference rules
 
