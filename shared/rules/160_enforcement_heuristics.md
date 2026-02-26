@@ -9,7 +9,7 @@ folder-fit decisions.
 ## Rule: Enforcement Heuristics
 **Rule ID:** sr-enforcement-heuristics  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Provides consistent review heuristics across downstream skills
 without over-prescribing implementation details.
