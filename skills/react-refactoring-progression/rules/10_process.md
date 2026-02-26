@@ -15,6 +15,10 @@ Defines deterministic, risk-ordered planning behavior.
 ### Requirement
 
 - Validate required inputs before planning steps.
+- Resolve effective output mode before planning output:
+  - accept optional `output_mode` (`human|agent`)
+  - default to `human` when a human explicitly instructs this skill to run
+  - default to `agent` otherwise
 - Use canonical tier labels only: `A`, `B`, `C`, `D`.
 - Order active plan steps from lower-risk to higher-risk tiers.
 - Apply deterministic ordering with no additional custom ordering beyond:

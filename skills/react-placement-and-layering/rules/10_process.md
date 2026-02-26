@@ -17,6 +17,10 @@ Defines the placement workflow for new or updated files.
   - implementation request
   - target architecture rules
   - architecture-detection result
+- Resolve effective output mode before planning:
+  - accept optional `output_mode` (`human|agent`)
+  - default to `human` when a human explicitly instructs this skill to run
+  - default to `agent` otherwise
 - Translate the request into explicit planning requirements before choosing
   files.
 - Classify the request using one or more task categories before placement:

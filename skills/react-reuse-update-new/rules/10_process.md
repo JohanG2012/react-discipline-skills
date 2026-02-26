@@ -122,6 +122,10 @@ Defines deterministic evaluation for reuse, update, or new creation.
   - intended state type
   - UI needs (primitive/composite/section shape)
 - Validate required inputs before discovery and decisioning.
+- Resolve effective output mode before final output:
+  - accept optional `output_mode` (`human|agent`)
+  - default to `human` when a human explicitly instructs this skill to run
+  - default to `agent` otherwise
 - If required inputs are missing or invalid, emit `validation_error` and stop.
 - If repository discovery/search evidence is unavailable or incomplete, emit
   `dependency_error` and stop.

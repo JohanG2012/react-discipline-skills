@@ -23,6 +23,10 @@ repeatable across runs.
   - `framework_hint`
   - `router_hint`
   - `state_hint`
+- Resolve effective output mode before scanning:
+  - accept optional `output_mode` (`human|agent`)
+  - default to `human` when a human explicitly instructs this skill to run
+  - default to `agent` otherwise
 - Run concern scans in deterministic order:
   1. routing and entry points
   2. UI homes/conventions

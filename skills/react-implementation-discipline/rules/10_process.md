@@ -25,6 +25,10 @@ policy constraints.
     - repository context needed for convention and boundary checks
     - confirmation that shared `sr-micro-change-bypass` constraints are all
       satisfied
+- Resolve effective output mode before implementation output:
+  - accept optional `output_mode` (`human|agent`)
+  - default to `human` when a human explicitly instructs this skill to run
+  - default to `agent` otherwise
 - Select execution mode before implementation:
   - `standard` when upstream planning artifacts are available or when scope is
     structural/ambiguous
