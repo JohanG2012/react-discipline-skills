@@ -8,7 +8,7 @@ Defines soft file-size and responsibility guidance to prevent oversized modules.
 ## Rule: File Size and Responsibility Guidance
 **Rule ID:** sr-file-size-guidance  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Encourages maintainable module boundaries and limits
 responsibility drift.
