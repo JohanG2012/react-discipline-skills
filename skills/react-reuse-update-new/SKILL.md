@@ -43,6 +43,8 @@ The skill expects:
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy
+- **Output mode:** optional `output_mode` (`human|agent`), default `human`
+  when a human explicitly instructs this skill to run, otherwise `agent`
 
 ## How to use
 Follow this workflow in order:
@@ -67,6 +69,10 @@ Return a **single JSON object** matching this shape:
   "schema_version": "1.0.0",
   "skill": "react-reuse-update-new",
   "version": "1.0.0",
+  "output_mode": "agent|human",
+  "presentation": {
+    "user_markdown": "### Reuse Decision Summary\n- Result type: decision_plan"
+  },
   "result_type": "decision_plan|validation_error|dependency_error",
   "validation_status": {
     "is_valid": true,
@@ -121,7 +127,13 @@ Return a **single JSON object** matching this shape:
 
 Constraints:
 
-- Output must be JSON only.
+- Machine payload must be a JSON object.
+- Output must include `output_mode` and `presentation.user_markdown`.
+- `output_mode` must be either `human` or `agent`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - `decision_plan` outputs must include threshold values, revised decisions, and
   stable `needed_artifact_id` continuity, plus context decisions, file actions,
   and layer justifications.
@@ -156,7 +168,6 @@ Constraints:
 - `dependency_error` outputs must include
   `fallback_context_bundle_requirements[]` describing required context inputs.
 - `notes[]` max 5 items on error outputs.
-- No extra prose outside JSON.
 
 ## Quick reference rules
 

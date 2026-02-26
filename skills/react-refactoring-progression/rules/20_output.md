@@ -18,8 +18,13 @@ Defines strict result types and payload constraints.
   - `schema_version`
   - `skill`
   - `version`
+  - `output_mode`
+  - `presentation`
   - `result_type`
   - `validation_status`
+- `output_mode` must be `human` or `agent`.
+- `presentation` must include:
+  - `user_markdown` (prettified markdown summary of the payload)
 - Restrict `result_type` to:
   - `refactor_plan`
   - `validation_error`
@@ -52,10 +57,15 @@ Defines strict result types and payload constraints.
   step execution.
 - If `plan.test_file_touches[]` is present, keep it directly relevant, bounded
   (default <=2 files), and dependency-neutral.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 
 ### Forbidden
 
-- Emitting prose outside the JSON payload.
+- Emitting prose outside the JSON payload when `output_mode=agent`.
+- Displaying raw JSON to humans when `output_mode=human`.
 - Returning partial `refactor_plan` output when required context is missing.
 - Emitting non-enum status strings.
 

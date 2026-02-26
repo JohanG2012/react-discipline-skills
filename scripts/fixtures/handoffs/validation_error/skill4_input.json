@@ -1,7 +1,11 @@
 {
   "detection_result": {
     "skill": "react-architecture-detection",
-    "result_type": "detection_result"
+    "result_type": "detection_result",
+    "output_mode": "agent",
+    "presentation": {
+      "user_markdown": "### react-architecture-detection summary\n- result_type: `detection_result`\n- output_mode: `agent`\n- validation: `null`"
+    }
   },
   "policy_ref": "agent-policy-v1"
 }

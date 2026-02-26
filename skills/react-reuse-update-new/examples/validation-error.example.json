@@ -12,5 +12,9 @@
   },
   "notes": [
     "Provide needed_artifacts with stable needed_artifact_id values."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-reuse-update-new summary\n- result_type: `validation_error`\n- output_mode: `agent`\n- validation: `input_validation`"
+  }
 }

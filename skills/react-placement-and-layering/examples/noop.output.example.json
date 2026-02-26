@@ -52,5 +52,9 @@
   },
   "notes": [
     "No-op placement plan selected because scope remains in existing files."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-placement-and-layering summary\n- result_type: `placement_plan`\n- output_mode: `agent`\n- validation: `finalized`"
+  }
 }

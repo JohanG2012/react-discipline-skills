@@ -13,5 +13,9 @@
   },
   "notes": [
     "Provide repository tree and entry points before detection."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-architecture-detection summary\n- result_type: `validation_error`\n- output_mode: `agent`\n- validation: `input_validation`"
+  }
 }

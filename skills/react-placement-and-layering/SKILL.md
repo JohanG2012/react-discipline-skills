@@ -36,6 +36,8 @@ The skill expects:
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy
+- **Output mode:** optional `output_mode` (`human|agent`), default `human`
+  when a human explicitly instructs this skill to run, otherwise `agent`
 
 ## How to use
 Follow this workflow in order:
@@ -53,6 +55,10 @@ Return a **single JSON object** matching this shape:
   "schema_version": "1.0.0",
   "skill": "react-placement-and-layering",
   "version": "1.0.0",
+  "output_mode": "agent|human",
+  "presentation": {
+    "user_markdown": "### Placement Summary\n- Result type: placement_plan"
+  },
   "result_type": "placement_plan|validation_error|dependency_error",
   "validation_status": {
     "is_valid": true,
@@ -66,7 +72,13 @@ Return a **single JSON object** matching this shape:
 
 Constraints:
 
-- Output must be JSON only.
+- Machine payload must be a JSON object.
+- Output must include `output_mode` and `presentation.user_markdown`.
+- `output_mode` must be either `human` or `agent`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - Output must follow strict versioned contract fields.
 - Required-input validation happens before plan generation.
 - Missing or invalid required inputs return `result_type=validation_error` with
@@ -90,7 +102,6 @@ Constraints:
   `scope_expansion_needed[]` entries (`why`, `would_touch`) while still
   returning the smallest in-cap plan.
 - No raw source snippets or secret-like values in output fields.
-- No extra prose outside JSON.
 
 ## Quick reference rules
 

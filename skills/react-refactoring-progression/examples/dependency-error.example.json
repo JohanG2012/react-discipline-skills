@@ -14,5 +14,9 @@
   ],
   "notes": [
     "No refactor_plan payload emitted because required context was unavailable."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-refactoring-progression summary\n- result_type: `dependency_error`\n- output_mode: `agent`\n- validation: `dependency_error`"
+  }
 }

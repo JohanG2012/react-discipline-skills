@@ -174,5 +174,9 @@
       "Decision package is deterministic and downstream-consumable.",
       "Decisions demonstrate reuse, update, new, and blocked outcomes."
     ]
+  },
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-reuse-update-new summary\n- result_type: `decision_plan`\n- output_mode: `agent`\n- validation: `finalized`"
   }
 }

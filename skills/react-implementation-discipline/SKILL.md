@@ -51,6 +51,8 @@ Optional:
 - `task_request` (traceability context when provided)
 - `policy_ref`
 - `policy_version`
+- `output_mode` (`human|agent`), default `human` when a human explicitly
+  instructs this skill to run, otherwise `agent`
 - `diff_preference` (`snippet_first` or `unified_diff`)
 - `strictness` (`strict` default; `relaxed` only when explicitly allowed)
 - `max_lines_policy` (explicit soft-cap overrides when provided)
@@ -74,11 +76,13 @@ Shared baseline:
 
 ## Output contract
 
-Return a single JSON object only (no extra prose) with:
+Return a single machine-payload JSON object with:
 
 - `schema_version`
 - `skill`: `react-implementation-discipline`
 - `version`
+- `output_mode`: `human | agent`
+- `presentation.user_markdown`
 - `result_type`: `implementation_package | validation_error | dependency_error`
 - `validation_status`
   - `final_state` in `validation_status.final_state`
@@ -98,6 +102,12 @@ Return a single JSON object only (no extra prose) with:
 - `output_package.refactoring_consult`
 - `output_package.required_fixes[]` (required when `final_state=blocked`)
 
+- Output must include `presentation.user_markdown` as a prettified markdown
+  summary of the JSON payload.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - `validation_error` output must include `notes[]` and must not include
   `output_package`.
 - `dependency_error` output must include:

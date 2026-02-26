@@ -51,5 +51,9 @@
     "notes": [
       "Output follows approved revised plan scope."
     ]
+  },
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-implementation-discipline summary\n- result_type: `implementation_package`\n- output_mode: `agent`\n- validation: `accepted`"
   }
 }

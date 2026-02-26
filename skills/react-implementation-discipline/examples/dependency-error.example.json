@@ -25,5 +25,9 @@
   ],
   "notes": [
     "Fail-closed behavior applied; no implementation package emitted."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-implementation-discipline summary\n- result_type: `dependency_error`\n- output_mode: `agent`\n- validation: `dependency_error`"
+  }
 }

@@ -39,6 +39,8 @@ The skill expects:
 - **Optional hints:** `framework_hint`, `router_hint`, `state_hint`
 - **Optional cache:** previously produced `detection_result` for the same
   repository/session
+- **Output mode:** optional `output_mode` (`human|agent`), default `human`
+  when a human explicitly instructs this skill to run, otherwise `agent`
 
 ## Baseline compliance
 
@@ -64,6 +66,10 @@ Return a **single JSON object** matching this shape:
   "schema_version": "1.1.0",
   "skill": "react-architecture-detection",
   "version": "1.0.0",
+  "output_mode": "agent|human",
+  "presentation": {
+    "user_markdown": "### Architecture Detection Summary\n- Result type: detection_result"
+  },
   "result_type": "detection_result|validation_error|dependency_error",
   "validation_status": {
     "is_valid": true,
@@ -104,7 +110,13 @@ Return a **single JSON object** matching this shape:
 
 Constraints:
 
-- Output must be JSON only.
+- Machine payload must be a JSON object.
+- Output must include `output_mode` and `presentation.user_markdown`.
+- `output_mode` must be either `human` or `agent`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - Output must include `schema_version`, `skill`, `version`, `result_type`, and
   `validation_status`.
 - `result_type=detection_result` must include architecture classification fields.
@@ -135,7 +147,6 @@ Constraints:
   - minimally refresh concern homes plus `gravity_map` from current evidence
   - reuse unchanged fields from cache
   - still emit a full schema-valid `detection_result`
-- No extra prose outside JSON.
 
 ## Quick reference rules
 

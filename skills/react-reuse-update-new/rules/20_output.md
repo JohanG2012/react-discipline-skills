@@ -14,7 +14,10 @@ Defines the expected deterministic output structure for reuse decisions.
 ### Requirement
 
 - Output must be one JSON object with `schema_version`, `skill`, `version`,
-  `result_type`, and `validation_status`.
+  `output_mode`, `presentation`, `result_type`, and `validation_status`.
+- `output_mode` must be `human` or `agent`.
+- `presentation.user_markdown` must be a prettified markdown summary of the
+  payload.
 - `result_type=decision_plan` outputs must include:
   - `thresholds_applied`
   - `revised_plan.source_plan_ref`
@@ -101,12 +104,17 @@ Defines the expected deterministic output structure for reuse decisions.
 - `needed_artifact_id` values must remain stable from request artifacts to
   final decision records.
 - `needed_artifact_id` values must be unique within one `decision_plan` output.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 
 ### Forbidden
 
 - Output that hides decision rationale.
 - Ambiguous decisions without a single final action per artifact.
-- Extra prose outside JSON output.
+- Extra prose outside JSON output when `output_mode=agent`.
+- Displaying raw JSON to humans when `output_mode=human`.
 - `decision_blocked` outputs without actionable blocker context.
 
 ### Notes

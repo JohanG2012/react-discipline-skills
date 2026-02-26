@@ -16,13 +16,18 @@ review-ready, and policy-verifiable.
 
 ### Requirement
 
-- Output must be JSON only.
+- Output machine payload must be JSON.
 - Output must include:
   - `schema_version`
   - `skill`
   - `version`
+  - `output_mode`
+  - `presentation`
   - `result_type`
   - `validation_status`
+- `output_mode` must be `human` or `agent`.
+- `presentation` must include:
+  - `user_markdown` (prettified markdown summary of the payload)
 - `validation_status` must report:
   - `is_valid`
   - `stage`
@@ -77,10 +82,15 @@ review-ready, and policy-verifiable.
   - `fallback_context_bundle_requirements[]`
   - `notes`
   and must not include `output_package`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 
 ### Forbidden
 
 - Returning unstructured prose.
+- Displaying raw JSON to humans when `output_mode=human`.
 - Omitting validation summary fields.
 - Returning `blocked` without `required_fixes`.
 - Returning error outputs with implementation payload.

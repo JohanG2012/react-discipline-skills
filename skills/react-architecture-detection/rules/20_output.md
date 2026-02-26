@@ -20,8 +20,15 @@ reinterpretation.
   - `schema_version`
   - `skill`
   - `version`
+  - `output_mode`
+  - `presentation`
   - `result_type`
   - `validation_status`
+- `output_mode` must be exactly one of:
+  - `human`
+  - `agent`
+- `presentation` must include:
+  - `user_markdown` (prettified markdown summary of the payload)
 - `result_type` must be exactly one of:
   - `detection_result`
   - `validation_error`
@@ -53,6 +60,10 @@ reinterpretation.
   and must not include detection fields.
 - `notes[]` must remain concise (maximum 5 items).
 - Output fields must contain structural metadata only (no raw source snippets).
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 
 ### Required fields
 
@@ -69,7 +80,8 @@ reinterpretation.
 
 ### Forbidden
 
-- Returning free-form prose outside JSON output.
+- Returning free-form prose outside JSON output when `output_mode=agent`.
+- Displaying raw JSON to humans when `output_mode=human`.
 - Returning more than one strategy for one task.
 - Omitting required fields for selected `result_type`.
 - Returning error result types with detection payload fields.

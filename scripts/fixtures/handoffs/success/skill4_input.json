@@ -99,6 +99,10 @@
         "Treat src/api/endpoints as canonical endpoint layer"
       ],
       "recommended_option": "Treat src/services/api as canonical endpoint layer"
+    },
+    "output_mode": "agent",
+    "presentation": {
+      "user_markdown": "### react-architecture-detection summary\n- result_type: `detection_result`\n- output_mode: `agent`\n- validation: `finalized`"
     }
   },
   "revised_plan": {

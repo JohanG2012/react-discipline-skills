@@ -60,5 +60,9 @@
     "notes": [
       "Plan blocked pending explicit approval for non-default Tier C change."
     ]
+  },
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-refactoring-progression summary\n- result_type: `refactor_plan`\n- output_mode: `agent`\n- validation: `blocked`"
   }
 }

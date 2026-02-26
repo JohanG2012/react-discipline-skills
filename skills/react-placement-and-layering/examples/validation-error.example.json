@@ -13,5 +13,9 @@
   },
   "notes": [
     "No placement plan emitted due to invalid required inputs."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-placement-and-layering summary\n- result_type: `validation_error`\n- output_mode: `agent`\n- validation: `input_validation`"
+  }
 }

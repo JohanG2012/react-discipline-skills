@@ -4,11 +4,13 @@
   "title": "React Architecture Detection Output Contract",
   "type": "object",
   "required": [
+    "output_mode",
+    "presentation",
+    "result_type",
     "schema_version",
     "skill",
-    "version",
-    "result_type",
-    "validation_status"
+    "validation_status",
+    "version"
   ],
   "additionalProperties": false,
   "properties": {
@@ -34,7 +36,11 @@
     },
     "validation_status": {
       "type": "object",
-      "required": ["is_valid", "stage", "errors"],
+      "required": [
+        "is_valid",
+        "stage",
+        "errors"
+      ],
       "additionalProperties": false,
       "properties": {
         "is_valid": {
@@ -42,7 +48,11 @@
         },
         "stage": {
           "type": "string",
-          "enum": ["input_validation", "detection", "finalized"]
+          "enum": [
+            "input_validation",
+            "detection",
+            "finalized"
+          ]
         },
         "errors": {
           "type": "array",
@@ -61,7 +71,10 @@
     },
     "routing": {
       "type": "object",
-      "required": ["type", "entry_points"],
+      "required": [
+        "type",
+        "entry_points"
+      ],
       "additionalProperties": false,
       "properties": {
         "type": {
@@ -77,7 +90,9 @@
         },
         "entry_points": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -86,14 +101,25 @@
     },
     "api": {
       "allOf": [
-        { "$ref": "#/$defs/concernHome" },
+        {
+          "$ref": "#/$defs/concernHome"
+        },
         {
           "type": "object",
-          "required": ["pattern"],
+          "required": [
+            "pattern"
+          ],
           "properties": {
             "pattern": {
               "type": "string",
-              "enum": ["root-api", "services", "feature-owned", "inline-fetch", "mixed", "unknown"]
+              "enum": [
+                "root-api",
+                "services",
+                "feature-owned",
+                "inline-fetch",
+                "mixed",
+                "unknown"
+              ]
             }
           }
         }
@@ -101,14 +127,25 @@
     },
     "domain": {
       "allOf": [
-        { "$ref": "#/$defs/concernHome" },
+        {
+          "$ref": "#/$defs/concernHome"
+        },
         {
           "type": "object",
-          "required": ["organization"],
+          "required": [
+            "organization"
+          ],
           "properties": {
             "organization": {
               "type": "string",
-              "enum": ["features", "modules", "routes", "flat", "mixed", "unknown"]
+              "enum": [
+                "features",
+                "modules",
+                "routes",
+                "flat",
+                "mixed",
+                "unknown"
+              ]
             }
           }
         }
@@ -116,18 +153,35 @@
     },
     "state": {
       "allOf": [
-        { "$ref": "#/$defs/concernHome" },
+        {
+          "$ref": "#/$defs/concernHome"
+        },
         {
           "type": "object",
-          "required": ["server", "client"],
+          "required": [
+            "server",
+            "client"
+          ],
           "properties": {
             "server": {
               "type": "string",
-              "enum": ["react-query", "swr", "custom", "none", "unknown"]
+              "enum": [
+                "react-query",
+                "swr",
+                "custom",
+                "none",
+                "unknown"
+              ]
             },
             "client": {
               "type": "string",
-              "enum": ["redux", "zustand", "context", "local-only", "unknown"]
+              "enum": [
+                "redux",
+                "zustand",
+                "context",
+                "local-only",
+                "unknown"
+              ]
             }
           }
         }
@@ -148,15 +202,33 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "pages_or_routes": { "type": "string" },
-        "domain_modules": { "type": "string" },
-        "ui_primitives": { "type": "string" },
-        "ui_composites": { "type": "string" },
-        "api": { "type": "string" },
-        "store": { "type": "string" },
-        "pure_utils": { "type": "string" },
-        "generic_hooks": { "type": "string" },
-        "app_setup": { "type": "string" }
+        "pages_or_routes": {
+          "type": "string"
+        },
+        "domain_modules": {
+          "type": "string"
+        },
+        "ui_primitives": {
+          "type": "string"
+        },
+        "ui_composites": {
+          "type": "string"
+        },
+        "api": {
+          "type": "string"
+        },
+        "store": {
+          "type": "string"
+        },
+        "pure_utils": {
+          "type": "string"
+        },
+        "generic_hooks": {
+          "type": "string"
+        },
+        "app_setup": {
+          "type": "string"
+        }
       }
     },
     "alignment_score": {
@@ -166,12 +238,18 @@
     },
     "alignment": {
       "type": "object",
-      "required": ["blockers", "next_migration_step"],
+      "required": [
+        "blockers",
+        "next_migration_step"
+      ],
       "additionalProperties": false,
       "properties": {
         "blockers": {
           "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "next_migration_step": {
           "type": "string",
@@ -182,12 +260,18 @@
     },
     "strategy": {
       "type": "string",
-      "enum": ["follow-existing", "introduce-boundaries", "migrate-as-you-touch"]
+      "enum": [
+        "follow-existing",
+        "introduce-boundaries",
+        "migrate-as-you-touch"
+      ]
     },
     "strategy_rationale": {
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "strategy_basis": {
       "type": "array",
@@ -206,13 +290,23 @@
     },
     "bootstrap": {
       "type": "object",
-      "required": ["triggered"],
+      "required": [
+        "triggered"
+      ],
       "additionalProperties": false,
       "properties": {
-        "triggered": { "type": "boolean" },
-        "canonical_set_enforced": { "type": "boolean" },
-        "minimal_bootstrap": { "type": "boolean" },
-        "exit_rule_enforced": { "type": "boolean" },
+        "triggered": {
+          "type": "boolean"
+        },
+        "canonical_set_enforced": {
+          "type": "boolean"
+        },
+        "minimal_bootstrap": {
+          "type": "boolean"
+        },
+        "exit_rule_enforced": {
+          "type": "boolean"
+        },
         "recommended_folders": {
           "type": "array",
           "items": {
@@ -238,9 +332,13 @@
         {
           "if": {
             "properties": {
-              "triggered": { "const": true }
+              "triggered": {
+                "const": true
+              }
             },
-            "required": ["triggered"]
+            "required": [
+              "triggered"
+            ]
           },
           "then": {
             "required": [
@@ -249,9 +347,15 @@
               "exit_rule_enforced"
             ],
             "properties": {
-              "canonical_set_enforced": { "const": true },
-              "minimal_bootstrap": { "const": true },
-              "exit_rule_enforced": { "const": true }
+              "canonical_set_enforced": {
+                "const": true
+              },
+              "minimal_bootstrap": {
+                "const": true
+              },
+              "exit_rule_enforced": {
+                "const": true
+              }
             }
           }
         }
@@ -260,7 +364,10 @@
     "notes": {
       "type": "array",
       "maxItems": 5,
-      "items": { "type": "string", "maxLength": 280 }
+      "items": {
+        "type": "string",
+        "maxLength": 280
+      }
     },
     "pause_decision": {
       "type": "object",
@@ -272,10 +379,16 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "pause_required": { "type": "boolean" },
+        "pause_required": {
+          "type": "boolean"
+        },
         "pause_mode": {
           "type": "string",
-          "enum": ["strict", "balanced", "autonomous"]
+          "enum": [
+            "strict",
+            "balanced",
+            "autonomous"
+          ]
         },
         "decision_safety_confidence": {
           "type": "number",
@@ -284,125 +397,197 @@
         },
         "impact": {
           "type": "string",
-          "enum": ["local", "structural"]
+          "enum": [
+            "local",
+            "structural"
+          ]
         },
-        "trigger": { "type": "string" },
+        "trigger": {
+          "type": "string"
+        },
         "options": {
           "type": "array",
           "minItems": 2,
           "maxItems": 3,
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
-        "recommended_option": { "type": "string" }
+        "recommended_option": {
+          "type": "string"
+        }
       },
       "allOf": [
         {
           "if": {
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": {
+                "const": true
+              }
             },
-            "required": ["pause_required"]
+            "required": [
+              "pause_required"
+            ]
           },
           "then": {
-            "required": ["trigger", "options", "recommended_option"]
+            "required": [
+              "trigger",
+              "options",
+              "recommended_option"
+            ]
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "local" }
+              "impact": {
+                "const": "local"
+              }
             },
-            "required": ["impact"]
+            "required": [
+              "impact"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": false }
+              "pause_required": {
+                "const": false
+              }
             }
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "structural" },
-              "pause_mode": { "const": "strict" }
+              "impact": {
+                "const": "structural"
+              },
+              "pause_mode": {
+                "const": "strict"
+              }
             },
-            "required": ["impact", "pause_mode"]
+            "required": [
+              "impact",
+              "pause_mode"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": {
+                "const": true
+              }
             }
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "structural" },
-              "pause_mode": { "const": "balanced" },
+              "impact": {
+                "const": "structural"
+              },
+              "pause_mode": {
+                "const": "balanced"
+              },
               "decision_safety_confidence": {
                 "type": "number",
                 "exclusiveMaximum": 0.7
               }
             },
-            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+            "required": [
+              "impact",
+              "pause_mode",
+              "decision_safety_confidence"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": {
+                "const": true
+              }
             }
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "structural" },
-              "pause_mode": { "const": "autonomous" },
+              "impact": {
+                "const": "structural"
+              },
+              "pause_mode": {
+                "const": "autonomous"
+              },
               "decision_safety_confidence": {
                 "type": "number",
                 "exclusiveMaximum": 0.5
               }
             },
-            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+            "required": [
+              "impact",
+              "pause_mode",
+              "decision_safety_confidence"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": true }
+              "pause_required": {
+                "const": true
+              }
             }
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "structural" },
-              "pause_mode": { "const": "balanced" },
+              "impact": {
+                "const": "structural"
+              },
+              "pause_mode": {
+                "const": "balanced"
+              },
               "decision_safety_confidence": {
                 "type": "number",
                 "minimum": 0.7
               }
             },
-            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+            "required": [
+              "impact",
+              "pause_mode",
+              "decision_safety_confidence"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": false }
+              "pause_required": {
+                "const": false
+              }
             }
           }
         },
         {
           "if": {
             "properties": {
-              "impact": { "const": "structural" },
-              "pause_mode": { "const": "autonomous" },
+              "impact": {
+                "const": "structural"
+              },
+              "pause_mode": {
+                "const": "autonomous"
+              },
               "decision_safety_confidence": {
                 "type": "number",
                 "minimum": 0.5
               }
             },
-            "required": ["impact", "pause_mode", "decision_safety_confidence"]
+            "required": [
+              "impact",
+              "pause_mode",
+              "decision_safety_confidence"
+            ]
           },
           "then": {
             "properties": {
-              "pause_required": { "const": false }
+              "pause_required": {
+                "const": false
+              }
             }
           }
         }
@@ -419,6 +604,26 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "output_mode": {
+      "type": "string",
+      "enum": [
+        "human",
+        "agent"
+      ]
+    },
+    "presentation": {
+      "type": "object",
+      "required": [
+        "user_markdown"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "user_markdown": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   },
   "allOf": [
@@ -429,7 +634,9 @@
             "const": "detection_result"
           }
         },
-        "required": ["result_type"]
+        "required": [
+          "result_type"
+        ]
       },
       "then": {
         "required": [
@@ -449,17 +656,25 @@
         "not": {
           "anyOf": [
             {
-              "required": ["dependency_issue"]
+              "required": [
+                "dependency_issue"
+              ]
             },
             {
-              "required": ["fallback_context_bundle_requirements"]
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
             }
           ]
         },
         "properties": {
           "validation_status": {
             "type": "object",
-            "required": ["is_valid", "stage", "errors"],
+            "required": [
+              "is_valid",
+              "stage",
+              "errors"
+            ],
             "properties": {
               "is_valid": {
                 "const": true
@@ -482,63 +697,101 @@
             "const": "validation_error"
           }
         },
-        "required": ["result_type"]
+        "required": [
+          "result_type"
+        ]
       },
       "then": {
-        "required": ["notes"],
+        "required": [
+          "notes"
+        ],
         "not": {
           "anyOf": [
             {
-              "required": ["routing"]
+              "required": [
+                "routing"
+              ]
             },
             {
-              "required": ["ui"]
+              "required": [
+                "ui"
+              ]
             },
             {
-              "required": ["api"]
+              "required": [
+                "api"
+              ]
             },
             {
-              "required": ["domain"]
+              "required": [
+                "domain"
+              ]
             },
             {
-              "required": ["state"]
+              "required": [
+                "state"
+              ]
             },
             {
-              "required": ["gravity_map"]
+              "required": [
+                "gravity_map"
+              ]
             },
             {
-              "required": ["alignment_score"]
+              "required": [
+                "alignment_score"
+              ]
             },
             {
-              "required": ["alignment"]
+              "required": [
+                "alignment"
+              ]
             },
             {
-              "required": ["strategy"]
+              "required": [
+                "strategy"
+              ]
             },
             {
-              "required": ["strategy_rationale"]
+              "required": [
+                "strategy_rationale"
+              ]
             },
             {
-              "required": ["strategy_basis"]
+              "required": [
+                "strategy_basis"
+              ]
             },
             {
-              "required": ["bootstrap"]
+              "required": [
+                "bootstrap"
+              ]
             },
             {
-              "required": ["pause_decision"]
+              "required": [
+                "pause_decision"
+              ]
             },
             {
-              "required": ["dependency_issue"]
+              "required": [
+                "dependency_issue"
+              ]
             },
             {
-              "required": ["fallback_context_bundle_requirements"]
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
             }
           ]
         },
         "properties": {
           "validation_status": {
             "type": "object",
-            "required": ["is_valid", "stage", "errors"],
+            "required": [
+              "is_valid",
+              "stage",
+              "errors"
+            ],
             "properties": {
               "is_valid": {
                 "const": false
@@ -561,7 +814,9 @@
             "const": "dependency_error"
           }
         },
-        "required": ["result_type"]
+        "required": [
+          "result_type"
+        ]
       },
       "then": {
         "required": [
@@ -572,50 +827,80 @@
         "not": {
           "anyOf": [
             {
-              "required": ["routing"]
+              "required": [
+                "routing"
+              ]
             },
             {
-              "required": ["ui"]
+              "required": [
+                "ui"
+              ]
             },
             {
-              "required": ["api"]
+              "required": [
+                "api"
+              ]
             },
             {
-              "required": ["domain"]
+              "required": [
+                "domain"
+              ]
             },
             {
-              "required": ["state"]
+              "required": [
+                "state"
+              ]
             },
             {
-              "required": ["gravity_map"]
+              "required": [
+                "gravity_map"
+              ]
             },
             {
-              "required": ["alignment_score"]
+              "required": [
+                "alignment_score"
+              ]
             },
             {
-              "required": ["alignment"]
+              "required": [
+                "alignment"
+              ]
             },
             {
-              "required": ["strategy"]
+              "required": [
+                "strategy"
+              ]
             },
             {
-              "required": ["strategy_rationale"]
+              "required": [
+                "strategy_rationale"
+              ]
             },
             {
-              "required": ["strategy_basis"]
+              "required": [
+                "strategy_basis"
+              ]
             },
             {
-              "required": ["bootstrap"]
+              "required": [
+                "bootstrap"
+              ]
             },
             {
-              "required": ["pause_decision"]
+              "required": [
+                "pause_decision"
+              ]
             }
           ]
         },
         "properties": {
           "validation_status": {
             "type": "object",
-            "required": ["is_valid", "stage", "errors"],
+            "required": [
+              "is_valid",
+              "stage",
+              "errors"
+            ],
             "properties": {
               "is_valid": {
                 "const": false
@@ -635,9 +920,16 @@
   "$defs": {
     "concernHome": {
       "type": "object",
-      "required": ["home", "confidence", "status", "evidence_paths"],
+      "required": [
+        "home",
+        "confidence",
+        "status",
+        "evidence_paths"
+      ],
       "properties": {
-        "home": { "type": "string" },
+        "home": {
+          "type": "string"
+        },
         "confidence": {
           "type": "number",
           "minimum": 0,
@@ -645,11 +937,16 @@
         },
         "status": {
           "type": "string",
-          "enum": ["resolved", "ambiguous"]
+          "enum": [
+            "resolved",
+            "ambiguous"
+          ]
         },
         "evidence_paths": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -664,8 +961,12 @@
           },
           "then": {
             "properties": {
-              "home": { "const": "unknown" },
-              "status": { "const": "ambiguous" }
+              "home": {
+                "const": "unknown"
+              },
+              "status": {
+                "const": "ambiguous"
+              }
             }
           }
         },
@@ -680,7 +981,9 @@
           },
           "then": {
             "properties": {
-              "status": { "const": "resolved" }
+              "status": {
+                "const": "resolved"
+              }
             }
           }
         }

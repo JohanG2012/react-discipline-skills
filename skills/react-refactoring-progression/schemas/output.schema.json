@@ -5,11 +5,13 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "output_mode",
+    "presentation",
+    "result_type",
     "schema_version",
     "skill",
-    "version",
-    "result_type",
-    "validation_status"
+    "validation_status",
+    "version"
   ],
   "properties": {
     "schema_version": {
@@ -65,6 +67,26 @@
     },
     "notes": {
       "$ref": "#/$defs/notes"
+    },
+    "output_mode": {
+      "type": "string",
+      "enum": [
+        "human",
+        "agent"
+      ]
+    },
+    "presentation": {
+      "type": "object",
+      "required": [
+        "user_markdown"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "user_markdown": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   },
   "allOf": [

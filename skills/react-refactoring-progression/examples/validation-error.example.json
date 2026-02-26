@@ -7,5 +7,9 @@
   "notes": [
     "Missing required input_refs.placement_result_ref.",
     "touched_file_set is required for opportunistic mode."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-refactoring-progression summary\n- result_type: `validation_error`\n- output_mode: `agent`\n- validation: `validation_error`"
+  }
 }

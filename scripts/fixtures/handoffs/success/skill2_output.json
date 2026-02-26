@@ -113,5 +113,9 @@
   "notes": [
     "Reuse/update decisions were selected before any new artifact creation.",
     "Ambiguity was low after existing-artifact lookup."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-placement-and-layering summary\n- result_type: `placement_plan`\n- output_mode: `agent`\n- validation: `finalized`"
+  }
 }

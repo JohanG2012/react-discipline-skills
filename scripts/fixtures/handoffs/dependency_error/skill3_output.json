@@ -20,5 +20,9 @@
   ],
   "notes": [
     "Retry after repository indexing/search is available."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-reuse-update-new summary\n- result_type: `dependency_error`\n- output_mode: `agent`\n- validation: `discovery`"
+  }
 }

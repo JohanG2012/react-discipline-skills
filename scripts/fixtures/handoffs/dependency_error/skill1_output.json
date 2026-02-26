@@ -21,5 +21,9 @@
   ],
   "notes": [
     "Retry after repository indexing or context sync."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-architecture-detection summary\n- result_type: `dependency_error`\n- output_mode: `agent`\n- validation: `detection`"
+  }
 }

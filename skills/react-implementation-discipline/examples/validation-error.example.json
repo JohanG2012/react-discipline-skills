@@ -17,5 +17,9 @@
   },
   "notes": [
     "Required upstream input validation failed."
-  ]
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-implementation-discipline summary\n- result_type: `validation_error`\n- output_mode: `agent`\n- validation: `validation_error`"
+  }
 }

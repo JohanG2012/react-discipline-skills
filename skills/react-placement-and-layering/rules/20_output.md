@@ -14,6 +14,9 @@ Defines the expected output structure for placement decisions.
 ### Requirement
 
 - Output must be one JSON object that follows a strict versioned contract.
+- Output root must include:
+  - `output_mode` (`human|agent`)
+  - `presentation.user_markdown` (prettified markdown summary of the payload)
 - Successful placement results must use `result_type=placement_plan`.
 - Invalid or missing required inputs must use `result_type=validation_error`.
 - Missing repository evidence must use `result_type=dependency_error`.
@@ -106,12 +109,17 @@ Defines the expected output structure for placement decisions.
   `artifacts`, `file_actions`, `layer_justifications`, `decision_explanation`,
   `import_guardrails`, `source_of_truth_resolutions`, `move_operations`,
   `move_concern`, `scope_expansion_needed`).
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 
 ### Forbidden
 
 - Vague placement guidance without concrete paths.
 - Omitting justification for layer selection.
-- Returning free-form prose outside JSON output.
+- Returning free-form prose outside JSON output when `output_mode=agent`.
+- Displaying raw JSON to humans when `output_mode=human`.
 - Returning placement-plan output that omits mandatory contract fields.
 - Returning validation-error output without explicit input_validation errors.
 - Returning dependency-error output without fallback context requirements.

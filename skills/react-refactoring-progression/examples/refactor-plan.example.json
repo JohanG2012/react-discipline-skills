@@ -124,5 +124,9 @@
     "notes": [
       "Tier C opportunities are deferred because mode is opportunistic."
     ]
+  },
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-refactoring-progression summary\n- result_type: `refactor_plan`\n- output_mode: `agent`\n- validation: `accepted`"
   }
 }

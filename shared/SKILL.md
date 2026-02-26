@@ -36,6 +36,8 @@ The skill expects:
 - **Policy:** This policy itself is the baseline
 - **Document precedence:** `specs/001-agent-policy-v1/master_spec.md` is
   authoritative; supporting policy docs may resolve non-conflicting gaps
+- **Output mode:** optional `output_mode` (`human|agent`), default `human`
+  when a human explicitly instructs this skill to run, otherwise `agent`
 
 ## How to use
 Follow this workflow in order:
@@ -51,6 +53,10 @@ Return a **single JSON object** matching this shape:
 {
   "skill": "shared-rules",
   "version": "1.0.0",
+  "output_mode": "agent|human",
+  "presentation": {
+    "user_markdown": "### Shared Policy Summary\n- Deterministic policy guidance generated."
+  },
   "notes": [],
   "output": {}
 }
@@ -58,9 +64,14 @@ Return a **single JSON object** matching this shape:
 
 Constraints:
 
-- Output must be JSON only.
+- Machine payload must be a JSON object.
+- Output must include `output_mode` and `presentation.user_markdown`.
+- `output_mode` must be either `human` or `agent`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - `notes[]` max 5 items.
-- No extra prose outside JSON.
 
 ## Quick reference rules
 
@@ -92,6 +103,13 @@ The policy source must maintain these rule IDs (see `rules/` for details):
 - sr-folderization-no-new-home
 - sr-layout-shell-placement
 - sr-layout-shell-subfolder-policy
+- sr-ui-classname-support
+- sr-a11y-aria-label
+- sr-dom-rendering-and-primitives
+- sr-prop-count-caps
+- sr-prop-grouping-discipline
+- sr-mega-file-triage
+- sr-i18n-text-extraction
 - sr-governance
 
 ## Files

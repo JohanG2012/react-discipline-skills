@@ -48,6 +48,8 @@ The skill expects:
   implementation context.
 - **Touched file set:** required in opportunistic mode.
 - **Optional scope overrides:** explicit, approved governor changes.
+- **Output mode:** optional `output_mode` (`human|agent`), default `human`
+  when a human explicitly instructs this skill to run, otherwise `agent`
 - **Baseline policy inheritance:** shared baseline rules remain mandatory.
 
 ## How to use
@@ -71,6 +73,10 @@ Return a **single JSON object** with this envelope:
   "schema_version": "1.0.0",
   "skill": "react-refactoring-progression",
   "version": "1.0.0",
+  "output_mode": "agent|human",
+  "presentation": {
+    "user_markdown": "### Refactor Progression Summary\n- Result type: refactor_plan"
+  },
   "result_type": "refactor_plan|validation_error|dependency_error",
   "validation_status": "accepted|blocked|validation_error|dependency_error"
 }
@@ -109,7 +115,13 @@ Return a **single JSON object** with this envelope:
 
 Constraints:
 
-- Output must be JSON only.
+- Machine payload must be a JSON object.
+- Output must include `output_mode` and `presentation.user_markdown`.
+- `output_mode` must be either `human` or `agent`.
+- The full JSON payload is always produced for both `output_mode` values.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=agent`, print/display the full JSON payload.
 - Tier labels are canonical `A|B|C|D` only.
 - Opportunistic mode allows only Tier A/B active steps and max 5 steps.
 - Tier C/D findings in opportunistic mode are non-blocking follow-up guidance
@@ -120,7 +132,6 @@ Constraints:
 - `dependency_error` must include actionable
   `fallback_context_bundle_requirements[]`.
 - `validation_error` and `dependency_error` must include no `plan` payload.
-- No extra prose outside JSON.
 
 ## Quick reference rules
 
@@ -147,6 +158,10 @@ Constraints:
 - rrp-dup-output
 - rrp-dup-next-actions
 - rrp-dup-keep-separate-output
+- rrf-ui-classname-hygiene
+- rrf-a11y-aria-label-hygiene
+- rrf-promote-feature-to-composite
+- rrf-naming-hygiene
 
 ## Files
 

@@ -71,5 +71,9 @@
     "notes": [
       "Blocked output returned for reviewer visibility."
     ]
+  },
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-implementation-discipline summary\n- result_type: `implementation_package`\n- output_mode: `agent`\n- validation: `blocked`"
   }
 }
