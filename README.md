@@ -1,8 +1,14 @@
 # React Discipline Skills
 
-This repository contains Codex skills for disciplined React architecture and
-implementation workflows. It includes skill definitions, rule sources, and build
-scripts to generate agent-readable rule bundles.
+`react-discipline-skills` is a set of Codex skills for disciplined React
+architecture and implementation workflows. It is not a rigid cookbook that
+forces one exact implementation style. Instead, it steers agent decisions
+toward industry standards and community best practices while respecting the
+patterns already established in your repository.
+
+The goal is to reduce agents to suggest implementation drift: rather than introducing ad hoc
+structures, the `react-*` skills pull changes back toward your codebase's
+existing architecture, boundaries, and naming conventions.
 
 ## Project Status
 
