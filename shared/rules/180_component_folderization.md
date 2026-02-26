@@ -1,18 +1,19 @@
 # Component Folderization
 
 ## Summary
-Defines when components should remain single-file versus folderized, and how
-folderized component modules must be structured and named.
+Defines when components and transport client modules should remain single-file
+versus decomposed/folderized, and how extracted modules must be structured and
+named.
 
 ---
 
-## Rule: Component Folderization Threshold
+## Rule: Component and Client Module Folderization Threshold
 **Rule ID:** sr-component-folderization  
 **Priority:** MUST  
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
-**Rationale:** Keeps components maintainable without creating mini-apps inside
-`ui/**` or `features/**`.
+**Rationale:** Keeps UI modules and transport clients maintainable without
+creating mega files or mixed-responsibility endpoints.
 
 ### Requirement
 
@@ -20,6 +21,12 @@ folderized component modules must be structured and named.
   - file is about `<= 200` lines and has one clear responsibility
   - helpers are small and render-support only
   - there are at most two closely related internal subcomponents
+- Keep a transport client module as a single file when all are true:
+  - file stays focused on shared transport concerns (request wrapper,
+    auth/header wiring, transport error normalization),
+  - endpoint/domain-specific call orchestration is not embedded in the client
+    file,
+  - file is reasonably small (about `<= 250` lines).
 - Folderize (move to a component module folder) when any is true:
   1. file is about `> 250-300` lines and splitting reduces responsibilities
   2. component contains three or more meaningful internal subcomponents
@@ -27,9 +34,22 @@ folderized component modules must be structured and named.
      handling, complex derived state)
   4. it has component-scoped assets (styles/icons/constants)
   5. it is reused broadly and needs a stable module boundary
+- Decompose transport client logic when any is true:
+  1. canonical client file grows to about `> 250-300` lines and mixes concerns,
+  2. endpoint-specific URLs/methods/payload shaping accumulate in the client
+     file,
+  3. multiple domain endpoint calls are orchestrated from one client file.
 - Hard rule:
   - if a single component file exceeds `400` lines, folderization is required
     unless explicitly justified in output notes and/or review metadata.
+  - if a transport client file (for example `api/client/client.ts`) exceeds
+    `400` lines, extraction is required unless explicitly justified in output
+    notes and/or review metadata.
+- Expected extraction target for oversized transport client files:
+  - endpoint/domain call functions must be extracted to `api/endpoints/**` or
+    the repository's gravity-equivalent canonical endpoint home,
+  - `api/client/**` remains a thin transport foundation (request wrapper,
+    auth/header wiring, retry policy, normalized transport errors).
 - This rule applies across skills and is enforced most strongly in
   `react-implementation-discipline` during execution output validation.
 
@@ -38,6 +58,9 @@ folderized component modules must be structured and named.
 - Keeping oversized multi-responsibility component files as single files without
   explicit justification.
 - Treating folderization as optional when the hard threshold is crossed.
+- Keeping endpoint-specific call orchestration in a mega transport client file
+  instead of extracting to `api/endpoints/**` (or gravity-equivalent endpoint
+  home).
 
 ### Notes
 
@@ -46,6 +69,10 @@ folderized component modules must be structured and named.
   - splitting subcomponents would improve clarity
   - helper pile is component-local only
   - file is above about `300` lines and still growing
+- Quick transport-client heuristic: when the shared client starts accumulating
+  endpoint paths, payload shaping, and domain branching, extract those calls to
+  `api/endpoints/**` (or gravity-equivalent endpoint home) and keep the client
+  thin.
 
 ---
 
