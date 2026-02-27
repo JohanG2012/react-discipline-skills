@@ -30,6 +30,7 @@
       "type": "string",
       "enum": [
         "refactor_plan",
+        "clarification_request",
         "validation_error",
         "dependency_error"
       ]
@@ -39,6 +40,7 @@
       "enum": [
         "accepted",
         "blocked",
+        "needs_clarification",
         "validation_error",
         "dependency_error"
       ]
@@ -67,6 +69,14 @@
     },
     "notes": {
       "$ref": "#/$defs/notes"
+    },
+    "clarification_questions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/clarification_question"
+      }
     },
     "output_mode": {
       "type": "string",
@@ -116,6 +126,52 @@
         },
         "not": {
           "anyOf": [
+            {
+              "required": [
+                "dependency_issue"
+              ]
+            },
+            {
+              "required": [
+                "fallback_context_bundle_requirements"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_type": {
+            "const": "clarification_request"
+          }
+        },
+        "required": [
+          "result_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "clarification_questions"
+        ],
+        "properties": {
+          "validation_status": {
+            "const": "needs_clarification"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "plan"
+              ]
+            },
+            {
+              "required": [
+                "refactor_mode"
+              ]
+            },
             {
               "required": [
                 "dependency_issue"
@@ -209,6 +265,11 @@
               "required": [
                 "refactor_mode"
               ]
+            },
+            {
+              "required": [
+                "clarification_questions"
+              ]
             }
           ]
         }
@@ -293,6 +354,71 @@
         "minLength": 1
       },
       "maxItems": 5
+    },
+    "clarification_option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "label",
+        "implication"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implication": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "clarification_question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_id",
+        "question",
+        "options",
+        "recommended_option"
+      ],
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "options": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/clarification_option"
+          }
+        },
+        "recommended_option": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        }
+      }
     },
     "scope_expansion_item": {
       "type": "object",

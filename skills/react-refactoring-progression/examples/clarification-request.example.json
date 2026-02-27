@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "skill": "react-refactoring-progression",
+  "version": "1.0.0",
+  "result_type": "clarification_request",
+  "validation_status": "needs_clarification",
+  "clarification_questions": [
+    {
+      "question_id": "q1_alias_policy",
+      "question": "Deep relative imports detected. Should this plan include alias adoption now?",
+      "options": [
+        {
+          "key": "A",
+          "label": "Adopt @/ now",
+          "implication": "Include scoped alias setup and touched-file import updates in this plan."
+        },
+        {
+          "key": "B",
+          "label": "Defer alias",
+          "implication": "Keep current import style and add follow-up recommendation only."
+        },
+        {
+          "key": "C",
+          "label": "Existing convention",
+          "implication": "Use already documented repository alias convention if present."
+        }
+      ],
+      "recommended_option": "B"
+    }
+  ],
+  "notes": [
+    "Planning paused pending clarification on alias adoption scope."
+  ],
+  "output_mode": "agent",
+  "presentation": {
+    "user_markdown": "### react-refactoring-progression summary\n- result_type: `clarification_request`\n- output_mode: `agent`\n- validation: `needs_clarification`"
+  }
+}
