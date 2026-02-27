@@ -559,7 +559,7 @@ all downstream skills.
 ## Rule: Completion and Quality Baseline
 **Rule ID:** sr-dod-baseline  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Ensures every downstream skill validates critical correctness and
 safety gates before completion.
@@ -689,7 +689,7 @@ Defines shared implementation posture defaults inherited by downstream skills.
 ## Rule: Implementation Defaults
 **Rule ID:** sr-implementation-defaults  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Aligns downstream implementation behavior on quality, environment
 access, logging, and tooling posture.
@@ -930,7 +930,7 @@ implementation discipline directly in micro mode.
 ## Rule: Micro-change Bypass and Skill 4 Micro Mode
 **Rule ID:** sr-micro-change-bypass  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Allows low-risk behavior-preserving refactors to stay fast while
 still enforcing implementation discipline and boundary checks.
@@ -977,7 +977,7 @@ named.
 ## Rule: Component and Client Module Folderization Threshold Index
 **Rule ID:** sr-component-folderization  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Preserves a stable entrypoint while delegating to focused
 component and client-threshold rules.
@@ -998,7 +998,7 @@ component and client-threshold rules.
 ## Rule: Component File Folderization Threshold
 **Rule ID:** sr-component-file-threshold  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps components maintainable by triggering folderization when
 size/responsibility thresholds are exceeded.
@@ -1035,7 +1035,7 @@ size/responsibility thresholds are exceeded.
 ## Rule: Transport Client Module Threshold
 **Rule ID:** sr-client-module-threshold  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents mega transport clients by keeping endpoint orchestration
 out of shared client foundations.
@@ -1071,7 +1071,7 @@ out of shared client foundations.
 ## Rule: Folder Structure for a Folderized Component
 **Rule ID:** sr-component-folder-structure  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents random folder soup and keeps discovery/search
 predictable.
@@ -1108,7 +1108,7 @@ ProjectSelector/
 ## Rule: Naming and Exports Inside Folderized Components
 **Rule ID:** sr-component-folder-exports  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps imports stable and grep-friendly.
 
@@ -1133,7 +1133,7 @@ ProjectSelector/
 ## Rule: Promotion and Demotion for Component Helpers
 **Rule ID:** sr-component-helper-promotion  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents leaking component-specific helpers into global utility
 layers.
@@ -1159,7 +1159,7 @@ layers.
 ## Rule: Folderization Must Not Create a New Home
 **Rule ID:** sr-folderization-no-new-home  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents second-architecture drift.
 
@@ -1192,7 +1192,7 @@ parallel layout homes.
 ## Rule: Layout and Shell Ownership Decision
 **Rule ID:** sr-layout-shell-placement  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Removes ambiguity between `ui/primitives`, `ui/composites`, and
 `features/<domain>/sections` for layout-like components.
@@ -1234,7 +1234,7 @@ parallel layout homes.
 ## Rule: Layout and Shell Subfolder Policy
 **Rule ID:** sr-layout-shell-subfolder-policy  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents creation of competing layout homes while allowing
 bounded categorization inside composites when needed.
@@ -1928,7 +1928,7 @@ accessibility attributes from being used as test-only hooks.
 ## Rule: Test Selectors and `aria-label` Usage
 **Rule ID:** sr-tests-aria-label-selectors  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep tests user-centric and stable without abusing accessibility
 attributes as test-only hooks.
@@ -2003,7 +2003,7 @@ accessibility behavior.
 ## Rule: Browser Side-Effects and Routing Boundary
 **Rule ID:** sr-browser-side-effects-boundary  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden routing/app side-effects from leaking into
 UI/feature components and keeps navigation/history ownership deterministic.
@@ -2050,7 +2050,7 @@ UI/feature components and keeps navigation/history ownership deterministic.
 ## Rule: Empty Catch and Swallowed Error Discipline
 **Rule ID:** sr-no-empty-catch  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Silent failures destroy debuggability and make behavior
 nondeterministic.
@@ -2084,7 +2084,7 @@ nondeterministic.
 ## Rule: JSX Logic Density and Handler Extraction
 **Rule ID:** sr-jsx-logic-density  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents JSX from becoming an execution script and improves
 readability/testability without premature performance optimization.
@@ -2120,7 +2120,7 @@ readability/testability without premature performance optimization.
 ## Rule: Time and "Now" Semantics in Derived State
 **Rule ID:** sr-time-derived-state  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden time dependencies that create stale values,
 flaky tests, and inconsistent behavior.
@@ -2150,7 +2150,7 @@ flaky tests, and inconsistent behavior.
 ## Rule: Hidden Interactive Controls and Accessibility Contract
 **Rule ID:** sr-hidden-interactive-controls  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents invisible/focus-trap controls and accessibility
 regressions from CSS hiding patterns.
@@ -2489,7 +2489,7 @@ ownership, rising coupling, and internal parallel taxonomies.
 ## Rule: Umbrella Feature Split and Domain Extraction
 **Rule ID:** sr-feature-split-domain-extraction  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevent feature folders from turning into umbrella owners that
 hide multiple domains and destabilize placement/reuse boundaries.
@@ -2780,7 +2780,7 @@ premature global-state escalation.
 ## Rule: Prop Drilling Discipline and Escalation
 **Rule ID:** sr-props-drilling-discipline  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep component trees readable and maintainable by limiting
 pass-through wiring while preserving clear ownership boundaries.
@@ -3047,10 +3047,8 @@ Defines the expected output structure for placement decisions.
   `artifacts`, `file_actions`, `layer_justifications`, `decision_explanation`,
   `import_guardrails`, `source_of_truth_resolutions`, `move_operations`,
   `move_concern`, `scope_expansion_needed`).
-- The full JSON payload is always produced for both `output_mode` values.
-- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
-- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
-- If `output_mode=agent`, print/display the full JSON payload.
+- Resolve payload/display behavior for `output_mode` via
+  `sr-output-discipline` and `sr-output-mode-resolution`.
 
 ### Forbidden
 

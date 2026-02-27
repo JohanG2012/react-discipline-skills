@@ -9,7 +9,7 @@ premature global-state escalation.
 ## Rule: Prop Drilling Discipline and Escalation
 **Rule ID:** sr-props-drilling-discipline  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep component trees readable and maintainable by limiting
 pass-through wiring while preserving clear ownership boundaries.

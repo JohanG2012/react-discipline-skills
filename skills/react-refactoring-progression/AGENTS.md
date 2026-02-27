@@ -820,7 +820,7 @@ accessibility attributes from being used as test-only hooks.
 ## Rule: Test Selectors and `aria-label` Usage
 **Rule ID:** sr-tests-aria-label-selectors  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep tests user-centric and stable without abusing accessibility
 attributes as test-only hooks.
@@ -966,7 +966,7 @@ accessibility behavior.
 ## Rule: Browser Side-Effects and Routing Boundary
 **Rule ID:** sr-browser-side-effects-boundary  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden routing/app side-effects from leaking into
 UI/feature components and keeps navigation/history ownership deterministic.
@@ -1013,7 +1013,7 @@ UI/feature components and keeps navigation/history ownership deterministic.
 ## Rule: Empty Catch and Swallowed Error Discipline
 **Rule ID:** sr-no-empty-catch  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Silent failures destroy debuggability and make behavior
 nondeterministic.
@@ -1047,7 +1047,7 @@ nondeterministic.
 ## Rule: JSX Logic Density and Handler Extraction
 **Rule ID:** sr-jsx-logic-density  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents JSX from becoming an execution script and improves
 readability/testability without premature performance optimization.
@@ -1083,7 +1083,7 @@ readability/testability without premature performance optimization.
 ## Rule: Time and "Now" Semantics in Derived State
 **Rule ID:** sr-time-derived-state  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden time dependencies that create stale values,
 flaky tests, and inconsistent behavior.
@@ -1113,7 +1113,7 @@ flaky tests, and inconsistent behavior.
 ## Rule: Hidden Interactive Controls and Accessibility Contract
 **Rule ID:** sr-hidden-interactive-controls  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents invisible/focus-trap controls and accessibility
 regressions from CSS hiding patterns.
@@ -1452,7 +1452,7 @@ ownership, rising coupling, and internal parallel taxonomies.
 ## Rule: Umbrella Feature Split and Domain Extraction
 **Rule ID:** sr-feature-split-domain-extraction  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevent feature folders from turning into umbrella owners that
 hide multiple domains and destabilize placement/reuse boundaries.
@@ -1743,7 +1743,7 @@ premature global-state escalation.
 ## Rule: Prop Drilling Discipline and Escalation
 **Rule ID:** sr-props-drilling-discipline  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep component trees readable and maintainable by limiting
 pass-through wiring while preserving clear ownership boundaries.
@@ -2004,8 +2004,10 @@ Defines strict result types and payload constraints.
   - no meaningful implementation-focused improvements are available and
     test-only improvement is used as fallback value.
 - The full JSON payload is always produced for both `output_mode` values.
-- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
-- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
+- If `output_mode=human`, print/display only `presentation.user_markdown` to
+  the human.
+- If `output_mode=human`, do not print/display raw JSON, envelope fields, or
+  any payload field other than `presentation.user_markdown`.
 - If `output_mode=agent`, print/display the full JSON payload.
 
 ### Forbidden
@@ -3034,10 +3036,10 @@ aligning with established naming contracts.
 - Any accepted naming refactor must preserve behavior and remain within current
   scope-governor limits.
 - Refactor naming decisions must be consistent with:
-  - `rid-naming-discoverability` from
-    `react-implementation-discipline/rules/150_naming_discoverability.md`
-  - `sr-ownership-naming` from `shared/rules/40_ownership_naming.md`.
-  - `sr-filename-length` from `shared/rules/380_filename_length_policy.md`.
+  - `sr-ownership-naming` from `shared/rules/40_ownership_naming.md`,
+  - `sr-filename-length` from `shared/rules/380_filename_length_policy.md`,
+  - and the role conventions in this rule (`*Page`, section/panel, `use*`,
+    DTO naming).
 
 ### Forbidden
 

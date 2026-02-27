@@ -9,7 +9,7 @@ selected downstream skills.
 ## Rule: Planning and Reuse Workflow
 **Rule ID:** sr-planning-reuse  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents ad hoc implementation choices and improves consistency
 across downstream planning outputs.

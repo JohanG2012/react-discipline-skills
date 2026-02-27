@@ -9,7 +9,7 @@ ownership, rising coupling, and internal parallel taxonomies.
 ## Rule: Umbrella Feature Split and Domain Extraction
 **Rule ID:** sr-feature-split-domain-extraction  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevent feature folders from turning into umbrella owners that
 hide multiple domains and destabilize placement/reuse boundaries.

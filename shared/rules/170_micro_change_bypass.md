@@ -9,7 +9,7 @@ implementation discipline directly in micro mode.
 ## Rule: Micro-change Bypass and Skill 4 Micro Mode
 **Rule ID:** sr-micro-change-bypass  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Allows low-risk behavior-preserving refactors to stay fast while
 still enforcing implementation discipline and boundary checks.

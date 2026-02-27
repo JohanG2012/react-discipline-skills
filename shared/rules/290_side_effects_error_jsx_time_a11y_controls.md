@@ -10,7 +10,7 @@ accessibility behavior.
 ## Rule: Browser Side-Effects and Routing Boundary
 **Rule ID:** sr-browser-side-effects-boundary  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden routing/app side-effects from leaking into
 UI/feature components and keeps navigation/history ownership deterministic.
@@ -57,7 +57,7 @@ UI/feature components and keeps navigation/history ownership deterministic.
 ## Rule: Empty Catch and Swallowed Error Discipline
 **Rule ID:** sr-no-empty-catch  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Silent failures destroy debuggability and make behavior
 nondeterministic.
@@ -91,7 +91,7 @@ nondeterministic.
 ## Rule: JSX Logic Density and Handler Extraction
 **Rule ID:** sr-jsx-logic-density  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents JSX from becoming an execution script and improves
 readability/testability without premature performance optimization.
@@ -127,7 +127,7 @@ readability/testability without premature performance optimization.
 ## Rule: Time and "Now" Semantics in Derived State
 **Rule ID:** sr-time-derived-state  
 **Priority:** SHOULD  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents hidden time dependencies that create stale values,
 flaky tests, and inconsistent behavior.
@@ -157,7 +157,7 @@ flaky tests, and inconsistent behavior.
 ## Rule: Hidden Interactive Controls and Accessibility Contract
 **Rule ID:** sr-hidden-interactive-controls  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents invisible/focus-trap controls and accessibility
 regressions from CSS hiding patterns.

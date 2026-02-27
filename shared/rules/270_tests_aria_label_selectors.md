@@ -9,7 +9,7 @@ accessibility attributes from being used as test-only hooks.
 ## Rule: Test Selectors and `aria-label` Usage
 **Rule ID:** sr-tests-aria-label-selectors  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
 **Rationale:** Keep tests user-centric and stable without abusing accessibility
 attributes as test-only hooks.

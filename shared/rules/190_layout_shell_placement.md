@@ -9,7 +9,7 @@ parallel layout homes.
 ## Rule: Layout and Shell Ownership Decision
 **Rule ID:** sr-layout-shell-placement  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Removes ambiguity between `ui/primitives`, `ui/composites`, and
 `features/<domain>/sections` for layout-like components.
@@ -51,7 +51,7 @@ parallel layout homes.
 ## Rule: Layout and Shell Subfolder Policy
 **Rule ID:** sr-layout-shell-subfolder-policy  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents creation of competing layout homes while allowing
 bounded categorization inside composites when needed.

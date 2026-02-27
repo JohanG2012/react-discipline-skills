@@ -50,10 +50,10 @@ aligning with established naming contracts.
 - Any accepted naming refactor must preserve behavior and remain within current
   scope-governor limits.
 - Refactor naming decisions must be consistent with:
-  - `rid-naming-discoverability` from
-    `react-implementation-discipline/rules/150_naming_discoverability.md`
-  - `sr-ownership-naming` from `shared/rules/40_ownership_naming.md`.
-  - `sr-filename-length` from `shared/rules/380_filename_length_policy.md`.
+  - `sr-ownership-naming` from `shared/rules/40_ownership_naming.md`,
+  - `sr-filename-length` from `shared/rules/380_filename_length_policy.md`,
+  - and the role conventions in this rule (`*Page`, section/panel, `use*`,
+    DTO naming).
 
 ### Forbidden
 

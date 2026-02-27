@@ -10,7 +10,7 @@ named.
 ## Rule: Component and Client Module Folderization Threshold Index
 **Rule ID:** sr-component-folderization  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Preserves a stable entrypoint while delegating to focused
 component and client-threshold rules.
@@ -31,7 +31,7 @@ component and client-threshold rules.
 ## Rule: Component File Folderization Threshold
 **Rule ID:** sr-component-file-threshold  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps components maintainable by triggering folderization when
 size/responsibility thresholds are exceeded.
@@ -68,7 +68,7 @@ size/responsibility thresholds are exceeded.
 ## Rule: Transport Client Module Threshold
 **Rule ID:** sr-client-module-threshold  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents mega transport clients by keeping endpoint orchestration
 out of shared client foundations.
@@ -104,7 +104,7 @@ out of shared client foundations.
 ## Rule: Folder Structure for a Folderized Component
 **Rule ID:** sr-component-folder-structure  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents random folder soup and keeps discovery/search
 predictable.
@@ -141,7 +141,7 @@ ProjectSelector/
 ## Rule: Naming and Exports Inside Folderized Components
 **Rule ID:** sr-component-folder-exports  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps imports stable and grep-friendly.
 
@@ -166,7 +166,7 @@ ProjectSelector/
 ## Rule: Promotion and Demotion for Component Helpers
 **Rule ID:** sr-component-helper-promotion  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents leaking component-specific helpers into global utility
 layers.
@@ -192,7 +192,7 @@ layers.
 ## Rule: Folderization Must Not Create a New Home
 **Rule ID:** sr-folderization-no-new-home  
 **Priority:** MUST  
-**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents second-architecture drift.
 
