@@ -82,10 +82,8 @@ review-ready, and policy-verifiable.
   - `fallback_context_bundle_requirements[]`
   - `notes`
   and must not include `output_package`.
-- The full JSON payload is always produced for both `output_mode` values.
-- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
-- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
-- If `output_mode=agent`, print/display the full JSON payload.
+- Resolve payload/display behavior for `output_mode` via
+  `sr-output-discipline` and `sr-output-mode-resolution`.
 
 ### Forbidden
 

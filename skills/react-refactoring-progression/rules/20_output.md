@@ -71,10 +71,8 @@ Defines strict result types and payload constraints.
   - test updates are required by implementation-focused active steps, or
   - no meaningful implementation-focused improvements are available and
     test-only improvement is used as fallback value.
-- The full JSON payload is always produced for both `output_mode` values.
-- If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
-- If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
-- If `output_mode=agent`, print/display the full JSON payload.
+- Resolve payload/display behavior for `output_mode` via
+  `sr-output-discipline` and `sr-output-mode-resolution`.
 
 ### Forbidden
 
