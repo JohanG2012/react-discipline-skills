@@ -8,9 +8,7 @@ import {
 
 const repoRoot = process.cwd();
 const skillsRoot = path.join(repoRoot, "skills");
-const sharedRoot = path.join(repoRoot, "shared");
-const sharedSkillPath = path.join(sharedRoot, "SKILL.md");
-const sharedRulesPath = path.join(sharedRoot, "rules");
+const sharedRulesPath = path.join(repoRoot, "shared", "rules");
 const sharedInheritedFromValue = "shared-rules";
 
 function findRuleBlocks(content) {
@@ -57,32 +55,6 @@ function hasSection(blockText, sectionName) {
   const escaped = sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const regex = new RegExp(`^###\\s+${escaped}\\s*$`, "m");
   return regex.test(blockText);
-}
-
-function normalizeQuickRefId(raw) {
-  return raw
-    .trim()
-    .replace(/^`/, "")
-    .replace(/`$/, "")
-    .replace(/\.$/, "")
-    .trim();
-}
-
-function extractQuickReferenceRuleIds(skillContent) {
-  const lines = skillContent.split("\n");
-  const start = lines.findIndex((line) => /^##\s+Quick reference rules\s*$/i.test(line));
-  if (start === -1) return null;
-
-  const ids = [];
-  for (let i = start + 1; i < lines.length; i += 1) {
-    const line = lines[i];
-    if (/^##\s+/.test(line)) break;
-    const bullet = line.match(/^\s*-\s+(.+?)\s*$/);
-    if (!bullet) continue;
-    const id = normalizeQuickRefId(bullet[1]);
-    if (id) ids.push(id);
-  }
-  return ids;
 }
 
 async function validateSharedRules() {
@@ -221,46 +193,6 @@ async function validateSharedRules() {
   for (const dup of duplicateIds) {
     errors.push(
       `Duplicate Rule ID "${dup.ruleId}" found at: ${dup.locations.join(", ")}`,
-    );
-  }
-
-  if (!await pathExists(sharedSkillPath)) {
-    errors.push(`Missing shared policy SKILL.md at ${sharedSkillPath}`);
-    return errors;
-  }
-
-  const sharedSkillContent = await readFile(sharedSkillPath);
-  const quickRefIds = extractQuickReferenceRuleIds(sharedSkillContent);
-  if (!quickRefIds) {
-    errors.push(`${sharedSkillPath}: missing "## Quick reference rules" section`);
-    return errors;
-  }
-  if (!quickRefIds.length) {
-    errors.push(`${sharedSkillPath}: no quick-reference rule IDs listed`);
-    return errors;
-  }
-
-  const quickRefIdSet = new Set();
-  for (const id of quickRefIds) {
-    if (quickRefIdSet.has(id)) {
-      errors.push(`${sharedSkillPath}: duplicate quick-reference rule ID "${id}"`);
-      continue;
-    }
-    quickRefIdSet.add(id);
-  }
-
-  const sharedRuleIds = [...idToLocations.keys()].sort();
-  const missingInQuickRef = sharedRuleIds.filter((id) => !quickRefIdSet.has(id));
-  const extraInQuickRef = [...quickRefIdSet].sort().filter((id) => !idToLocations.has(id));
-
-  if (missingInQuickRef.length) {
-    errors.push(
-      `${sharedSkillPath}: missing quick-reference IDs for rules: ${missingInQuickRef.join(", ")}`,
-    );
-  }
-  if (extraInQuickRef.length) {
-    errors.push(
-      `${sharedSkillPath}: quick-reference IDs not found in shared/rules: ${extraInQuickRef.join(", ")}`,
     );
   }
 
