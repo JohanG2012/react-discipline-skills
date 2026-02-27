@@ -32,7 +32,7 @@ missing.
 - Default write control behavior:
   - produce reviewable patch/new-file output
   - avoid direct structural writes outside approved plan
-  - never auto-edit architecture docs or specification docs (`specs/**`, including `specs/**/master_spec.md`) unless requested
+  - never auto-edit architecture or specification docs unless explicitly requested
 
 ### Forbidden
 

@@ -35,8 +35,8 @@ speculative structure changes.
 - This skill remains planning-only and does not perform implementation edits.
 - Default write posture is controlled/review-oriented output; avoid silent churn
   and unreviewed direct edits as routine behavior.
-- Do not auto-edit architecture/specification documents during routine tasks
-  (`ARCHITECTURE.md`, `specs/**/master_spec.md`, `spec/**`).
+- Do not auto-edit architecture or specification documents during routine
+  tasks.
 - Treat architecture/specification document edits as dedicated documentation
   scope and perform them only when explicitly requested.
 

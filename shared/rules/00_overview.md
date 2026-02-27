@@ -34,7 +34,7 @@ All rules defined here are binding for agents and LLMs using this skill.
   skills; the shared baseline policy is not a production execution skill.
 - Shared policy/config updates must not be modeled as new execution skills.
 - Document precedence must remain deterministic:
-  - `specs/001-agent-policy-v1/master_spec.md` is authoritative.
+  - The shared-policy master specification is authoritative.
   - Supporting policy docs may fill non-conflicting open details only.
 - The shared baseline must explicitly govern:
   - Architecture/dependency boundaries.

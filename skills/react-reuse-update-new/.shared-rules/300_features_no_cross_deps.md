@@ -38,8 +38,7 @@ causes architectural drift and refactor explosions.
   - cross-feature import is allowed only when all are true:
     - an explicitly designated shared-domain module exists (for example
       `features/_shared/**` or `domains/**`),
-    - that module is documented in exactly one canonical policy location (for
-      example `ARCHITECTURE.md` or `src/config/agentOverrides.ts`),
+    - that module is documented in exactly one canonical policy location,
     - exported contracts are intentionally domain-agnostic or multi-feature
       primitives,
     - usage is consistent with no parallel ad hoc cross-feature imports.
