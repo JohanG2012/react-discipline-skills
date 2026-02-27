@@ -1,7 +1,9 @@
 import path from "path";
 import {
   listDirs,
+  listFiles,
   parseFrontmatter,
+  pathExists,
   readFile,
 } from "../lib/utils.mjs";
 
@@ -16,6 +18,27 @@ const skillNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const requiredKeys = ["name", "description", "version", "license"];
 const requiredMetadataKeys = ["category", "stability"];
+const rulePrefixBySkill = new Map([
+  ["react-architecture-detection", "rad-"],
+  ["react-placement-and-layering", "rpl-"],
+  ["react-reuse-update-new", "rru-"],
+  ["react-implementation-discipline", "rid-"],
+  ["react-refactoring-progression", "rrp-"],
+]);
+
+function extractRuleIdsWithLines(content) {
+  const lines = content.split("\n");
+  const result = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const match = lines[i].match(/^\*\*Rule ID:\*\*\s*(.+?)\s*$/);
+    if (!match) continue;
+    result.push({
+      line: i + 1,
+      ruleId: match[1].trim(),
+    });
+  }
+  return result;
+}
 
 async function validateSkill(skillDir) {
   const skillPath = path.join(skillsRoot, skillDir, "SKILL.md");
@@ -67,6 +90,38 @@ async function validateSkill(skillDir) {
   );
   if (hasPreApprovedCollisions) {
     errors.push(`pre_approved_collisions is only allowed in ${sharedPolicySkillPath}`);
+  }
+
+  return errors;
+}
+
+async function validateSkillRulePrefixes(skillDir) {
+  const errors = [];
+  const expectedPrefix = rulePrefixBySkill.get(skillDir);
+  if (!expectedPrefix) {
+    return errors;
+  }
+
+  const rulesPath = path.join(skillsRoot, skillDir, "rules");
+  if (!await pathExists(rulesPath)) {
+    return errors;
+  }
+
+  const ruleFiles = (await listFiles(rulesPath))
+    .filter((file) => file.endsWith(".md"))
+    .sort();
+
+  for (const file of ruleFiles) {
+    const filePath = path.join(rulesPath, file);
+    const content = await readFile(filePath);
+    const ids = extractRuleIdsWithLines(content);
+    for (const entry of ids) {
+      if (!entry.ruleId.startsWith(expectedPrefix)) {
+        errors.push(
+          `${filePath}:${entry.line}: Rule ID "${entry.ruleId}" must use "${expectedPrefix}" prefix for skill "${skillDir}"`,
+        );
+      }
+    }
   }
 
   return errors;
@@ -146,6 +201,8 @@ async function run() {
   for (const skillDir of skillDirs) {
     const skillErrors = await validateSkill(skillDir);
     errors.push(...skillErrors);
+    const skillRulePrefixErrors = await validateSkillRulePrefixes(skillDir);
+    errors.push(...skillRulePrefixErrors);
   }
   const sharedPolicyErrors = await validateSharedPolicy();
   errors.push(...sharedPolicyErrors);

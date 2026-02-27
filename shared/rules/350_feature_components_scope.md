@@ -7,7 +7,7 @@ components do not become a shadow shared-UI system.
 ---
 
 ## Rule: What May Live in `features/<domain>/components/`
-**Rule ID:** rpl-feature-components-scope  
+**Rule ID:** sr-feature-components-scope  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  

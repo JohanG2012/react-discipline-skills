@@ -8,7 +8,7 @@ naming remains searchable, layer-aligned, and domain-safe.
 ---
 
 ## Rule: Refactor — Naming Hygiene and Correct Placement
-**Rule ID:** rrf-naming-hygiene  
+**Rule ID:** rrp-naming-hygiene  
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents naming drift and misplaced ownership during refactors by

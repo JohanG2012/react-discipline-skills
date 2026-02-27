@@ -7,7 +7,7 @@ folders.
 ---
 
 ## Rule: No `views/` or `*View` in Features
-**Rule ID:** rpl-no-feature-views  
+**Rule ID:** sr-no-feature-views  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  

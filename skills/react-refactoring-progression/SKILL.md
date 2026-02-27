@@ -212,6 +212,7 @@ Constraints:
 - rrp-validation-gates
 - rrp-scope-governor
 - rrp-detection
+- rrp-detection-assist-scripts
 - rrp-semantic-duplication
 - rrp-interactions
 - rrp-progression-model
@@ -229,10 +230,10 @@ Constraints:
 - rrp-dup-output
 - rrp-dup-next-actions
 - rrp-dup-keep-separate-output
-- rrf-ui-classname-hygiene
-- rrf-a11y-aria-label-hygiene
-- rrf-promote-feature-to-composite
-- rrf-naming-hygiene
+- rrp-ui-classname-hygiene
+- rrp-a11y-aria-label-hygiene
+- rrp-promote-feature-to-composite
+- rrp-naming-hygiene
 - rrp-test-suggestion-priority
 
 ## Files

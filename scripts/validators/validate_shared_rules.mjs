@@ -57,6 +57,16 @@ function hasSection(blockText, sectionName) {
   return regex.test(blockText);
 }
 
+function extractSharedRuleReferences(blockText) {
+  const ids = new Set();
+  const regex = /\b(sr-[a-z0-9]+(?:-[a-z0-9]+)+)\b/g;
+  let match;
+  while ((match = regex.exec(blockText)) !== null) {
+    ids.add(match[1]);
+  }
+  return [...ids];
+}
+
 async function validateSharedRules() {
   const errors = [];
   const productionSkills = (await listDirs(skillsRoot))
@@ -77,6 +87,7 @@ async function validateSharedRules() {
   }
 
   const idToLocations = new Map();
+  const ruleRecords = [];
   for (const file of ruleFiles) {
     const filePath = path.join(sharedRulesPath, file);
     const content = await readFile(filePath);
@@ -96,6 +107,7 @@ async function validateSharedRules() {
       const ruleId = extractFieldValue(block.text, "Rule ID");
       const priority = extractFieldValue(block.text, "Priority");
       const appliesTo = extractFieldValue(block.text, "Applies to");
+      const appliesList = parseSkillList(appliesTo);
       const inlineIn = extractFieldValue(block.text, "Inline in");
       const referenceIn = extractFieldValue(block.text, "Reference in");
       const inheritedFrom = extractFieldValue(block.text, "Inherited from");
@@ -112,6 +124,11 @@ async function validateSharedRules() {
         const locations = idToLocations.get(ruleId) || [];
         locations.push(`${filePath}:${block.startLine}`);
         idToLocations.set(ruleId, locations);
+        if (!ruleId.startsWith("sr-")) {
+          errors.push(
+            `${filePath}:${block.startLine}: shared Rule ID "${ruleId}" must use "sr-" prefix`,
+          );
+        }
       }
 
       if (!priority) {
@@ -124,8 +141,6 @@ async function validateSharedRules() {
           `${filePath}:${block.startLine}: missing "**Applies to:**" in rule block "${block.title}"`,
         );
       } else {
-        const appliesList = parseSkillList(appliesTo);
-
         if (appliesList.length === 0) {
           errors.push(
             `${filePath}:${block.startLine}: "**Applies to:**" must include at least one skill`,
@@ -176,6 +191,16 @@ async function validateSharedRules() {
           `${filePath}:${block.startLine}: missing "### Forbidden" section in rule block "${block.title}"`,
         );
       }
+
+      if (ruleId) {
+        ruleRecords.push({
+          filePath,
+          startLine: block.startLine,
+          ruleId,
+          appliesList,
+          text: block.text,
+        });
+      }
     }
 
     if (fileRuleIdCount === 0) {
@@ -194,6 +219,42 @@ async function validateSharedRules() {
     errors.push(
       `Duplicate Rule ID "${dup.ruleId}" found at: ${dup.locations.join(", ")}`,
     );
+  }
+
+  const ruleById = new Map();
+  for (const rule of ruleRecords) {
+    if (!ruleById.has(rule.ruleId)) {
+      ruleById.set(rule.ruleId, rule);
+    }
+  }
+
+  for (const rule of ruleRecords) {
+    const references = extractSharedRuleReferences(rule.text)
+      .filter((id) => id !== rule.ruleId);
+    const effectiveApplies = rule.appliesList
+      .filter((skill) => productionSkillSet.has(skill));
+
+    for (const refId of references) {
+      const refRule = ruleById.get(refId);
+      if (!refRule) {
+        errors.push(
+          `${rule.filePath}:${rule.startLine}: shared rule "${rule.ruleId}" references unknown shared rule ID "${refId}"`,
+        );
+        continue;
+      }
+
+      const refApplies = new Set(
+        refRule.appliesList.filter((skill) => productionSkillSet.has(skill)),
+      );
+      const missingSkills = effectiveApplies
+        .filter((skill) => !refApplies.has(skill));
+
+      if (missingSkills.length) {
+        errors.push(
+          `${rule.filePath}:${rule.startLine}: shared rule "${rule.ruleId}" references "${refId}" but "${refId}" is missing Applies to skills required transitively: ${missingSkills.join(", ")} (defined at ${refRule.filePath}:${refRule.startLine})`,
+        );
+      }
+    }
   }
 
   return errors;

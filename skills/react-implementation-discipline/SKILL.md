@@ -144,6 +144,10 @@ Return a single machine-payload JSON object with:
 - `rid-boundary-runtime-query`
 - `rid-stop-conditions`
 - `rid-naming-discoverability`
+- `rid-file-export-alignment`
+- `rid-component-role-naming`
+- `rid-naming-boundary-hygiene`
+- `rid-hook-endpoint-type-naming`
 - `rid-refactoring-consult`
 
 ## Files

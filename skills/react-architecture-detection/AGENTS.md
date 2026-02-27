@@ -30,14 +30,19 @@ Generated on: 2026-02-27
 - [Rule: Architecture Detection Output and Bootstrap Contract [sr-architecture-detection-contract]](#rule-architecture-detection-output-and-bootstrap-contract)
 - [Rule: Enforcement Heuristics [sr-enforcement-heuristics]](#rule-enforcement-heuristics)
 - [Rule: Micro-change Bypass and Skill 4 Micro Mode [sr-micro-change-bypass]](#rule-micro-change-bypass-and-skill-4-micro-mode)
-- [Rule: Component and Client Module Folderization Threshold [sr-component-folderization]](#rule-component-and-client-module-folderization-threshold)
+- [Rule: Component and Client Module Folderization Threshold Index [sr-component-folderization]](#rule-component-and-client-module-folderization-threshold-index)
+- [Rule: Component File Folderization Threshold [sr-component-file-threshold]](#rule-component-file-folderization-threshold)
+- [Rule: Transport Client Module Threshold [sr-client-module-threshold]](#rule-transport-client-module-threshold)
 - [Rule: Folder Structure for a Folderized Component [sr-component-folder-structure]](#rule-folder-structure-for-a-folderized-component)
 - [Rule: Naming and Exports Inside Folderized Components [sr-component-folder-exports]](#rule-naming-and-exports-inside-folderized-components)
 - [Rule: Promotion and Demotion for Component Helpers [sr-component-helper-promotion]](#rule-promotion-and-demotion-for-component-helpers)
 - [Rule: Folderization Must Not Create a New Home [sr-folderization-no-new-home]](#rule-folderization-must-not-create-a-new-home)
 - [Rule: Layout and Shell Ownership Decision [sr-layout-shell-placement]](#rule-layout-and-shell-ownership-decision)
 - [Rule: Layout and Shell Subfolder Policy [sr-layout-shell-subfolder-policy]](#rule-layout-and-shell-subfolder-policy)
-- [Rule: `*Like` and `Maybe<T>` Type Discipline [sr-type-like-maybe]](#rule-like-and-maybet-type-discipline)
+- [Rule: `*Like` and `Maybe<T>` Discipline Index [sr-type-like-maybe]](#rule-like-and-maybet-discipline-index)
+- [Rule: `*Like` Boundary Discipline [sr-type-like-boundary]](#rule-like-boundary-discipline)
+- [Rule: `Maybe<T>` Semantics Discipline [sr-type-maybe-semantics]](#rule-maybet-semantics-discipline)
+- [Rule: Domain Type Integrity [sr-domain-type-integrity]](#rule-domain-type-integrity)
 - [Rule: Test Selectors and `aria-label` Usage [sr-tests-aria-label-selectors]](#rule-test-selectors-and-aria-label-usage)
 - [Rule: Browser Side-Effects and Routing Boundary [sr-browser-side-effects-boundary]](#rule-browser-side-effects-and-routing-boundary)
 - [Rule: Empty Catch and Swallowed Error Discipline [sr-no-empty-catch]](#rule-empty-catch-and-swallowed-error-discipline)
@@ -90,6 +95,8 @@ Key constraints:
 - sr-enforcement-heuristics
 - sr-micro-change-bypass
 - sr-component-folderization
+- sr-component-file-threshold
+- sr-client-module-threshold
 - sr-component-folder-structure
 - sr-component-folder-exports
 - sr-component-helper-promotion
@@ -97,6 +104,9 @@ Key constraints:
 - sr-layout-shell-placement
 - sr-layout-shell-subfolder-policy
 - sr-type-like-maybe
+- sr-type-like-boundary
+- sr-type-maybe-semantics
+- sr-domain-type-integrity
 - sr-tests-aria-label-selectors
 - sr-browser-side-effects-boundary
 - sr-no-empty-catch
@@ -482,13 +492,8 @@ compact, and reviewable.
   - `output_mode` (`human|agent`)
   - `presentation.user_markdown` (prettified summary of the payload)
   - `notes[]` limited to 5 items
-- `output_mode` defaulting must be deterministic:
-  - resolve with strict precedence:
-    1. explicit `output_mode` in request,
-    2. explicit machine-readable/raw JSON request -> `agent`,
-    3. human explicitly instructs a skill to run -> `human`,
-    4. otherwise -> `agent`
-  - if uncertain between `human` and `agent`, choose `human`
+- Resolve `output_mode` precedence and display behavior via
+  `sr-output-mode-resolution`.
 - The full JSON payload is always produced for both `output_mode` values.
 - If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
 - If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
@@ -988,72 +993,97 @@ named.
 
 ---
 
-## Rule: Component and Client Module Folderization Threshold
+## Rule: Component and Client Module Folderization Threshold Index
 **Rule ID:** sr-component-folderization  
 **Priority:** MUST  
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
-**Rationale:** Keeps UI modules and transport clients maintainable without
-creating mega files or mixed-responsibility endpoints.
+**Rationale:** Preserves a stable entrypoint while delegating to focused
+component and client-threshold rules.
+
+### Requirement
+
+- When this rule is in scope, enforce both:
+  - `sr-component-file-threshold`,
+  - `sr-client-module-threshold`.
+
+### Forbidden
+
+- Treating this index rule as sufficient without enforcing the referenced
+  threshold rules.
+
+---
+
+## Rule: Component File Folderization Threshold
+**Rule ID:** sr-component-file-threshold  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps components maintainable by triggering folderization when
+size/responsibility thresholds are exceeded.
 
 ### Requirement
 
 - Keep a component as a single file when all are true:
-  - file is about `<= 200` lines and has one clear responsibility
-  - helpers are small and render-support only
-  - there are at most two closely related internal subcomponents
-- Keep a transport client module as a single file when all are true:
-  - file stays focused on shared transport concerns (request wrapper,
-    auth/header wiring, transport error normalization),
-  - endpoint/domain-specific call orchestration is not embedded in the client
-    file,
-  - file is reasonably small (about `<= 250` lines).
-- Folderize (move to a component module folder) when any is true:
-  1. file is about `> 250-300` lines and splitting reduces responsibilities
-  2. component contains three or more meaningful internal subcomponents
+  - file is about `<= 200` lines and has one clear responsibility,
+  - helpers are small and render-support only,
+  - there are at most two closely related internal subcomponents.
+- Folderize component modules when any is true:
+  1. file is about `> 250-300` lines and splitting reduces responsibilities,
+  2. component contains three or more meaningful internal subcomponents,
   3. non-trivial local logic should be isolated (mapping/formatting, keyboard
-     handling, complex derived state)
-  4. it has component-scoped assets (styles/icons/constants)
-  5. it is reused broadly and needs a stable module boundary
-- Decompose transport client logic when any is true:
-  1. canonical client file grows to about `> 250-300` lines and mixes concerns,
-  2. endpoint-specific URLs/methods/payload shaping accumulate in the client
-     file,
-  3. multiple domain endpoint calls are orchestrated from one client file.
+     handling, complex derived state),
+  4. it has component-scoped assets (styles/icons/constants),
+  5. it is reused broadly and needs a stable module boundary.
 - Hard rule:
   - if a single component file exceeds `400` lines, folderization is required
     unless explicitly justified in output notes and/or review metadata.
-  - if a transport client file (for example `api/client/client.ts`) exceeds
-    `400` lines, extraction is required unless explicitly justified in output
-    notes and/or review metadata.
-- Expected extraction target for oversized transport client files:
-  - endpoint/domain call functions must be extracted to `api/endpoints/**` or
-    the repository's gravity-equivalent canonical endpoint home,
-  - `api/client/**` remains a thin transport foundation (request wrapper,
-    auth/header wiring, retry policy, normalized transport errors).
-- This rule applies across skills and is enforced most strongly in
-  `react-implementation-discipline` during execution output validation.
+- Quick heuristic:
+  - folderize when file has multiple responsibilities and is above about
+    `300` lines and still growing.
 
 ### Forbidden
 
 - Keeping oversized multi-responsibility component files as single files without
   explicit justification.
-- Treating folderization as optional when the hard threshold is crossed.
-- Keeping endpoint-specific call orchestration in a mega transport client file
-  instead of extracting to `api/endpoints/**` (or gravity-equivalent endpoint
-  home).
+- Treating component folderization as optional after the hard threshold is
+  crossed.
 
-### Notes
+---
 
-- Quick folderization heuristic: folderize when any is true:
-  - file has two or more responsibilities
-  - splitting subcomponents would improve clarity
-  - helper pile is component-local only
-  - file is above about `300` lines and still growing
-- Quick transport-client heuristic: when the shared client starts accumulating
-  endpoint paths, payload shaping, and domain branching, extract those calls to
-  `api/endpoints/**` (or gravity-equivalent endpoint home) and keep the client
-  thin.
+## Rule: Transport Client Module Threshold
+**Rule ID:** sr-client-module-threshold  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Prevents mega transport clients by keeping endpoint orchestration
+out of shared client foundations.
+
+### Requirement
+
+- Keep a transport client module as a single file when all are true:
+  - it stays focused on shared transport concerns (request wrapper, auth/header
+    wiring, transport error normalization),
+  - endpoint/domain-specific call orchestration is not embedded in client file,
+  - file is reasonably small (about `<= 250` lines).
+- Decompose transport client logic when any is true:
+  1. canonical client file grows to about `> 250-300` lines and mixes concerns,
+  2. endpoint-specific URLs/methods/payload shaping accumulate in client file,
+  3. multiple domain endpoint calls are orchestrated from one client file.
+- Hard rule:
+  - if a transport client file (for example `api/client/client.ts`) exceeds
+    `400` lines, extraction is required unless explicitly justified in output
+    notes and/or review metadata.
+- Expected extraction target:
+  - endpoint/domain call functions must be extracted to `api/endpoints/**` or
+    gravity-equivalent canonical endpoint home,
+  - `api/client/**` remains a thin transport foundation (request wrapper,
+    auth/header wiring, retry policy, normalized transport errors).
+
+### Forbidden
+
+- Keeping endpoint-specific call orchestration in mega transport client files.
+- Treating transport extraction as optional after hard threshold exceedance.
 
 ---
 
@@ -1256,97 +1286,118 @@ bounded categorization inside composites when needed.
 # `*Like` and `Maybe<T>` Type Discipline
 
 ## Summary
-Defines hard governance for boundary-only structural looseness (`*Like`) and
-optionality wrappers (`Maybe<T>`), while protecting canonical domain integrity.
+Splits boundary flexibility and optionality semantics into separate rules while
+keeping strict domain integrity requirements explicit.
 
 ---
 
-## Rule: `*Like` and `Maybe<T>` Type Discipline
+## Rule: `*Like` and `Maybe<T>` Discipline Index
 **Rule ID:** sr-type-like-maybe  
 **Priority:** MUST  
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
-**Rationale:** Prevents vague pseudo-types in domain layers while allowing safe
-boundary flexibility.
+**Rationale:** Preserves backward-compatible entrypoint while delegating to
+single-focus type rules.
 
 ### Requirement
 
-- Intent:
-  - structural looseness (`*Like`) and optionality wrappers (`Maybe<T>`) are
-    boundary tools, not substitutes for canonical domain models.
-- Definitions:
-  - `*Like` type: structural compatibility type (for example `UserLike`).
-  - `Maybe<T>`: wrapper representing explicit optionality semantics.
-  - canonical domain model: authoritative type in
-    `features/<domain>/domain/**`.
-- `*Like` usage policy:
-  - allowed only when all are true:
-    - it exists in `api/dto/**`, `features/<domain>/adapters/**`,
-      form/input parsing layers, or pure utility input-normalization functions,
-    - it represents external or pre-normalized input shapes,
-    - it is mapped immediately into a canonical domain model,
-    - it is not exported as a primary domain contract.
-  - if introduced, all are required:
-    - a canonical model it maps to exists,
-    - a mapper function exists in the same feature boundary,
-    - mapping occurs before UI rendering or store persistence.
-- `Maybe<T>` usage policy:
-  - allowed only when all are true:
-    - it is defined once in a canonical shared location (for example
-      `src/lib/types.ts`),
-    - semantics are exactly one of:
-      - `type Maybe<T> = T | null`, or
-      - `type Maybe<T> = T | undefined`,
-    - repository-wide usage is consistent with only one of those semantics.
-  - allowed contexts:
-    - API response normalization,
-    - feature-boundary pre-validation states,
-    - explicit domain states where absence is meaningful.
-- Domain layer integrity (`features/<domain>/domain/**`):
-  - types must represent fully validated canonical models,
-  - fields should be required unless domain semantics truly model absence,
-  - `*Like` is prohibited,
-  - `Maybe<T>` is permitted only when domain semantics require true optional
-    state.
-- Enforcement heuristics:
-  - treat as architectural smell when:
-    - `*Like` appears outside boundary layers,
-    - `Maybe<T>` appears broadly in `ui/**` or `store/**`,
-    - canonical models overuse optional fields (`?`) without domain
-      justification,
-    - a `*Like` type is passed directly into UI without normalization.
-- Decision defaults:
-  - prefer canonical type plus explicit mapping,
-  - prefer required domain fields over `Maybe<T>`,
-  - prefer in-place explicit union (`T | null`) over introducing `Maybe<T>`
-    unless it improves repository-wide consistency.
-- Hard stop conditions:
-  - stop and revise when:
-    - canonical domain model is replaced by a `*Like` type,
-    - multiple `Maybe<T>` definitions exist,
-    - domain logic depends on structural `*Like` types.
+- When this rule is in scope, follow all of:
+  - `sr-type-like-boundary`,
+  - `sr-type-maybe-semantics`,
+  - `sr-domain-type-integrity`.
 
 ### Forbidden
 
-- `*Like` types inside:
-  - `features/<domain>/domain/**`,
-  - `store/**`,
-  - shared `ui/**`.
+- Applying this index rule without enforcing the referenced type-discipline
+  rules.
+
+---
+
+## Rule: `*Like` Boundary Discipline
+**Rule ID:** sr-type-like-boundary  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Restricts structural compatibility types to boundary layers.
+
+### Requirement
+
+- `*Like` types are allowed only when all are true:
+  - they exist in boundary-oriented homes (`api/dto/**`,
+    `features/<domain>/adapters/**`, input parsing/normalization layers),
+  - they model external or pre-normalized input shape,
+  - they are mapped immediately to canonical domain models,
+  - they are not exported as canonical domain contracts.
+- If a `*Like` type is introduced, all are required:
+  - canonical mapped model exists,
+  - mapper exists in same feature boundary,
+  - mapping occurs before UI rendering or store persistence.
+
+### Forbidden
+
+- Using `*Like` inside `features/<domain>/domain/**`, `store/**`, or shared
+  `ui/**`.
 - Using `*Like` to avoid defining canonical domain models.
-- Passing `*Like` deep into feature sections/pages without normalization.
-- Naming canonical domain models as `SomethingLike`.
-- Mixing `null` and `undefined` semantics arbitrarily for `Maybe<T>`.
-- Using `Maybe<T>` to avoid validation or to keep post-validation required
-  domain fields weak.
-- Defining multiple `Maybe` types across modules.
+- Passing `*Like` deep into pages/sections without normalization.
+- Naming canonical models as `SomethingLike`.
 
-### Notes
+---
 
-- Short philosophy:
-  - `*Like` = boundary flexibility.
-  - `Maybe<T>` = semantic absence.
-  - Domain models = strict canonical contracts.
-  - UI/store layers = never vague about domain shape.
+## Rule: `Maybe<T>` Semantics Discipline
+**Rule ID:** sr-type-maybe-semantics  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Enforces one explicit repository-wide optionality semantic.
+
+### Requirement
+
+- `Maybe<T>` is allowed only when all are true:
+  - defined once in a canonical shared location (for example `src/lib/types.ts`),
+  - semantics are exactly one of:
+    - `type Maybe<T> = T | null`, or
+    - `type Maybe<T> = T | undefined`,
+  - repository uses one meaning consistently.
+- Allowed contexts:
+  - API response normalization,
+  - feature-boundary pre-validation states,
+  - explicit domain states where absence is meaningful.
+
+### Forbidden
+
+- Mixing `null` and `undefined` semantics arbitrarily.
+- Using `Maybe<T>` to bypass validation.
+- Defining multiple `Maybe` aliases in different modules.
+
+---
+
+## Rule: Domain Type Integrity
+**Rule ID:** sr-domain-type-integrity  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps domain-layer contracts strict and canonical.
+
+### Requirement
+
+- In `features/<domain>/domain/**`:
+  - types represent validated canonical models,
+  - fields are required unless domain semantics explicitly model absence.
+- `Maybe<T>` in domain models is allowed only when domain semantics require true
+  optional state.
+- Treat as architectural smell when:
+  - `*Like` appears outside boundaries,
+  - `Maybe<T>` appears broadly in `ui/**` or `store/**`,
+  - canonical models overuse optional fields without domain justification.
+- Deterministic defaults:
+  - prefer canonical types with explicit mapping,
+  - prefer required domain fields over optional wrappers by default.
+
+### Forbidden
+
+- Replacing canonical domain models with `*Like` types.
+- Using `Maybe<T>` to keep post-validation required fields weak.
+- Letting domain logic depend on structural compatibility types.
 
 ---
 

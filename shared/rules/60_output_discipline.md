@@ -25,13 +25,8 @@ compact, and reviewable.
   - `output_mode` (`human|agent`)
   - `presentation.user_markdown` (prettified summary of the payload)
   - `notes[]` limited to 5 items
-- `output_mode` defaulting must be deterministic:
-  - resolve with strict precedence:
-    1. explicit `output_mode` in request,
-    2. explicit machine-readable/raw JSON request -> `agent`,
-    3. human explicitly instructs a skill to run -> `human`,
-    4. otherwise -> `agent`
-  - if uncertain between `human` and `agent`, choose `human`
+- Resolve `output_mode` precedence and display behavior via
+  `sr-output-mode-resolution`.
 - The full JSON payload is always produced for both `output_mode` values.
 - If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
 - If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.

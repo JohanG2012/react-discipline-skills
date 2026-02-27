@@ -30,7 +30,9 @@ Generated on: 2026-02-27
 - [Rule: Architecture Detection Output and Bootstrap Contract [sr-architecture-detection-contract]](#rule-architecture-detection-output-and-bootstrap-contract)
 - [Rule: Enforcement Heuristics [sr-enforcement-heuristics]](#rule-enforcement-heuristics)
 - [Rule: Micro-change Bypass and Skill 4 Micro Mode [sr-micro-change-bypass]](#rule-micro-change-bypass-and-skill-4-micro-mode)
-- [Rule: Component and Client Module Folderization Threshold [sr-component-folderization]](#rule-component-and-client-module-folderization-threshold)
+- [Rule: Component and Client Module Folderization Threshold Index [sr-component-folderization]](#rule-component-and-client-module-folderization-threshold-index)
+- [Rule: Component File Folderization Threshold [sr-component-file-threshold]](#rule-component-file-folderization-threshold)
+- [Rule: Transport Client Module Threshold [sr-client-module-threshold]](#rule-transport-client-module-threshold)
 - [Rule: Folder Structure for a Folderized Component [sr-component-folder-structure]](#rule-folder-structure-for-a-folderized-component)
 - [Rule: Naming and Exports Inside Folderized Components [sr-component-folder-exports]](#rule-naming-and-exports-inside-folderized-components)
 - [Rule: Promotion and Demotion for Component Helpers [sr-component-helper-promotion]](#rule-promotion-and-demotion-for-component-helpers)
@@ -39,12 +41,21 @@ Generated on: 2026-02-27
 - [Rule: Layout and Shell Subfolder Policy [sr-layout-shell-subfolder-policy]](#rule-layout-and-shell-subfolder-policy)
 - [Rule: `className` Support Policy [sr-ui-classname-support]](#rule-classname-support-policy)
 - [Rule: `aria-label` and Accessible Name Policy [sr-a11y-aria-label]](#rule-aria-label-and-accessible-name-policy)
-- [Rule: DOM Rendering Boundaries and Primitive Creation Discipline [sr-dom-rendering-and-primitives]](#rule-dom-rendering-boundaries-and-primitive-creation-discipline)
+- [Rule: DOM Rendering and Primitive Discipline Index [sr-dom-rendering-and-primitives]](#rule-dom-rendering-and-primitive-discipline-index)
+- [Rule: DOM Rendering Boundaries [sr-dom-rendering-boundaries]](#rule-dom-rendering-boundaries)
+- [Rule: Primitive Creation Threshold and Raw DOM Usage [sr-primitive-creation-threshold]](#rule-primitive-creation-threshold-and-raw-dom-usage)
+- [Rule: Shared UI Domain Discipline [sr-shared-ui-domain-discipline]](#rule-shared-ui-domain-discipline)
 - [Rule: Prop Count Caps and Escalation Actions [sr-prop-count-caps]](#rule-prop-count-caps-and-escalation-actions)
-- [Rule: Mega-File Triage and Extraction Plan [sr-mega-file-triage]](#rule-mega-file-triage-and-extraction-plan)
+- [Rule: Mega-File Triage and Extraction Plan Index [sr-mega-file-triage]](#rule-mega-file-triage-and-extraction-plan-index)
+- [Rule: Mega-File Trigger and Safety Baseline [sr-mega-file-trigger-safety]](#rule-mega-file-trigger-and-safety-baseline)
+- [Rule: Mega-File Extraction Ordering [sr-mega-file-extraction-order]](#rule-mega-file-extraction-ordering)
+- [Rule: Mega-File Safety Checks and Output Contract [sr-mega-file-validation-output]](#rule-mega-file-safety-checks-and-output-contract)
 - [Rule: Prop Grouping Discipline [sr-prop-grouping-discipline]](#rule-prop-grouping-discipline)
 - [Rule: i18n Extraction for User-Facing UI Text [sr-i18n-text-extraction]](#rule-i18n-extraction-for-user-facing-ui-text)
-- [Rule: `*Like` and `Maybe<T>` Type Discipline [sr-type-like-maybe]](#rule-like-and-maybet-type-discipline)
+- [Rule: `*Like` and `Maybe<T>` Discipline Index [sr-type-like-maybe]](#rule-like-and-maybet-discipline-index)
+- [Rule: `*Like` Boundary Discipline [sr-type-like-boundary]](#rule-like-boundary-discipline)
+- [Rule: `Maybe<T>` Semantics Discipline [sr-type-maybe-semantics]](#rule-maybet-semantics-discipline)
+- [Rule: Domain Type Integrity [sr-domain-type-integrity]](#rule-domain-type-integrity)
 - [Rule: Test Selectors and `aria-label` Usage [sr-tests-aria-label-selectors]](#rule-test-selectors-and-aria-label-usage)
 - [Rule: No Duplicate UI Patterns (Composites) [sr-no-duplicate-ui-patterns]](#rule-no-duplicate-ui-patterns-composites)
 - [Rule: Browser Side-Effects and Routing Boundary [sr-browser-side-effects-boundary]](#rule-browser-side-effects-and-routing-boundary)
@@ -57,9 +68,9 @@ Generated on: 2026-02-27
 - [Rule: Double Type Assertion Discipline (`as unknown as T`) [sr-types-double-assertion]](#rule-double-type-assertion-discipline-as-unknown-as-t)
 - [Rule: Deep Relative Imports Should Trigger `@/` Alias Suggestion [sr-import-alias-suggestion]](#rule-deep-relative-imports-should-trigger-alias-suggestion)
 - [Rule: Umbrella Feature Split and Domain Extraction [sr-feature-split-domain-extraction]](#rule-umbrella-feature-split-and-domain-extraction)
-- [Rule: What May Live in `features/<domain>/components/` [rpl-feature-components-scope]](#rule-what-may-live-in-featuresdomaincomponents)
-- [Rule: No `api/` Inside Features When Canonical API Home Exists [rpl-no-feature-api-home]](#rule-no-api-inside-features-when-canonical-api-home-exists)
-- [Rule: No `views/` or `*View` in Features [rpl-no-feature-views]](#rule-no-views-or-view-in-features)
+- [Rule: What May Live in `features/<domain>/components/` [sr-feature-components-scope]](#rule-what-may-live-in-featuresdomaincomponents)
+- [Rule: No `api/` Inside Features When Canonical API Home Exists [sr-no-feature-api-home]](#rule-no-api-inside-features-when-canonical-api-home-exists)
+- [Rule: No `views/` or `*View` in Features [sr-no-feature-views]](#rule-no-views-or-view-in-features)
 - [Rule: File Name Length Discipline [sr-filename-length]](#rule-file-name-length-discipline)
 - [Rule: Output Mode Resolution and Display Safety [sr-output-mode-resolution]](#rule-output-mode-resolution-and-display-safety)
 - [Rule: Prop Drilling Discipline and Escalation [sr-props-drilling-discipline]](#rule-prop-drilling-discipline-and-escalation)
@@ -78,7 +89,11 @@ Generated on: 2026-02-27
 - [Rule: Deterministic Defaults and Pause Protocol [rid-pause-defaults-protocol]](#rule-deterministic-defaults-and-pause-protocol-1)
 - [Rule: Boundary, Runtime, and Query Correctness [rid-boundary-runtime-query]](#rule-boundary-runtime-and-query-correctness)
 - [Rule: Stop and Revise Conditions [rid-stop-conditions]](#rule-stop-and-revise-conditions)
-- [Rule: Naming and Discoverability Contract [rid-naming-discoverability]](#rule-naming-and-discoverability-contract)
+- [Rule: Naming and Discoverability Contract Index [rid-naming-discoverability]](#rule-naming-and-discoverability-contract-index)
+- [Rule: File and Export Naming Alignment [rid-file-export-alignment]](#rule-file-and-export-naming-alignment)
+- [Rule: Component Role Naming [rid-component-role-naming]](#rule-component-role-naming)
+- [Rule: Naming Boundary Hygiene [rid-naming-boundary-hygiene]](#rule-naming-boundary-hygiene)
+- [Rule: Hook, Endpoint, and DTO Naming [rid-hook-endpoint-type-naming]](#rule-hook-endpoint-and-dto-naming)
 - [Rule: Mandatory Opportunistic Refactoring Consult [rid-refactoring-consult]](#rule-mandatory-opportunistic-refactoring-consult)
 
 ## Overview
@@ -110,6 +125,8 @@ Key constraints:
 - sr-enforcement-heuristics
 - sr-micro-change-bypass
 - sr-component-folderization
+- sr-component-file-threshold
+- sr-client-module-threshold
 - sr-component-folder-structure
 - sr-component-folder-exports
 - sr-component-helper-promotion
@@ -119,11 +136,20 @@ Key constraints:
 - sr-ui-classname-support
 - sr-a11y-aria-label
 - sr-dom-rendering-and-primitives
+- sr-dom-rendering-boundaries
+- sr-primitive-creation-threshold
+- sr-shared-ui-domain-discipline
 - sr-prop-count-caps
 - sr-mega-file-triage
+- sr-mega-file-trigger-safety
+- sr-mega-file-extraction-order
+- sr-mega-file-validation-output
 - sr-prop-grouping-discipline
 - sr-i18n-text-extraction
 - sr-type-like-maybe
+- sr-type-like-boundary
+- sr-type-maybe-semantics
+- sr-domain-type-integrity
 - sr-tests-aria-label-selectors
 - sr-no-duplicate-ui-patterns
 - sr-browser-side-effects-boundary
@@ -136,9 +162,9 @@ Key constraints:
 - sr-types-double-assertion
 - sr-import-alias-suggestion
 - sr-feature-split-domain-extraction
-- rpl-feature-components-scope
-- rpl-no-feature-api-home
-- rpl-no-feature-views
+- sr-feature-components-scope
+- sr-no-feature-api-home
+- sr-no-feature-views
 - sr-filename-length
 - sr-output-mode-resolution
 - sr-props-drilling-discipline
@@ -158,6 +184,10 @@ Key constraints:
 - rid-boundary-runtime-query
 - rid-stop-conditions
 - rid-naming-discoverability
+- rid-file-export-alignment
+- rid-component-role-naming
+- rid-naming-boundary-hygiene
+- rid-hook-endpoint-type-naming
 - rid-refactoring-consult
 
 ---
@@ -522,13 +552,8 @@ compact, and reviewable.
   - `output_mode` (`human|agent`)
   - `presentation.user_markdown` (prettified summary of the payload)
   - `notes[]` limited to 5 items
-- `output_mode` defaulting must be deterministic:
-  - resolve with strict precedence:
-    1. explicit `output_mode` in request,
-    2. explicit machine-readable/raw JSON request -> `agent`,
-    3. human explicitly instructs a skill to run -> `human`,
-    4. otherwise -> `agent`
-  - if uncertain between `human` and `agent`, choose `human`
+- Resolve `output_mode` precedence and display behavior via
+  `sr-output-mode-resolution`.
 - The full JSON payload is always produced for both `output_mode` values.
 - If `output_mode=human`, print/display only `presentation.user_markdown` to the human.
 - If `output_mode=human`, do not print/display raw JSON, envelope fields, or any payload field other than `presentation.user_markdown`.
@@ -1028,72 +1053,97 @@ named.
 
 ---
 
-## Rule: Component and Client Module Folderization Threshold
+## Rule: Component and Client Module Folderization Threshold Index
 **Rule ID:** sr-component-folderization  
 **Priority:** MUST  
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
-**Rationale:** Keeps UI modules and transport clients maintainable without
-creating mega files or mixed-responsibility endpoints.
+**Rationale:** Preserves a stable entrypoint while delegating to focused
+component and client-threshold rules.
+
+### Requirement
+
+- When this rule is in scope, enforce both:
+  - `sr-component-file-threshold`,
+  - `sr-client-module-threshold`.
+
+### Forbidden
+
+- Treating this index rule as sufficient without enforcing the referenced
+  threshold rules.
+
+---
+
+## Rule: Component File Folderization Threshold
+**Rule ID:** sr-component-file-threshold  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps components maintainable by triggering folderization when
+size/responsibility thresholds are exceeded.
 
 ### Requirement
 
 - Keep a component as a single file when all are true:
-  - file is about `<= 200` lines and has one clear responsibility
-  - helpers are small and render-support only
-  - there are at most two closely related internal subcomponents
-- Keep a transport client module as a single file when all are true:
-  - file stays focused on shared transport concerns (request wrapper,
-    auth/header wiring, transport error normalization),
-  - endpoint/domain-specific call orchestration is not embedded in the client
-    file,
-  - file is reasonably small (about `<= 250` lines).
-- Folderize (move to a component module folder) when any is true:
-  1. file is about `> 250-300` lines and splitting reduces responsibilities
-  2. component contains three or more meaningful internal subcomponents
+  - file is about `<= 200` lines and has one clear responsibility,
+  - helpers are small and render-support only,
+  - there are at most two closely related internal subcomponents.
+- Folderize component modules when any is true:
+  1. file is about `> 250-300` lines and splitting reduces responsibilities,
+  2. component contains three or more meaningful internal subcomponents,
   3. non-trivial local logic should be isolated (mapping/formatting, keyboard
-     handling, complex derived state)
-  4. it has component-scoped assets (styles/icons/constants)
-  5. it is reused broadly and needs a stable module boundary
-- Decompose transport client logic when any is true:
-  1. canonical client file grows to about `> 250-300` lines and mixes concerns,
-  2. endpoint-specific URLs/methods/payload shaping accumulate in the client
-     file,
-  3. multiple domain endpoint calls are orchestrated from one client file.
+     handling, complex derived state),
+  4. it has component-scoped assets (styles/icons/constants),
+  5. it is reused broadly and needs a stable module boundary.
 - Hard rule:
   - if a single component file exceeds `400` lines, folderization is required
     unless explicitly justified in output notes and/or review metadata.
-  - if a transport client file (for example `api/client/client.ts`) exceeds
-    `400` lines, extraction is required unless explicitly justified in output
-    notes and/or review metadata.
-- Expected extraction target for oversized transport client files:
-  - endpoint/domain call functions must be extracted to `api/endpoints/**` or
-    the repository's gravity-equivalent canonical endpoint home,
-  - `api/client/**` remains a thin transport foundation (request wrapper,
-    auth/header wiring, retry policy, normalized transport errors).
-- This rule applies across skills and is enforced most strongly in
-  `react-implementation-discipline` during execution output validation.
+- Quick heuristic:
+  - folderize when file has multiple responsibilities and is above about
+    `300` lines and still growing.
 
 ### Forbidden
 
 - Keeping oversized multi-responsibility component files as single files without
   explicit justification.
-- Treating folderization as optional when the hard threshold is crossed.
-- Keeping endpoint-specific call orchestration in a mega transport client file
-  instead of extracting to `api/endpoints/**` (or gravity-equivalent endpoint
-  home).
+- Treating component folderization as optional after the hard threshold is
+  crossed.
 
-### Notes
+---
 
-- Quick folderization heuristic: folderize when any is true:
-  - file has two or more responsibilities
-  - splitting subcomponents would improve clarity
-  - helper pile is component-local only
-  - file is above about `300` lines and still growing
-- Quick transport-client heuristic: when the shared client starts accumulating
-  endpoint paths, payload shaping, and domain branching, extract those calls to
-  `api/endpoints/**` (or gravity-equivalent endpoint home) and keep the client
-  thin.
+## Rule: Transport Client Module Threshold
+**Rule ID:** sr-client-module-threshold  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
+**Inherited from:** shared-rules  
+**Rationale:** Prevents mega transport clients by keeping endpoint orchestration
+out of shared client foundations.
+
+### Requirement
+
+- Keep a transport client module as a single file when all are true:
+  - it stays focused on shared transport concerns (request wrapper, auth/header
+    wiring, transport error normalization),
+  - endpoint/domain-specific call orchestration is not embedded in client file,
+  - file is reasonably small (about `<= 250` lines).
+- Decompose transport client logic when any is true:
+  1. canonical client file grows to about `> 250-300` lines and mixes concerns,
+  2. endpoint-specific URLs/methods/payload shaping accumulate in client file,
+  3. multiple domain endpoint calls are orchestrated from one client file.
+- Hard rule:
+  - if a transport client file (for example `api/client/client.ts`) exceeds
+    `400` lines, extraction is required unless explicitly justified in output
+    notes and/or review metadata.
+- Expected extraction target:
+  - endpoint/domain call functions must be extracted to `api/endpoints/**` or
+    gravity-equivalent canonical endpoint home,
+  - `api/client/**` remains a thin transport foundation (request wrapper,
+    auth/header wiring, retry policy, normalized transport errors).
+
+### Forbidden
+
+- Keeping endpoint-specific call orchestration in mega transport client files.
+- Treating transport extraction as optional after hard threshold exceedance.
 
 ---
 
@@ -1401,106 +1451,124 @@ interactive controls always have an accessible name.
 # DOM Rendering and Primitive Discipline
 
 ## Summary
-Defines deterministic rendering ownership and primitive-creation thresholds to
-prevent DOM leakage into logic/data layers and avoid abstraction drift.
+Defines rendering boundaries, primitive-creation thresholds, and shared-UI
+domain discipline as separate concerns.
 
 ---
 
-## Rule: DOM Rendering Boundaries and Primitive Creation Discipline
+## Rule: DOM Rendering and Primitive Discipline Index
 **Rule ID:** sr-dom-rendering-and-primitives  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
-**Rationale:** Enforces deterministic rendering ownership, prevents DOM leakage
-into non-presentation layers, and defines when to introduce reusable UI
-primitives versus allowing raw HTML.
+**Rationale:** Preserves backward-compatible entrypoint while delegating
+enforcement to narrowly scoped rules.
 
 ### Requirement
 
-- Rendering layer boundaries:
-  - only these layers may render JSX/DOM:
-    - `ui/primitives/**`
-    - `ui/composites/**`
-    - `features/*/sections/**`
-    - `pages/**`
-    - `core/**` (layout composition only, such as app shell/providers)
-  - these layers must remain DOM-free (no JSX rendering):
-    - `api/**`
-    - `lib/**`
-    - `store/**`
-    - `hooks/**`
-    - `config/**`
-  - hooks must return state/functions only and never JSX.
-- Primitive usage vs raw DOM:
-  - when reusable primitives exist (for example `Button`, `Input`, `Card`),
-    `features/**/sections/**` and `pages/**` should use them.
-  - repeated direct implementations of `<button>`, `<input>`, or `<a>` should
-    not bypass existing primitives.
-  - raw HTML is allowed when:
-    - the element is structural/layout-only (`div`, `section`, `span`, etc.),
-    - no suitable primitive exists,
-    - usage is truly one-off and not expected to repeat, or
-    - usage is highly domain-specific and would leak domain semantics into
-      `ui/**`.
-- Missing primitive creation threshold:
-  - raw DOM may be used temporarily if no suitable primitive exists.
-  - create a new primitive in `ui/primitives/**` when any applies:
-    - same semantic element pattern appears across two or more
-      features/domains,
-    - a shared composite needs that element as a building block,
-    - two or more near-identical implementations exist with copy-pasted style
-      or behavior,
-    - multiple call sites independently reimplement accessibility/keyboard/focus
-      or label wiring,
-    - the element is a core building block (for example button/input/select/
-      checkbox/radio/textarea/link/card base/modal base/tabs base/badge/
-      tooltip base),
-    - styling tokens/classes are repeated to enforce visual consistency.
-- Shared UI layer discipline:
-  - components in `ui/**` may render valid HTML but must remain domain-agnostic.
-  - shared UI must not hardcode domain-specific ARIA labels or domain text.
-  - shared UI must not import from `features/**`.
-  - shared UI owns semantic correctness, accessibility wiring, and basic visual
-    state presentation.
-  - shared UI does not own business logic, domain rules, or feature semantics.
-- Refactoring enforcement:
-  - when DOM appears in invalid layers, refactoring should evaluate:
-    1. move JSX to nearest valid presentation layer,
-    2. extract reusable primitive when duplication threshold is met,
-    3. split logic from markup (`domain/lib` for logic, `sections/ui` for
-       markup),
-    4. remove duplicated semantic implementations,
-    5. replace duplicated raw DOM with shared primitive.
-  - refactoring must remain behavior-preserving and within scope-governor
-    limits.
-- Scope and migration constraints:
-  - primitive creation must respect scope caps (default max new files: 4 unless
-    explicitly expanded), add no new dependencies, and create no parallel homes.
-  - primitive extraction must stay inside existing gravity home
-    (`ui/primitives/**`).
-  - if extraction exceeds caps, emit `scope_expansion_needed[]` and deliver a
-    minimal in-cap safe result first.
-- Architectural principle:
-  - this rule governs responsibility boundaries, not HTML availability.
-  - vanilla HTML is allowed in presentation layers.
-  - prefer shared primitives when reuse thresholds are met.
-  - never render DOM in logic/data layers.
-  - never use raw DOM as a shortcut around established abstractions.
+- When this rule is in scope, follow all of:
+  - `sr-dom-rendering-boundaries`,
+  - `sr-primitive-creation-threshold`,
+  - `sr-shared-ui-domain-discipline`.
 
 ### Forbidden
 
-- Rendering JSX from `hooks/**`, `lib/**`, `store/**`, or `api/**`.
-- Duplicating semantic elements already represented by primitives.
-- Hardcoding domain semantics inside `ui/**`.
-- Creating a new top-level UI home during primitive extraction.
-- Introducing new styling systems or UI libraries during primitive creation
-  without explicit approval.
-- Using primitive extraction as justification for broad migration.
+- Treating this index rule as sufficient without enforcing the referenced
+  detailed rules.
 
-### Notes
+---
 
-- Any JSX detected in DOM-free layers is a structural violation and should be
-  treated as high-priority boundary remediation.
+## Rule: DOM Rendering Boundaries
+**Rule ID:** sr-dom-rendering-boundaries  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Prevents JSX/DOM leakage into logic/data layers.
+
+### Requirement
+
+- Only these layers may render JSX/DOM:
+  - `ui/primitives/**`
+  - `ui/composites/**`
+  - `features/*/sections/**`
+  - `pages/**`
+  - `core/**` (layout composition only, such as app shell/providers)
+- These layers must remain DOM-free:
+  - `api/**`
+  - `lib/**`
+  - `store/**`
+  - `hooks/**`
+  - `config/**`
+- Hooks must return state/functions only and must not render JSX.
+
+### Forbidden
+
+- Rendering JSX from `api/**`, `lib/**`, `store/**`, `hooks/**`, or `config/**`.
+
+---
+
+## Rule: Primitive Creation Threshold and Raw DOM Usage
+**Rule ID:** sr-primitive-creation-threshold  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps raw DOM use pragmatic while preventing repeated semantic
+reimplementation.
+
+### Requirement
+
+- Prefer existing reusable primitives (for example `Button`, `Input`, `Card`)
+  before adding repeated raw semantic elements.
+- Raw HTML is allowed when any is true:
+  - element is structural/layout-only (`div`, `section`, `span`, etc.),
+  - no suitable primitive exists,
+  - usage is one-off and not expected to repeat,
+  - usage is highly domain-specific and should not leak into `ui/**`.
+- Create a primitive in `ui/primitives/**` when any is true:
+  - the same semantic element pattern appears across 2+ features/domains,
+  - a shared composite needs it as a building block,
+  - 2+ near-identical implementations copy style/behavior,
+  - accessibility/keyboard/focus/label wiring is repeatedly reimplemented,
+  - it is a core UI building block (for example button/input/select/checkbox/
+    radio/textarea/link/card/modal/tabs/badge/tooltip base),
+  - repeated styling tokens/classes are used to enforce consistency.
+
+### Forbidden
+
+- Duplicating semantic elements already represented by existing primitives.
+- Bypassing existing primitives with repeated ad-hoc raw semantic controls.
+
+---
+
+## Rule: Shared UI Domain Discipline
+**Rule ID:** sr-shared-ui-domain-discipline  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps shared UI reusable and prevents domain/transport leakage.
+
+### Requirement
+
+- Components in `ui/**` may render valid HTML but must remain domain-agnostic.
+- Shared UI must not import from `features/**`.
+- Shared UI owns:
+  - semantic correctness,
+  - accessibility wiring,
+  - basic visual state presentation (disabled/loading/selected).
+- Shared UI does not own:
+  - business logic,
+  - domain rules,
+  - feature semantics.
+- When invalid placement is detected, refactoring should:
+  1. move JSX into valid presentation layers,
+  2. split logic from markup (`domain/lib` for logic, `sections/ui` for markup),
+  3. prefer behavior-preserving extraction within active scope.
+
+### Forbidden
+
+- Hardcoding domain semantics in shared `ui/**`.
+- Using shared UI as a transport or business-logic owner.
+- Introducing new top-level UI homes while remediating domain leakage.
 
 ---
 
@@ -1575,102 +1643,135 @@ safe size/responsibility thresholds.
 
 ---
 
-## Rule: Mega-File Triage and Extraction Plan
+## Rule: Mega-File Triage and Extraction Plan Index
 **Rule ID:** sr-mega-file-triage  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
-**Rationale:** Prevents unsafe edits and chaotic refactors when a file is far
-beyond size/responsibility thresholds.
+**Rationale:** Preserves stable entrypoint while delegating to focused triage,
+extraction-sequencing, and validation-output rules.
 
 ### Requirement
 
-- Trigger this rule when any touched file is:
-  - over 600 LOC (hard stop threshold), or
-  - over 400 LOC with clear multi-responsibility signals, or
-  - explicitly flagged as an offender (for example, a 1500 LOC component), or
-  - below threshold but showing clear prior extraction pattern with obvious
-    same-pattern leftovers.
-- Freeze behavior and shrink the risk surface:
-  - treat work as refactor-only unless the user explicitly requests behavior
-    changes,
-  - default to no functional changes and preserve output, props, and side
-    effects,
-  - plan extraction as safe incremental steps, not a rewrite.
-- Establish a bounded extraction target:
-  - declare `anchor_component` (path plus export),
-  - declare `extraction_budget` (how many files may change under scope caps),
-  - declare `end_state_goal` as anchor file <= 250-400 LOC (or <= 600 LOC if
-    explicitly timeboxed) plus stable module boundaries,
-  - if scope caps prevent ideal end state, deliver in-cap reduction and include
-    `scope_expansion_needed[]`.
-- Continue extraction when prior-pattern signals exist, even below thresholds:
-  - if an anchor file shows prior extraction signs (for example colocated
-    `*.utils.ts`, `*.types.ts`, `components/*`, `*.hooks.ts`, or equivalent
-    pattern files) and remaining code matches the same extraction pattern,
-    continue extracting those leftovers,
-  - dropping below 400/600 LOC is not a stop condition by itself,
-  - stop when same-pattern leftovers are exhausted or when scope caps are hit;
-    when caps block completion, emit `scope_expansion_needed[]`.
-- Execute extraction ordering in this exact sequence:
-  1. Step A, non-React pure logic first:
-     - extract constants, pure helpers, and component-local types first,
-     - keep component-only helpers/types/constants local to the component
-       module folder,
-     - promote to `lib/**` only when reused by 2+ domains and pure,
-     - promote to `features/<domain>/domain/**` only when domain behavior is
-       encoded.
-  2. Step B, local subcomponents second:
-     - extract clear presentational JSX chunks (especially repeated blocks),
-     - keep subcomponents component-local unless cross-feature reuse is clear,
-     - prefer folderization such as:
-       - `ComponentName/ComponentName.tsx` (anchor),
-       - `ComponentName/components/ComponentNameHeader.tsx`,
-       - `ComponentName/components/ComponentNameRow.tsx`,
-     - subcomponents must be prefixed for grepability (`ComponentNameRow`, not
-       `Row`).
-  3. Step C, hook extraction third:
-     - extract complex derived state/effect/event wiring to
-       `ComponentName/ComponentName.hooks.ts` or `useComponentNameState.ts`,
-     - move hooks to `features/<domain>/hooks/**` only when feature-level and
-       not component-scoped.
-  4. Step D, split feature ownership last:
-     - do not use mega-file triage as a shortcut for architecture migration,
-     - keep folderization in the same gravity home unless migration mode is
-       explicitly enabled,
-     - propose cross-layer/home moves only after decomposition and only under
-       explicit migration scope.
-- Safety checks are required after each extraction step:
-  - TypeScript still compiles (or would compile under existing TS config),
-  - imports remain boundary-compliant (no forbidden-layer imports),
-  - anchor component public API (props/exports) is unchanged unless explicitly
-    requested,
-  - no runtime behavior change unless explicitly requested,
-  - tests are updated only when behavior changes and a suite already exists
-    (extraction-only does not require new tests).
-- Output contract when triggered must include:
-  - phased A->D plan with file-touch list per phase,
-  - explicit plan declaration: `in_cap_minimal_reduction` (default) or
-    `scope_expansion_needed`,
-  - implementation preference: unified diff for mega anchor-file edits and full
-    content for newly extracted files.
-- Practical default phased template:
-  1. folderize anchor and extract constants/utils/types,
-  2. extract obvious presentational subcomponents,
-  3. extract state/effect logic into local hooks,
-  4. optionally promote reused helpers to `lib/**` or `features/**` only when
-     reuse criteria is satisfied.
+- When this rule is in scope, enforce all of:
+  - `sr-mega-file-trigger-safety`,
+  - `sr-mega-file-extraction-order`,
+  - `sr-mega-file-validation-output`.
 
 ### Forbidden
 
-- Creating new `shared/common` dumping-ground directories.
-- Adding new domain logic to `ui/**`.
-- Introducing data fetching outside the canonical endpoint layer.
-- Performing bulk formatting churn on the entire anchor file during extraction.
-- Adding new flags/modes to force reuse, especially in shared composites.
-- Introducing new barrels where the local area does not already use barrels.
-- Stopping extraction only because line count dropped below thresholds while
-  clear same-pattern leftovers remain and scope budget still allows extraction.
+- Treating this index rule as sufficient without enforcing the referenced
+  mega-file rules.
+
+---
+
+## Rule: Mega-File Trigger and Safety Baseline
+**Rule ID:** sr-mega-file-trigger-safety  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Ensures deterministic trigger conditions and behavior-preserving
+triage defaults.
+
+### Requirement
+
+- Trigger mega-file triage when any touched file is:
+  - over 600 LOC (hard stop threshold), or
+  - over 400 LOC with clear multi-responsibility signals, or
+  - explicitly flagged as an offender (for example a 1500 LOC component), or
+  - below threshold but showing prior extraction pattern with obvious same-pattern
+    leftovers.
+- Freeze behavior and reduce risk surface:
+  - treat work as refactor-only unless user explicitly requests behavior changes,
+  - preserve output, props, and side effects by default,
+  - plan incremental extraction steps, not a rewrite.
+- Establish bounded target:
+  - declare `anchor_component` (path + export),
+  - declare `extraction_budget` (allowed file touches under caps),
+  - declare `end_state_goal` as anchor `<= 250-400` LOC (or `<= 600` when
+    explicitly timeboxed),
+  - if caps block ideal target, deliver in-cap reduction and include
+    `scope_expansion_needed[]`.
+- Continue extraction when prior-pattern leftovers exist:
+  - dropping below 400/600 is not a stop condition by itself,
+  - stop when same-pattern leftovers are exhausted or caps are reached.
+
+### Forbidden
+
+- Treating line-count drop alone as stop condition when same-pattern leftovers
+  remain and scope budget allows continued extraction.
+- Ignoring declared behavior-preserving default in triage-only runs.
+
+---
+
+## Rule: Mega-File Extraction Ordering
+**Rule ID:** sr-mega-file-extraction-order  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps decomposition predictable and low-risk.
+
+### Requirement
+
+- Execute extraction in this exact sequence:
+  1. Step A, pure logic first:
+     - extract constants, pure helpers, component-local types,
+     - promote to `lib/**` only when reused by 2+ domains and pure,
+     - promote to `features/<domain>/domain/**` only when domain behavior is
+       encoded.
+  2. Step B, presentational subcomponents:
+     - extract clear JSX blocks (especially repeated blocks),
+     - keep subcomponents local unless cross-feature reuse is clear,
+     - use prefixed subcomponent naming (`ComponentNameRow`, not `Row`).
+  3. Step C, hook/state extraction:
+     - extract complex derived state/effect/event wiring to local hook files,
+     - move to `features/<domain>/hooks/**` only when truly feature-level.
+  4. Step D, ownership split last:
+     - do not use mega-file triage as migration shortcut,
+     - cross-home moves only under explicit migration scope after decomposition.
+
+### Forbidden
+
+- Reordering extraction steps to perform high-risk structural migration first.
+- Using mega-file triage as justification for broad architecture moves.
+
+---
+
+## Rule: Mega-File Safety Checks and Output Contract
+**Rule ID:** sr-mega-file-validation-output  
+**Priority:** MUST  
+**Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Enforces post-step safety evidence and deterministic output
+shape.
+
+### Requirement
+
+- After each extraction step, verify:
+  - TypeScript still compiles (or would compile under existing config),
+  - imports remain boundary-compliant,
+  - anchor public API (props/exports) is unchanged unless explicitly requested,
+  - no runtime behavior change unless requested,
+  - tests are updated only when behavior changes and suite exists.
+- Output when triggered must include:
+  - phased A->D plan with file-touch list per phase,
+  - declaration: `in_cap_minimal_reduction` (default) or
+    `scope_expansion_needed`,
+  - implementation preference: unified diff for mega anchor edits and full
+    content for newly extracted files.
+- Keep extraction anti-churn constraints explicit:
+  - no `shared/common` dumping-ground creation,
+  - no new domain logic in `ui/**`,
+  - no fetching outside canonical endpoint layer,
+  - no broad formatting-only churn,
+  - no new mode/flag matrices to force reuse,
+  - no new barrels where local area does not already use barrels.
+
+### Forbidden
+
+- Skipping required safety checks after extraction steps.
+- Returning mega-file plan output without phased touches and plan declaration.
+- Introducing anti-churn violations under mega-file triage scope.
 
 ---
 
@@ -1780,97 +1881,118 @@ maintainable, localizable, and consistent.
 # `*Like` and `Maybe<T>` Type Discipline
 
 ## Summary
-Defines hard governance for boundary-only structural looseness (`*Like`) and
-optionality wrappers (`Maybe<T>`), while protecting canonical domain integrity.
+Splits boundary flexibility and optionality semantics into separate rules while
+keeping strict domain integrity requirements explicit.
 
 ---
 
-## Rule: `*Like` and `Maybe<T>` Type Discipline
+## Rule: `*Like` and `Maybe<T>` Discipline Index
 **Rule ID:** sr-type-like-maybe  
 **Priority:** MUST  
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
-**Rationale:** Prevents vague pseudo-types in domain layers while allowing safe
-boundary flexibility.
+**Rationale:** Preserves backward-compatible entrypoint while delegating to
+single-focus type rules.
 
 ### Requirement
 
-- Intent:
-  - structural looseness (`*Like`) and optionality wrappers (`Maybe<T>`) are
-    boundary tools, not substitutes for canonical domain models.
-- Definitions:
-  - `*Like` type: structural compatibility type (for example `UserLike`).
-  - `Maybe<T>`: wrapper representing explicit optionality semantics.
-  - canonical domain model: authoritative type in
-    `features/<domain>/domain/**`.
-- `*Like` usage policy:
-  - allowed only when all are true:
-    - it exists in `api/dto/**`, `features/<domain>/adapters/**`,
-      form/input parsing layers, or pure utility input-normalization functions,
-    - it represents external or pre-normalized input shapes,
-    - it is mapped immediately into a canonical domain model,
-    - it is not exported as a primary domain contract.
-  - if introduced, all are required:
-    - a canonical model it maps to exists,
-    - a mapper function exists in the same feature boundary,
-    - mapping occurs before UI rendering or store persistence.
-- `Maybe<T>` usage policy:
-  - allowed only when all are true:
-    - it is defined once in a canonical shared location (for example
-      `src/lib/types.ts`),
-    - semantics are exactly one of:
-      - `type Maybe<T> = T | null`, or
-      - `type Maybe<T> = T | undefined`,
-    - repository-wide usage is consistent with only one of those semantics.
-  - allowed contexts:
-    - API response normalization,
-    - feature-boundary pre-validation states,
-    - explicit domain states where absence is meaningful.
-- Domain layer integrity (`features/<domain>/domain/**`):
-  - types must represent fully validated canonical models,
-  - fields should be required unless domain semantics truly model absence,
-  - `*Like` is prohibited,
-  - `Maybe<T>` is permitted only when domain semantics require true optional
-    state.
-- Enforcement heuristics:
-  - treat as architectural smell when:
-    - `*Like` appears outside boundary layers,
-    - `Maybe<T>` appears broadly in `ui/**` or `store/**`,
-    - canonical models overuse optional fields (`?`) without domain
-      justification,
-    - a `*Like` type is passed directly into UI without normalization.
-- Decision defaults:
-  - prefer canonical type plus explicit mapping,
-  - prefer required domain fields over `Maybe<T>`,
-  - prefer in-place explicit union (`T | null`) over introducing `Maybe<T>`
-    unless it improves repository-wide consistency.
-- Hard stop conditions:
-  - stop and revise when:
-    - canonical domain model is replaced by a `*Like` type,
-    - multiple `Maybe<T>` definitions exist,
-    - domain logic depends on structural `*Like` types.
+- When this rule is in scope, follow all of:
+  - `sr-type-like-boundary`,
+  - `sr-type-maybe-semantics`,
+  - `sr-domain-type-integrity`.
 
 ### Forbidden
 
-- `*Like` types inside:
-  - `features/<domain>/domain/**`,
-  - `store/**`,
-  - shared `ui/**`.
+- Applying this index rule without enforcing the referenced type-discipline
+  rules.
+
+---
+
+## Rule: `*Like` Boundary Discipline
+**Rule ID:** sr-type-like-boundary  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Restricts structural compatibility types to boundary layers.
+
+### Requirement
+
+- `*Like` types are allowed only when all are true:
+  - they exist in boundary-oriented homes (`api/dto/**`,
+    `features/<domain>/adapters/**`, input parsing/normalization layers),
+  - they model external or pre-normalized input shape,
+  - they are mapped immediately to canonical domain models,
+  - they are not exported as canonical domain contracts.
+- If a `*Like` type is introduced, all are required:
+  - canonical mapped model exists,
+  - mapper exists in same feature boundary,
+  - mapping occurs before UI rendering or store persistence.
+
+### Forbidden
+
+- Using `*Like` inside `features/<domain>/domain/**`, `store/**`, or shared
+  `ui/**`.
 - Using `*Like` to avoid defining canonical domain models.
-- Passing `*Like` deep into feature sections/pages without normalization.
-- Naming canonical domain models as `SomethingLike`.
-- Mixing `null` and `undefined` semantics arbitrarily for `Maybe<T>`.
-- Using `Maybe<T>` to avoid validation or to keep post-validation required
-  domain fields weak.
-- Defining multiple `Maybe` types across modules.
+- Passing `*Like` deep into pages/sections without normalization.
+- Naming canonical models as `SomethingLike`.
 
-### Notes
+---
 
-- Short philosophy:
-  - `*Like` = boundary flexibility.
-  - `Maybe<T>` = semantic absence.
-  - Domain models = strict canonical contracts.
-  - UI/store layers = never vague about domain shape.
+## Rule: `Maybe<T>` Semantics Discipline
+**Rule ID:** sr-type-maybe-semantics  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Enforces one explicit repository-wide optionality semantic.
+
+### Requirement
+
+- `Maybe<T>` is allowed only when all are true:
+  - defined once in a canonical shared location (for example `src/lib/types.ts`),
+  - semantics are exactly one of:
+    - `type Maybe<T> = T | null`, or
+    - `type Maybe<T> = T | undefined`,
+  - repository uses one meaning consistently.
+- Allowed contexts:
+  - API response normalization,
+  - feature-boundary pre-validation states,
+  - explicit domain states where absence is meaningful.
+
+### Forbidden
+
+- Mixing `null` and `undefined` semantics arbitrarily.
+- Using `Maybe<T>` to bypass validation.
+- Defining multiple `Maybe` aliases in different modules.
+
+---
+
+## Rule: Domain Type Integrity
+**Rule ID:** sr-domain-type-integrity  
+**Priority:** MUST  
+**Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
+**Inherited from:** shared-rules  
+**Rationale:** Keeps domain-layer contracts strict and canonical.
+
+### Requirement
+
+- In `features/<domain>/domain/**`:
+  - types represent validated canonical models,
+  - fields are required unless domain semantics explicitly model absence.
+- `Maybe<T>` in domain models is allowed only when domain semantics require true
+  optional state.
+- Treat as architectural smell when:
+  - `*Like` appears outside boundaries,
+  - `Maybe<T>` appears broadly in `ui/**` or `store/**`,
+  - canonical models overuse optional fields without domain justification.
+- Deterministic defaults:
+  - prefer canonical types with explicit mapping,
+  - prefer required domain fields over optional wrappers by default.
+
+### Forbidden
+
+- Replacing canonical domain models with `*Like` types.
+- Using `Maybe<T>` to keep post-validation required fields weak.
+- Letting domain logic depend on structural compatibility types.
 
 ---
 
@@ -2581,7 +2703,7 @@ components do not become a shadow shared-UI system.
 ---
 
 ## Rule: What May Live in `features/<domain>/components/`
-**Rule ID:** rpl-feature-components-scope  
+**Rule ID:** sr-feature-components-scope  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
@@ -2640,7 +2762,7 @@ Prevents transport-layer fragmentation by enforcing one canonical API home.
 ---
 
 ## Rule: No `api/` Inside Features When Canonical API Home Exists
-**Rule ID:** rpl-no-feature-api-home  
+**Rule ID:** sr-no-feature-api-home  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
@@ -2683,7 +2805,7 @@ folders.
 ---
 
 ## Rule: No `views/` or `*View` in Features
-**Rule ID:** rpl-no-feature-views  
+**Rule ID:** sr-no-feature-views  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  
@@ -2926,7 +3048,7 @@ with architecture and policy.
 
 ## Summary
 
-Defines disciplined, plan-driven implementation with fail-closed safeguards.
+Defines orchestration flow for plan-driven implementation.
 
 ---
 
@@ -2939,99 +3061,47 @@ policy constraints.
 
 ### Requirement
 
-- Validate required inputs before any implementation output:
-  - standard mode requires:
-    - `revised_plan`
-    - `detection_result`
-    - repository context needed for convention and boundary checks
-  - micro mode requires:
-    - explicit behavior-preserving refactor intent in `task_request`
-    - repository context needed for convention and boundary checks
-    - confirmation that shared `sr-micro-change-bypass` constraints are all
-      satisfied
-- Resolve effective output mode before implementation output:
-  - accept optional `output_mode` (`human|agent`)
-  - default to `human` when a human explicitly instructs this skill to run
-  - default to `agent` otherwise
-- Select execution mode before implementation:
-  - `standard` when upstream planning artifacts are available or when scope is
-    structural/ambiguous
-  - `micro` only when all micro constraints are explicitly satisfied:
-    - touched files `<= 2`
-    - no new files
-    - no move/rename
-    - no new endpoint/hook/composite homes
-    - no routing changes
-- If micro mode is selected and new file creation becomes necessary, escalate
-  to `standard` mode before continuing implementation output.
+- Treat this rule as workflow orchestration; detailed validation and guardrails
+  are delegated to referenced rules.
+- Validate required inputs before implementation:
+  - standard mode requires `revised_plan`, `detection_result`, and repository
+    context,
+  - micro mode requires explicit behavior-preserving refactor intent, repository
+    context, and compliance with `sr-micro-change-bypass`.
+- Resolve output mode using `sr-output-mode-resolution`.
+- Select execution mode:
+  - default `standard`,
+  - allow `micro` only when micro constraints are explicitly satisfied;
+    escalate to `standard` if a new-file requirement appears.
 - If required inputs are invalid, return `validation_error` and stop.
 - If required repository context is unavailable, return `dependency_error` and
-  stop.
-- Dependency-error handling must include actionable fallback context-bundle
-  requirements for no-direct-access execution.
-- Honor optional execution controls when provided:
-  - `diff_preference`: prefer snippet-first or unified-diff output as requested,
-    unless safer output mode rules require escalation.
-  - `strictness`: default to `strict`; allow `relaxed` only when explicitly
-    permitted in request context.
-  - `max_lines_policy`: allow explicit soft-cap overrides when provided.
-- Enforce plan fidelity:
-  - in standard mode:
-    - touch only files in the revised plan
-    - allow extra touches only for minimal dependency/export wiring requirements
-    - record each extra touch with one-line rationale
-  - in micro mode:
-    - treat current in-place files as the bounded plan
-    - do not exceed micro-change constraints
-- Enforce boundary checks for modified artifacts:
-  - `ui/**` must not import from `features/**`, `api/**`, `store/**`, `pages/**`
-  - `api/**` must not import React or UI/presentation layers
-  - `pages/**` must not call canonical endpoint modules directly
-  - hooks must follow documented exception policy for `hooks/** -> api/**`
-- Enforce convention matching using nearest repository analogs:
-  - naming style
-  - export style
-  - local error-handling patterns
-  - path alias conventions
-- Enforce minimal churn:
-  - no unrelated renames
-  - no broad formatting-only rewrites
-  - no speculative refactors
-- Enforce file-size discipline:
-  - soft caps by layer: pages `120-150`, sections `200-250`, composites
-    `200-250`, hooks `150-200`, feature domain files around `200`, endpoints
-    `80-120`, primitives `<=150`, `lib` files `120-200`, `store` slices
-    `150-250`, and `core` files around `150`
-  - mandatory split/extraction when any touched file would exceed `400` lines
-  - hard stop when any touched file would exceed `600` lines
-- Enforce out-of-scope policy:
-  - unapproved migration/dependency/cleanup/spec edits must be excluded
-  - represent excluded work through bounded scope-expansion guidance
-- Require final quality-gate checks before completion and map result to final
-  state (`accepted` or `blocked`).
-- Before finalizing any `implementation_package`, run a downstream consult to
-  `react-refactoring-progression` in opportunistic mode using the touched file
-  set and record consult outcome metadata in output.
-- Treat downstream refactoring consult failures as non-blocking for
-  implementation final state, while preserving explicit consult-status reporting.
+  stop, with actionable fallback context requirements.
+- Run implementation sequence in order:
+  1. enforce scope caps and out-of-scope behavior via `rid-scope-governor`,
+  2. enforce access/write discipline via `rid-access-control`,
+  3. apply ambiguity defaults via `rid-ambiguity-strategy`,
+  4. enforce anti-chaotic guardrails via `rid-chaotic-change-guardrails`,
+  5. enforce boundary/runtime/query policy via `rid-boundary-runtime-query`,
+  6. enforce hard stop conditions via `rid-stop-conditions`,
+  7. execute validation gates via `rid-validation-gates`,
+  8. emit contract-compliant payload via `rid-output`.
+- Before finalizing `implementation_package`, run downstream consult via
+  `rid-refactoring-consult` and record consult metadata.
+- Keep plan fidelity and minimal churn as mandatory behavior for both standard
+  and micro runs.
 
 ### Forbidden
 
 - Implementing without required upstream inputs.
-- Entering micro mode when any shared micro constraint is missing or uncertain.
-- Continuing micro-mode execution after discovering that file creation is
-  required.
-- Continuing execution after missing repository context.
-- Returning accepted output when mandatory quality checks fail.
-- Including unapproved out-of-scope work in implementation payload.
-- Violating boundary rules to satisfy convenience implementation.
-- Skipping downstream opportunistic refactoring consult for an
-  `implementation_package` result.
+- Entering micro mode when micro constraints are missing or uncertain.
+- Continuing execution after missing required context.
+- Returning accepted output when mandatory gates fail.
+- Skipping referenced sub-rules and substituting ad-hoc policy.
 
 ### Notes
 
-- Prefer deterministic defaults when safe and compliant.
-- Keep changes reviewable and constrained to requested scope.
+- This rule coordinates execution flow; detailed thresholds and contracts are
+  owned by referenced rules.
 
 ---
 
@@ -3662,146 +3732,142 @@ Defines hard stop/revise conditions before output finalization.
 # Naming and Discoverability
 
 ## Summary
-Defines deterministic naming rules for Skill 4 so ownership stays obvious,
-discoverability stays high, and layer leakage is prevented.
+Defines implementation naming governance as focused rules so ownership,
+searchability, and layer boundaries remain explicit.
 
 ---
 
-## Rule: Naming and Discoverability Contract
+## Rule: Naming and Discoverability Contract Index
 **Rule ID:** rid-naming-discoverability  
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
-**Rationale:** Consistent naming keeps ownership obvious, prevents layer
-leakage, improves searchability, and makes duplicate patterns easier to detect.
+**Rationale:** Preserves stable entrypoint while delegating to single-focus
+naming rules.
 
 ### Requirement
 
-#### A) One file = one primary export = same name
-
-- Every new React component file must export one primary component whose name
-  matches the file name.
-  - `UserProfileSection.tsx` -> `export function UserProfileSection() { ... }`
-- Prefer named exports for components, hooks, and utilities.
-- Allow default exports only when framework conventions require them (for
-  example Next route modules) or local folder convention already uses defaults.
-
-#### B) Component names must encode layer and responsibility
-
-- Pages/routes:
-  - use `*Page` (or framework-required file names such as `page.tsx`)
-  - meaning: route entry and orchestration only
-- Feature orchestration (domain-aware UI):
-  - use `*Section`
-  - meaning: domain composition of UI and feature hooks; local UI state is
-    allowed
-- UI patterns (domain-agnostic reusable composition):
-  - use `*Shell`, `*Layout`, or `*Scaffold`
-  - use one term consistently in the repo (default: `*Shell`)
-  - use role names like `*Toolbar`, `*FilterBar`, `*Header`, `*Footer` when
-    they describe stable reusable pattern roles
-- Boundaries and async states:
-  - use `*Boundary` (`DataStateBoundary`, `AsyncBoundary`, `ErrorBoundary`)
-  - boundary components handle UI states only, not data fetching
-- Forms:
-  - full form: `*Form`
-  - form subsection: `*FormSection`
-  - reusable field wrapper: `*Field` (domain-agnostic only)
-- Modals/dialogs:
-  - use `*Dialog` or `*Modal`
-  - pick one term consistently (default: `*Dialog`)
-  - destructive confirmation patterns: `Confirm*Dialog`
-- List/table presentation:
-  - use `*List` / `*Table` only for domain-agnostic reusable components
-  - if domain-aware, prefer `*Section` or `*Panel` in feature scope
-- Panels:
-  - use `*Panel` for contained sub-regions with local state
-  - prefer `Panel` over ambiguous `Container` naming
-
-#### C) Domain terms are forbidden in `ui/**`
-
-- Components in `ui/primitives/**` or `ui/composites/**` must not include
-  domain nouns (for example `TaskRow`, `ProjectFilters`, `InvoiceCard`).
-- If domain nouns are required, ownership belongs in `features/<domain>/**`.
-
-#### D) Avoid ambiguous junk-drawer names
-
-- Do not create new components named:
-  - `Common*`
-  - `Shared*`
-  - `Utils*`
-  - `Helper*`
-  - `Component*`
-  - `Wrapper*`
-  - `Thing*`
-- Reusable components must be named by responsibility (for example `FilterBar`,
-  `DataStateBoundary`, `FormSectionShell`).
-
-#### E) Hooks and non-components
-
-- Hooks must be named `useXxx`.
-- Hook placement:
-  - `features/<domain>/hooks/useXxx.ts` for feature-owned hooks
-  - `hooks/useXxx.ts` for generic cross-domain hooks only
-- API endpoint modules must be resource-oriented
-  (for example `api/endpoints/projects.ts`).
-- DTO types must use `*Dto` suffix.
-
-#### F) Follow gravity and local convention when conflicts exist
-
-- If local folder conventions already exist (for example `Screens` instead of
-  `Pages`), follow local convention in that area.
-- Do not introduce a second naming dialect in the same area.
-
-#### Suffix decision tree (fast checklist)
-
-1. route entry -> `*Page` (or framework route file name)
-2. domain-aware UI orchestration -> `*Section` (or `*Panel` for sub-region)
-3. reusable domain-agnostic UI pattern -> `*Shell` (default), otherwise
-   `*Layout` only if local convention already uses it
-4. loading/error/empty or error wrapper -> `*Boundary`
-5. forms:
-   - full form -> `*Form`
-   - subsection -> `*FormSection`
-   - reusable domain-agnostic field wrapper -> `*Field`
-6. dialog/modal -> `*Dialog` (default); destructive confirm -> `Confirm*Dialog`
-7. small dumb building block -> no suffix (`Button`, `Input`, `Card`, `Badge`,
-   `Icon`)
-8. list/table:
-   - reusable domain-agnostic -> `*List` / `*Table`
-   - domain-aware -> prefer `*Section` / `*Panel`
-9. if name contains domain nouns and target is `ui/**`, stop and keep in
-   `features/**` or make truly domain-agnostic
-
-#### Allowed suffix vocabulary (recommended)
-
-- route layer: `Page`
-- feature layer: `Section`, `Panel`
-- ui composites/patterns: primary `Shell`; allowed only by local convention
-  `Layout`, `Scaffold`
-- async/state handling: `Boundary`
-- forms: `Form`, `FormSection`, `Field` (domain-agnostic only)
-- dialogs: `Dialog` (preferred), `Modal` (only if local convention already uses it)
-- structural roles: `Header`, `Footer`, `Toolbar`, `FilterBar`,
-  `Pager` or `Pagination` (pick one), `Tabs`
-- data display (domain-agnostic only): `List`, `Table`, `Row`, `Card`
+- When this rule is in scope, enforce all of:
+  - `rid-file-export-alignment`,
+  - `rid-component-role-naming`,
+  - `rid-naming-boundary-hygiene`,
+  - `rid-hook-endpoint-type-naming`.
 
 ### Forbidden
 
-- Creating a component whose primary export name does not match the file name
-  unless framework behavior requires it.
-- Introducing a second naming vocabulary within the same local area (for
-  example arbitrary mixing of `*Shell` and `*Layout`).
+- Treating this index rule as sufficient without enforcing the referenced naming
+  rules.
+
+---
+
+## Rule: File and Export Naming Alignment
+**Rule ID:** rid-file-export-alignment  
+**Priority:** MUST  
+**Applies to:** react-implementation-discipline  
+**Rationale:** Keeps files grep-friendly and ownership obvious.
+
+### Requirement
+
+- Each new React component file must export one primary component with matching
+  name:
+  - `UserProfileSection.tsx` -> `export function UserProfileSection()`.
+- Prefer named exports for components, hooks, and utilities.
+- Allow default exports only when:
+  - framework behavior requires them, or
+  - local area convention already uses them consistently.
+
+### Forbidden
+
+- Mismatched component file and primary export names without framework-required
+  exception.
+- Introducing default exports as a new convention in areas that are named-export
+  oriented.
+
+---
+
+## Rule: Component Role Naming
+**Rule ID:** rid-component-role-naming  
+**Priority:** MUST  
+**Applies to:** react-implementation-discipline  
+**Rationale:** Makes layer responsibility explicit from component names.
+
+### Requirement
+
+- Route orchestration components use `*Page` (or framework-required route files).
+- Domain-aware feature orchestration uses `*Section` (or `*Panel` for contained
+  sub-regions).
+- Domain-agnostic reusable UI patterns use one consistent composite term
+  (default `*Shell`, with local-convention `*Layout`/`*Scaffold` only when
+  already established).
+- Async/error/loading wrappers use `*Boundary`.
+- Form naming:
+  - full form: `*Form`,
+  - subsection: `*FormSection`,
+  - reusable domain-agnostic wrapper: `*Field`.
+- Dialog naming:
+  - default `*Dialog` (or `*Modal` only when local convention already uses it),
+  - destructive confirmation: `Confirm*Dialog`.
+- `*List`/`*Table` names are for domain-agnostic reusable components; domain-
+  aware list/table UI should remain feature-owned (`*Section`/`*Panel`).
+
+### Forbidden
+
+- Mixing naming dialects in the same area (for example arbitrary `*Shell` and
+  `*Layout` mixing without local convention).
+- Using suffixes that hide route/feature/shared ownership intent.
+
+---
+
+## Rule: Naming Boundary Hygiene
+**Rule ID:** rid-naming-boundary-hygiene  
+**Priority:** MUST  
+**Applies to:** react-implementation-discipline  
+**Rationale:** Prevents domain leakage and junk-drawer naming drift.
+
+### Requirement
+
+- Components in `ui/primitives/**` or `ui/composites/**` must not contain domain
+  nouns (for example `TaskRow`, `ProjectFilters`, `InvoiceCard`).
+- If domain nouns are required, ownership stays in `features/<domain>/**`.
+- Reusable components must be named by responsibility (for example `FilterBar`,
+  `DataStateBoundary`), not vague prefixes.
+- Follow existing local naming convention when it already exists (for example
+  `Screens` area naming), and keep one dialect per area.
+
+### Forbidden
+
 - Placing domain-named components under `ui/**`.
-- Naming reusable components with junk-drawer prefixes:
-  `Common*`, `Shared*`, `Utils*`, `Helper*`, `Wrapper*`, `Component*`,
-  `Thing*`, `Base*`.
+- Introducing junk-drawer names such as:
+  - `Common*`, `Shared*`, `Utils*`, `Helper*`, `Wrapper*`, `Component*`,
+    `Thing*`, `Base*`.
+- Introducing a second naming dialect in one local area.
+
+---
+
+## Rule: Hook, Endpoint, and DTO Naming
+**Rule ID:** rid-hook-endpoint-type-naming  
+**Priority:** MUST  
+**Applies to:** react-implementation-discipline  
+**Rationale:** Keeps non-component artifacts predictable and discoverable.
+
+### Requirement
+
+- Hooks must use `useXxx` naming.
+- Hook placement:
+  - `features/<domain>/hooks/useXxx.ts` for feature-owned hooks,
+  - `hooks/useXxx.ts` for generic cross-domain hooks only.
+- API endpoint modules should be resource-oriented (for example
+  `api/endpoints/projects.ts`).
+- DTO types should use `*Dto` suffix.
+
+### Forbidden
+
+- Non-`useXxx` hook naming.
+- Resource-agnostic endpoint module naming that obscures ownership.
+- DTO naming that drifts from `*Dto` in established areas.
 
 ### Notes
 
-- Naming should optimize ripgrep discoverability: searching the exported
-  component name should find the defining file quickly.
-- For duplicate pattern extraction, prefer pattern names (for example
-  `DataStateBoundary`, `FilterBarShell`) over domain names.
+- Naming should optimize ripgrep discoverability and quick ownership diagnosis.
 
 ---
 

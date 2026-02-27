@@ -71,47 +71,16 @@ metadata.
   - `react-placement-and-layering`
   - `react-reuse-update-new`
   - `react-implementation-discipline`
-- Home/placement helper for ambiguous scans:
-  - when model-only detection confidence is low for likely wrong-home files, run
-    `skills/react-refactoring-progression/scripts/scan_home_misplacements.mjs`
-    against the repository root with explicit
-    `--frontend-root <frontend-source-root>` input (repeatable and required),
-  - `--frontend-root` must point at the frontend source root (for example
-    `apps/web/src`), not the frontend package root,
-  - scanner reviews only the provided frontend roots and does not auto-scan the
-    whole monorepo tree,
-  - scanner output is candidate file paths only; home decisions stay with the
-    LLM/agent,
-  - scanner output is heuristic and may contain false positives; dismiss
-    candidates that are not supported by direct review evidence,
-  - use returned `file_paths[]` (top 10 by default) as review candidates before
-    finalizing findings,
-  - empty `file_paths[]` means no strong likely wrong-home candidates were found
-    by heuristic scan.
-  - if all script candidates are dismissed, proceed with direct repository
-    assessment and apply shared/skill rules without script assistance.
-- Duplicate-cluster helper for side-by-side review:
-  - when the agent cannot confidently find duplicate JSX/DOM candidates on its
-    own (low-confidence discovery), run
-    `skills/react-refactoring-progression/scripts/scan_duplicate_ui_clusters.mjs`
-    with explicit `--frontend-root <frontend-source-root>` input (repeatable and
-    required),
-  - use returned `review_groups[]` and `file_paths[]` only as candidate review
-    queues before applying semantic-duplication qualification,
-  - duplicate-cluster suggestions are heuristic and may include false positives;
-    dismiss unsupported groups after side-by-side review,
-  - if all duplicate-cluster groups are dismissed, continue with manual
-    semantic-duplication assessment based on repository evidence and rule
-    contracts only,
-  - script output intentionally avoids extraction/reuse decisions; those remain
-    with the LLM/agent and downstream duplication rules.
+- If model-only confidence is low, follow `rrp-detection-assist-scripts` for
+  script-assisted candidate discovery and fallback behavior.
 
 ### Forbidden
 
 - Emitting anti-pattern findings without traceable affected files.
 - Promoting out-of-mode findings to blocking active-step status.
 - Producing recommendations that are purely aesthetic or preference-driven.
-- Treating dismissed/empty script output as a blocker for continuing detection.
+- Treating script output as authoritative evidence without direct rule-based
+  review.
 
 ### Notes
 

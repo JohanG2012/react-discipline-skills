@@ -6,7 +6,7 @@ Prevents transport-layer fragmentation by enforcing one canonical API home.
 ---
 
 ## Rule: No `api/` Inside Features When Canonical API Home Exists
-**Rule ID:** rpl-no-feature-api-home  
+**Rule ID:** sr-no-feature-api-home  
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering, react-reuse-update-new, react-implementation-discipline, react-refactoring-progression  
 **Inherited from:** shared-rules  

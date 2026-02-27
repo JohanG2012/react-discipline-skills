@@ -8,7 +8,7 @@ refactor planning without expanding architecture scope.
 ---
 
 ## Rule: Refactor — `className` Hygiene and Correct Placement
-**Rule ID:** rrf-ui-classname-hygiene  
+**Rule ID:** rrp-ui-classname-hygiene  
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Remove style-prop drift without creating new architecture or
@@ -64,7 +64,7 @@ prop soup.
 ---
 
 ## Rule: Refactor — `aria-label` Hygiene and Correct Placement
-**Rule ID:** rrf-a11y-aria-label-hygiene  
+**Rule ID:** rrp-a11y-aria-label-hygiene  
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevent ARIA misuse while ensuring every control has a correct

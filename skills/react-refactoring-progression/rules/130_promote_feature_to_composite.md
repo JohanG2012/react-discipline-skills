@@ -8,7 +8,7 @@ shared UI composites during refactor planning.
 ---
 
 ## Rule: Refactor — Promote Feature Components to Shared UI Composites Safely
-**Rule ID:** rrf-promote-feature-to-composite  
+**Rule ID:** rrp-promote-feature-to-composite  
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Enables promote-to-shared-composite refactors without domain
