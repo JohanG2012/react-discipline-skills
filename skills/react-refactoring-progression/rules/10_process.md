@@ -17,8 +17,22 @@ Defines deterministic, risk-ordered planning behavior.
 - Validate required inputs before planning steps.
 - Resolve effective output mode before planning output:
   - accept optional `output_mode` (`human|agent`)
-  - default to `human` when a human explicitly instructs this skill to run
-  - default to `agent` otherwise
+  - resolve with strict precedence:
+    1. explicit `output_mode` in request
+    2. explicit machine-readable/raw JSON request -> `agent`
+    3. human explicitly instructs this skill -> `human`
+    4. otherwise -> `agent`
+  - when uncertain between `human` and `agent`, choose `human`
+- Clarification loop support:
+  - when a high-impact ambiguity blocks deterministic plan quality, emit
+    `clarification_request` and pause planning,
+  - ask at most 4 questions in one request,
+  - each question must provide `A`/`B`/`C` options (optional `D` when needed),
+  - ask only questions that materially affect scope, safety, boundary ownership,
+    or acceptance outcomes,
+  - when `clarification_answers` are provided on resume, continue planning and
+    produce a final `refactor_plan`/error result (not another duplicate
+    clarification for already-answered items).
 - Use canonical tier labels only: `A`, `B`, `C`, `D`.
 - Order active plan steps from lower-risk to higher-risk tiers.
 - Apply deterministic ordering with no additional custom ordering beyond:
@@ -39,6 +53,11 @@ Defines deterministic, risk-ordered planning behavior.
   - naming clarity and local helper extraction
   - type tightening
   - non-structural boundary-conformance fixes
+- Prioritize implementation-focused improvements over test-only improvements.
+- Test updates should be proposed in active steps only when they are required to
+  preserve, validate, or safely land implementation-focused improvements.
+- Test-only improvements may be suggested only when no meaningful
+  implementation-focused improvements remain in current scope.
 - In opportunistic mode, treat Tier C/D findings as non-blocking follow-up
   guidance only.
 - In opportunistic mode, do not include:
@@ -56,6 +75,8 @@ Defines deterministic, risk-ordered planning behavior.
 - Using mixed tier naming schemes (for example `0-4` plus `A-D`) in one output.
 - Escalating for aesthetic cleanup, style-only churn, or speculative
   "refactor for future" rationale.
+- Asking low-value stylistic clarification questions that do not change planning
+  decisions.
 
 ### Notes
 

@@ -27,10 +27,14 @@ Defines mode-specific scope limits and expansion handling.
   dependencies.
 - Opportunistic mode may include directly related test-file updates without
   counting them toward touched-file budget only when all hold:
+  - implementation-focused active steps exist and require those test updates for
+    safe landing/coverage alignment
   - no new dependencies are introduced
   - tests validate behavior directly related to touched code
   - no more than 2 test files are updated by default (or explicitly expanded
     via `scope_expansion_needed[]`)
+- Test-only update proposals are allowed only when no meaningful
+  implementation-focused improvements remain within active scope caps.
 - Dedicated mode move/rename actions are capped at 3 unless migration mode is
   explicitly enabled.
 - Dedicated mode may include broader changes only within explicit cap policy and

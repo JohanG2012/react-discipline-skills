@@ -19,6 +19,8 @@ aligning with established naming contracts.
 - Treat naming as incorrect/suspect when any is true:
   - component primary export name does not match defining file name (except
     framework-required defaults),
+  - semantic file base name exceeds shared file-name limit (`>64` characters,
+    excluding extension),
   - domain-named components are placed under `ui/**`,
   - suffix/name does not match responsibility:
     - route orchestrators missing `*Page` convention (or framework route
@@ -35,13 +37,15 @@ aligning with established naming contracts.
 - For suspect naming, refactor should evaluate smallest compliant action in this
   order:
   1. rename file/export to match one-file one-primary-export contract,
-  2. rename component to responsibility-aligned, domain-agnostic pattern name
+  2. shorten oversized file/symbol names while preserving local vocabulary and
+     role clarity,
+  3. rename component to responsibility-aligned, domain-agnostic pattern name
      when in `ui/**`,
-  3. relocate ownership to correct layer when domain naming reveals domain
+  4. relocate ownership to correct layer when domain naming reveals domain
      behavior ownership,
-  4. keep local convention where explicit gravity/local standard exists instead
+  5. keep local convention where explicit gravity/local standard exists instead
      of introducing a second dialect,
-  5. stop/block and return scoped expansion request when correction requires
+  6. stop/block and return scoped expansion request when correction requires
      broad migration or scope-cap breach.
 - Any accepted naming refactor must preserve behavior and remain within current
   scope-governor limits.
@@ -49,6 +53,7 @@ aligning with established naming contracts.
   - `rid-naming-discoverability` from
     `react-implementation-discipline/rules/150_naming_discoverability.md`
   - `sr-ownership-naming` from `shared/rules/40_ownership_naming.md`.
+  - `sr-filename-length` from `shared/rules/380_filename_length_policy.md`.
 
 ### Forbidden
 
