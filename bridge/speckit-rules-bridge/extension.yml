@@ -1,0 +1,16 @@
+schema_version: "1.0"
+extension:
+  id: "rules-bridge"
+  name: "Rules Bridge"
+  version: "0.1.0"
+  description: "Bridge command that injects clarification questions from installed react-discipline skills/rules before planning."
+  author: "react-discipline-skills"
+  repository: "https://github.com/github/spec-kit"
+  license: "Apache-2.0"
+requires:
+  speckit_version: ">=0.0.0"
+provides:
+  commands:
+    - name: "speckit.rules-bridge.clarify"
+      file: "commands/clarify.md"
+      description: "Run rule-aware clarification by consulting installed skill rules and injecting high-impact questions."
