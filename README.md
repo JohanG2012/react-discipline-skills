@@ -17,6 +17,28 @@ existing architecture, boundaries, and naming conventions.
 Interfaces, folder contents, and skill behavior may change as specs are refined.
 Use for evaluation and active development, not as a stable long-term contract.
 
+## Known/Possible Issues
+
+- **Spec Kit clarify bridge compatibility is unverified**: currently tested on
+  one setup/system only; behavior across other setups is unknown.
+- **Refactor helper script usage pattern is unverified**: scripts are intended
+  as fallback when the agent cannot confidently find candidates on its own, but
+  whether agents will consistently use them that way is currently unknown.
+- **Impact of recent helper-script additions is unverified**: these additions
+  are new, and their effect on overall skill output quality has not been
+  systematically tested yet.
+- **Token usage has not been a development focus so far**: token consumption
+  has not been explicitly considered or optimized to date. Impact remains
+  unmeasured and may vary by workflow and prompt quality.
+- **Rule volume and rule size have grown quickly**: the current rule set needs
+  a dedicated consolidation/restructure pass to improve LLM lookup ergonomics
+  and enable better token-usage optimization.
+- **Validation has been refactoring-focused so far**: the skills were exercised
+  in a week-long refactoring session, and many updates were made during that
+  run to improve reasoning and rule understanding for refactor workflows.
+  Since those changes, the updated skills have not yet been re-tested on new
+  feature implementation workflows.
+
 ## Project Direction
 
 This project is intentionally scoped to **5 maintained skills** for agents such
@@ -56,9 +78,7 @@ This sequence minimizes architectural drift and keeps planning/implementation de
 
 ## Example Use Cases
 
-- **Adding a new route feature**: detect architecture -> plan placement -> decide reuse/update/new for UI/API pieces -> implement with discipline gates.
-- **Refactoring a feature area safely**: detect current structure -> validate target placement -> decide what to reuse vs split/extract -> implement with scope limits.
-- **Large change review before coding**: run first three skills to produce evidence-backed planning artifacts before implementation starts.
+Try: `use $react-refactoring-progression to create a step-by-step plan that suggests high-impact improvements for the project.` to review reasoning and skill based output. However, all skills will perform their responsibilities without being excplicitly invoked as long as you prompts on a codebase that contains a react/frontend home.
 
 ## Official Skill Standards
 
@@ -165,6 +185,41 @@ ln -s /path/to/react-discipline-skills/skills/react-reuse-update-new /path/to/ta
 ln -s /path/to/react-discipline-skills/skills/react-implementation-discipline /path/to/target-repo/.agents/skills/react-implementation-discipline
 ln -s /path/to/react-discipline-skills/skills/react-refactoring-progression /path/to/target-repo/.agents/skills/react-refactoring-progression
 ```
+
+## Optional: Spec Kit Clarify Bridge
+
+Use this when you want rule-aware clarification injected before planning in a
+Spec Kit project.
+
+Install the local extension into a target Spec Kit repo:
+
+```bash
+./bridge/install-speckit-clarify-bridge.sh --target-repo /path/to/target-repo
+```
+
+Uninstall from a target repo:
+
+```bash
+./bridge/uninstall-speckit-clarify-bridge.sh --target-repo /path/to/target-repo
+```
+
+Optional full cleanup of known local extension cache path:
+
+```bash
+./bridge/uninstall-speckit-clarify-bridge.sh --target-repo /path/to/target-repo --purge-local
+```
+
+Then run in the target repo:
+
+```bash
+/speckit.rules-bridge.clarify
+```
+
+Notes:
+
+- This is an explicit wrapper command, not a patch to core `/speckit.clarify`.
+- It is designed to consult installed react-discipline rules and inject
+  high-impact clarification questions into the clarify flow.
 
 ## Contributing
 
