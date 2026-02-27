@@ -12,6 +12,8 @@ deterministic and low-friction.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Reduces over-asking and ensures predictable outcomes when
 ambiguity exists but safe defaults are available.
+**Covers:** Deterministic Defaults and Pause Discipline.
+**Index mode:** reference
 
 ### Requirement
 

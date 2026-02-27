@@ -16,6 +16,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Priority:** MUST  
 **Applies to:** react-architecture-detection  
 **Rationale:** Ensures architecture detection stays within its defined responsibility.
+**Covers:** Skill Scope Definition.
+**Index mode:** reference
 
 ### Requirement
 

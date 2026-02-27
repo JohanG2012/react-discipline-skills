@@ -10,6 +10,8 @@ Defines orchestration flow for reuse/update/new decisioning.
 **Priority:** MUST  
 **Applies to:** react-reuse-update-new  
 **Rationale:** Keeps decisions consistent and bounded.
+**Covers:** Decision Ladder.
+**Index mode:** reference
 
 ### Requirement
 

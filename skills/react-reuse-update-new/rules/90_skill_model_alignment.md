@@ -11,6 +11,8 @@ Defines alignment with the fixed execution skill model and shared policy layer.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Prevents scope drift and keeps responsibilities aligned across
 the four execution skills.
+**Covers:** Fixed Skill Model Compliance.
+**Index mode:** reference
 
 ### Requirement
 

@@ -12,6 +12,8 @@ placement planning.
 **Applies to:** react-placement-and-layering  
 **Rationale:** Placement decisions require repository evidence to avoid
 speculative structure changes.
+**Covers:** Repository Evidence Access.
+**Index mode:** reference
 
 ### Requirement
 

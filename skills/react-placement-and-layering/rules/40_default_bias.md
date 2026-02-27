@@ -12,6 +12,8 @@ decisions.
 **Applies to:** react-placement-and-layering  
 **Rationale:** Keeps planning flow predictable while pausing only for
 high-impact ambiguity.
+**Covers:** Default Bias and Clean Pause Protocol.
+**Index mode:** reference
 
 ### Requirement
 

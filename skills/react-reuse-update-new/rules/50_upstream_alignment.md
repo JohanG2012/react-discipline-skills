@@ -12,6 +12,8 @@ and avoid introducing parallel architecture paths.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Keeps reuse decisions coherent with prior skills and prevents
 conflicting structural guidance.
+**Covers:** Upstream Decision Alignment.
+**Index mode:** reference
 
 ### Requirement
 

@@ -13,6 +13,8 @@ naming remains searchable, layer-aligned, and domain-safe.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents naming drift and misplaced ownership during refactors by
 aligning with established naming contracts.
+**Covers:** Refactor — Naming Hygiene and Correct Placement.
+**Index mode:** reference
 
 ### Requirement
 

@@ -12,6 +12,8 @@ Defines orchestration flow for plan-driven implementation.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Ensure deterministic execution that matches approved planning and
 policy constraints.
+**Covers:** Plan-Driven Implementation.
+**Index mode:** reference
 
 ### Requirement
 

@@ -11,6 +11,8 @@ Defines hard stop/revise conditions before output finalization.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevent knowingly non-compliant output from being emitted.
+**Covers:** Stop and Revise Conditions.
+**Index mode:** reference
 
 ### Requirement
 

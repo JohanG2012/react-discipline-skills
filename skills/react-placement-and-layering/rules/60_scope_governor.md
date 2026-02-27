@@ -10,6 +10,8 @@ Defines required scope and constraint handling for placement planning.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Keeps plans reviewable and prevents implicit scope expansion.
+**Covers:** Constraint-Aware Placement Scope.
+**Index mode:** reference
 
 ### Requirement
 

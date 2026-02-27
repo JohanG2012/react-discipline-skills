@@ -18,6 +18,7 @@ const skillNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const requiredKeys = ["name", "description", "version", "license"];
 const requiredMetadataKeys = ["category", "stability"];
+const allowedIndexModes = new Set(["inline", "reference"]);
 const rulePrefixBySkill = new Map([
   ["react-architecture-detection", "rad-"],
   ["react-placement-and-layering", "rpl-"],
@@ -26,18 +27,47 @@ const rulePrefixBySkill = new Map([
   ["react-refactoring-progression", "rrp-"],
 ]);
 
-function extractRuleIdsWithLines(content) {
+function findRuleBlocks(content) {
   const lines = content.split("\n");
-  const result = [];
+  const starts = [];
   for (let i = 0; i < lines.length; i += 1) {
-    const match = lines[i].match(/^\*\*Rule ID:\*\*\s*(.+?)\s*$/);
-    if (!match) continue;
-    result.push({
-      line: i + 1,
-      ruleId: match[1].trim(),
+    if (/^##\s+Rule:/.test(lines[i])) {
+      starts.push(i);
+    }
+  }
+
+  const blocks = [];
+  for (let i = 0; i < starts.length; i += 1) {
+    const start = starts[i];
+    const end = starts[i + 1] ?? lines.length;
+    const title = lines[start].replace(/^##\s+Rule:\s*/, "").trim();
+    blocks.push({
+      title,
+      startLine: start + 1,
+      text: lines.slice(start, end).join("\n"),
     });
   }
-  return result;
+  return blocks;
+}
+
+function extractFieldValue(blockText, fieldName) {
+  const regex = new RegExp(`^\\*\\*${fieldName}:\\*\\*\\s*(.+?)\\s*$`, "m");
+  const match = blockText.match(regex);
+  return match ? match[1].trim() : null;
+}
+
+function parseSkillList(rawValue) {
+  if (!rawValue) return [];
+  return rawValue
+    .split(",")
+    .map((value) => value.trim().replace(/^`/, "").replace(/`$/, ""))
+    .filter(Boolean);
+}
+
+function hasSection(blockText, sectionName) {
+  const escaped = sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`^###\\s+${escaped}\\s*$`, "m");
+  return regex.test(blockText);
 }
 
 async function validateSkill(skillDir) {
@@ -114,11 +144,73 @@ async function validateSkillRulePrefixes(skillDir) {
   for (const file of ruleFiles) {
     const filePath = path.join(rulesPath, file);
     const content = await readFile(filePath);
-    const ids = extractRuleIdsWithLines(content);
-    for (const entry of ids) {
-      if (!entry.ruleId.startsWith(expectedPrefix)) {
+    const blocks = findRuleBlocks(content);
+    if (!blocks.length) {
+      errors.push(`${filePath}: no "## Rule:" blocks found`);
+      continue;
+    }
+
+    for (const block of blocks) {
+      const ruleId = extractFieldValue(block.text, "Rule ID");
+      const priority = extractFieldValue(block.text, "Priority");
+      const appliesTo = extractFieldValue(block.text, "Applies to");
+      const covers = extractFieldValue(block.text, "Covers");
+      const indexMode = extractFieldValue(block.text, "Index mode");
+
+      if (!ruleId) {
+        errors.push(`${filePath}:${block.startLine}: missing "**Rule ID:**"`);
+        continue;
+      }
+
+      if (!ruleId.startsWith(expectedPrefix)) {
         errors.push(
-          `${filePath}:${entry.line}: Rule ID "${entry.ruleId}" must use "${expectedPrefix}" prefix for skill "${skillDir}"`,
+          `${filePath}:${block.startLine}: Rule ID "${ruleId}" must use "${expectedPrefix}" prefix for skill "${skillDir}"`,
+        );
+      }
+
+      if (!priority) {
+        errors.push(`${filePath}:${block.startLine}: missing "**Priority:**"`);
+      }
+
+      if (!appliesTo) {
+        errors.push(`${filePath}:${block.startLine}: missing "**Applies to:**"`);
+      } else {
+        const appliesList = parseSkillList(appliesTo);
+        if (!appliesList.includes(skillDir)) {
+          errors.push(
+            `${filePath}:${block.startLine}: "**Applies to:**" must include "${skillDir}"`,
+          );
+        }
+      }
+
+      if (!covers) {
+        errors.push(`${filePath}:${block.startLine}: missing "**Covers:**"`);
+      }
+
+      if (!indexMode) {
+        errors.push(`${filePath}:${block.startLine}: missing "**Index mode:**"`);
+      } else {
+        const normalizedMode = indexMode.toLowerCase();
+        if (!allowedIndexModes.has(normalizedMode)) {
+          errors.push(
+            `${filePath}:${block.startLine}: "**Index mode:**" must be one of: ${[...allowedIndexModes].join(", ")}`,
+          );
+        }
+        if (ruleId.endsWith("-output") && normalizedMode !== "inline") {
+          errors.push(
+            `${filePath}:${block.startLine}: output rule "${ruleId}" must use "**Index mode:** inline"`,
+          );
+        }
+      }
+
+      if (!hasSection(block.text, "Requirement")) {
+        errors.push(
+          `${filePath}:${block.startLine}: missing "### Requirement" section in "${block.title}"`,
+        );
+      }
+      if (!hasSection(block.text, "Forbidden")) {
+        errors.push(
+          `${filePath}:${block.startLine}: missing "### Forbidden" section in "${block.title}"`,
         );
       }
     }

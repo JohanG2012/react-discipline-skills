@@ -12,6 +12,8 @@ ambiguity.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Avoid unnecessary interruptions while preventing structural debt.
+**Covers:** Deterministic Defaults and Pause Protocol.
+**Index mode:** reference
 
 ### Requirement
 

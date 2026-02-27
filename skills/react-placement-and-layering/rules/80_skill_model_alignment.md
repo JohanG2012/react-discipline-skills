@@ -11,6 +11,8 @@ Defines alignment with the fixed execution-skill model and shared policy layer.
 **Applies to:** react-placement-and-layering  
 **Rationale:** Prevents skill-scope drift and preserves cross-skill ownership
 boundaries.
+**Covers:** Fixed Execution-Skill Scope.
+**Index mode:** reference
 
 ### Requirement
 

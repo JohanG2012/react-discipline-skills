@@ -12,6 +12,8 @@ architecture detection output.
 **Applies to:** react-architecture-detection  
 **Rationale:** Prevents parallel-architecture guidance and unsafe migration
 recommendations.
+**Covers:** Strategy and One-Home Discipline.
+**Index mode:** reference
 
 ### Requirement
 

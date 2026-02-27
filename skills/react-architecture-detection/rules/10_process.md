@@ -12,6 +12,8 @@ architecture detection.
 **Applies to:** react-architecture-detection  
 **Rationale:** Ensures architecture classification is evidence-based and
 repeatable across runs.
+**Covers:** Deterministic Signal Scan.
+**Index mode:** reference
 
 ### Requirement
 

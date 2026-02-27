@@ -11,6 +11,8 @@ Defines pre-output lightweight checks required for disciplined completion.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Catch common correctness issues before output is finalized.
+**Covers:** Quick Validation Checklist.
+**Index mode:** reference
 
 ### Requirement
 

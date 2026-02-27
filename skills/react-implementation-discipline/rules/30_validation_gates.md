@@ -12,6 +12,8 @@ Defines mandatory implementation validation checks and execution order.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Catch high-risk defects early and keep completion criteria
 consistent.
+**Covers:** Validation Gate Sequence.
+**Index mode:** reference
 
 ### Requirement
 

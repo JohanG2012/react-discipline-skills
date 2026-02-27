@@ -12,6 +12,8 @@ missing.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevent unsafe assumptions and maintain controlled change output.
+**Covers:** Context Access and Write Discipline.
+**Index mode:** reference
 
 ### Requirement
 

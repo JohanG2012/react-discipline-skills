@@ -12,6 +12,8 @@ reuse/update/new selection.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Converts scoring into predictable decisions and prevents
 reviewer-dependent outcomes.
+**Covers:** Outcome Threshold Interpretation.
+**Index mode:** reference
 
 ### Requirement
 

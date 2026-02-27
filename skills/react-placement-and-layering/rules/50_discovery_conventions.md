@@ -11,6 +11,8 @@ final placement output.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Prevents duplicate artifacts and naming drift in placement plans.
+**Covers:** Discovery Coverage and Convention Alignment.
+**Index mode:** reference
 
 ### Requirement
 

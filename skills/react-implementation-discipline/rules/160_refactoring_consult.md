@@ -13,6 +13,8 @@ Defines mandatory end-of-execution consultation of
 **Applies to:** react-implementation-discipline  
 **Rationale:** Ensures every implementation run gets a bounded, non-blocking
 cleanup/refactor plan derived from the touched file set.
+**Covers:** Mandatory Opportunistic Refactoring Consult.
+**Index mode:** reference
 
 ### Requirement
 

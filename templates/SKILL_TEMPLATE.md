@@ -29,7 +29,8 @@ Do not use this skill when:
 The skill expects:
 - **Task request:** <what the user asked for>
 - **Repository context:** <tree/read/search OR context bundle>
-- **Policy baseline:** baked in from `shared/rules` at build time (`shared-rules`)
+- **Policy baseline:** materialized from `shared/rules` into
+  `./.shared-rules` at build time (`shared-rules`)
 - **Baseline inheritance:** shared baseline rules are mandatory unless an
   approved exception exists
 - **Pause defaults:** default `pause_mode` is inherited from shared policy
@@ -83,7 +84,8 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 - <rule_id_3>
 
 ## Files
-- `AGENTS.md` is generated from `shared/rules/*.md` and `rules/*.md`.
+- `AGENTS.md` is a generated rule lookup index with inline always-on rules.
+- `.shared-rules/` is generated per-skill shared baseline rule source.
 - `rules/` contains source-of-truth local rule modules for this skill.
 - Optional: `schemas/output.schema.json` for machine validation.
 

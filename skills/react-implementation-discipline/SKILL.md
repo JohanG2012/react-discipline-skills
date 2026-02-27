@@ -59,7 +59,8 @@ Optional:
 
 Shared baseline:
 
-- `shared-rules` are baked in from `shared/rules` at build time and must be enforced.
+- `shared-rules` are materialized from `shared/rules` into
+  `./.shared-rules` at build time and must be enforced.
 - Default `pause_mode` is taken from shared policy.
 
 ## Workflow
@@ -152,7 +153,9 @@ Return a single machine-payload JSON object with:
 
 ## Files
 
-- `AGENTS.md` contains generated, full guidance.
+- `AGENTS.md` contains generated rule lookup index plus inline always-on rules.
+- `.shared-rules/` contains generated shared baseline rule sources used by this
+  skill at runtime.
 - `rules/` contains source-of-truth modular rules.
 - `schemas/output.schema.json` defines machine-validated output contract.
 

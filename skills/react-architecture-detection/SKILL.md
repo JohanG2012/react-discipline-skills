@@ -32,7 +32,8 @@ The skill expects:
 - **Repository root/context:** File tree and key entry points
 - **Target architecture context:** Active architecture policy/spec reference
 - **Task scope:** `small_change | feature_change | new_route | refactor`
-- **Policy baseline:** baked in from `shared/rules` at build time (`shared-rules`)
+- **Policy baseline:** materialized from `shared/rules` into
+  `./.shared-rules` at build time (`shared-rules`)
 - **Baseline inheritance:** shared baseline rules are mandatory and may not be
   locally overridden without approved exception record
 - **Pause defaults:** default `pause_mode` is taken from shared policy
@@ -163,7 +164,9 @@ The skill must follow these rule IDs (see `AGENTS.md` for details):
 
 ## Files
 
-- `AGENTS.md` contains the full rules for agents and LLMs (generated from `rules/`).
+- `AGENTS.md` contains the generated rule lookup index and inline always-on rules.
+- `.shared-rules/` contains the generated shared baseline rules for standalone
+  skill portability.
 - `rules/` contains the source-of-truth modular rules.
 
 ## Examples

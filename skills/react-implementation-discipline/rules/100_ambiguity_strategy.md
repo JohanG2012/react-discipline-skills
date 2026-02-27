@@ -11,6 +11,8 @@ Defines deterministic behavior when local patterns conflict or are unclear.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keep delivery moving while minimizing structural mistakes.
+**Covers:** Ambiguity Resolution Strategy.
+**Index mode:** reference
 
 ### Requirement
 

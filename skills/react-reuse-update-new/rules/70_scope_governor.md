@@ -11,6 +11,8 @@ approval when expanded scope is materially beneficial.
 **Priority:** MUST  
 **Applies to:** react-reuse-update-new  
 **Rationale:** Prevents refactor creep and keeps decision packages reviewable.
+**Covers:** Scope Cap Enforcement.
+**Index mode:** reference
 
 ### Requirement
 

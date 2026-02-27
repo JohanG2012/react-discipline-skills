@@ -13,6 +13,8 @@ duplication clusters.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Ensures each duplication candidate maps to one clear extraction
 strategy.
+**Covers:** Pattern Type Classification.
+**Index mode:** reference
 
 ### Requirement
 
@@ -42,6 +44,8 @@ strategy.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Reduces false positives from cosmetic similarity.
+**Covers:** Two-Signal Qualification Gate.
+**Index mode:** reference
 
 ### Requirement
 
@@ -62,6 +66,8 @@ strategy.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps recommendations actionable and auditable.
+**Covers:** Structural Evidence Quality.
+**Index mode:** reference
 
 ### Requirement
 

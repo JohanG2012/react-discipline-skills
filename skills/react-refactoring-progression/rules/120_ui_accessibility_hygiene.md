@@ -13,6 +13,8 @@ refactor planning without expanding architecture scope.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Remove style-prop drift without creating new architecture or
 prop soup.
+**Covers:** Refactor — className Hygiene and Correct Placement.
+**Index mode:** reference
 
 ### Requirement
 
@@ -69,6 +71,8 @@ prop soup.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevent ARIA misuse while ensuring every control has a correct
 accessible name.
+**Covers:** Refactor — aria-label Hygiene and Correct Placement.
+**Index mode:** reference
 
 ### Requirement
 

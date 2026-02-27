@@ -12,6 +12,8 @@ detection outputs.
 **Applies to:** react-architecture-detection  
 **Rationale:** Ensures downstream skills can consume architecture output without
 reinterpretation.
+**Covers:** Structured Output.
+**Index mode:** inline
 
 ### Requirement
 

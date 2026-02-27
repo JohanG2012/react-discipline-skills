@@ -12,6 +12,8 @@ planning skill.
 **Applies to:** react-placement-and-layering  
 **Rationale:** Keeps handoff output reviewable and consistent across placement
 and implementation stages.
+**Covers:** Implementation Output Format Defaults.
+**Index mode:** reference
 
 ### Requirement
 

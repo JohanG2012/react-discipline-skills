@@ -11,6 +11,8 @@ Defines behavior-preservation and approval gate checks.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents accidental regressions during refactor planning.
+**Covers:** Behavior Preservation Enforcement.
+**Index mode:** reference
 
 ### Requirement
 

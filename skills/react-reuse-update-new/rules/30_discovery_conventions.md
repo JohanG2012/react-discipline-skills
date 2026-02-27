@@ -12,6 +12,8 @@ completed before final reuse/update/new decisions.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Prevents duplicate artifacts and style drift by forcing
 evidence-based discovery in the active repository.
+**Covers:** Discovery Coverage and Convention Fit.
+**Index mode:** reference
 
 ### Requirement
 

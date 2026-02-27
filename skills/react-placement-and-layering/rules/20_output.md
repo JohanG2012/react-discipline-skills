@@ -10,6 +10,8 @@ Defines the expected output structure for placement decisions.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Ensures decisions are traceable and actionable.
+**Covers:** Structured Placement Output.
+**Index mode:** inline
 
 ### Requirement
 

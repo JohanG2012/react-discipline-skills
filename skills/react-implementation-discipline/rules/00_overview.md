@@ -19,6 +19,8 @@ All rules here are binding for agents and LLMs using this skill.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keep implementation output disciplined, reviewable, and aligned
 with architecture and policy.
+**Covers:** Skill Scope Definition.
+**Index mode:** reference
 
 ### Requirement
 

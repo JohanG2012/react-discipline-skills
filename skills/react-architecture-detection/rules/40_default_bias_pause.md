@@ -12,6 +12,8 @@ architecture detection.
 **Applies to:** react-architecture-detection  
 **Rationale:** Keeps detection decisive while pausing only for high-impact
 structural ambiguity.
+**Covers:** Default Bias and Clean Pause Protocol.
+**Index mode:** reference
 
 ### Requirement
 

@@ -11,6 +11,8 @@ Defines mode-specific scope limits and expansion handling.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents uncontrolled refactor spread and hidden churn.
+**Covers:** Bounded Scope Execution.
+**Index mode:** reference
 
 ### Requirement
 

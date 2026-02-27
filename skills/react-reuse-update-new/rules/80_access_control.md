@@ -12,6 +12,8 @@ fallback context bundle when direct repository access is unavailable.
 **Applies to:** react-reuse-update-new  
 **Rationale:** Reuse decisions require repository evidence; fallback inputs must
 be explicit when direct access is unavailable.
+**Covers:** Read/Search Access and Fallback Bundle.
+**Index mode:** reference
 
 ### Requirement
 

@@ -13,6 +13,8 @@ refactoring detection runs.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps helper-script usage bounded, input-safe, and subordinate to
 rule-based agent judgment.
+**Covers:** Script-Assisted Detection Candidates.
+**Index mode:** reference
 
 ### Requirement
 

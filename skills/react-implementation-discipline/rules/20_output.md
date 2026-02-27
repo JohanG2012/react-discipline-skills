@@ -13,6 +13,8 @@ dependency-error outcomes.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Ensure implementation outcomes are machine-consumable,
 review-ready, and policy-verifiable.
+**Covers:** Structured Implementation Output.
+**Index mode:** inline
 
 ### Requirement
 

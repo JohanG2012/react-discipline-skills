@@ -12,6 +12,8 @@ Defines anti-pattern detection requirements and output mapping.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Turns known architecture drift signals into actionable planning
 metadata.
+**Covers:** Anti-Pattern Findings.
+**Index mode:** reference
 
 ### Requirement
 

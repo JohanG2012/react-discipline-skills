@@ -10,6 +10,8 @@ Defines alignment with fixed execution-skill boundaries and shared policy layer.
 **Priority:** MUST  
 **Applies to:** react-architecture-detection  
 **Rationale:** Prevents ownership drift between detection and downstream skills.
+**Covers:** Fixed Execution-Skill Scope.
+**Index mode:** reference
 
 ### Requirement
 

@@ -13,6 +13,8 @@ test-only work as secondary fallback scope.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents plans from drifting into test-only cleanup when higher
 impact implementation improvements are still available.
+**Covers:** Implementation-First Test Suggestion Priority.
+**Index mode:** reference
 
 ### Requirement
 

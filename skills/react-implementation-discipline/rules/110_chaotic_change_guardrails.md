@@ -11,6 +11,8 @@ Defines explicit anti-patterns that must be avoided during implementation.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevent architecture drift and uncontrolled maintenance debt.
+**Covers:** Anti-Chaotic Change Guardrails.
+**Index mode:** reference
 
 ### Requirement
 

@@ -12,6 +12,8 @@ Defines the finalized tier model and mode-specific tier allowances.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps tier semantics stable for reviewers and downstream
 automation.
+**Covers:** Finalized Tier Model.
+**Index mode:** reference
 
 ### Requirement
 

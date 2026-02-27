@@ -11,6 +11,8 @@ Defines execution order, data-flow boundaries, and export wiring discipline.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keep implementation predictable and avoid boundary leakage.
+**Covers:** Bottom-Up Flow and Minimal Export Wiring.
+**Index mode:** reference
 
 ### Requirement
 

@@ -10,6 +10,8 @@ Defines the expected deterministic output structure for reuse decisions.
 **Priority:** MUST  
 **Applies to:** react-reuse-update-new  
 **Rationale:** Ensures decisions are actionable and traceable.
+**Covers:** Structured Decision Output.
+**Index mode:** inline
 
 ### Requirement
 

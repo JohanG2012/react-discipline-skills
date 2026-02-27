@@ -10,6 +10,8 @@ Defines migration-aware placement behavior and duplicate-home prevention.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Prevents parallel architectures and unsafe structural churn.
+**Covers:** Strategy and One-Home Discipline.
+**Index mode:** reference
 
 ### Requirement
 

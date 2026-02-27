@@ -11,6 +11,8 @@ Defines qualification and scoring for structural duplication candidates.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents unsafe abstraction and focuses on high-leverage reuse.
+**Covers:** Semantic Duplication Qualification.
+**Index mode:** reference
 
 ### Requirement
 

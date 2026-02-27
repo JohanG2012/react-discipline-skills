@@ -238,7 +238,9 @@ Constraints:
 
 ## Files
 
-- `AGENTS.md` contains generated full rules.
+- `AGENTS.md` contains generated rule lookup index plus inline always-on rules.
+- `.shared-rules/` contains generated shared baseline rule sources used by this
+  skill at runtime.
 - `rules/` contains source-of-truth modular rules.
 - `scripts/scan_home_misplacements.mjs` scans repositories for likely
   wrong-home files and returns top candidate paths for review only (no expected

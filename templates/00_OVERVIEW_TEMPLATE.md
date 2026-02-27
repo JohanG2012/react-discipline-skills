@@ -5,7 +5,8 @@
 This document defines the authoritative rules for the `<skill-name>` skill.
 
 This skill operates under:
-- `shared-rules` (mandatory baseline policy baked in at build time)
+- `shared-rules` (mandatory baseline policy materialized into `./.shared-rules`
+  at build time)
 
 All rules defined here are binding for agents and LLMs using this skill.
 
@@ -16,6 +17,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Priority:** MUST  
 **Applies to:** <skill-name>  
 **Rationale:** Ensure the skill operates only within its defined responsibility.
+**Covers:** Skill scope boundaries and baseline inheritance.
+**Index mode:** reference
 
 ### Requirement
 

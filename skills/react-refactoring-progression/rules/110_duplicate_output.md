@@ -11,6 +11,8 @@ Defines required duplication-cluster output fields for actionable planning.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Ensures clusters are actionable without implementation output.
+**Covers:** Cluster Output Completeness.
+**Index mode:** inline
 
 ### Requirement
 
@@ -43,6 +45,8 @@ Defines required duplication-cluster output fields for actionable planning.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps output useful for downstream task planning.
+**Covers:** Actionable Next Actions.
+**Index mode:** reference
 
 ### Requirement
 
@@ -63,6 +67,8 @@ Defines required duplication-cluster output fields for actionable planning.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Makes non-extraction decisions explicit and reviewable.
+**Covers:** Keep-Separate Output Clarity.
+**Index mode:** inline
 
 ### Requirement
 

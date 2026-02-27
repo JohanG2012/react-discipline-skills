@@ -11,6 +11,8 @@ Defines deterministic, risk-ordered planning behavior.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Ensures predictable and low-risk refactor planning.
+**Covers:** Tiered Planning Sequence.
+**Index mode:** reference
 
 ### Requirement
 

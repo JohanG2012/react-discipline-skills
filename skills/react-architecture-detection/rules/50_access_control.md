@@ -12,6 +12,8 @@ direct read/search access is unavailable.
 **Applies to:** react-architecture-detection  
 **Rationale:** Reliable detection requires direct repository signals or explicit
 fallback context.
+**Covers:** Repository Evidence Access.
+**Index mode:** reference
 
 ### Requirement
 

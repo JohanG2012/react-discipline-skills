@@ -10,6 +10,8 @@ Defines the orchestration workflow for placement planning.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Keeps placement decisions consistent and testable.
+**Covers:** Layer Mapping.
+**Index mode:** reference
 
 ### Requirement
 

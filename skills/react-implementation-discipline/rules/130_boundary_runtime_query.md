@@ -13,6 +13,8 @@ requirements.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Ensure implementation output is safe at architecture and runtime
 levels.
+**Covers:** Boundary, Runtime, and Query Correctness.
+**Index mode:** reference
 
 ### Requirement
 

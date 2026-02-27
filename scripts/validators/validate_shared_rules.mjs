@@ -10,6 +10,11 @@ const repoRoot = process.cwd();
 const skillsRoot = path.join(repoRoot, "skills");
 const sharedRulesPath = path.join(repoRoot, "shared", "rules");
 const sharedInheritedFromValue = "shared-rules";
+const allowedIndexModes = new Set(["inline", "reference"]);
+const mandatoryInlineRuleIds = new Set([
+  "sr-output-discipline",
+  "sr-output-mode-resolution",
+]);
 
 function findRuleBlocks(content) {
   const lines = content.split("\n");
@@ -108,10 +113,10 @@ async function validateSharedRules() {
       const priority = extractFieldValue(block.text, "Priority");
       const appliesTo = extractFieldValue(block.text, "Applies to");
       const appliesList = parseSkillList(appliesTo);
-      const inlineIn = extractFieldValue(block.text, "Inline in");
-      const referenceIn = extractFieldValue(block.text, "Reference in");
       const inheritedFrom = extractFieldValue(block.text, "Inherited from");
       const rationale = extractFieldValue(block.text, "Rationale");
+      const covers = extractFieldValue(block.text, "Covers");
+      const indexMode = extractFieldValue(block.text, "Index mode");
       const hasRequirement = hasSection(block.text, "Requirement");
       const hasForbidden = hasSection(block.text, "Forbidden");
 
@@ -157,16 +162,6 @@ async function validateSharedRules() {
         }
       }
 
-      if (inlineIn) {
-        errors.push(
-          `${filePath}:${block.startLine}: "**Inline in:**" is deprecated; shared rules are inline-only`,
-        );
-      }
-      if (referenceIn) {
-        errors.push(
-          `${filePath}:${block.startLine}: "**Reference in:**" is deprecated; shared rules are inline-only`,
-        );
-      }
       if (!inheritedFrom) {
         errors.push(
           `${filePath}:${block.startLine}: missing "**Inherited from:**" in rule block "${block.title}"`,
@@ -180,6 +175,28 @@ async function validateSharedRules() {
         errors.push(
           `${filePath}:${block.startLine}: missing "**Rationale:**" in rule block "${block.title}"`,
         );
+      }
+      if (!covers) {
+        errors.push(
+          `${filePath}:${block.startLine}: missing "**Covers:**" in rule block "${block.title}"`,
+        );
+      }
+      if (!indexMode) {
+        errors.push(
+          `${filePath}:${block.startLine}: missing "**Index mode:**" in rule block "${block.title}"`,
+        );
+      } else {
+        const normalizedMode = indexMode.toLowerCase();
+        if (!allowedIndexModes.has(normalizedMode)) {
+          errors.push(
+            `${filePath}:${block.startLine}: "**Index mode:**" must be one of: ${[...allowedIndexModes].join(", ")}`,
+          );
+        }
+        if (ruleId && mandatoryInlineRuleIds.has(ruleId) && normalizedMode !== "inline") {
+          errors.push(
+            `${filePath}:${block.startLine}: shared rule "${ruleId}" must use "**Index mode:** inline"`,
+          );
+        }
       }
       if (!hasRequirement) {
         errors.push(

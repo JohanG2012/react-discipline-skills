@@ -11,6 +11,8 @@ Defines deterministic selection between snippet/diff updates and full-file outpu
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keep implementation output reviewable while minimizing misapply risk.
+**Covers:** Output Mode Selection.
+**Index mode:** reference
 
 ### Requirement
 

@@ -11,6 +11,8 @@ Defines required interaction boundaries with upstream/downstream skills.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents overlap and contradiction across the fixed skill model.
+**Covers:** Interaction Boundaries.
+**Index mode:** reference
 
 ### Requirement
 

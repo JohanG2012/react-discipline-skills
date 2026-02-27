@@ -16,6 +16,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Priority:** MUST  
 **Applies to:** react-placement-and-layering  
 **Rationale:** Ensures placement decisions stay within boundaries.
+**Covers:** Skill Scope Definition.
+**Index mode:** reference
 
 ### Requirement
 

@@ -11,6 +11,8 @@ Defines anti-leakage rules for primitives/composites during implementation.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevent domain coupling and unstable abstractions in shared UI.
+**Covers:** UI Genericity and Anti-Leakage.
+**Index mode:** reference
 
 ### Requirement
 

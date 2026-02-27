@@ -17,6 +17,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Keeps shared baseline governance and scope constraints explicit.
+**Covers:** Skill Scope Definition.
+**Index mode:** reference
 
 ### Requirement
 
@@ -57,6 +59,8 @@ All rules defined here are binding for agents and LLMs using this skill.
 **Applies to:** react-architecture-detection, react-placement-and-layering, react-reuse-update-new, react-implementation-discipline  
 **Inherited from:** shared-rules  
 **Rationale:** Prevents policy drift into implementation-specific prescriptions.
+**Covers:** Baseline Non-goals.
+**Index mode:** reference
 
 ### Requirement
 

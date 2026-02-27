@@ -13,6 +13,8 @@ Defines the authoritative scope and boundaries for
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps this skill planning-only and aligned with the fixed
 four-skill production pipeline.
+**Covers:** Optional Extension Scope.
+**Index mode:** reference
 
 ### Requirement
 

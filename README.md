@@ -50,9 +50,9 @@ as Codex:
 4. `react-implementation-discipline` (core production)
 5. `react-refactoring-progression` (optional extension)
 
-`shared` is a shared policy baseline source in `shared/` that
-is baked into generated `AGENTS.md` for all maintained skills. It is not
-counted as a skill itself.
+`shared` is a shared policy baseline source in `shared/` that is materialized
+per skill into `.shared-rules/` during the build. It is not counted as a skill
+itself.
 
 ## Skill Overview
 
@@ -106,9 +106,9 @@ Each skill should follow the same high-level shape used in those ecosystems:
 ## Structure
 
 - `skills/`: Skill definitions, rules, examples, and generated `AGENTS.md`
-- `shared/`: Shared baseline policy source baked into generated
-  production skill bundles (`shared/rules` uses `__TARGET_SKILL__` for
-  `Applies to`, resolved per target skill at build time)
+- `shared/`: Shared baseline policy source, resolved per target skill at build
+  time into each skill's generated `.shared-rules/` directory (`shared/rules`
+  uses `__TARGET_SKILL__` for `Applies to`)
 - `templates/`: Authoring scaffolds for initializing `SKILL.md`, rule modules,
   and generated-agent-document structure
 - `scripts/generators/`: Build-flow generators (for example `AGENTS.md`)
@@ -125,8 +125,8 @@ starting formats for:
 
 - `SKILL.md` contracts (including baseline-compliance and
   `result_type`/`validation_status` output envelopes)
-- `rules/*.md` modules (`shared/rules` uses `Applies to: __TARGET_SKILL__`
-  and `Inherited from: shared-rules`)
+- `rules/*.md` modules (`shared/rules` uses `Applies to: __TARGET_SKILL__`,
+  `Inherited from: shared-rules`, plus `Covers` and `Index mode`)
 - generated `AGENTS.md` structure
 - `00_overview` scope rules (including baseline inheritance and conflict guards)
 
@@ -159,7 +159,8 @@ This installs Husky hooks, including Commitlint on `commit-msg`.
 
 This repository is the source for developing skills. Runtime use happens by
 installing the maintained skill folders into a Codex-recognized skills
-directory. Shared policy is already baked into each generated `AGENTS.md`.
+directory. Shared policy is generated into each installed skill under
+`.shared-rules/`, and `AGENTS.md` remains a compact lookup index.
 
 - Project-local install target: `<target-repo>/.agents/skills/`
 - User-level install target: `$HOME/.agents/skills/`

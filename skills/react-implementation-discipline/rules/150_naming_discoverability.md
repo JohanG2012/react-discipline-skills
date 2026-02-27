@@ -12,6 +12,8 @@ searchability, and layer boundaries remain explicit.
 **Applies to:** react-implementation-discipline  
 **Rationale:** Preserves stable entrypoint while delegating to single-focus
 naming rules.
+**Covers:** Naming and Discoverability Contract.
+**Index mode:** reference
 
 ### Requirement
 
@@ -33,6 +35,8 @@ naming rules.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keeps files grep-friendly and ownership obvious.
+**Covers:** File and Export Naming Alignment.
+**Index mode:** reference
 
 ### Requirement
 
@@ -58,6 +62,8 @@ naming rules.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Makes layer responsibility explicit from component names.
+**Covers:** Component Role Naming.
+**Index mode:** reference
 
 ### Requirement
 
@@ -91,6 +97,8 @@ naming rules.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevents domain leakage and junk-drawer naming drift.
+**Covers:** Naming Boundary Hygiene.
+**Index mode:** reference
 
 ### Requirement
 
@@ -117,6 +125,8 @@ naming rules.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Keeps non-component artifacts predictable and discoverable.
+**Covers:** Hook, Endpoint, and DTO Naming.
+**Index mode:** reference
 
 ### Requirement
 

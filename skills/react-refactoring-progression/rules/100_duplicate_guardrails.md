@@ -11,6 +11,8 @@ Defines anti-over-abstraction constraints for duplication recommendations.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents introducing a second architecture home by accident.
+**Covers:** Existing Home Alignment.
+**Index mode:** reference
 
 ### Requirement
 
@@ -29,6 +31,8 @@ Defines anti-over-abstraction constraints for duplication recommendations.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Avoids prop explosion and domain flags in shared UI composites.
+**Covers:** Slots Over Prop Matrix.
+**Index mode:** reference
 
 ### Requirement
 
@@ -49,6 +53,8 @@ Defines anti-over-abstraction constraints for duplication recommendations.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Keeps abstraction scope proportional to the duplication source.
+**Covers:** One-Level-Up Preference.
+**Index mode:** reference
 
 ### Requirement
 
@@ -69,6 +75,8 @@ Defines anti-over-abstraction constraints for duplication recommendations.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Treats intentional duplication as valid when abstraction is
 unsafe.
+**Covers:** Keep-Separate by Default Under High Risk.
+**Index mode:** reference
 
 ### Requirement
 
@@ -87,6 +95,8 @@ unsafe.
 **Priority:** SHOULD  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Respects established repository sharing culture.
+**Covers:** Locality Preference.
+**Index mode:** reference
 
 ### Requirement
 
@@ -104,6 +114,8 @@ unsafe.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** DRY does not justify harder-to-understand APIs.
+**Covers:** Cognitive Load Guard.
+**Index mode:** reference
 
 ### Requirement
 
@@ -123,6 +135,8 @@ unsafe.
 **Priority:** MUST  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Prevents high-churn suggestions in bounded planning modes.
+**Covers:** Refactor Radius Bound.
+**Index mode:** reference
 
 ### Requirement
 
@@ -142,6 +156,8 @@ unsafe.
 **Priority:** SHOULD  
 **Applies to:** react-refactoring-progression  
 **Rationale:** Improves safety by extracting high-leverage subparts first.
+**Covers:** Micro Extraction Before Mega Extraction.
+**Index mode:** reference
 
 ### Requirement
 

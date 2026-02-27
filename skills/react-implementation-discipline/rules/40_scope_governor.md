@@ -11,6 +11,8 @@ Defines hard execution caps and bounded scope expansion behavior.
 **Priority:** MUST  
 **Applies to:** react-implementation-discipline  
 **Rationale:** Prevent implementation drift and keep output reviewable.
+**Covers:** Scope and Churn Caps.
+**Index mode:** reference
 
 ### Requirement
 

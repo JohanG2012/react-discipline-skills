@@ -12,6 +12,8 @@ detection.
 **Applies to:** react-architecture-detection  
 **Rationale:** Speeds repeat detection runs without weakening confidence,
 consistency, or schema correctness.
+**Covers:** Fast-path Detection Reuse.
+**Index mode:** reference
 
 ### Requirement
 

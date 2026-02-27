@@ -13,6 +13,8 @@ shared UI composites during refactor planning.
 **Applies to:** react-refactoring-progression  
 **Rationale:** Enables promote-to-shared-composite refactors without domain
 leakage, parallel homes, or churn-heavy migration.
+**Covers:** Refactor — Promote Feature Components to Shared UI Composites Safely.
+**Index mode:** reference
 
 ### Requirement
 
