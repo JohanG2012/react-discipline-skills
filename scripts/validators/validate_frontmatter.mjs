@@ -220,12 +220,11 @@ async function validateSkillRulePrefixes(skillDir) {
 }
 
 async function validateSharedPolicy() {
-  let content;
-  try {
-    content = await readFile(sharedPolicySkillPath);
-  } catch {
-    return [`Missing shared baseline SKILL.md at ${sharedPolicySkillPath}`];
+  if (!await pathExists(sharedPolicySkillPath)) {
+    return [];
   }
+
+  const content = await readFile(sharedPolicySkillPath);
 
   const frontmatter = parseFrontmatter(content);
   if (!frontmatter) {
