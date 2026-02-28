@@ -267,6 +267,10 @@ deterministic mode selection.
 - Output must include explicit guardrails describing anti-leakage constraints.
 - `revised_plan.guardrails[]` must also include concise constraints against:
   - new shared/common dumping-ground abstractions
+  - non-user-facing top-level `features/<name>/` creation when
+    owner-scoped modules or `lib/**` are appropriate
+  - new sibling top-level feature roots with normalized stem/prefix overlap
+    against existing feature owners
   - endpoint bypass patterns in hooks/UI layers
   - casual shared API client surface expansion when endpoint behavior is not
     stable and cross-domain

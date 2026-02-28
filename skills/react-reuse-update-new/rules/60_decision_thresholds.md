@@ -52,12 +52,23 @@ reviewer-dependent outcomes.
   - update would require multiple flags/options that violate thresholds
   - divergence risk is high
   - coupling/domain leakage risk is high
+- When `decision=new`, apply feature-root gate before finalizing `target_path`:
+  - new top-level `features/<name>/` is valid only for route/nav-level or
+    otherwise user-facing owners,
+  - non-user-facing/internal capability must target
+    `features/<owner>/modules/<name>/` (or local equivalent module subhome),
+  - React-free artifacts should prefer `lib/**`,
+  - if candidate feature name shares normalized stem/prefix with existing
+    top-level feature owner (including simple singular/plural variants), treat
+    as submodule placement under that owner, not a new sibling feature root.
 
 ### Forbidden
 
 - Selecting `reuse` or `update` outcomes that violate threshold limits without
   explicit override handling.
 - Treating high-divergence/high-coupling outcomes as reusable shared abstractions.
+- Returning `decision=new` that introduces a non-user-facing top-level
+  `features/<name>/` root.
 - Omitting applied threshold values from decision output.
 
 ### Notes

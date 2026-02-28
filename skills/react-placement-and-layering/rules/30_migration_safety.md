@@ -25,6 +25,13 @@ Defines migration-aware placement behavior and duplicate-home prevention.
   run (`authoritative_home_map`).
 - Introduce new target structure only when the new scope is isolated,
   self-consistent, and does not create competing homes.
+- Feature-root creation safety:
+  - creating a new top-level `features/<name>/` is allowed only for
+    route/nav-level or otherwise user-facing owners,
+  - non-user-facing capability must remain under an existing owner as
+    `features/<owner>/modules/<name>/` (or local equivalent module subhome),
+  - React-free cross-feature logic should be placed in `lib/**` rather than
+    spawning feature roots.
 - Classify placement work as either:
   - feature task (default: updates/creates only, no moves), or
   - migration task (moves allowed only in explicit migration scope).
@@ -41,6 +48,8 @@ Defines migration-aware placement behavior and duplicate-home prevention.
 ### Forbidden
 
 - Treating two locations as simultaneously correct for the same concern.
+- Creating sibling top-level feature roots with overlapping normalized
+  stem/prefix when one owner can host a module.
 - Introducing broad relocation/migration during routine feature-scope planning.
 - Creating bootstrap folders outside canonical homes.
 - Mixing feature-behavior changes with structural migration by default.
