@@ -33,10 +33,15 @@ leakage, parallel homes, or churn-heavy migration.
      (domain mapping/rules/copy/hooks),
   2. extract domain-agnostic composite in `ui/composites/**` with generic name,
      minimal UI-only state, and root `className` support,
-  3. add thin feature adapter wrapper when domain wiring remains needed,
-  4. replace call sites incrementally inside approved scope only.
+  3. review promoted component export and file base name; if either is
+     domain-specific, rename to domain-agnostic pattern naming and keep
+     file/export alignment,
+  4. add thin feature adapter wrapper when domain wiring remains needed,
+  5. replace call sites incrementally inside approved scope only.
 - Naming and placement requirements:
   - shared composite names must be domain-agnostic and pattern-based,
+  - promoted file base names under `ui/composites/**` must be domain-agnostic
+    and match the primary export name,
   - composite must live in existing `ui/composites/**` home (or
     gravity-equivalent),
   - extracted helpers stay local unless reused by 2+ domains and pure; then
@@ -54,7 +59,7 @@ leakage, parallel homes, or churn-heavy migration.
      - no new dependencies,
      - no new top-level folders.
   4. naming audit:
-     - no domain terms in shared composite names/exports.
+    - no domain terms in shared composite names, file base names, or exports.
 - Deterministic defaults:
   - if promotion certainty is low, default to feature-local duplication with
     primitive reuse.
