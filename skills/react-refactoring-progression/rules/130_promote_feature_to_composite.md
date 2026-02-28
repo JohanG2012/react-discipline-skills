@@ -28,6 +28,15 @@ leakage, parallel homes, or churn-heavy migration.
      props for variability),
   5. promotion does not create a new concern home and uses existing
      authoritative UI composite home.
+- Hard gate: owner-noun naming must not be moved as-is.
+  - If the promoted component export name or file base name contains a
+    feature-owner noun (or starts with one), do not move it directly to
+    `ui/composites/**`.
+  - In that case, promotion must use this deterministic 2-step path:
+    1. keep/create a feature-owned wrapper that retains domain wiring
+       (domain hooks, store usage, API wiring, mapping),
+    2. extract a domain-agnostic inner composite with pattern-based naming and
+       UI-only dependencies into `ui/composites/**`.
 - Promotion action order must be:
   1. split responsibilities so feature remains owner of domain meaning
      (domain mapping/rules/copy/hooks),
@@ -74,6 +83,8 @@ leakage, parallel homes, or churn-heavy migration.
 - Promoting when disqualifiers exist:
   - component imports from `features/**`, `api/**`, `store/**`, or `pages/**`,
   - component encodes domain meaning in naming/props/hardcoded copy,
+  - component name contains feature-owner noun and is moved into
+    `ui/composites/**` as-is (without wrapper + inner-composite split),
   - generalization requires domain flags, large prop matrices, or
     config-object abstraction,
   - expected divergence remains high across domains,
