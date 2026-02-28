@@ -40,6 +40,21 @@ const INTERACTIVE_OR_STRUCTURAL_TAGS = new Set([
   "details",
   "summary",
 ]);
+const ATOMIC_CONTROL_TAGS = new Set([
+  "button",
+  "input",
+  "select",
+  "textarea",
+  "a",
+]);
+const ATOMIC_CONTROL_EXCLUDED_PROPS = new Set([
+  "children",
+  "className",
+  "key",
+  "ref",
+  "style",
+  "id",
+]);
 
 function toPosixPath(input) {
   return input.replaceAll(path.sep, "/");
@@ -99,6 +114,7 @@ function parseArgs(argv) {
           "",
           "Output:",
           "  JSON with candidate cross-file review groups only.",
+          "  review_groups[].pattern_hint is a heuristic: structural_cluster|atomic_control.",
           "",
           "Example:",
           "  --frontend-root apps/web/src",
@@ -251,6 +267,24 @@ function extractClassTokens(tagSource) {
   return [...tokens];
 }
 
+function extractPropKeys(tagSource, tagName) {
+  const keys = new Set();
+  const prefix = `<${tagName}`;
+  const attributes = (
+    tagSource.startsWith(prefix) ? tagSource.slice(prefix.length) : tagSource
+  ).replace(/\/?>$/, "");
+  const assignedPropPattern = /\s([A-Za-z_:][A-Za-z0-9:._-]*)\s*=(?!=)/g;
+
+  let match = assignedPropPattern.exec(attributes);
+  while (match) {
+    const key = match[1];
+    keys.add(key);
+    match = assignedPropPattern.exec(attributes);
+  }
+
+  return [...keys];
+}
+
 function extractTags(source) {
   const tags = [];
   const lineStarts = buildLineStarts(source);
@@ -268,12 +302,14 @@ function extractTags(source) {
     const line = lineFromOffset(match.index, lineStarts);
     const isDom = /^[a-z]/.test(name);
     const classTokens = extractClassTokens(tagSource);
+    const propKeys = extractPropKeys(tagSource, name);
 
     tags.push({
       name,
       line,
       isDom,
       classTokens,
+      propKeys,
     });
 
     match = tagRegex.exec(source);
@@ -362,8 +398,47 @@ function collectWindowOccurrences(relPath, tags) {
         endLine,
         size,
         specificityScore: specificity.score,
+        patternHint: "structural_cluster",
       });
     }
+  }
+
+  return occurrences;
+}
+
+function collectAtomicControlOccurrences(relPath, tags) {
+  const occurrences = [];
+
+  for (const tag of tags) {
+    if (!tag.isDom) continue;
+
+    const lowerName = tag.name.toLowerCase();
+    if (!ATOMIC_CONTROL_TAGS.has(lowerName)) continue;
+
+    const classTokens = [...new Set(tag.classTokens)].sort();
+    const propKeys = [...new Set(tag.propKeys)]
+      .filter((prop) => !ATOMIC_CONTROL_EXCLUDED_PROPS.has(prop))
+      .sort();
+
+    const hasStableClass = classTokens.length >= 2;
+    const hasStableProps = propKeys.length >= 1;
+    if (!hasStableClass || !hasStableProps) continue;
+
+    const signature = `atomic:${lowerName}|class:${classTokens.join(".")}|props:${propKeys.join(",")}`;
+    const specificityScore = 2
+      + Math.min(classTokens.length, 10) * 0.6
+      + Math.min(propKeys.length, 8) * 0.4
+      + ((lowerName === "button" || lowerName === "input") ? 1 : 0);
+
+    occurrences.push({
+      signature,
+      relPath,
+      startLine: tag.line,
+      endLine: tag.line,
+      size: 1,
+      specificityScore,
+      patternHint: "atomic_control",
+    });
   }
 
   return occurrences;
@@ -402,8 +477,10 @@ function buildGroups(signatureMap, limit) {
 
     const avgSpecificity = perFile.reduce((sum, item) => sum + item.specificityScore, 0) / perFile.length;
     const avgWindowSize = perFile.reduce((sum, item) => sum + item.size, 0) / perFile.length;
+    const patternHint = perFile[0].patternHint ?? "structural_cluster";
+    const atomicBonus = patternHint === "atomic_control" ? 2 : 0;
 
-    const score = (perFile.length * 4) + (avgWindowSize * 1.5) + avgSpecificity;
+    const score = (perFile.length * 4) + (avgWindowSize * 1.5) + avgSpecificity + atomicBonus;
 
     const filePaths = perFile.map((item) => item.relPath).sort();
     const sampleLocations = perFile
@@ -413,6 +490,7 @@ function buildGroups(signatureMap, limit) {
 
     groups.push({
       signature,
+      pattern_hint: patternHint,
       score,
       file_paths: filePaths,
       sample_locations: sampleLocations,
@@ -428,12 +506,13 @@ function buildGroups(signatureMap, limit) {
   const seenPathSets = new Set();
   const limited = [];
   for (const group of groups) {
-    const pathSetKey = group.file_paths.join("|");
+    const pathSetKey = `${group.pattern_hint}|${group.file_paths.join("|")}`;
     if (seenPathSets.has(pathSetKey)) continue;
     seenPathSets.add(pathSetKey);
 
     limited.push({
       group_id: `g${limited.length + 1}`,
+      pattern_hint: group.pattern_hint,
       file_paths: group.file_paths,
       sample_locations: group.sample_locations,
     });
@@ -458,9 +537,12 @@ async function main() {
     if (!source.includes("<")) continue;
 
     const tags = extractTags(source);
-    if (tags.length < 4) continue;
+    if (!tags.length) continue;
 
-    const occurrences = collectWindowOccurrences(relPath, tags);
+    const occurrences = [
+      ...collectWindowOccurrences(relPath, tags),
+      ...collectAtomicControlOccurrences(relPath, tags),
+    ];
     for (const occurrence of occurrences) {
       if (!signatureMap.has(occurrence.signature)) {
         signatureMap.set(occurrence.signature, []);

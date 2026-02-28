@@ -248,7 +248,9 @@ Constraints:
   and only scans those roots.
 - `scripts/scan_duplicate_ui_clusters.mjs` scans repositories for repeated
   JSX/DOM structural clusters across files and returns candidate review groups
-  plus deduped `file_paths[]` for side-by-side inspection.
+  plus deduped `file_paths[]` for side-by-side inspection, including atomic
+  interactive-control candidate hints when repeated control signatures are
+  detected.
 - `schemas/output.schema.json` defines strict machine validation.
 
 ## Examples

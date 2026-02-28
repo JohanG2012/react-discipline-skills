@@ -28,6 +28,7 @@ Defines qualification and scoring for structural duplication candidates.
   - layout skeletons
   - loading/error/empty boundary trees
   - interaction state-machine patterns
+  - atomic interactive control units
   - config schemas (table/form structures)
   - hook orchestration flows
   - domain-parallel component structures
@@ -58,6 +59,11 @@ Defines qualification and scoring for structural duplication candidates.
   - `extract_lib_utility`
 - Recommend `extract_ui_composite` only when variation can be represented with
   slots/children and no domain mode flags are needed.
+- For `pattern_type=atomic_control`, recommend `extract_ui_primitive` when
+  repeated interactive controls have stable class-token and prop-key
+  signatures across candidate files.
+- If interactive control signatures are unstable or domain-specific, prefer
+  `keep_separate` or feature-local extraction.
 - Prefer "one level up":
   - within-feature duplication -> feature-local extraction first
   - cross-feature duplication -> shared UI extraction only when leakage risk is

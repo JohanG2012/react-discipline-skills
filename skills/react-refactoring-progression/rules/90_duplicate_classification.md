@@ -23,12 +23,16 @@ strategy.
   - `layout_skeleton`
   - `data_state_boundary`
   - `interaction_state_machine`
+  - `atomic_control`
   - `config_schema`
   - `hook_orchestration`
   - `domain_parallel_component`
   - `mapping_pipeline`
   - `permission_gating`
   - `other`
+- Classify as `atomic_control` when the repeated unit is an interactive control
+  (for example `button`, `input`, `select`, `textarea`, `a`) and candidate
+  files share stable class-token and prop-key signatures for that control.
 - If `pattern_type=other`, include a concise `type_explanation`.
 
 ### Forbidden

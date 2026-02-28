@@ -619,6 +619,7 @@
             "layout_skeleton",
             "data_state_boundary",
             "interaction_state_machine",
+            "atomic_control",
             "config_schema",
             "hook_orchestration",
             "domain_parallel_component",
@@ -650,7 +651,8 @@
               "layout_skeleton_similarity",
               "config_schema_similarity",
               "state_machine_similarity",
-              "mapping_pipeline_similarity"
+              "mapping_pipeline_similarity",
+              "atomic_control_signature_similarity"
             ]
           },
           "minItems": 2,
@@ -795,6 +797,29 @@
             "required": [
               "keep_separate_reason"
             ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "pattern_type": {
+                "const": "atomic_control"
+              }
+            },
+            "required": [
+              "pattern_type",
+              "recommended_target"
+            ]
+          },
+          "then": {
+            "properties": {
+              "recommended_target": {
+                "enum": [
+                  "extract_ui_primitive",
+                  "keep_separate"
+                ]
+              }
+            }
           }
         },
         {
