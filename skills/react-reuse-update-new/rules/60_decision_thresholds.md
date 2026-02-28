@@ -56,11 +56,13 @@ reviewer-dependent outcomes.
   - new top-level `features/<name>/` is valid only for route/nav-level or
     otherwise user-facing owners,
   - non-user-facing/internal capability must target
-    `features/<owner>/modules/<name>/` (or local equivalent module subhome),
+    direct owner-scoped capability folder `features/<owner>/<capability>/`
+    (or local equivalent capability subhome),
   - React-free artifacts should prefer `lib/**`,
   - if candidate feature name shares normalized stem/prefix with existing
     top-level feature owner (including simple singular/plural variants), treat
-    as submodule placement under that owner, not a new sibling feature root.
+    as owner-scoped capability placement under that owner, not a new sibling
+    feature root.
 
 ### Forbidden
 

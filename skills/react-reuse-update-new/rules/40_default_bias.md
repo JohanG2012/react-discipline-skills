@@ -27,10 +27,10 @@ ambiguity exists but safe defaults are available.
   - API placement unclear -> use the existing API home
   - folder placement unclear -> follow upstream gravity and nearest established
     home from placement outputs
-  - new top-level feature vs module unclear -> choose owner-scoped module
-    placement (`features/<owner>/modules/<name>/`) or `lib/**` for React-free
-    logic; reserve top-level `features/<name>/` for route/nav-level user-facing
-    scope
+  - new top-level feature vs capability unclear -> choose owner-scoped
+    capability placement (`features/<owner>/<capability>/`) or `lib/**` for
+    React-free logic; reserve top-level `features/<name>/` for route/nav-level
+    user-facing scope
   - naming unclear -> match nearest-neighbor naming
 - Pause only when at least one condition is true:
   - safe progress is impossible without clarification

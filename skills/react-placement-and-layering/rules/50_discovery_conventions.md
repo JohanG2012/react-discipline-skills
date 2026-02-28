@@ -23,20 +23,21 @@ final placement output.
   - endpoint and DTO modules
   - store slices and state ownership patterns
   - naming/export conventions in the active area
-- Feature-root vs module gate is mandatory before proposing `features/<name>/`
+- Feature-root vs capability gate is mandatory before proposing
+  `features/<name>/`
   creation:
   - allow a new top-level `features/<name>/` only when the concern is
     route/nav-level or otherwise directly user-facing,
-  - for non-route/non-nav/internal capability, place under
-    `features/<owner>/modules/<name>/` (or existing local equivalent module
-    subhome),
+  - for non-route/non-nav/internal capability, place under direct owner-scoped
+    capability folder `features/<owner>/<capability>/` (or existing local
+    equivalent capability subhome),
   - if the candidate artifact is React-free logic, prefer `lib/**` instead of a
-    feature root/module path,
+    feature-root/capability path,
   - run stem/prefix collision check against existing top-level feature owners;
     if candidate name shares normalized stem/prefix (including simple
     singular/plural variants, such as `task*` with `tasks/` or `planner*` with
-    `planner/`), treat it as a submodule under the matching owner and do not
-    propose a new sibling feature root.
+    `planner/`), treat it as an owner-scoped capability under the matching
+    owner and do not propose a new sibling feature root.
 - Naming and export checks must enforce local consistency:
   - pages: `*Page` unless framework or local conventions require otherwise
   - feature sections: `*Section`
@@ -60,7 +61,7 @@ final placement output.
 - Proposing new artifact homes before discovery checks complete.
 - Creating non-user-facing top-level `features/<name>/` roots.
 - Proposing a new top-level feature root when stem/prefix collision indicates an
-  existing owner feature should host a module.
+  existing owner feature should host a capability.
 - Inventing a new naming/export style in an established area.
 - Treating naming ambiguity as justification for structural churn.
 

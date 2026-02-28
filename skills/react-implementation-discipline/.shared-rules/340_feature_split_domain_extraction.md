@@ -32,6 +32,18 @@ hide multiple domains and destabilize placement/reuse boundaries.
   - cross-domain coupling grows inside one feature (shared helpers/state/UI
     glue for unrelated sub-areas),
   - reviewability breaks down (changes routinely span unrelated sub-areas).
+- Capability clustering policy (inside one feature owner):
+  - default 1-2 distinct capability clusters: keep flat owner homes
+    (`domain/**`, `hooks/**`, `components/**`, `sections/**`),
+  - 3+ distinct capability clusters: capability folders are preferred directly
+    under `features/<domain>/`,
+  - cluster signals should be measurable (for example distinct sub-areas with
+    dedicated sections/hooks/domain rules, repeated multi-cluster touches, or
+    clearly separated data-operation groups).
+- Trigger response is review + plan:
+  - produce bounded extraction/capability-folder recommendations,
+  - do not perform auto-migration or broad restructuring without explicit
+    approved scope.
 - Required extraction outcome when triggered:
   - extract each domain sub-area into first-class feature ownership with
     `features/<domain>/sections/**`, `components/**`, `hooks/**`,
@@ -63,3 +75,5 @@ hide multiple domains and destabilize placement/reuse boundaries.
   example `features/<x>/api/**` alongside canonical `api/**`).
 - Introducing `views/` inside features as a substitute for `sections/`.
 - Splitting by technical layer taxonomy (MVC-style) instead of domain ownership.
+- Auto-restructuring immediately when split/capability-cluster signals are
+  detected.

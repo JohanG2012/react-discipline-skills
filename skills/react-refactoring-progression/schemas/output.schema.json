@@ -494,6 +494,11 @@
             "fetch_outside_endpoint_layer",
             "domain_leakage_shared_ui",
             "redundant_server_state_mirror",
+            "prop_drilling_debt",
+            "umbrella_feature_drift",
+            "feature_shadow_homes",
+            "feature_too_big_triggers",
+            "capability_folder_recommendation",
             "other"
           ]
         },
@@ -507,6 +512,14 @@
           ]
         },
         "affected_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "affected_folders": {
           "type": "array",
           "items": {
             "type": "string",

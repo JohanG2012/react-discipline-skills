@@ -26,8 +26,9 @@ high-impact ambiguity.
   - unsure abstraction -> keep implementation concrete
   - API placement unclear -> use the existing API home
   - folder placement unclear -> follow gravity and nearest established home
-  - new top-level feature vs module unclear -> choose
-    `features/<owner>/modules/<name>/` (or `lib/**` when React-free); reserve
+  - new top-level feature vs capability unclear -> choose
+    owner-scoped capability placement
+    (`features/<owner>/<capability>/`) or `lib/**` when React-free; reserve
     new top-level `features/<name>/` for route/nav-level user-facing scope
   - naming unclear -> match nearest-neighbor naming
 - Pause only when both are true:

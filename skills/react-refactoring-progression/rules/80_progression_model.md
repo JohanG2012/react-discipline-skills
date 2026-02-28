@@ -31,6 +31,14 @@ automation.
   - Tier D requires explicit migration mode and approval
 - Escalation order must remain:
   - Tier A -> Tier B -> Tier C -> Tier D
+- Detection-to-tier mapping must remain deterministic:
+  - `feature_too_big_triggers` defaults to Tier B follow-up,
+  - escalate `feature_too_big_triggers` to Tier C follow-up when placement
+    correction is required,
+  - `capability_folder_recommendation` is Tier C follow-up by default because
+    it is structural.
+- Tier C findings must include structural evidence paths (affected files and
+  owning folders) before they can be accepted as follow-up output.
 
 ### Forbidden
 

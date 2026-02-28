@@ -31,9 +31,15 @@ deterministic in legacy or evolving repositories.
   skills and must not be recomputed unless pause/escalation resolves a conflict.
 - If move mode is explicitly enabled, keep moves small and complete import
   updates in the same change.
+- When governance triggers fire (for example oversized feature signals, split
+  triggers, or capability-cluster thresholds), output must:
+  - recommend the smallest in-cap next step,
+  - optionally include scope-expansion follow-up when needed for correctness,
+  - avoid auto-restructure behavior.
 
 ### Forbidden
 
 - Two active homes for the same concern in one scope.
 - Mixing broad structural migration with unrelated behavior changes.
 - Recomputing gravity independently in downstream skills without escalation.
+- Auto-restructuring repositories when governance triggers are detected.

@@ -20,6 +20,10 @@ causes architectural drift and refactor explosions.
 
 - Core rule:
   - `features/**` must not import from other `features/**` modules.
+  - Composition boundary remains outside features:
+    - cross-feature composition is allowed only in `pages/**` and `core/**`,
+    - feature sections/components/hooks may not render/import other feature
+      sections/components/hooks.
   - This includes:
     - UI components/sections from another feature,
     - hooks from another feature,

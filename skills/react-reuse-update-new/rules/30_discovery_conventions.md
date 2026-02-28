@@ -27,19 +27,21 @@ evidence-based discovery in the active repository.
   - state conventions (server-state, local-state, global store), including
     server-state cache wiring patterns (for example QueryClient usage in core
     wiring) when present
-- Feature-root vs module gate is mandatory before any `decision=new` path that
+- Feature-root vs capability gate is mandatory before any `decision=new` path
+  that
   targets `features/**`:
   - allow a new top-level `features/<name>/` only when the requested capability
     is route/nav-level or otherwise directly user-facing,
-  - for non-route/non-nav/internal capability, target
-    `features/<owner>/modules/<name>/` (or local equivalent module subhome),
+  - for non-route/non-nav/internal capability, target direct owner-scoped
+    capability folder `features/<owner>/<capability>/` (or local equivalent
+    capability subhome),
   - if the new artifact is React-free logic, target `lib/**` instead of
     feature-root creation,
   - compare candidate feature name against existing top-level feature owners and
     run normalized stem/prefix matching (including simple singular/plural
     variants, such as `task*` with `tasks/` and `planner*` with `planner/`);
-    stem/prefix matches must resolve to submodule placement under the matching
-    owner, not a new sibling feature root.
+    stem/prefix matches must resolve to owner-scoped capability placement under
+    the matching owner, not a new sibling feature root.
 - Discovery must verify established naming/export conventions in the active area
   before proposing new paths, including:
   - one concept per role (avoid mixed `Page`/`Route`/`Screen` synonyms in one

@@ -26,6 +26,9 @@ metadata.
   - umbrella-feature drift (single feature acting like a mini `features` root)
   - feature-local presentation/transport shadow homes (for example
     `features/*/views/**`, `*View` naming, `features/*/api/**`)
+  - feature-too-big governance triggers fired (`size_review_required=true`)
+  - capability-folder recommendation triggers (`3+` distinct capability
+    clusters in one feature owner)
 - Anti-pattern tier defaults:
   - implicit visibility in shared presentational UI -> Tier A
   - fetch outside canonical endpoint layer -> Tier B (Tier C when widespread)
@@ -35,6 +38,9 @@ metadata.
   - prop-drilling debt -> Tier B (Tier C when subtree breadth/churn is high)
   - umbrella-feature drift -> Tier B (Tier C when widespread and high-churn)
   - feature-local shadow homes for views/api -> Tier B
+  - feature-too-big triggers fired -> Tier B follow-up
+    (Tier C follow-up when placement correction is required)
+  - capability-folder recommendation (3+ clusters) -> Tier C follow-up
 - Detection heuristics must include:
   - implicit visibility:
     - component in `ui/primitives/**` or `ui/composites/**`
@@ -61,11 +67,21 @@ metadata.
     - feature paths matching `features/*/views/**` or `features/**/*View.*`,
     - feature paths matching `features/*/api/**` while canonical API home
       exists
+  - feature-too-big triggers fired:
+    - hard trigger(s) from `sr-feature-too-big-triggers` are present, or
+    - 2+ soft trigger signals from `sr-feature-too-big-triggers` are present
+      and structural risk is clear
+  - capability-folder recommendation:
+    - `3+` distinct capability clusters detected under one
+      `features/<domain>/` owner per `sr-feature-capability-clusters`,
+    - extraction remains review/planning guidance (no auto-migration)
 - Emit findings with:
   - stable `finding_id`
   - `type`
   - assigned `tier`
   - `affected_files[]`
+  - `affected_folders[]` for structural findings (or clear folder-level paths
+    represented in `affected_files[]`)
   - `recommended_step_id`
 - Ensure out-of-mode findings are surfaced as non-blocking follow-up guidance.
 - Detection focus should align with standards enforced by:
@@ -79,6 +95,7 @@ metadata.
 ### Forbidden
 
 - Emitting anti-pattern findings without traceable affected files.
+- Emitting structural anti-pattern findings without folder-level evidence.
 - Promoting out-of-mode findings to blocking active-step status.
 - Producing recommendations that are purely aesthetic or preference-driven.
 - Treating script output as authoritative evidence without direct rule-based

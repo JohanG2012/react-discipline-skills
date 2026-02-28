@@ -29,7 +29,8 @@ Defines migration-aware placement behavior and duplicate-home prevention.
   - creating a new top-level `features/<name>/` is allowed only for
     route/nav-level or otherwise user-facing owners,
   - non-user-facing capability must remain under an existing owner as
-    `features/<owner>/modules/<name>/` (or local equivalent module subhome),
+    direct capability folder `features/<owner>/<capability>/` (or local
+    equivalent capability subhome),
   - React-free cross-feature logic should be placed in `lib/**` rather than
     spawning feature roots.
 - Classify placement work as either:
@@ -49,7 +50,7 @@ Defines migration-aware placement behavior and duplicate-home prevention.
 
 - Treating two locations as simultaneously correct for the same concern.
 - Creating sibling top-level feature roots with overlapping normalized
-  stem/prefix when one owner can host a module.
+  stem/prefix when one owner can host a capability.
 - Introducing broad relocation/migration during routine feature-scope planning.
 - Creating bootstrap folders outside canonical homes.
 - Mixing feature-behavior changes with structural migration by default.
