@@ -55,6 +55,14 @@ const ATOMIC_CONTROL_EXCLUDED_PROPS = new Set([
   "style",
   "id",
 ]);
+const COMPONENT_PROP_EXCLUDED_KEYS = new Set([
+  "children",
+  "className",
+  "key",
+  "ref",
+  "style",
+  "id",
+]);
 
 function toPosixPath(input) {
   return input.replaceAll(path.sep, "/");
@@ -114,7 +122,8 @@ function parseArgs(argv) {
           "",
           "Output:",
           "  JSON with candidate cross-file review groups only.",
-          "  review_groups[].pattern_hint is a heuristic: structural_cluster|atomic_control.",
+          "  review_groups[].pattern_hint is a heuristic:",
+          "  structural_cluster|component_composition|atomic_control.",
           "",
           "Example:",
           "  --frontend-root apps/web/src",
@@ -319,7 +328,21 @@ function extractTags(source) {
 }
 
 function buildWindowSignature(windowTags) {
-  const normalized = windowTags.map((tag) => (tag.isDom ? tag.name.toLowerCase() : "C"));
+  const normalized = windowTags.map((tag) => {
+    if (tag.isDom) {
+      return tag.name.toLowerCase();
+    }
+
+    const propSignature = [...new Set(tag.propKeys)]
+      .filter((prop) => !COMPONENT_PROP_EXCLUDED_KEYS.has(prop))
+      .sort()
+      .slice(0, 6)
+      .join(",");
+
+    return propSignature
+      ? `C:${tag.name}(${propSignature})`
+      : `C:${tag.name}`;
+  });
   return normalized.join(">");
 }
 
@@ -364,9 +387,9 @@ function windowSpecificity(windowTags) {
 
 function collectWindowOccurrences(relPath, tags) {
   const occurrences = [];
-  if (tags.length < 4) return occurrences;
+  if (tags.length < 2) return occurrences;
 
-  const minSize = 4;
+  const minSize = 2;
   const maxSize = Math.min(8, tags.length);
 
   for (let size = minSize; size <= maxSize; size += 1) {
@@ -377,7 +400,9 @@ function collectWindowOccurrences(relPath, tags) {
       if (endLine - startLine > 90) continue;
 
       const domCount = windowTags.filter((tag) => tag.isDom).length;
-      if (domCount < 2) continue;
+      const componentCount = windowTags.length - domCount;
+      if (size < 4 && componentCount < 2) continue;
+      if (domCount < 2 && componentCount < 2) continue;
 
       const signature = buildWindowSignature(windowTags);
       const specificity = windowSpecificity(windowTags);
@@ -398,7 +423,9 @@ function collectWindowOccurrences(relPath, tags) {
         endLine,
         size,
         specificityScore: specificity.score,
-        patternHint: "structural_cluster",
+        patternHint: componentCount >= 2
+          ? "component_composition"
+          : "structural_cluster",
       });
     }
   }
@@ -479,8 +506,13 @@ function buildGroups(signatureMap, limit) {
     const avgWindowSize = perFile.reduce((sum, item) => sum + item.size, 0) / perFile.length;
     const patternHint = perFile[0].patternHint ?? "structural_cluster";
     const atomicBonus = patternHint === "atomic_control" ? 2 : 0;
+    const componentBonus = patternHint === "component_composition" ? 1.5 : 0;
 
-    const score = (perFile.length * 4) + (avgWindowSize * 1.5) + avgSpecificity + atomicBonus;
+    const score = (perFile.length * 4)
+      + (avgWindowSize * 1.5)
+      + avgSpecificity
+      + atomicBonus
+      + componentBonus;
 
     const filePaths = perFile.map((item) => item.relPath).sort();
     const sampleLocations = perFile

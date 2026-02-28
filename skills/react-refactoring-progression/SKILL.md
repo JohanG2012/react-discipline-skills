@@ -252,10 +252,10 @@ Constraints:
   supports optional repeatable `--home-dir` hints (`<dir>` or
   `<dir>=<canonical>`), and only scans supplied roots.
 - `scripts/scan_duplicate_ui_clusters.mjs` scans repositories for repeated
-  JSX/DOM structural clusters across files and returns candidate review groups
-  plus deduped `file_paths[]` for side-by-side inspection, including atomic
-  interactive-control candidate hints when repeated control signatures are
-  detected.
+  JSX/DOM and React-component composition clusters across files and returns
+  candidate review groups plus deduped `file_paths[]` for side-by-side
+  inspection, including atomic interactive-control candidate hints when
+  repeated control signatures are detected.
 - `schemas/output.schema.json` defines strict machine validation.
 
 ## Examples

@@ -39,8 +39,8 @@ rule-based agent judgment.
   - use returned `review_groups[]` and `file_paths[]` only as candidate queues
     for side-by-side review.
   - when present, use `review_groups[].pattern_hint` as a heuristic cue
-    (`structural_cluster` or `atomic_control`) only; never as final
-    classification.
+    (`structural_cluster`, `component_composition`, or `atomic_control`) only;
+    never as final classification.
 - Script output is heuristic and non-authoritative:
   - treat all script results as potential false positives,
   - dismiss unsupported candidates after direct evidence review,
