@@ -35,6 +35,19 @@ Defines deterministic, risk-ordered planning behavior.
   - when `clarification_answers` are provided on resume, continue planning and
     produce a final `refactor_plan`/error result (not another duplicate
     clarification for already-answered items).
+- Dedicated no-op guard:
+  - if dedicated mode is explicitly requested but the request does not provide
+    specific refactor targets/instructions, run bounded discovery first,
+  - treat rule-defined opportunities as meaningful by default:
+    - any actionable issue/finding/opportunity derived from active shared or
+      skill rules counts as meaningful,
+  - if no meaningful improvement is found after that discovery, do not force
+    speculative/filler steps and do not emit a full findings report,
+  - return an accepted `refactor_plan` with empty `plan.steps[]` plus concise
+    guidance to rerun with specific improvement goals,
+  - this no-op guard takes precedence over clarification requests for purely
+    open-ended "refactor something" prompts when no meaningful opportunities
+    are found.
 - Use canonical tier labels only: `A`, `B`, `C`, `D`.
 - Order active plan steps from lower-risk to higher-risk tiers.
 - Apply deterministic ordering with no additional custom ordering beyond:
@@ -79,6 +92,10 @@ Defines deterministic, risk-ordered planning behavior.
   "refactor for future" rationale.
 - Asking low-value stylistic clarification questions that do not change planning
   decisions.
+- Fabricating low-value refactor steps to avoid returning an empty dedicated
+  plan when no meaningful opportunities are found.
+- Returning dedicated no-op output when actionable rule-defined opportunities
+  exist in current scope.
 
 ### Notes
 

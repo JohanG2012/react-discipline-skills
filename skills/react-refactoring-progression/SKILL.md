@@ -207,6 +207,14 @@ Constraints:
   include `D` when needed).
 - `clarification_request`, `validation_error`, and `dependency_error` must
   include no `plan` payload.
+- Dedicated no-op guard:
+  - if dedicated mode is requested without specific refactor instructions and no
+    meaningful opportunities are found, return accepted `refactor_plan` with
+    `plan.steps=[]` and concise guidance to rerun with specific targets.
+  - "meaningful opportunities" includes any actionable issue/finding/opportunity
+    defined by active shared or skill rules in current scope.
+  - in `output_mode=human`, keep `presentation.user_markdown` concise (no full
+    findings report) for this case.
 
 ## Quick reference rules
 

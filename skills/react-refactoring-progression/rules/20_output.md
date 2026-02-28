@@ -75,6 +75,18 @@ Defines strict result types and payload constraints.
     test-only improvement is used as fallback value.
 - Resolve payload/display behavior for `output_mode` via
   `sr-output-discipline` and `sr-output-mode-resolution`.
+- Dedicated no-op output behavior:
+  - when `refactor_mode=dedicated`, request scope is non-specific, and no
+    meaningful opportunities are found, keep output minimal:
+    - "no meaningful opportunities" means no actionable opportunities/findings
+      were detected from active shared/skill rules in the current scope,
+    - return `result_type=refactor_plan` and `validation_status=accepted`,
+    - set `plan.steps=[]`,
+    - keep `presentation.user_markdown` concise in human mode:
+      - "No meaningful refactoring opportunities were found in current scope."
+      - "Provide more specific refactor targets/instructions and run again."
+  - in this no-op case, do not emit full-report markdown sections (tier
+    breakdowns, long findings dumps, or duplicate-cluster detail blocks).
 
 ### Forbidden
 
@@ -87,6 +99,10 @@ Defines strict result types and payload constraints.
 - Returning partial `refactor_plan` output when required context is missing.
 - Returning `clarification_request` without structured options.
 - Emitting non-enum status strings.
+- Emitting verbose full-report human markdown for the dedicated no-op case where
+  no meaningful opportunities are found.
+- Emitting dedicated no-op output when any actionable rule-defined
+  opportunities/findings exist in current scope.
 
 ### Notes
 
