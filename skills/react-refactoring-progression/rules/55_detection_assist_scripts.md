@@ -26,6 +26,10 @@ rule-based agent judgment.
     required),
   - `--frontend-root` must point to frontend source root (for example
     `apps/web/src`), not the package root,
+  - when a trusted architecture-detection result is available, pass relevant
+    home-dir hints using repeatable `--home-dir` (for example
+    `--home-dir views=pages --home-dir state=store`) to align script inference
+    with detected gravity/home conventions,
   - scanner must review only supplied frontend roots.
 - Duplicate-cluster candidate scan:
   - run
@@ -51,6 +55,8 @@ rule-based agent judgment.
 ### Forbidden
 
 - Running helper scripts without required `--frontend-root` input.
+- Treating `--home-dir` hints as authoritative overrides when direct repository
+  evidence disagrees.
 - Auto-scanning entire monorepo roots when only frontend source roots are
   required.
 - Treating empty or dismissed script output as a blocker.

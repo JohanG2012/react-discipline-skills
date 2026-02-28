@@ -5,7 +5,32 @@ import path from "path";
 
 const DEFAULT_LIMIT = 10;
 const CODE_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"]);
-const EXPECTED_SOURCE_HOME_DIRS = ["ui", "features", "pages", "api", "core", "hooks", "lib", "store", "config"];
+const DEFAULT_HOME_PREFIX_TO_CANONICAL = new Map([
+  ["features", "features"],
+  ["ui", "ui"],
+  ["pages", "pages"],
+  ["views", "pages"],
+  ["api", "api"],
+  ["core", "core"],
+  ["hooks", "hooks"],
+  ["lib", "lib"],
+  ["store", "store"],
+  ["state", "store"],
+  ["config", "config"],
+]);
+const DEFAULT_EXPECTED_SOURCE_HOME_DIRS = [
+  "ui",
+  "features",
+  "pages",
+  "views",
+  "api",
+  "core",
+  "hooks",
+  "lib",
+  "store",
+  "state",
+  "config",
+];
 const EXCLUDE_DIRS = new Set([
   ".git",
   ".next",
@@ -16,6 +41,14 @@ const EXCLUDE_DIRS = new Set([
   "dist",
   "node_modules",
   "out",
+]);
+const UI_FORBIDDEN_IMPORTED_HOMES = new Set([
+  "features",
+  "api",
+  "store",
+  "state",
+  "pages",
+  "views",
 ]);
 
 function toPosixPath(input) {
@@ -38,6 +71,7 @@ function parseArgs(argv) {
     repo: process.cwd(),
     limit: DEFAULT_LIMIT,
     frontendRoots: [],
+    homeDirs: [],
     pathsOnly: false,
   };
 
@@ -64,6 +98,14 @@ function parseArgs(argv) {
       }
       continue;
     }
+    if (arg === "--home-dir") {
+      const next = argv[i + 1];
+      if (next) {
+        args.homeDirs.push(next);
+        i += 1;
+      }
+      continue;
+    }
     if (arg === "--paths-only") {
       args.pathsOnly = true;
       continue;
@@ -77,6 +119,7 @@ function parseArgs(argv) {
           "  --repo <path>      Repository root to scan (default: cwd)",
           "  --limit <n>        Max candidates to return (default: 10)",
           "  --frontend-root    Frontend source root to scan (repeatable, required)",
+          "  --home-dir         Optional home dir override (repeatable): <dir> or <dir>=<canonical>",
           "  --paths-only       Print only file paths, one per line",
           "  -h, --help         Show this help",
           "",
@@ -94,8 +137,52 @@ function parseArgs(argv) {
   return args;
 }
 
-async function hasExpectedSourceHomes(absPath) {
-  for (const dirName of EXPECTED_SOURCE_HOME_DIRS) {
+function normalizeHomeDirName(value) {
+  return value
+    .trim()
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "")
+    .replace(/^src\//, "");
+}
+
+function parseHomeDirOverride(rawValue) {
+  const value = normalizeHomeDirName(rawValue);
+  if (!value) return null;
+
+  const separators = ["=", ":"];
+  for (const separator of separators) {
+    const splitAt = value.indexOf(separator);
+    if (splitAt > 0) {
+      const prefix = normalizeHomeDirName(value.slice(0, splitAt));
+      const canonical = normalizeHomeDirName(value.slice(splitAt + 1));
+      if (!prefix || !canonical) return null;
+      return { prefix, canonical };
+    }
+  }
+
+  const defaultCanonical = DEFAULT_HOME_PREFIX_TO_CANONICAL.get(value) ?? value;
+  return { prefix: value, canonical: defaultCanonical };
+}
+
+function buildHomeConfig(homeDirOverrides) {
+  const homePrefixToCanonical = new Map(DEFAULT_HOME_PREFIX_TO_CANONICAL);
+  const expectedSourceHomeDirs = new Set(DEFAULT_EXPECTED_SOURCE_HOME_DIRS);
+
+  for (const rawOverride of homeDirOverrides) {
+    const parsed = parseHomeDirOverride(rawOverride);
+    if (!parsed) continue;
+    homePrefixToCanonical.set(parsed.prefix, parsed.canonical);
+    expectedSourceHomeDirs.add(parsed.prefix);
+  }
+
+  return {
+    homePrefixToCanonical,
+    expectedSourceHomeDirs: [...expectedSourceHomeDirs],
+  };
+}
+
+async function hasExpectedSourceHomes(absPath, expectedSourceHomeDirs) {
+  for (const dirName of expectedSourceHomeDirs) {
     const candidate = path.join(absPath, dirName);
     const stats = await fs.stat(candidate).catch(() => null);
     if (stats && stats.isDirectory()) {
@@ -110,7 +197,7 @@ function normalizeRepoRel(repoRoot, absPath) {
   return rel === "." ? "" : rel;
 }
 
-async function buildScanRoots(repoRoot, explicitRoots) {
+async function buildScanRoots(repoRoot, explicitRoots, expectedSourceHomeDirs) {
   if (explicitRoots.length === 0) {
     throw new Error("Missing required --frontend-root <frontend-source-root> (repeatable).");
   }
@@ -123,10 +210,16 @@ async function buildScanRoots(repoRoot, explicitRoots) {
       throw new Error(`Frontend root is not a directory: ${value}`);
     }
 
-    const looksLikeSourceRoot = await hasExpectedSourceHomes(absPath);
+    const looksLikeSourceRoot = await hasExpectedSourceHomes(
+      absPath,
+      expectedSourceHomeDirs,
+    );
     if (!looksLikeSourceRoot) {
       const suggestedSrc = path.join(absPath, "src");
-      const srcLooksValid = await hasExpectedSourceHomes(suggestedSrc);
+      const srcLooksValid = await hasExpectedSourceHomes(
+        suggestedSrc,
+        expectedSourceHomeDirs,
+      );
       if (srcLooksValid) {
         const suggestion = toPosixPath(path.relative(repoRoot, suggestedSrc) || "src");
         throw new Error(
@@ -214,16 +307,13 @@ function featureOwner(relNoSrc) {
   return match ? match[1] : null;
 }
 
-function inferHome(relNoSrc) {
-  if (relNoSrc.startsWith("features/")) return "features";
-  if (relNoSrc.startsWith("ui/")) return "ui";
-  if (relNoSrc.startsWith("pages/")) return "pages";
-  if (relNoSrc.startsWith("api/")) return "api";
-  if (relNoSrc.startsWith("core/")) return "core";
-  if (relNoSrc.startsWith("hooks/")) return "hooks";
-  if (relNoSrc.startsWith("lib/")) return "lib";
-  if (relNoSrc.startsWith("store/")) return "store";
-  if (relNoSrc.startsWith("config/")) return "config";
+function inferHome(relNoSrc, homePrefixToCanonical) {
+  const prefixes = [...homePrefixToCanonical.keys()].sort((a, b) => b.length - a.length);
+  for (const prefix of prefixes) {
+    if (relNoSrc === prefix || relNoSrc.startsWith(`${prefix}/`)) {
+      return homePrefixToCanonical.get(prefix);
+    }
+  }
   return "other";
 }
 
@@ -268,9 +358,9 @@ function addSignal(signals, { id, score }) {
   signals.push({ id, score });
 }
 
-function scanFile(relPath, source, importSpecs, resolvedImports) {
+function scanFile(relPath, source, importSpecs, resolvedImports, homePrefixToCanonical) {
   const relNoSrc = toNoSrc(relPath);
-  const home = inferHome(relNoSrc);
+  const home = inferHome(relNoSrc, homePrefixToCanonical);
   const inUi = home === "ui";
   const inFeatures = home === "features";
   const inPages = home === "pages";
@@ -280,7 +370,8 @@ function scanFile(relPath, source, importSpecs, resolvedImports) {
 
   const signals = [];
 
-  const importedHomes = resolvedImports.map((item) => inferHome(toNoSrc(item)));
+  const importedHomes = resolvedImports
+    .map((item) => inferHome(toNoSrc(item), homePrefixToCanonical));
   const importedFeatureOwners = resolvedImports
     .map((item) => featureOwner(toNoSrc(item)))
     .filter(Boolean);
@@ -297,7 +388,7 @@ function scanFile(relPath, source, importSpecs, resolvedImports) {
     }
   }
 
-  if (inUi && importedHomes.some((h) => ["features", "api", "store", "pages"].includes(h))) {
+  if (inUi && importedHomes.some((h) => UI_FORBIDDEN_IMPORTED_HOMES.has(h))) {
     addSignal(signals, {
       id: "ui_forbidden_import_layer",
       score: 8,
@@ -373,7 +464,12 @@ function scanFile(relPath, source, importSpecs, resolvedImports) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const repoRoot = path.resolve(args.repo);
-  const scanRoots = await buildScanRoots(repoRoot, args.frontendRoots);
+  const homeConfig = buildHomeConfig(args.homeDirs);
+  const scanRoots = await buildScanRoots(
+    repoRoot,
+    args.frontendRoots,
+    homeConfig.expectedSourceHomeDirs,
+  );
   const files = await walkCodeFiles(repoRoot, scanRoots);
 
   const candidates = [];
@@ -385,7 +481,13 @@ async function main() {
     const resolvedImports = imports
       .map((spec) => resolveImportToRepoRel(relPath, spec, repoRoot, context))
       .filter(Boolean);
-    const candidate = scanFile(relPath, source, imports, resolvedImports);
+    const candidate = scanFile(
+      relPath,
+      source,
+      imports,
+      resolvedImports,
+      homeConfig.homePrefixToCanonical,
+    );
     if (candidate) candidates.push(candidate);
   }
 

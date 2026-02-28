@@ -44,6 +44,11 @@ repeatable across runs.
   `common/`, `shared/`, `atoms/molecules` patterns).
 - Data-access scan must identify the canonical backend-access home
   (`api/`, `services/`, `client/`) and current state stack signals.
+- Normalize legacy/alias homes in detection output:
+  - treat `views/**` as routing-home evidence equivalent to `pages/**`,
+  - treat `state/**` as global-state-home evidence equivalent to `store/**`,
+  - keep canonical emitted homes in `detection_result`/`gravity_map` as
+    `pages`/`store` labels for downstream consistency.
 - Domain scan must classify organization (`features`, `modules`, `domains`,
   `flat`, or `mixed`).
 - Classify repository shape as one of:

@@ -69,11 +69,15 @@ Follow this sequence:
 6. Add anti-pattern and semantic-duplication findings with scored metadata.
 7. Emit exactly one structured result object.
 8. If home/placement signals are ambiguous, run
-   `scripts/scan_home_misplacements.mjs --repo <repo-root> --frontend-root <frontend-source-root> --limit 10`
+   `scripts/scan_home_misplacements.mjs --repo <repo-root> --frontend-root <frontend-source-root> --limit 10 [--home-dir <dir>|<dir>=<canonical>]...`
    (repeat `--frontend-root` for multi-frontend repos) and use returned
    `file_paths[]` as a review queue (or empty list if none likely).
    `--frontend-root` is required and must point to the frontend source root
    (for example `apps/web/src`), not the package root.
+   When a trusted architecture-detection result is available, pass detected
+   home aliases as `--home-dir` hints (for example
+   `--home-dir views=pages --home-dir state=store`) before interpreting
+   candidate paths.
    The script output is intentionally path-only candidate data; the LLM/agent
    decides home/placement interpretation.
 9. If the agent has low confidence finding duplicate UI/DOM structures on its
@@ -244,8 +248,9 @@ Constraints:
 - `rules/` contains source-of-truth modular rules.
 - `scripts/scan_home_misplacements.mjs` scans repositories for likely
   wrong-home files and returns top candidate paths for review only (no expected
-  home recommendations). The scanner requires explicit `--frontend-root` input
-  and only scans those roots.
+  home recommendations). The scanner requires explicit `--frontend-root` input,
+  supports optional repeatable `--home-dir` hints (`<dir>` or
+  `<dir>=<canonical>`), and only scans supplied roots.
 - `scripts/scan_duplicate_ui_clusters.mjs` scans repositories for repeated
   JSX/DOM structural clusters across files and returns candidate review groups
   plus deduped `file_paths[]` for side-by-side inspection, including atomic

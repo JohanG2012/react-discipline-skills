@@ -44,6 +44,11 @@ recommendations.
   - `hooks/`
   - `config/`
   - `store/` only when truly global client-state is required
+- Alias handling for existing repositories:
+  - `views/` is treated as `pages/`-equivalent routing home evidence,
+  - `state/` is treated as `store/`-equivalent global-state home evidence,
+  - bootstrap/new-home recommendations remain canonical (`pages/`, `store/`)
+    rather than alias names.
 - Bootstrap recommendations must be minimal and task-scoped (no speculative
   folder recommendations).
 - Once a canonical home exists for a concern, do not recommend an alternate

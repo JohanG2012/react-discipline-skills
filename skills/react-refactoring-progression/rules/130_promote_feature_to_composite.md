@@ -59,7 +59,9 @@ leakage, parallel homes, or churn-heavy migration.
   1. boundary audit:
      - `ui/**` imports only allowed shared layers (`ui/**`, generic `hooks/**`,
        `lib/**`),
-     - no `features/**`/`api/**`/`store/**` import leakage into shared UI.
+     - no `features/**`/`api/**`/`store/**`/`state/**`/`pages/**`/`views/**`
+       import leakage into shared UI (`state/**` treated as `store/**`;
+       `views/**` treated as `pages/**`).
   2. behavior preservation:
      - visible UI behavior, interaction, keyboard/focus, and state/routing
        strategy remain unchanged.
@@ -81,7 +83,8 @@ leakage, parallel homes, or churn-heavy migration.
 ### Forbidden
 
 - Promoting when disqualifiers exist:
-  - component imports from `features/**`, `api/**`, `store/**`, or `pages/**`,
+  - component imports from `features/**`, `api/**`, `store/**`, `state/**`,
+    `pages/**`, or `views/**`,
   - component encodes domain meaning in naming/props/hardcoded copy,
   - component name contains feature-owner noun and is moved into
     `ui/composites/**` as-is (without wrapper + inner-composite split),
