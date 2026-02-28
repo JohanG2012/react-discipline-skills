@@ -26,6 +26,7 @@ consistency, or schema correctness.
   - `api.home`
   - `domain.home`
   - `state.home`
+  - `i18n.home`
   - `gravity_map`
 - Carry forward unchanged fields only when refreshed evidence does not conflict.
 - Recompute strategy/pause evaluation when refreshed evidence changes structural

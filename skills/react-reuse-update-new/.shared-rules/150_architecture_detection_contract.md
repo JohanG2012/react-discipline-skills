@@ -23,6 +23,7 @@ architecture-detection result and bootstrap behavior.
   - `ui.home`
   - `api.home` (canonical endpoint layer for boundary checks)
   - `domain.organization`
+  - `i18n.home`
   - `gravity_map`
   - `alignment_score`
   - `strategy`

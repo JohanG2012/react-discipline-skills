@@ -187,6 +187,7 @@ reinterpretation.
   - `api`
   - `domain`
   - `state`
+  - `i18n`
   - `gravity_map`
   - `alignment_score`
   - `alignment`

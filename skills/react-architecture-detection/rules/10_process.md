@@ -35,6 +35,7 @@ repeatable across runs.
   3. domain organization
   4. API/data-access homes
   5. state ownership/home
+  6. i18n/localization home
 - Routing scan must check framework and router signals, including:
   - Next (`app/**/page.*`, `next.config.*`, `next/navigation`)
   - Remix (`app/routes/*`, `remix.config.*`)
@@ -44,6 +45,8 @@ repeatable across runs.
   `common/`, `shared/`, `atoms/molecules` patterns).
 - Data-access scan must identify the canonical backend-access home
   (`api/`, `services/`, `client/`) and current state stack signals.
+- i18n scan must detect localization homes when present
+  (`i18n/`, `locales/`, `translations/`, or gravity-equivalent).
 - Normalize legacy/alias homes in detection output:
   - treat `views/**` as routing-home evidence equivalent to `pages/**`,
   - treat `state/**` as global-state-home evidence equivalent to `store/**`,
@@ -74,7 +77,7 @@ repeatable across runs.
 ### Detection sequence
 
 1. Gather repository entry/context signals.
-2. Execute routing/UI/domain/API/state scans.
+2. Execute routing/UI/domain/API/state/i18n scans.
 3. Score confidence and assign concern homes/status.
 4. Build one gravity map and alignment summary.
 5. Hand off migration strategy selection to `rad-migration-safety`.

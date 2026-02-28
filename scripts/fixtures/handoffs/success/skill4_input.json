@@ -56,6 +56,14 @@
         "src/store"
       ]
     },
+    "i18n": {
+      "home": "src/i18n",
+      "confidence": 0.78,
+      "status": "resolved",
+      "evidence_paths": [
+        "src/i18n"
+      ]
+    },
     "gravity_map": {
       "pages_or_routes": "src/pages",
       "domain_modules": "src/features",

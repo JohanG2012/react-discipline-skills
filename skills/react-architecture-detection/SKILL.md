@@ -1,6 +1,6 @@
 ---
 name: react-architecture-detection
-description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when downstream placement, routing, endpoint-layer, or domain-boundary decisions must be evidence-based, especially during React refactoring sessions. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations. If this skill is skipped for a code-changing task, use react-implementation-discipline (standard or micro mode) for enforcement. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
+description: Analyze an existing React repository to determine architectural shape, gravity homes (UI, API, domain, routing, i18n/localization), and migration strategy from real repo signals. Use when repository structure may already exist or differ from preferred architecture, or when downstream placement, routing, endpoint-layer, domain-boundary, or localization-home decisions must be evidence-based, especially during React refactoring sessions. Classify the repo, determine canonical endpoint layer, compute gravity confidence, and output a detection_result for downstream reuse without recomputation. Do not use for code generation, placement planning, reuse decisions, or file mutations. If this skill is skipped for a code-changing task, use react-implementation-discipline (standard or micro mode) for enforcement. This skill should be considered when changing, updating, adding, refactoring, or improving React code.
 version: 1.0.0
 license: MIT
 metadata:
@@ -52,7 +52,7 @@ The skill expects:
 
 ## How to use
 Follow this workflow in order:
-1. Scan the repository for routing, UI, domain, API/data-access, and state signals.
+1. Scan the repository for routing, UI, domain, API/data-access, state, and i18n/localization signals.
 2. Classify the architecture shape and gravity.
 3. Validate output constraints against shared baseline policy.
 4. Output a structured detection contract for downstream skills.
@@ -82,6 +82,7 @@ Return a **single JSON object** matching this shape:
   "api": {"home": "src/services/api", "pattern": "services", "confidence": 0.9, "status": "resolved", "evidence_paths": ["src/services/api"]},
   "domain": {"organization": "features", "home": "src/features", "confidence": 0.9, "status": "resolved", "evidence_paths": ["src/features"]},
   "state": {"server": "react-query", "client": "zustand", "home": "src/store", "confidence": 0.8, "status": "resolved", "evidence_paths": ["src/store"]},
+  "i18n": {"home": "src/i18n", "confidence": 0.8, "status": "resolved", "evidence_paths": ["src/i18n"]},
   "gravity_map": {
     "pages_or_routes": "src/pages",
     "domain_modules": "src/features",
@@ -129,8 +130,8 @@ Constraints:
 - Output must contain structural metadata only.
 - Raw code snippets are prohibited in standard output.
 - For `result_type=detection_result`, output must include at minimum:
-  `routing.type`, `ui.home`, `api.home`, `domain.organization`, `gravity_map`,
-  `alignment_score`, `strategy`, and `notes[]`.
+  `routing.type`, `ui.home`, `api.home`, `domain.organization`, `state.home`,
+  `i18n.home`, `gravity_map`, `alignment_score`, `strategy`, and `notes[]`.
 - For `result_type=detection_result`, output must include
   `strategy_rationale`, `alignment.blockers`,
   `alignment.next_migration_step`, and `pause_decision`.
@@ -145,7 +146,8 @@ Constraints:
   layer for downstream boundary checks in the task.
 - Fast path is allowed during React refactor sessions when existing code is
   touched and a trusted in-memory cached `detection_result` exists:
-  - minimally refresh concern homes plus `gravity_map` from current evidence
+  - minimally refresh concern homes (including `i18n.home`) plus `gravity_map`
+    from current evidence
   - reuse unchanged fields from cache
   - still emit a full schema-valid `detection_result`
 
