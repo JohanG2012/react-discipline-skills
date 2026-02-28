@@ -24,15 +24,6 @@ Use for evaluation and active development, not as a stable long-term contract.
 - **Refactor helper script usage pattern is unverified**: scripts are intended
   as fallback when the agent cannot confidently find candidates on its own, but
   whether agents will consistently use them that way is currently unknown.
-- **Impact of recent helper-script additions is unverified**: these additions
-  are new, and their effect on overall skill output quality has not been
-  systematically tested yet.
-- **Token usage has not been a development focus so far**: token consumption
-  has not been explicitly considered or optimized to date. Impact remains
-  unmeasured and may vary by workflow and prompt quality.
-- **Rule volume and rule size have grown quickly**: the current rule set needs
-  a dedicated consolidation/restructure pass to improve LLM lookup ergonomics
-  and enable better token-usage optimization.
 - **Validation has been refactoring-focused so far**: the skills were exercised
   in a week-long refactoring session, and many updates were made during that
   run to improve reasoning and rule understanding for refactor workflows.
