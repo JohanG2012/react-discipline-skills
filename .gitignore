@@ -19,3 +19,4 @@ Thumbs.db
 .idea/
 coverage/
 skills/*/AGENTS.debug.md
+.refactor-progress/
