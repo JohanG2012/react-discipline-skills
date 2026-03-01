@@ -63,37 +63,45 @@ Follow this sequence:
 2. Apply mode constraints and scope-governor budget.
 3. If critical ambiguity blocks deterministic planning, emit
    `clarification_request` (max 4 questions) and pause.
-4. Detect low-risk opportunities first (Tier A/B), then escalate only when
+4. Run a rule-first detection pass using active shared + skill rules in current
+   scope.
+5. Run a direct repository scan pass without helper scripts to confirm/dismiss
+   candidates from step 4.
+6. Detect low-risk opportunities first (Tier A/B), then escalate only when
    justified.
-5. Validate behavior-preservation constraints for every step.
-6. Add anti-pattern and semantic-duplication findings with scored metadata.
-7. Emit exactly one structured result object.
-8. If home/placement signals are ambiguous, run
-   `scripts/scan_home_misplacements.mjs --repo <repo-root> --frontend-root <frontend-source-root> --home-dir <dir>|<dir>=<canonical> --limit 10 [--home-dir <dir>|<dir>=<canonical>]...`
-   (repeat `--frontend-root` for multi-frontend repos) and use returned
-   `file_paths[]` as a review queue (or empty list if none likely).
-   `--frontend-root` is required and must point to the frontend source root
-   (for example `apps/web/src`), not the package root.
-   `--home-dir` mappings are required.
-   When a trusted architecture-detection result is available, pass detected
-   home aliases as `--home-dir` mappings (for example
-   `--home-dir views=pages --home-dir state=store`) before interpreting
-   candidate paths.
-   The script output is intentionally path-only candidate data; the LLM/agent
-   decides home/placement interpretation.
-9. If the agent has low confidence finding duplicate UI/DOM structures on its
-   own, run
-   `scripts/scan_duplicate_ui_clusters.mjs --repo <repo-root> --frontend-root <frontend-source-root> --limit 10`
-   (repeat `--frontend-root` for multi-frontend repos) and use
-   `review_groups[]`/`file_paths[]` as side-by-side review candidates only.
-   This script only surfaces possible duplicate clusters and does not make
-   extraction/refactor decisions.
-10. Treat all script outputs as heuristic signals only:
+7. Validate behavior-preservation constraints for every step.
+8. Add anti-pattern and semantic-duplication findings with scored metadata.
+9. If steps 4-8 already produce meaningful evidence-backed opportunities with
+   sufficient confidence, skip helper scripts.
+10. Only when no meaningful opportunities are found from steps 4-8, or
+    unresolved ambiguity remains with low confidence, run exactly the targeted
+    helper script needed:
+   - For home/placement ambiguity, run
+     `scripts/scan_home_misplacements.mjs --repo <repo-root> --frontend-root <frontend-source-root> --home-dir <dir>|<dir>=<canonical> --limit 10 [--home-dir <dir>|<dir>=<canonical>]...`
+     (repeat `--frontend-root` for multi-frontend repos) and use returned
+     `file_paths[]` as a review queue (or empty list if none likely).
+     `--frontend-root` is required and must point to the frontend source root
+     (for example `apps/web/src`), not the package root.
+     `--home-dir` mappings are required.
+     When a trusted architecture-detection result is available, pass detected
+     home aliases as `--home-dir` mappings (for example
+     `--home-dir views=pages --home-dir state=store`) before interpreting
+     candidate paths.
+     The script output is intentionally path-only candidate data; the LLM/agent
+     decides home/placement interpretation.
+   - For duplicate-cluster ambiguity, run
+     `scripts/scan_duplicate_ui_clusters.mjs --repo <repo-root> --frontend-root <frontend-source-root> --limit 10`
+     (repeat `--frontend-root` for multi-frontend repos) and use
+     `review_groups[]`/`file_paths[]` as side-by-side review candidates only.
+     This script only surfaces possible duplicate clusters and does not make
+     extraction/refactor decisions.
+11. Treat all script outputs as heuristic signals only:
     false positives are expected, unsupported candidates may be dismissed, and
     final placement/reuse/refactor judgment must come from LLM/agent reasoning,
     not script output alone.
-11. If all script candidates are dismissed, continue with direct repository
+12. If all script candidates are dismissed, continue with direct repository
     assessment without helper scripts and rely on skill rules/evidence only.
+13. Emit exactly one structured result object.
 
 ## Output contract
 

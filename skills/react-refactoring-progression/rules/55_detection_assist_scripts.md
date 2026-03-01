@@ -18,7 +18,27 @@ rule-based agent judgment.
 
 ### Requirement
 
-- Use helper scripts only when model-only detection confidence is low.
+- Use helper scripts only as a last-resort fallback when confidence remains low
+  after required pre-script analysis.
+- If required pre-script analysis already produces meaningful actionable
+  opportunities with sufficient confidence, skip helper scripts.
+- Required pre-script analysis sequence:
+  1. Rule-first reasoning pass:
+    - evaluate active shared + skill-local rules against current scope,
+    - derive initial candidate findings directly from rule checks.
+  2. Direct repository scan pass (no helper scripts):
+    - inspect likely hotspots with targeted file/path search and side-by-side
+      code review,
+    - dismiss or confirm initial candidates using repository evidence.
+  3. Fallback eligibility check:
+    - run a helper script only when confidence is still low after steps 1-2 and
+      at least one of these is true:
+      - no meaningful actionable opportunities were found from rule-first and
+        direct-scan analysis,
+      - unresolved ambiguity still blocks reliable findings or classification.
+- Script invocation must be targeted:
+  - choose only the helper script that matches remaining ambiguity,
+  - do not run both helper scripts by default when one is sufficient.
 - Home/placement candidate scan:
   - run
     `skills/react-refactoring-progression/scripts/scan_home_misplacements.mjs`
@@ -57,10 +77,16 @@ rule-based agent judgment.
 
 ### Forbidden
 
+- Running helper scripts as a default first detection step.
+- Running helper scripts before completing required rule-first and direct-scan
+  passes.
+- Running helper scripts when rule-first and direct-scan analysis already
+  identified enough meaningful, evidence-backed opportunities.
 - Running helper scripts without required `--frontend-root` input.
 - Running home/placement candidate scan without required `--home-dir` mappings.
 - Treating `--home-dir` hints as authoritative overrides when direct repository
   evidence disagrees.
+- Running both helper scripts eagerly when only one unresolved ambiguity exists.
 - Auto-scanning entire monorepo roots when only frontend source roots are
   required.
 - Treating empty or dismissed script output as a blocker.

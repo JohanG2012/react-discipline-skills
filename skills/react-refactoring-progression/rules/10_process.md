@@ -53,6 +53,14 @@ Defines deterministic, risk-ordered planning behavior.
 - Apply deterministic ordering with no additional custom ordering beyond:
   - tier order (`A -> B -> C -> D`)
   - risk order (low before high within the produced list)
+- Before any helper-script-assisted detection:
+  - complete a rule-first reasoning pass using active shared + skill rules,
+  - complete a direct repository scan pass without helper scripts,
+  - if those passes already produce meaningful actionable opportunities with
+    sufficient confidence, skip helper scripts,
+  - allow script usage only when unresolved ambiguity remains and confidence is
+    still low after those two passes, or when no meaningful opportunities are
+    found from those passes.
 - Escalate only when at least one condition is true:
   - a lower-tier improvement is blocked by compliance constraints
   - no meaningful lower-tier improvements remain
@@ -90,6 +98,9 @@ Defines deterministic, risk-ordered planning behavior.
 - Using mixed tier naming schemes (for example `0-4` plus `A-D`) in one output.
 - Escalating for aesthetic cleanup, style-only churn, or speculative
   "refactor for future" rationale.
+- Running helper scripts as default first-step detection.
+- Running helper scripts to pad evidence when meaningful opportunities are
+  already established from rule-first and direct-scan analysis.
 - Asking low-value stylistic clarification questions that do not change planning
   decisions.
 - Fabricating low-value refactor steps to avoid returning an empty dedicated

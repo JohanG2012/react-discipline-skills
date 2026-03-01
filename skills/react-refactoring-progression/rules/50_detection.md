@@ -137,8 +137,12 @@ metadata.
   - `react-placement-and-layering`
   - `react-reuse-update-new`
   - `react-implementation-discipline`
-- If model-only confidence is low, follow `rrp-detection-assist-scripts` for
-  script-assisted candidate discovery and fallback behavior.
+- If rule-first reasoning and direct repository scans already yield meaningful
+  evidence-backed findings, do not invoke helper scripts.
+- If no meaningful findings are established, or confidence remains low due to
+  unresolved ambiguity after those passes, follow
+  `rrp-detection-assist-scripts` for script-assisted candidate discovery and
+  fallback behavior.
 
 ### Forbidden
 
