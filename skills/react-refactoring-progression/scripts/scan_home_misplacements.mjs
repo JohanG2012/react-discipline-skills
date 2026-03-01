@@ -119,7 +119,7 @@ function parseArgs(argv) {
           "  --repo <path>      Repository root to scan (default: cwd)",
           "  --limit <n>        Max candidates to return (default: 10)",
           "  --frontend-root    Frontend source root to scan (repeatable, required)",
-          "  --home-dir         Optional home dir override (repeatable): <dir> or <dir>=<canonical>",
+          "  --home-dir         Home dir mapping (repeatable, required): <dir> or <dir>=<canonical>",
           "  --paths-only       Print only file paths, one per line",
           "  -h, --help         Show this help",
           "",
@@ -165,12 +165,18 @@ function parseHomeDirOverride(rawValue) {
 }
 
 function buildHomeConfig(homeDirOverrides) {
+  if (homeDirOverrides.length === 0) {
+    throw new Error("Missing required --home-dir <dir>|<dir>=<canonical> (repeatable).");
+  }
+
   const homePrefixToCanonical = new Map(DEFAULT_HOME_PREFIX_TO_CANONICAL);
   const expectedSourceHomeDirs = new Set(DEFAULT_EXPECTED_SOURCE_HOME_DIRS);
 
   for (const rawOverride of homeDirOverrides) {
     const parsed = parseHomeDirOverride(rawOverride);
-    if (!parsed) continue;
+    if (!parsed) {
+      throw new Error(`Invalid --home-dir value '${rawOverride}'. Expected <dir> or <dir>=<canonical>.`);
+    }
     homePrefixToCanonical.set(parsed.prefix, parsed.canonical);
     expectedSourceHomeDirs.add(parsed.prefix);
   }

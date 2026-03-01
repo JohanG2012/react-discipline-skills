@@ -24,12 +24,15 @@ rule-based agent judgment.
     `skills/react-refactoring-progression/scripts/scan_home_misplacements.mjs`
     with explicit `--frontend-root <frontend-source-root>` (repeatable and
     required),
+  - pass repeatable `--home-dir <dir>|<dir>=<canonical>` mappings (required),
   - `--frontend-root` must point to frontend source root (for example
     `apps/web/src`), not the package root,
-  - when a trusted architecture-detection result is available, pass relevant
-    home-dir hints using repeatable `--home-dir` (for example
+  - when a trusted architecture-detection result is available, align required
+    `--home-dir` mappings to detected aliases (for example
     `--home-dir views=pages --home-dir state=store`) to align script inference
     with detected gravity/home conventions,
+  - when architecture-detection aliases are unavailable, pass canonical home
+    mappings that reflect active frontend homes,
   - scanner must review only supplied frontend roots.
 - Duplicate-cluster candidate scan:
   - run
@@ -55,6 +58,7 @@ rule-based agent judgment.
 ### Forbidden
 
 - Running helper scripts without required `--frontend-root` input.
+- Running home/placement candidate scan without required `--home-dir` mappings.
 - Treating `--home-dir` hints as authoritative overrides when direct repository
   evidence disagrees.
 - Auto-scanning entire monorepo roots when only frontend source roots are
