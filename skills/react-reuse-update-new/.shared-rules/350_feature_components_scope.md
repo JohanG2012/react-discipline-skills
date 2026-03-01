@@ -19,7 +19,8 @@ or hiding domain/transport logic in presentation files.
 ### Requirement
 
 - `features/<domain>/components/**` exists for feature-owned UI pieces that are
-  not cross-domain reusable and are not route-level orchestration.
+  not route-level orchestration and are not yet qualified for shared `ui/**`
+  ownership.
 - Allowed component characteristics (all required):
   - domain-bound UI with domain terminology and feature-coupled behavior,
   - feature-scoped reuse (same feature only, not intended cross-feature),
@@ -42,10 +43,22 @@ or hiding domain/transport logic in presentation files.
   - feature-owned leaf UI -> `features/<domain>/components/**`,
   - cross-domain reusable UI -> `ui/primitives/**` or `ui/composites/**`,
   - pure logic -> `features/<domain>/domain/**` or `lib/**`.
+- Cross-capability/cross-domain reuse assessment is required when either is
+  true:
+  - a feature component is reused by 2+ capabilities in the same feature, or
+  - a feature component is reused by 2+ domains/features.
+- `ui/**`-fit assessment must verify all:
+  - naming can be domain-agnostic (file base name + primary export),
+  - dependencies are UI-only/shared-safe (no feature-owned domain/transport
+    coupling),
+  - behavior is reusable pattern/interaction rather than domain ownership.
 - Hard guardrail:
-  - if a component in `features/<domain>/components/**` is reused by 2+ domains,
-    has no domain terminology, or becomes a mini shared composite, promote it
-    to `ui/**`.
+  - if a component in `features/<domain>/components/**` is reused by 2+
+    domains/features and passes `ui/**`-fit assessment, promote it to `ui/**`,
+  - if reused by 2+ capabilities, assess for promotion and prefer `ui/**` when
+    it passes `ui/**`-fit checks,
+  - any promoted component must use domain-agnostic file/export naming in
+    `ui/**`.
 
 ### Forbidden
 
@@ -57,3 +70,5 @@ or hiding domain/transport logic in presentation files.
 - Route orchestration concerns in feature components (belongs in pages/sections).
 - Shared dumping-ground subfolders like `common/` or `shared/` under
   feature-components homes.
+- Moving/promoting a component to `ui/**` while keeping domain-specific
+  file/export naming.

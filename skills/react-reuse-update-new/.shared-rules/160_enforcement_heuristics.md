@@ -20,7 +20,10 @@ without over-prescribing implementation details.
 
 - Treat a file as likely misplaced when one or more signals appear:
   - It imports forbidden layer dependencies.
-  - It contains domain terms while living in reusable `ui/**` homes.
+  - It contains domain terms in file/export naming while living in reusable
+    `ui/**` homes.
+  - A feature component is reused across 2+ capabilities/domains but remains in
+    feature home without explicit `ui/**`-fit assessment.
   - It performs network fetches outside canonical endpoint modules.
   - It performs DTO-to-domain mapping inside `api/**`.
 - Use a simple placement sanity map in reviews:

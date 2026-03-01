@@ -47,7 +47,7 @@ architecture and import-boundary model.
 ### Forbidden
 
 - Competing homes for the same concern in the same scope.
-- Domain terms in reusable `ui/**` component file names.
+- Domain terms in reusable `ui/**` component file names or primary export names.
 - DTO-to-domain mapping in `api/**`.
 
 ### Notes
