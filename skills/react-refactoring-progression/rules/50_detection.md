@@ -29,6 +29,15 @@ metadata.
   - feature-too-big governance triggers fired (`size_review_required=true`)
   - capability-folder recommendation triggers (`3+` distinct capability
     clusters in one feature owner)
+  - run-once effect guard hacks instead of dependency modeling
+  - async duplicate-prevention that relies on state only
+  - async race/out-of-order response protection gaps
+  - async handler discipline violations in JSX/error handling
+  - observer/listener registration churn
+  - unstable list key usage for dynamic lists
+  - pagination cursor coupling to business fields
+  - component responsibility overload (god-component pattern)
+  - error gating that blocks unrelated flows
 - Anti-pattern tier defaults:
   - implicit visibility in shared presentational UI -> Tier A
   - fetch outside canonical endpoint layer -> Tier B (Tier C when widespread)
@@ -41,6 +50,17 @@ metadata.
   - feature-too-big triggers fired -> Tier B follow-up
     (Tier C follow-up when placement correction is required)
   - capability-folder recommendation (3+ clusters) -> Tier C follow-up
+  - run-once effect hacks -> Tier B
+  - async state-only gating -> Tier B
+  - async race protection gaps -> Tier C when data-correctness risk is active
+    (Tier B otherwise)
+  - async handler discipline violations -> Tier B
+  - observer/listener churn -> Tier B
+  - unstable list keys -> Tier B (Tier C when reorder/insert bugs are active)
+  - pagination cursor coupling -> Tier C
+  - component responsibility overload -> Tier B (Tier C when placement split is
+    required)
+  - error gating isolation breaches -> Tier B
 - Detection heuristics must include:
   - implicit visibility:
     - component in `ui/primitives/**` or `ui/composites/**`
@@ -75,6 +95,34 @@ metadata.
     - `3+` distinct capability clusters detected under one
       `features/<domain>/` owner per `sr-feature-capability-clusters`,
     - extraction remains review/planning guidance (no auto-migration)
+  - run-once effect hacks:
+    - effect uses run-suppression guards (`didRun`, `hasInitialized`,
+      `isFirst`, `mountedRef`, `ranOnceRef`) to avoid re-runs,
+    - effect omits real dependencies and uses guard logic with empty deps
+  - async state-only gating:
+    - duplicate async prevention relies only on local state flags
+      (`loading`/`isFetching`/`isSubmitting`) in rapid multi-trigger paths
+  - async race protection gaps:
+    - overlapping async calls can update same target without abort/latest
+      acceptance rules,
+    - paginated/state merges apply responses without continuity/currentness
+      checks
+  - async handler discipline:
+    - multi-step async logic embedded inline in JSX handlers,
+    - repeated actions have divergent error normalization/surfacing
+  - observer/listener churn:
+    - effect dependencies cause frequent observer/listener teardown/recreate
+      cycles unrelated to stable target changes
+  - unstable list keys:
+    - dynamic lists use index keys or unstable/collision-prone derived keys
+  - pagination cursor coupling:
+    - client derives next cursor from business fields without opaque token or
+      explicit tie-break invariant
+  - component responsibility overload:
+    - single component owns multiple orchestration concerns (fetching,
+      pagination, mutations, routing side-effects, heavy derived state) plus UI
+  - error gating isolation breaches:
+    - one error flag blocks unrelated actions/requests in same feature flow
 - Emit findings with:
   - stable `finding_id`
   - `type`

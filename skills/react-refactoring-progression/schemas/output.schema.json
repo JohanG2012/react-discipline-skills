@@ -499,6 +499,15 @@
             "feature_shadow_homes",
             "feature_too_big_triggers",
             "capability_folder_recommendation",
+            "effects_run_once_hack",
+            "async_state_only_gating",
+            "async_race_missing_protection",
+            "async_event_handler_discipline",
+            "observer_listener_churn",
+            "react_list_key_instability",
+            "pagination_cursor_coupling",
+            "component_responsibility_overload",
+            "error_gating_isolation_breach",
             "other"
           ]
         },
